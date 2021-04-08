@@ -18,7 +18,7 @@
   <meta name="author" content="mmm6">
   <meta name="keywords" content="">
   
-  <title>linux常用命令 - XiRang&#39;s</title>
+  <title>使用hexo部署静态blog - XiRang&#39;s</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -158,12 +158,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://images.unsplash.com/photo-1520483780248-0b3b9173a5be') no-repeat center center;
+         style="background: url('https://images.unsplash.com/photo-1526170160160-1a5eb242ab58') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="linux常用命令">
+            <span class="h2" id="subtitle" title="使用hexo部署静态blog">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-02 14:03" pubdate>
-        2021年4月2日 下午
+      <time datetime="2021-04-02 11:13" pubdate>
+        2021年4月2日 上午
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      562 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14
+      6
        分钟
     </span>
   
@@ -225,114 +225,50 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">linux常用命令</h1>
+            <h1 style="display: none">使用hexo部署静态blog</h1>
             
             <div class="markdown-body">
-              <h3 id="目录相关"><a href="#目录相关" class="headerlink" title="目录相关"></a>目录相关</h3><ul>
-<li><strong><code>pwd</code>    查看当前工作的位置</strong></li>
-<li><strong><code>ls</code>     查看目录的内容</strong></li>
-<li><strong><code>mkdir</code>    创建目录</strong></li>
-<li><strong><code>cd</code></strong>     <strong>从当前位置跳转到指定目录</strong></li>
-<li><strong><code>rmdir</code>    *删除目录*</strong></li>
-</ul>
-<h3 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h3><ul>
-<li><strong><code>touch</code>     新建文件</strong></li>
-<li><strong><code>cat</code>      查看文本</strong></li>
-<li><strong><code>cp</code>       复制文件</strong></li>
-<li><strong><code>file</code>       查看文件类型</strong></li>
-<li><strong><code>rm</code>     删除文件</strong></li>
-<li><strong><code>mv</code>     移动文件，给文件命名</strong></li>
-<li><code>**find</code>     查找文件**</li>
-</ul>
-<h3 id="查看、统计文件"><a href="#查看、统计文件" class="headerlink" title="查看、统计文件"></a>查看、统计文件</h3><ul>
-<li><code>more</code>   按屏显示文本文件<ul>
-<li>常用参数</li>
-</ul>
+              <h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><ul>
+<li><p>安装node环境</p>
+<p><code>npm install hexo</code></p>
 </li>
-<li><code>less</code>    与more类似，区别在于可以使用Pageup向上查看<ul>
-<li>常用参数</li>
-</ul>
+<li><p>安装git</p>
+<p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/896067074338496">廖雪峰-安装git</a></p>
 </li>
-<li><strong><code>head、tail</code>     局部显示文件，head 显示文件头部，tail显示文件尾部</strong></li>
-<li><strong><code>wc</code> 文件内容统计</strong></li>
-<li><strong><code>grep</code>   查找文本文件中与指定模式匹配的行</strong></li>
 </ul>
-<h3 id="用户相关"><a href="#用户相关" class="headerlink" title="用户相关"></a>用户相关</h3><ul>
-<li><strong><code>adduser</code>  添加</strong></li>
-<li><strong><code>passwd</code>       设置或更改用户密码</strong></li>
-<li><strong><code>userdel</code>     删除用户</strong></li>
-<li><strong><code>usermod</code>    修改用户属性，常用于启用、禁用账号</strong></li>
-<li><strong><code>su</code>   改变用户身份</strong></li>
-<li><strong><code>who</code>     查看当前登录到系统的用户是谁</strong></li>
-</ul>
-<h3 id="用户组相关"><a href="#用户组相关" class="headerlink" title="用户组相关"></a>用户组相关</h3><ul>
-<li><strong><code>group</code></strong></li>
-<li><strong><code>groupadd</code>    添加用户组</strong></li>
-<li><strong><code>groupdel</code>   删除组，   删除之前组内不能有用户</strong></li>
-<li><strong><code>usermod</code>    更改组账号</strong></li>
-</ul>
-<h3 id="权限相关"><a href="#权限相关" class="headerlink" title="权限相关"></a>权限相关</h3><p>-rw-rw-r–      第一个位置指定了文件类型。-表示非目录的文件，d表示目录文件。2-4位表示属主权限，5-7位表示属主同组的用户权限，8-10表示其他用户权限 数值设定发： 0表示没有权限，1表示可执行权限，2表示可写权限，4表示可读权限。    644 (属主可读可写，同组和其他用户可读权限)</p>
-<ul>
-<li><strong><code>chmod</code>   用于改变文件或目录的访问权限</strong></li>
-<li><strong><code>chown</code>   更改文件或目录的所有者</strong></li>
-</ul>
-<h3 id="重定向与管道"><a href="#重定向与管道" class="headerlink" title="重定向与管道"></a>重定向与管道</h3><ul>
-<li><strong><code>&gt;</code></strong>   将结果重定向到某个位置     <code>&gt;&gt;</code> 表示输出追加到文件末尾</li>
-<li><strong><code>grep &#39;am&#39;&lt; filename</code></strong>    输入重定向（grep是在filename文件中搜索“am”字符串）</li>
-</ul>
-<h3 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h3><ul>
-<li><strong><code>ps</code>   显示进程</strong></li>
-<li><strong><code>top</code>    动态显示进程</strong></li>
-<li><strong><code>kill</code>    中断进程</strong></li>
-</ul>
-<h3 id="文件压缩"><a href="#文件压缩" class="headerlink" title="文件压缩"></a>文件压缩</h3><ul>
-<li><strong><code>zip</code>  打包和压缩文件</strong></li>
-<li><strong><code>unzip</code>    对压缩包进行解压缩</strong></li>
-<li><strong><code>gzip</code>     压缩文件，不能压缩多个</strong></li>
-<li><strong><code>tar</code>    打包文件，gzip不能压缩多个文件，先打包再压缩。<code>.tgz</code> 后缀</strong></li>
-<li><strong><code>gunzip</code>    对压缩包解压缩</strong></li>
-</ul>
-<h2 id="source命令"><a href="#source命令" class="headerlink" title="source命令"></a>source命令</h2><h3 id="source-filename-与-sh-filename-及-filename执行脚本的区别"><a href="#source-filename-与-sh-filename-及-filename执行脚本的区别" class="headerlink" title="source filename 与 sh filename 及./filename执行脚本的区别"></a><strong>source filename 与 sh filename 及./filename执行脚本的区别</strong></h3><ol>
-<li>当shell脚本具有可执行权限时，用<code>sh filename</code>与<code>./filename</code>执行脚本是没有区别得。<code>./filename</code>是因为当前目录没有在PATH中，所有”.”是用来表示当前目录的。</li>
-<li><code>sh filename</code> 重新建立一个子shell，在子shell中执行脚本里面的语句，该子shell继承父shell的环境变量，但子shell新建的、改变的变量不会被带回父shell，除非使用export。</li>
-<li><code>source filename</code>：这个命令其实只是简单地读取脚本里面的语句依次在当前shell里面执行，没有建立新的子shell。那么脚本里面所有新建、改变变量的语句都会保存在当前shell里面。</li>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><ol>
+<li><p>文档👇  (有问题查文档 )</p>
+<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">**官方文档</a>**      <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo"><strong>github</strong></a></p>
+</li>
+<li><p>使用主题 （fluid）</p>
+<p><a target="_blank" rel="noopener" href="https://fluid-dev.github.io/hexo-fluid-docs/guide/"><strong>配置指南</strong></a>     <a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid"><strong>github</strong></a></p>
+</li>
 </ol>
-<h2 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h2><p><code>nohup xxxx &amp;</code> 将程序以忽略挂起信号的方式运行起来</p>
+<p> “Hexo是一个快速，简单且功能强大的博客框架。您使用Markdown（或其他标记语言）编写帖子，然后Hexo会在几秒钟内生成带有精美主题的静态文件”      - - （官方文档）</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>网上教程大部分都是安装node,git。有些在服务器上自行部署的还要安装git服务。刚开始有点懵，没有搞懂其中的关系。在服务器上搭建了整套的东西。<br><code>如果你部署到GitHub Pages上的话，那么你需要在你电脑上安装git、node，本地编写新文章后使用git同步到github上。</code><br><code>如果你是部署到自己的服务器上，那么就只需要在服务器上部署git服务，每次写完的文章使用hexo生成静态文件，然后同步到你自己的服务器上。使用nginx转发就可以访问了。</code></p>
 <ul>
-<li><p><code>jobs -l</code>  查看后台进程，只能查看当前终端，关闭终端后不能查看。</p>
+<li><p>node.js    (hexo主要使用node编写)</p>
 </li>
-<li><pre><code>ps -aux |gerp xxxx
-</code></pre>
-<p>  查看后台程序</p>
-<ol>
-<li>a : 显示所有程序</li>
-<li>u: 以用户为主的格式来显示</li>
-<li>x: 显示所有程序，不以终端机来区分</li>
-</ol>
-</li>
-<li><p>nohup 默认输出到附加到当前目录的nohup.out文件中 如果当前的nohup.out 文件不可写，则输出重定向到 $HOME/nohup.out文件 如果没有文件能创建或者打开用于追加，则需要的运行的命令不可调用</p>
-</li>
-<li><p>执行shell命令时，默认打开3个文件。<code>标准输入</code>  <code>标准输出</code>  <code>错误输出</code></p>
+<li><p>git  (主要用于拉取和同步代码)</p>
+<p><code>【自建git服务】  这个是在服务器上搭建自己的git服务</code></p>
 </li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/cexWXn"><img src="https://z3.ax1x.com/2021/04/02/cexWXn.png" srcset="/img/loading.gif" lazyload alt="cexWXn.png"></a></p>
-<ul>
-<li><p><code>&gt;/dev/null</code>   /dev/null代表linux的空设备文件，所有往这个文件里面写入的内容都会丢失</p>
-</li>
-<li><p><code>nohup xxx &gt;/dev/null 2&gt;&amp;1 &amp;</code>     什么信息也不输出</p>
-<p>2&gt;&amp;1 重定向绑定，采用&amp;可以将两个输出绑定在一起。这条命令的作用是错误输出将和标准输出同用一个文件描述符，说人话就是错误输出将会和标准输出输出到同一个地方</p>
-</li>
-<li><p><code>nohup xxx &gt;/dev/null 2&gt;log &amp;</code>    只输出错误输出到log文件中</p>
-</li>
+<h3 id="配置git-hook"><a href="#配置git-hook" class="headerlink" title="配置git hook"></a>配置git hook</h3><p>使用git hook的目的是为了自动同步每次提交到服务器的静态文件</p>
+<p> 官方介绍<em>文档</em> ：**<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90">git 钩子</a>**</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>GIT_REPO=/srv/program/myblog.git<br>TMP_GIT_CLONE=/var/www/tmp_hexo_blog<br>PUBLIC_WWW=/var/www/hexo_blog<br>rm -rf <span class="hljs-variable">$&#123;TMP_GIT_CLONE&#125;</span><br>git <span class="hljs-built_in">clone</span> <span class="hljs-variable">$GIT_REPO</span> <span class="hljs-variable">$TMP_GIT_CLONE</span><br>rm -rf <span class="hljs-variable">$&#123;PUBLIC_WWW&#125;</span><br>cp -rf <span class="hljs-variable">$&#123;TMP_GIT_CLONE&#125;</span> <span class="hljs-variable">$&#123;PUBLIC_WWW&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>git hook</strong>脚本参照了  <a target="_blank" rel="noopener" href="https://blog8.flyky.org/20191105/build-git-server-to-use-hexo-deploy/">flyky</a> 的文章</p>
+<p>如果git能正常提交，但是钩子脚本没有生效，一般情况下是因为文件目录读写权限的问题，仔细检查相关目录权限就可以了</p>
+<p><code>PUBLIC_WWW</code>  这个目录为hexo生成的静态文件目录</p>
+<h3 id="配置nginx"><a href="#配置nginx" class="headerlink" title="配置nginx"></a>配置nginx</h3><p>安装参考：👇</p>
+<p><code>sudo yum install nginx</code></p>
+<p>nginx安装完成后，更新配置文件，一般在<code>conf.d</code>文件夹中添加conf文件,方便不同项目管理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">location / &#123;<br>                <span class="hljs-built_in">alias</span> /var/www/hexo_blog/;<br>        &#125;<br></code></pre></td></tr></table></figure>
+
+<p>然后重启nginx服务即可以使用ip访问了。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li>要想使用自己的域名，https访问等需要单独购买域名，配置ssl证书等。</li>
 </ul>
-<h2 id="amp-amp-和-amp-、-和"><a href="#amp-amp-和-amp-、-和" class="headerlink" title="&amp;&amp;和&amp; 、|和||"></a><code>&amp;&amp;和&amp;</code> 、<code>|和||</code></h2><ul>
-<li>&amp; 表示任务在后台执行，如要在后台运行redis-server,则有 redis-server &amp;</li>
-<li>&amp;&amp; 表示前一条命令执行成功时，才执行后一条命令 ，如 echo ‘1‘ &amp;&amp; echo ‘2’</li>
-<li>| 表示管道，上一条命令的输出，作为下一条命令参数，如 echo ‘yes’ | wc -l</li>
-<li>|| 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo “fail”</li>
-</ul>
-<h3 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h3><p><code>ln -s xxx.sh /usr/local/bin</code>   把shell脚本添加软链接全局执行</p>
-<h3 id="Linux脚本开头-bin-bash-bin-sh"><a href="#Linux脚本开头-bin-bash-bin-sh" class="headerlink" title="Linux脚本开头#!/bin/bash  #!/bin/sh"></a>Linux脚本开头<code>#!/bin/bash</code>  <code>#!/bin/sh</code></h3><p>#!/bin/sh是指此脚本使用/bin/sh来解释执行，#!是特殊的表示符，其后面根的是此解释此脚本的shell的路径</p>
 
             </div>
             <hr>
@@ -350,7 +286,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/git/">git</a>
+                      <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
                     
                   </div>
                 
@@ -367,12 +303,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/202104/ckn8qhg1h0002sguebicm2o37/96748c343230/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">linux常用命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/202104/ckn03cki90002a8ue51lvfkm4/c99ce9de858a/">
-                        <span class="hidden-mobile">使用hexo部署静态blog</span>
+                      <a href="/202104/ckn8qhg1k0005sgue97gma9zj/c9d756e4d9a6/">
+                        <span class="hidden-mobile">hexo 示例</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
