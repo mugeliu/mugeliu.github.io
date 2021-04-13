@@ -18,25 +18,9 @@
   <meta name="author" content="mmm6">
   <meta name="keywords" content="">
   
-  <title>Docker 常用命令 - XiRang&#39;s</title>
+  <title>分类 - 记录 - XiRang&#39;s</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
@@ -64,7 +48,7 @@
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 60vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -158,51 +142,14 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://images.unsplash.com/photo-1527645746751-d4dc7aa53163') no-repeat center center;
+         style="background: url('/img/default.png') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Docker 常用命令">
+            <span class="h2" id="subtitle" title="分类 - 记录">
               
             </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-09 17:25" pubdate>
-        2021年4月9日 下午
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      585 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      7
-       分钟
-    </span>
-  
-
-  
-  
-</div>
 
             
           </div>
@@ -215,148 +162,40 @@
 
   <main>
     
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 1 篇文章</p>
+  <hr>
+  
+  
+    
       
+      <p class="h5">2021</p>
+    
+    <a href="/202104/cknfx222m0006dwue5a687oqi/c427816ed3b6/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">信息获取方式的变迁</span>
+      <time style="float: right;">04-03</time>
+    </a>
+  
+</div>
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">Docker 常用命令</h1>
-            
-            <div class="markdown-body">
-              <blockquote>
-<p>容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/docker/">Docker命令行参考</a></p>
-<h3 id="镜像（image）"><a href="#镜像（image）" class="headerlink" title="镜像（image）"></a>镜像（image）</h3><p>Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。</p>
-<ul>
-<li><p>拉取仓库代码到本地</p>
-<p><code>docker image pull library/hello-world</code></p>
-<p>docker官方提供的默认在library中，可以省略library</p>
-<p><code>docker image pull hello-world</code></p>
-</li>
-<li><p>查看所有镜像文件</p>
-<p><code>docker image list</code></p>
-</li>
-</ul>
-<p>docker run&amp; docker container run 区别：前者是1.13之前使用的命令，后者是1.13后新增加的，作用效果一样。<a target="_blank" rel="noopener" href="https://www.docker.com/blog/whats-new-in-docker-1-13/">参考说明</a></p>
-<ul>
-<li><p>从image文件中生成一个正在运行的容器实例</p>
-<p><code>docker container run xxxx</code></p>
-</li>
-<li><p>手动终止运行的容器</p>
-<p><code>docker container kill xxxx</code></p>
-</li>
-<li><p>以交互模式运行容器 (后边可以跟需要打开的shell)</p>
-<p><code>docker container run -it xxxx (bin/bash)</code></p>
-</li>
-</ul>
-<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>更多命令参考   👉🏻 <strong>(<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/container/">官方文档</a>)</strong></p>
-<ul>
-<li><p>列出本机正在运行的容器</p>
-<p><code>docker container list</code></p>
-</li>
-<li><p>列出本机所有容器，包括终止运行的容器</p>
-<p><code>docker container ls -all</code></p>
-</li>
-<li><p>启动终止的容器</p>
-<p><code>docker container start &lt;container id&gt;</code></p>
-<p>run和start的区别：第一次使用run;  容器已经生成并且已经停止运行使用start     *<strong>容器后台运行加 -d 参数*</strong></p>
-</li>
-<li><p>重启正在运行的容器</p>
-<p><code>docker container restart &lt;container id&gt;</code></p>
-</li>
-<li><p>停止正在运行的容器</p>
-<p><code>docker container stop &lt;container id&gt;</code></p>
-</li>
-<li><p>删除容器文件(终止运行的容器文件，依然会占据硬盘空间)</p>
-<p><code>docker container rm &lt;container id&gt;</code></p>
-</li>
-<li><p>获取容器的运行的输出</p>
-<p><code>docker container logs &lt;container id&gt;</code></p>
-</li>
-<li><p>进入容器</p>
-<p>使用attach命令进入容器后，如果从这个stdin中exit,会导致容器的停止。使用exec容器则不会停止</p>
-<p><code>docker container attach &lt;container id&gt;</code></p>
-<p><code>docker container exec -it &lt;container id&gt; (bash)</code></p>
-</li>
-<li><p>清理掉所有处于终止状态的容器</p>
-<p><code>docker container prune</code></p>
-</li>
-</ul>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/docker/">docker</a>
-                    
-                  </div>
-                
+
+
+
               </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/202104/ckna492r00005gsue1ys29iqd/d1ffddf6e37f/">
-                        <span class="hidden-mobile">Centos 安装Docker</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
             </div>
-
-            
-          </article>
+          </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
     
 
     
@@ -461,15 +300,9 @@
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
