@@ -18,7 +18,7 @@
   <meta name="author" content="mmm6">
   <meta name="keywords" content="">
   
-  <title>使用hexo部署静态blog - XiRang&#39;s</title>
+  <title>Docker 常用命令 - XiRang&#39;s</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -158,12 +158,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://images.unsplash.com/photo-1526170160160-1a5eb242ab58') no-repeat center center;
+         style="background: url('https://images.unsplash.com/photo-1527645746751-d4dc7aa53163') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="使用hexo部署静态blog">
+            <span class="h2" id="subtitle" title="Docker 常用命令">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-02 11:13" pubdate>
-        2021年4月2日 上午
+      <time datetime="2021-04-09 17:25" pubdate>
+        2021年4月9日 下午
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      562 字
+      585 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      7
        分钟
     </span>
   
@@ -225,49 +225,68 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">使用hexo部署静态blog</h1>
+            <h1 style="display: none">Docker 常用命令</h1>
             
             <div class="markdown-body">
-              <h3 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><ul>
-<li><p>安装node环境</p>
-<p><code>npm install hexo</code></p>
-</li>
-<li><p>安装git</p>
-<p><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/896067074338496">廖雪峰-安装git</a></p>
-</li>
-</ul>
-<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><ol>
-<li><p>文档👇  (有问题查文档 )</p>
-<p><a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">**官方文档</a>**      <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo"><strong>github</strong></a></p>
-</li>
-<li><p>使用主题 （fluid）</p>
-<p><a target="_blank" rel="noopener" href="https://fluid-dev.github.io/hexo-fluid-docs/guide/"><strong>配置指南</strong></a>     <a target="_blank" rel="noopener" href="https://github.com/fluid-dev/hexo-theme-fluid"><strong>github</strong></a></p>
-</li>
-</ol>
-<p> “Hexo是一个快速，简单且功能强大的博客框架。您使用Markdown（或其他标记语言）编写帖子，然后Hexo会在几秒钟内生成带有精美主题的静态文件”      - - （官方文档）</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>网上教程大部分都是安装node,git。有些在服务器上自行部署的还要安装git服务。刚开始有点懵，没有搞懂其中的关系。在服务器上搭建了整套的东西。<br><code>如果你部署到GitHub Pages上的话，那么你需要在你电脑上安装git、node，本地编写新文章后使用git同步到github上。</code><br><code>如果你是部署到自己的服务器上，那么就只需要在服务器上部署git服务，每次写完的文章使用hexo生成静态文件，然后同步到你自己的服务器上。使用nginx转发就可以访问了。</code></p>
+              <blockquote>
+<p>容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/docker/">Docker命令行参考</a></p>
+<h3 id="镜像（image）"><a href="#镜像（image）" class="headerlink" title="镜像（image）"></a>镜像（image）</h3><p>Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。</p>
 <ul>
-<li><p>node.js    (hexo主要使用node编写)</p>
+<li><p>拉取仓库代码到本地</p>
+<p><code>docker image pull library/hello-world</code></p>
+<p>docker官方提供的默认在library中，可以省略library</p>
+<p><code>docker image pull hello-world</code></p>
 </li>
-<li><p>git  (主要用于拉取和同步代码)</p>
-<p><code>【自建git服务】  这个是在服务器上搭建自己的git服务</code></p>
+<li><p>查看所有镜像文件</p>
+<p><code>docker image list</code></p>
 </li>
 </ul>
-<h3 id="配置git-hook"><a href="#配置git-hook" class="headerlink" title="配置git hook"></a>配置git hook</h3><p>使用git hook的目的是为了自动同步每次提交到服务器的静态文件</p>
-<p> 官方介绍<em>文档</em> ：**<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/%E8%87%AA%E5%AE%9A%E4%B9%89-Git-Git-%E9%92%A9%E5%AD%90">git 钩子</a>**</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><br>GIT_REPO=/srv/program/myblog.git<br>TMP_GIT_CLONE=/var/www/tmp_hexo_blog<br>PUBLIC_WWW=/var/www/hexo_blog<br>rm -rf <span class="hljs-variable">$&#123;TMP_GIT_CLONE&#125;</span><br>git <span class="hljs-built_in">clone</span> <span class="hljs-variable">$GIT_REPO</span> <span class="hljs-variable">$TMP_GIT_CLONE</span><br>rm -rf <span class="hljs-variable">$&#123;PUBLIC_WWW&#125;</span><br>cp -rf <span class="hljs-variable">$&#123;TMP_GIT_CLONE&#125;</span> <span class="hljs-variable">$&#123;PUBLIC_WWW&#125;</span><br></code></pre></td></tr></table></figure>
-
-<p><strong>git hook</strong>脚本参照了  <a target="_blank" rel="noopener" href="https://blog8.flyky.org/20191105/build-git-server-to-use-hexo-deploy/">flyky</a> 的文章</p>
-<p>如果git能正常提交，但是钩子脚本没有生效，一般情况下是因为文件目录读写权限的问题，仔细检查相关目录权限就可以了</p>
-<p><code>PUBLIC_WWW</code>  这个目录为hexo生成的静态文件目录</p>
-<h3 id="配置nginx"><a href="#配置nginx" class="headerlink" title="配置nginx"></a>配置nginx</h3><p>安装参考：👇</p>
-<p><code>sudo yum install nginx</code></p>
-<p>nginx安装完成后，更新配置文件，一般在<code>conf.d</code>文件夹中添加conf文件,方便不同项目管理</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">location / &#123;<br>                <span class="hljs-built_in">alias</span> /var/www/hexo_blog/;<br>        &#125;<br></code></pre></td></tr></table></figure>
-
-<p>然后重启nginx服务即可以使用ip访问了。</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
-<li>要想使用自己的域名，https访问等需要单独购买域名，配置ssl证书等。</li>
+<p>docker run&amp; docker container run 区别：前者是1.13之前使用的命令，后者是1.13后新增加的，作用效果一样。<a target="_blank" rel="noopener" href="https://www.docker.com/blog/whats-new-in-docker-1-13/">参考说明</a></p>
+<ul>
+<li><p>从image文件中生成一个正在运行的容器实例</p>
+<p><code>docker container run xxxx</code></p>
+</li>
+<li><p>手动终止运行的容器</p>
+<p><code>docker container kill xxxx</code></p>
+</li>
+<li><p>以交互模式运行容器 (后边可以跟需要打开的shell)</p>
+<p><code>docker container run -it xxxx (bin/bash)</code></p>
+</li>
+</ul>
+<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>更多命令参考   👉🏻 <strong>(<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/container/">官方文档</a>)</strong></p>
+<ul>
+<li><p>列出本机正在运行的容器</p>
+<p><code>docker container list</code></p>
+</li>
+<li><p>列出本机所有容器，包括终止运行的容器</p>
+<p><code>docker container ls -all</code></p>
+</li>
+<li><p>启动终止的容器</p>
+<p><code>docker container start &lt;container id&gt;</code></p>
+<p>run和start的区别：第一次使用run;  容器已经生成并且已经停止运行使用start     *<strong>容器后台运行加 -d 参数*</strong></p>
+</li>
+<li><p>重启正在运行的容器</p>
+<p><code>docker container restart &lt;container id&gt;</code></p>
+</li>
+<li><p>停止正在运行的容器</p>
+<p><code>docker container stop &lt;container id&gt;</code></p>
+</li>
+<li><p>删除容器文件(终止运行的容器文件，依然会占据硬盘空间)</p>
+<p><code>docker container rm &lt;container id&gt;</code></p>
+</li>
+<li><p>获取容器的运行的输出</p>
+<p><code>docker container logs &lt;container id&gt;</code></p>
+</li>
+<li><p>进入容器</p>
+<p>使用attach命令进入容器后，如果从这个stdin中exit,会导致容器的停止。使用exec容器则不会停止</p>
+<p><code>docker container attach &lt;container id&gt;</code></p>
+<p><code>docker container exec -it &lt;container id&gt; (bash)</code></p>
+</li>
+<li><p>清理掉所有处于终止状态的容器</p>
+<p><code>docker container prune</code></p>
+</li>
 </ul>
 
             </div>
@@ -286,7 +305,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
+                      <a class="hover-with-bg" href="/tags/docker/">docker</a>
                     
                   </div>
                 
@@ -303,18 +322,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/202104/ckna3ut570001l0ue52xj7dg3/96748c343230/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">linux常用命令</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/202104/ckna3ut5k000ol0uea85uhk1b/c9d756e4d9a6/">
-                        <span class="hidden-mobile">hexo 示例</span>
+                      <a href="/202104/ckna492r00005gsue1ys29iqd/d1ffddf6e37f/">
+                        <span class="hidden-mobile">Centos 安装Docker</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
