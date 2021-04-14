@@ -18,7 +18,7 @@
   <meta name="author" content="mmm6">
   <meta name="keywords" content="">
   
-  <title>Docker 常用命令 - XiRang&#39;s</title>
+  <title>信息获取方式的变迁 - XiRang&#39;s</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -158,12 +158,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://images.unsplash.com/photo-1527645746751-d4dc7aa53163') no-repeat center center;
+         style="background: url('https://images.unsplash.com/photo-1537301696988-4a82a4959466') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Docker 常用命令">
+            <span class="h2" id="subtitle" title="信息获取方式的变迁">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-09 17:25" pubdate>
-        2021年4月9日 下午
+      <time datetime="2021-04-03 15:44" pubdate>
+        2021年4月3日 下午
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      585 字
+      446 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      4
        分钟
     </span>
   
@@ -225,69 +225,16 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Docker 常用命令</h1>
+            <h1 style="display: none">信息获取方式的变迁</h1>
             
             <div class="markdown-body">
-              <blockquote>
-<p>容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。</p>
+              <h3 id="信息的获取方式"><a href="#信息的获取方式" class="headerlink" title="信息的获取方式"></a>信息的获取方式</h3><blockquote>
+<p>今天去剪头发，跟理发的小哥闲聊，说到打理头发上面，我说我一般都不太打理头发，第一是懒，第二也是不太会。小哥就给我说，你在抖音上看，有好多教男生抓头发的视频。在回来的路上，我突然就想到了，信息的获取方式发生了很大的变化。</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/docker/">Docker命令行参考</a></p>
-<h3 id="镜像（image）"><a href="#镜像（image）" class="headerlink" title="镜像（image）"></a>镜像（image）</h3><p>Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。</p>
-<ul>
-<li><p>拉取仓库代码到本地</p>
-<p><code>docker image pull library/hello-world</code></p>
-<p>docker官方提供的默认在library中，可以省略library</p>
-<p><code>docker image pull hello-world</code></p>
-</li>
-<li><p>查看所有镜像文件</p>
-<p><code>docker image list</code></p>
-</li>
-</ul>
-<p>docker run&amp; docker container run 区别：前者是1.13之前使用的命令，后者是1.13后新增加的，作用效果一样。<a target="_blank" rel="noopener" href="https://www.docker.com/blog/whats-new-in-docker-1-13/">参考说明</a></p>
-<ul>
-<li><p>从image文件中生成一个正在运行的容器实例</p>
-<p><code>docker container run xxxx</code></p>
-</li>
-<li><p>手动终止运行的容器</p>
-<p><code>docker container kill xxxx</code></p>
-</li>
-<li><p>以交互模式运行容器 (后边可以跟需要打开的shell)</p>
-<p><code>docker container run -it xxxx (bin/bash)</code></p>
-</li>
-</ul>
-<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>更多命令参考   👉🏻 <strong>(<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/container/">官方文档</a>)</strong></p>
-<ul>
-<li><p>列出本机正在运行的容器</p>
-<p><code>docker container list</code></p>
-</li>
-<li><p>列出本机所有容器，包括终止运行的容器</p>
-<p><code>docker container ls -all</code></p>
-</li>
-<li><p>启动终止的容器</p>
-<p><code>docker container start &lt;container id&gt;</code></p>
-<p>run和start的区别：第一次使用run;  容器已经生成并且已经停止运行使用start     *<strong>容器后台运行加 -d 参数*</strong></p>
-</li>
-<li><p>重启正在运行的容器</p>
-<p><code>docker container restart &lt;container id&gt;</code></p>
-</li>
-<li><p>停止正在运行的容器</p>
-<p><code>docker container stop &lt;container id&gt;</code></p>
-</li>
-<li><p>删除容器文件(终止运行的容器文件，依然会占据硬盘空间)</p>
-<p><code>docker container rm &lt;container id&gt;</code></p>
-</li>
-<li><p>获取容器的运行的输出</p>
-<p><code>docker container logs &lt;container id&gt;</code></p>
-</li>
-<li><p>进入容器</p>
-<p>使用attach命令进入容器后，如果从这个stdin中exit,会导致容器的停止。使用exec容器则不会停止</p>
-<p><code>docker container attach &lt;container id&gt;</code></p>
-<p><code>docker container exec -it &lt;container id&gt; (bash)</code></p>
-</li>
-<li><p>清理掉所有处于终止状态的容器</p>
-<p><code>docker container prune</code></p>
-</li>
-</ul>
+<p>在pc时代，大多数的信息主要集中在一些头部的门户网站上面和一些个人博客上。到了4G普及，进入移动互联网，信息的获取主要集中在了各种app上面。</p>
+<p>信息的展现方式也由原来的图文变成了视频。带来的好处就是信息更加直观，更加容易理解。同时信息的碎片化也更加严重。</p>
+<p>如果你不看抖音、不刷微博，没有小红书，那很明显一些很火的东西你就会比别人很晚的接收到。虽然接不接收这些信息对你的生活没有太大的影响。</p>
+<p>视频的一个很大问题，就是把很多的知识点都全部压缩在一个几分钟左右的短片中。包含同样知识点的一篇文章就要好几千字，可能当你看到这篇文章长度就偷偷打了退堂鼓。但同样的图文的好处就是可以在阅读的过程中，你会有稍微的停顿去思考。有没看懂的可以很方便的拖回去再细细看一遍。视频虽然把所有的知识点都压缩到一个片段中，但是你很难精确的划到自己不明白想要重新去看的地方。</p>
 
             </div>
             <hr>
@@ -297,7 +244,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+                      <a class="hover-with-bg" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
                     
                   </div>
                 
@@ -305,7 +252,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/docker/">docker</a>
+                      <a class="hover-with-bg" href="/tags/%E6%9D%82%E8%AE%B0/">杂记</a>
                     
                   </div>
                 
@@ -322,9 +269,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/202104/ckngxh697000co0uecygp1gdz/2ce7f3e3d355/">
+                      <a href="/202104/cknhbb1al0007p8ue39yra9m5/d1ffddf6e37f/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">docker 使用的一些理解</span>
+                        <span class="hidden-mobile">Centos 安装Docker</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -332,8 +279,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/202104/ckngxh6950007o0ue0ntwgu4g/d1ffddf6e37f/">
-                        <span class="hidden-mobile">Centos 安装Docker</span>
+                      <a href="/202104/cknhbb1ak0005p8ue2p3ya9fw/46fad839a23f/">
+                        <span class="hidden-mobile">node增加全局环境配置</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

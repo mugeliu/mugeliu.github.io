@@ -18,7 +18,7 @@
   <meta name="author" content="mmm6">
   <meta name="keywords" content="">
   
-  <title>信息获取方式的变迁 - XiRang&#39;s</title>
+  <title>docker 使用的一些理解 - XiRang&#39;s</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -158,12 +158,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://images.unsplash.com/photo-1537301696988-4a82a4959466') no-repeat center center;
+         style="background: url('https://images.unsplash.com/photo-1569742676440-c90d64e4d56e') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="信息获取方式的变迁">
+            <span class="h2" id="subtitle" title="docker 使用的一些理解">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-03 15:44" pubdate>
-        2021年4月3日 下午
+      <time datetime="2021-04-13 18:45" pubdate>
+        2021年4月13日 晚上
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      446 字
+      312 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      3
        分钟
     </span>
   
@@ -225,16 +225,17 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">信息获取方式的变迁</h1>
+            <h1 style="display: none">docker 使用的一些理解</h1>
             
             <div class="markdown-body">
-              <h3 id="信息的获取方式"><a href="#信息的获取方式" class="headerlink" title="信息的获取方式"></a>信息的获取方式</h3><blockquote>
-<p>今天去剪头发，跟理发的小哥闲聊，说到打理头发上面，我说我一般都不太打理头发，第一是懒，第二也是不太会。小哥就给我说，你在抖音上看，有好多教男生抓头发的视频。在回来的路上，我突然就想到了，信息的获取方式发生了很大的变化。</p>
-</blockquote>
-<p>在pc时代，大多数的信息主要集中在一些头部的门户网站上面和一些个人博客上。到了4G普及，进入移动互联网，信息的获取主要集中在了各种app上面。</p>
-<p>信息的展现方式也由原来的图文变成了视频。带来的好处就是信息更加直观，更加容易理解。同时信息的碎片化也更加严重。</p>
-<p>如果你不看抖音、不刷微博，没有小红书，那很明显一些很火的东西你就会比别人很晚的接收到。虽然接不接收这些信息对你的生活没有太大的影响。</p>
-<p>视频的一个很大问题，就是把很多的知识点都全部压缩在一个几分钟左右的短片中。包含同样知识点的一篇文章就要好几千字，可能当你看到这篇文章长度就偷偷打了退堂鼓。但同样的图文的好处就是可以在阅读的过程中，你会有稍微的停顿去思考。有没看懂的可以很方便的拖回去再细细看一遍。视频虽然把所有的知识点都压缩到一个片段中，但是你很难精确的划到自己不明白想要重新去看的地方。</p>
+              <h3 id="docker容器访问宿主机"><a href="#docker容器访问宿主机" class="headerlink" title="docker容器访问宿主机"></a>docker容器访问宿主机</h3><p>docker相当于一个单独的系统，所以访问宿主机上mysql等，不能直接使用<code>127.0.0.1</code>或者<code>localhost</code>，使用这两个访问的是docker容器内部自身的回环地址。</p>
+<p>如何访问宿主机呢。需要用到docker的创建的一个linux网桥, 一般使用ifconfig可以看到。</p>
+<p><img src="https://www.hualigs.cn/image/6075796b28434.jpg" srcset="/img/loading.gif" lazyload alt="docker network"></p>
+<p>所以在docker容器中地址需要使用<code>172.17.0.1</code>就能访问了。当然还需要宿主机的mysql或者其他应用开启ip访问才可以</p>
+<h3 id="宿主机器访问docker容器中的服务"><a href="#宿主机器访问docker容器中的服务" class="headerlink" title="宿主机器访问docker容器中的服务"></a>宿主机器访问docker容器中的服务</h3><p>如果想要外部访问到docker容器中的服务，在使用<code>docker run</code>命令第一次启动时，一定要做端口映射，把docker中的端口映射到本地端口上。那样本地才可以进行访问。不加端口映射本地直接端口是不通的。</p>
+<p><code>docker container run -d -p 主机(宿主)端口:容器端口  container_id  </code></p>
+<h3 id="进入docker容器内部"><a href="#进入docker容器内部" class="headerlink" title="进入docker容器内部"></a>进入docker容器内部</h3><p><code>docker container exec -it &lt;container id&gt; /bin/bash(bash)</code></p>
+<p>使用exec 命令进入一个容器内容，相当于进入一台linux机器中。需要在容器中安装应用宝，或者其他操作，就需要进入到容器重进行操作。</p>
 
             </div>
             <hr>
@@ -244,7 +245,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a>
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
                     
                   </div>
                 
@@ -252,7 +253,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%9D%82%E8%AE%B0/">杂记</a>
+                      <a class="hover-with-bg" href="/tags/docker/">docker</a>
+                    
+                      <a class="hover-with-bg" href="/tags/liunx/">liunx</a>
                     
                   </div>
                 
@@ -269,9 +272,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/202104/ckngxh6950007o0ue0ntwgu4g/d1ffddf6e37f/">
+                      <a href="/202104/cknhbb1ar000gp8ue6ccm4jfz/2243a327cdd9/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Centos 安装Docker</span>
+                        <span class="hidden-mobile">一些接码合集</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -279,8 +282,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/202104/ckngxh6900002o0uedpn34atc/46fad839a23f/">
-                        <span class="hidden-mobile">node增加全局环境配置</span>
+                      <a href="/202104/cknhbb1ao000bp8ue9eb3bkrr/3b1d0077f9be/">
+                        <span class="hidden-mobile">Docker 常用命令</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

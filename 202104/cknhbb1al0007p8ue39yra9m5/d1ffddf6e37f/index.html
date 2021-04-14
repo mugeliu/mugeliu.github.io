@@ -18,9 +18,25 @@
   <meta name="author" content="mmm6">
   <meta name="keywords" content="">
   
-  <title>标签 - 杂记 - XiRang&#39;s</title>
+  <title>Centos 安装Docker - XiRang&#39;s</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -142,22 +158,55 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('https://images.unsplash.com/photo-1498503603722-8de8df0beb96') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="标签 - 杂记">
+            <span class="h2" id="subtitle" title="Centos 安装Docker">
               
             </span>
 
             
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-08 18:20" pubdate>
+        2021年4月8日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      291 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -166,40 +215,131 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 1 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/202104/cknhbb1al0006p8uedzqzco13/c427816ed3b6/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">信息获取方式的变迁</span>
-      <time style="float: right;">04-03</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Centos 安装Docker</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Centos-安装docker"><a href="#Centos-安装docker" class="headerlink" title="Centos 安装docker"></a>Centos 安装docker</h1><p><strong>docker:</strong>  属于 Linux 容器的一种封装，提供简单易用的容器使用接口<br>            👉 <a target="_blank" rel="noopener" href="https://docs.docker.com/"><strong>官方文档</strong></a></p>
+<p><strong>docker-compose:</strong> 一个集群管理方式，可以利用名为docker-compose.yml的yaml文件来定义需要启动的容器</p>
+<p><strong>Kubernetes（K8S）:</strong> 非常强大的容器编排工具，可以管理大型集群、微服务、分布式应用等等</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li><p>使用Docker的存储库安装</p>
+<p>参考 ：**<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/">安装Docker Engine</a>    ||   <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/centos/">**在centos上安装</a>    <strong>||</strong>   <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html">Docker入门教程</a></p>
+</li>
+<li><p><code>sudo yum install -y yum-utils</code></p>
+</li>
+<li><p><code>sudo yum-config-manager  --add-repo  https://download.docker.com/linux/centos/docker-ce.repo</code></p>
+</li>
+<li><p><code>sudo yum install docker-ce docker-ce-cli containerd.io</code></p>
+</li>
+<li><p><code>sudo systemctl start docker</code></p>
+</li>
+<li><p>验证是否安装成功</p>
+<p><code>sudo docker run hello-world</code></p>
+</li>
+</ul>
+<h3 id="创建docker用户组"><a href="#创建docker用户组" class="headerlink" title="创建docker用户组"></a>创建docker用户组</h3><ul>
+<li>这一步的作用是为了其他用户使用docke命令时不加sudo  (参考：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/linux-postinstall/">Linux安装后的步骤</a>)</li>
+<li><code>sudo groupadd  docker</code></li>
+<li><code>sudo usermod -aG docker $USER</code>  (这个是把当前登录用户加入到docker用户组中)</li>
+</ul>
+<h3 id="配置开机自启动"><a href="#配置开机自启动" class="headerlink" title="配置开机自启动"></a>配置开机自启动</h3><p>（禁止启动则使用disable关键字替换enable执行命令）</p>
+<ul>
+<li><code>sudo systemctl enable docker.service</code></li>
+<li><code>sudo systemctl enable containerd.service</code></li>
+</ul>
+<h3 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h3><ul>
+<li>linux下参考<a target="_blank" rel="noopener" href="https://docs.docker.com/compose/install/#install-compose">官方文档</a></li>
+<li>也可以使用pip进行安装 <code>pip install docker-compose</code></li>
+</ul>
 
-
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
+                    
+                      <a class="hover-with-bg" href="/tags/docker/">docker</a>
+                    
+                      <a class="hover-with-bg" href="/tags/contos/">contos</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/202104/cknhbb1ao000bp8ue9eb3bkrr/3b1d0077f9be/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Docker 常用命令</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/202104/cknhbb1al0006p8uedzqzco13/c427816ed3b6/">
+                        <span class="hidden-mobile">信息获取方式的变迁</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -304,9 +444,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
