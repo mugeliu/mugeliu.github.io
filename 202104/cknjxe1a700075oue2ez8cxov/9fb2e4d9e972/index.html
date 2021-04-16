@@ -18,7 +18,7 @@
   <meta name="author" content="mmm6">
   <meta name="keywords" content="">
   
-  <title>docker 使用的一些理解 - XiRang&#39;s</title>
+  <title>Linux 安装docker - XiRang&#39;s</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -158,12 +158,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://images.unsplash.com/photo-1569742676440-c90d64e4d56e') no-repeat center center;
+         style="background: url('https://images.unsplash.com/photo-1498503603722-8de8df0beb96') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="docker 使用的一些理解">
+            <span class="h2" id="subtitle" title="Linux 安装docker">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-13 18:45" pubdate>
-        2021年4月13日 晚上
+      <time datetime="2021-04-08 18:20" pubdate>
+        2021年4月8日 晚上
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      312 字
+      595 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      8
        分钟
     </span>
   
@@ -225,17 +225,88 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">docker 使用的一些理解</h1>
+            <h1 style="display: none">Linux 安装docker</h1>
             
             <div class="markdown-body">
-              <h3 id="docker容器访问宿主机"><a href="#docker容器访问宿主机" class="headerlink" title="docker容器访问宿主机"></a>docker容器访问宿主机</h3><p>docker相当于一个单独的系统，所以访问宿主机上mysql等，不能直接使用<code>127.0.0.1</code>或者<code>localhost</code>，使用这两个访问的是docker容器内部自身的回环地址。</p>
-<p>如何访问宿主机呢。需要用到docker的创建的一个linux网桥, 一般使用ifconfig可以看到。</p>
-<p><img src="https://www.hualigs.cn/image/6075796b28434.jpg" srcset="/img/loading.gif" lazyload alt="docker network"></p>
-<p>所以在docker容器中地址需要使用<code>172.17.0.1</code>就能访问了。当然还需要宿主机的mysql或者其他应用开启ip访问才可以</p>
-<h3 id="宿主机器访问docker容器中的服务"><a href="#宿主机器访问docker容器中的服务" class="headerlink" title="宿主机器访问docker容器中的服务"></a>宿主机器访问docker容器中的服务</h3><p>如果想要外部访问到docker容器中的服务，在使用<code>docker run</code>命令第一次启动时，一定要做端口映射，把docker中的端口映射到本地端口上。那样本地才可以进行访问。不加端口映射本地直接端口是不通的。</p>
-<p><code>docker container run -d -p 主机(宿主)端口:容器端口  container_id  </code></p>
-<h3 id="进入docker容器内部"><a href="#进入docker容器内部" class="headerlink" title="进入docker容器内部"></a>进入docker容器内部</h3><p><code>docker container exec -it &lt;container id&gt; /bin/bash(bash)</code></p>
-<p>使用exec 命令进入一个容器内容，相当于进入一台linux机器中。需要在容器中安装应用宝，或者其他操作，就需要进入到容器重进行操作。</p>
+              <h1 id="Linux-安装docker"><a href="#Linux-安装docker" class="headerlink" title="Linux 安装docker"></a>Linux 安装docker</h1><ul>
+<li><p><strong>docker:</strong>  属于 Linux 容器的一种封装，提供简单易用的容器使用接口</p>
+<pre><code>        👉 [**官方文档**](https://docs.docker.com/)
+</code></pre>
+<p><strong>docker-compose:</strong> 一个集群管理方式，可以利用名为docker-compose.yml的yaml文件来定义需要启动的容器</p>
+<p><strong>Kubernetes（K8S）:</strong> 非常强大的容器编排工具，可以管理大型集群、微服务、分布式应用等等</p>
+<h2 id="Centos7"><a href="#Centos7" class="headerlink" title="Centos7"></a>Centos7</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
+<li><p>使用Docker的存储库安装</p>
+<p>参考 ：**<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/">安装Docker Engine</a>    ||   <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/centos/">**在centos上安装</a>    <strong>||</strong>   <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html">Docker入门教程</a></p>
+</li>
+<li><p><code>sudo yum install -y yum-utils</code></p>
+</li>
+<li><p><code>sudo yum-config-manager  --add-repo  https://download.docker.com/linux/centos/docker-ce.repo</code></p>
+</li>
+<li><p><code>sudo yum install docker-ce docker-ce-cli containerd.io</code></p>
+</li>
+<li><p><code>sudo systemctl start docker</code></p>
+</li>
+<li><p>验证是否安装成功</p>
+<p><code>sudo docker run hello-world</code></p>
+</li>
+</ul>
+<h3 id="配置开机自启动"><a href="#配置开机自启动" class="headerlink" title="配置开机自启动"></a>配置开机自启动</h3><p>（禁止启动则使用disable关键字替换enable执行命令）</p>
+<ul>
+<li><code>sudo systemctl enable docker.service</code></li>
+<li><code>sudo systemctl enable containerd.service</code></li>
+</ul>
+<h3 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h3><ul>
+<li>linux下参考<a target="_blank" rel="noopener" href="https://docs.docker.com/compose/install/#install-compose">官方文档</a></li>
+<li>也可以使用pip进行安装 <code>pip install docker-compose</code></li>
+</ul>
+<h3 id="卸载docker"><a href="#卸载docker" class="headerlink" title="卸载docker"></a>卸载docker</h3><ul>
+<li><p>卸载Docker Engine，CLI和Containerd软件包</p>
+<p><code>sudo yum remove docker-ce docker-ce-cli [containerd.io](http://containerd.io/)</code></p>
+</li>
+<li><p>Images, containers, volumes 需要手动删除</p>
+<p><code>sudo rm -rf /var/lib/docker</code></p>
+<p><code>sudo rm -rf /var/lib/containerd</code></p>
+</li>
+</ul>
+<h2 id="Ubuntu-安装"><a href="#Ubuntu-安装" class="headerlink" title="Ubuntu 安装"></a>Ubuntu 安装</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><ul>
+<li><p>使用Docker的存储库安装</p>
+<p>参考：  <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/ubuntu/">Ubuntu上安装</a>   || <a target="_blank" rel="noopener" href="https://www.runoob.com/docker/ubuntu-docker-install.html">菜鸟教程</a></p>
+<p><code>sudo apt-get update</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install \<br>    apt-transport-https \<br>    ca-certificates \<br>    curl \<br>    gnupg \<br>    lsb-release<br></code></pre></td></tr></table></figure>
+
+<p><code>curl -fsSL [https://download.docker.com/linux/ubuntu/gpg](https://download.docker.com/linux/ubuntu/gpg) | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</code></p>
+<p><code>sudo apt-get update</code></p>
+<p><code>sudo apt-get install docker-ce docker-ce-cli [containerd.io](http://containerd.io/)</code></p>
+<p><code>sudo docker run hello-world</code></p>
+</li>
+</ul>
+<h3 id="卸载docker-1"><a href="#卸载docker-1" class="headerlink" title="卸载docker"></a>卸载docker</h3><ul>
+<li><p>卸载Docker Engine，CLI和Containerd软件包</p>
+<p><code>sudo apt-get purge docker-ce docker-ce-cli containerd.io</code></p>
+</li>
+<li><p>Images, containers, volumes 需要手动删除</p>
+<p><code>sudo rm -rf /var/lib/docker</code></p>
+<p><code>sudo rm -rf /var/lib/containerd</code></p>
+</li>
+</ul>
+<h2 id="创建docker用户组"><a href="#创建docker用户组" class="headerlink" title="创建docker用户组"></a>创建docker用户组</h2><ul>
+<li>这一步的作用是为了其他用户使用docke命令时不加sudo  (参考：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/linux-postinstall/">Linux安装后的步骤</a>)</li>
+<li><code>sudo groupadd  docker</code></li>
+<li><code>sudo usermod -aG docker $USER</code>  (这个是把当前登录用户加入到docker用户组中)</li>
+</ul>
+<h2 id="遇到的问题："><a href="#遇到的问题：" class="headerlink" title="遇到的问题："></a>遇到的问题：</h2><ul>
+<li><p>Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?</p>
+<p>这个是因为docker服务没有启动。 ubtuntu使用 <code>service docker start</code> 命令启动。  centos使用<code>systemctl  start docker</code> 启动</p>
+</li>
+<li><p>System has not been booted with systemd as init system (PID 1). Can’t operate</p>
+<p>Ubuntu中启动命令跟Centos中不一样，Ubuntu使用<code>service</code></p>
+</li>
+<li><p>docker: unrecognized service</p>
+<p>貌似是版本问题，参考菜鸟教程的安装方式，装了Docker version 20.10.6成功了。之前19的版本</p>
+</li>
+</ul>
+</li>
+</ul>
 
             </div>
             <hr>
@@ -253,9 +324,11 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
+                    
                       <a class="hover-with-bg" href="/tags/docker/">docker</a>
                     
-                      <a class="hover-with-bg" href="/tags/liunx/">liunx</a>
+                      <a class="hover-with-bg" href="/tags/contos/">contos</a>
                     
                   </div>
                 
@@ -272,9 +345,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/202104/cknjrvrpy000lvouehfxibscj/2243a327cdd9/">
+                      <a href="/202104/cknjxe1a9000b5ouebvxm4yyo/3b1d0077f9be/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">一些接码合集</span>
+                        <span class="hidden-mobile">Docker 常用命令</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -282,8 +355,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/202104/cknjrvrpx000gvoue363f1iic/3b1d0077f9be/">
-                        <span class="hidden-mobile">Docker 常用命令</span>
+                      <a href="/202104/cknjxe1a600055oueavex8a3w/c427816ed3b6/">
+                        <span class="hidden-mobile">信息获取方式的变迁</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

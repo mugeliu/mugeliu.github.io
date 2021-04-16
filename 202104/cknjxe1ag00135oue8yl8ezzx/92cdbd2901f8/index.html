@@ -18,7 +18,7 @@
   <meta name="author" content="mmm6">
   <meta name="keywords" content="">
   
-  <title>Linux 安装docker - XiRang&#39;s</title>
+  <title>解决win系统docker和模拟器冲突 - XiRang&#39;s</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -158,12 +158,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://images.unsplash.com/photo-1498503603722-8de8df0beb96') no-repeat center center;
+         style="background: url('https://images.unsplash.com/photo-1517151786858-6b6b39f0df48') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Linux 安装docker">
+            <span class="h2" id="subtitle" title="解决win系统docker和模拟器冲突">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-08 18:20" pubdate>
-        2021年4月8日 晚上
+      <time datetime="2021-04-16 14:17" pubdate>
+        2021年4月16日 下午
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      595 字
+      351 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      3
        分钟
     </span>
   
@@ -225,86 +225,43 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Linux 安装docker</h1>
+            <h1 style="display: none">解决win系统docker和模拟器冲突</h1>
             
             <div class="markdown-body">
-              <h1 id="Linux-安装docker"><a href="#Linux-安装docker" class="headerlink" title="Linux 安装docker"></a>Linux 安装docker</h1><ul>
-<li><p><strong>docker:</strong>  属于 Linux 容器的一种封装，提供简单易用的容器使用接口</p>
-<pre><code>        👉 [**官方文档**](https://docs.docker.com/)
-</code></pre>
-<p><strong>docker-compose:</strong> 一个集群管理方式，可以利用名为docker-compose.yml的yaml文件来定义需要启动的容器</p>
-<p><strong>Kubernetes（K8S）:</strong> 非常强大的容器编排工具，可以管理大型集群、微服务、分布式应用等等</p>
-<h2 id="Centos7"><a href="#Centos7" class="headerlink" title="Centos7"></a>Centos7</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul>
-<li><p>使用Docker的存储库安装</p>
-<p>参考 ：**<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/">安装Docker Engine</a>    ||   <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/centos/">**在centos上安装</a>    <strong>||</strong>   <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html">Docker入门教程</a></p>
+              <blockquote>
+<p> Win子系统安装了Ubuntu之后，需要开启WSL2.  wsl2底层是借助Hyper-V实现的，使用Ubuntu需要在<code>启用windows功能</code>中打开Hyper-V。 但是一些安卓模拟器不使用Hyper-V，夜神模拟器会报错，木木模拟器会直接蓝屏</p>
+</blockquote>
+<p>为了安装模拟器进行抓包和调试，同时使用能在win上使用docker。docker也是使用Hyper-V实现的。</p>
+<p>官方给出的解决办法：</p>
+<p>微软：</p>
+<p><a target="_blank" rel="noopener" href="https://devblogs.microsoft.com/visualstudio/hyper-v-android-emulator-support/">Hyper-V Android emulator support | Visual Studio Blog</a></p>
+<p>谷歌：</p>
+<p><a target="_blank" rel="noopener" href="https://android-developers.googleblog.com/2018/07/android-emulator-amd-processor-hyper-v.html">Android Emulator - AMD Processor &amp; Hyper-V Support</a></p>
+<p>解决办法：</p>
+<p>安装<code>genymotion</code> 模拟器完美实现需求。</p>
+<p>实现Win子系统Ubuntu和模拟器的共存，在Ubuntu中安装docker。</p>
+<hr>
+<h3 id="Genymotion-安装"><a href="#Genymotion-安装" class="headerlink" title="Genymotion 安装"></a>Genymotion 安装</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.genymotion.com/download/">下载地址</a></p>
 </li>
-<li><p><code>sudo yum install -y yum-utils</code></p>
+<li><p>Genymotion的启动需要用到VirtualBox，所以没有装的话安装完Genymotion打开会提示让你装</p>
 </li>
-<li><p><code>sudo yum-config-manager  --add-repo  https://download.docker.com/linux/centos/docker-ce.repo</code></p>
+<li><p>安装VirtualBox，（一般下载选第一个<code>使用VirtualBox</code>）就不需要单独安装VirtualBox了</p>
 </li>
-<li><p><code>sudo yum install docker-ce docker-ce-cli containerd.io</code></p>
+<li><p>安装完成后打开按**<code>+</code>**添加模拟器</p>
+<p><img src="https://i.loli.net/2021/04/16/LrUpJfGh6lX8ePt.png" srcset="/img/loading.gif" lazyload alt="https://i.loli.net/2021/04/16/LrUpJfGh6lX8ePt.png"></p>
 </li>
-<li><p><code>sudo systemctl start docker</code></p>
-</li>
-<li><p>验证是否安装成功</p>
-<p><code>sudo docker run hello-world</code></p>
-</li>
-</ul>
-<h3 id="配置开机自启动"><a href="#配置开机自启动" class="headerlink" title="配置开机自启动"></a>配置开机自启动</h3><p>（禁止启动则使用disable关键字替换enable执行命令）</p>
-<ul>
-<li><code>sudo systemctl enable docker.service</code></li>
-<li><code>sudo systemctl enable containerd.service</code></li>
-</ul>
-<h3 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h3><ul>
-<li>linux下参考<a target="_blank" rel="noopener" href="https://docs.docker.com/compose/install/#install-compose">官方文档</a></li>
-<li>也可以使用pip进行安装 <code>pip install docker-compose</code></li>
-</ul>
-<h3 id="卸载docker"><a href="#卸载docker" class="headerlink" title="卸载docker"></a>卸载docker</h3><ul>
-<li><p>卸载Docker Engine，CLI和Containerd软件包</p>
-<p><code>sudo yum remove docker-ce docker-ce-cli [containerd.io](http://containerd.io/)</code></p>
-</li>
-<li><p>Images, containers, volumes 需要手动删除</p>
-<p><code>sudo rm -rf /var/lib/docker</code></p>
-<p><code>sudo rm -rf /var/lib/containerd</code></p>
+<li><p>添加完成后就可以启动模拟器了。</p>
 </li>
 </ul>
-<h2 id="Ubuntu-安装"><a href="#Ubuntu-安装" class="headerlink" title="Ubuntu 安装"></a>Ubuntu 安装</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><ul>
-<li><p>使用Docker的存储库安装</p>
-<p>参考：  <a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/ubuntu/">Ubuntu上安装</a>   || <a target="_blank" rel="noopener" href="https://www.runoob.com/docker/ubuntu-docker-install.html">菜鸟教程</a></p>
-<p><code>sudo apt-get update</code></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">sudo apt-get install \<br>    apt-transport-https \<br>    ca-certificates \<br>    curl \<br>    gnupg \<br>    lsb-release<br></code></pre></td></tr></table></figure>
-
-<p><code>curl -fsSL [https://download.docker.com/linux/ubuntu/gpg](https://download.docker.com/linux/ubuntu/gpg) | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</code></p>
-<p><code>sudo apt-get update</code></p>
-<p><code>sudo apt-get install docker-ce docker-ce-cli [containerd.io](http://containerd.io/)</code></p>
-<p><code>sudo docker run hello-world</code></p>
+<h3 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h3><ul>
+<li><p>由于电脑是x86架构，直接安装apk到模拟器会失败，需要转换程序</p>
+<p>👉🏻 <a target="_blank" rel="noopener" href="https://github.com/m9rco/Genymotion_ARM_Translation">转换包</a> （安卓4.3到安卓8的转换包）</p>
 </li>
-</ul>
-<h3 id="卸载docker-1"><a href="#卸载docker-1" class="headerlink" title="卸载docker"></a>卸载docker</h3><ul>
-<li><p>卸载Docker Engine，CLI和Containerd软件包</p>
-<p><code>sudo apt-get purge docker-ce docker-ce-cli containerd.io</code></p>
-</li>
-<li><p>Images, containers, volumes 需要手动删除</p>
-<p><code>sudo rm -rf /var/lib/docker</code></p>
-<p><code>sudo rm -rf /var/lib/containerd</code></p>
-</li>
-</ul>
-<h2 id="创建docker用户组"><a href="#创建docker用户组" class="headerlink" title="创建docker用户组"></a>创建docker用户组</h2><ul>
-<li>这一步的作用是为了其他用户使用docke命令时不加sudo  (参考：<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/install/linux-postinstall/">Linux安装后的步骤</a>)</li>
-<li><code>sudo groupadd  docker</code></li>
-<li><code>sudo usermod -aG docker $USER</code>  (这个是把当前登录用户加入到docker用户组中)</li>
-</ul>
-<h2 id="遇到的问题："><a href="#遇到的问题：" class="headerlink" title="遇到的问题："></a>遇到的问题：</h2><ul>
-<li><p>Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?</p>
-<p>这个是因为docker服务没有启动。 ubtuntu使用 <code>service docker start</code> 命令启动。  centos使用<code>systemctl  start docker</code> 启动</p>
-</li>
-<li><p>System has not been booted with systemd as init system (PID 1). Can’t operate</p>
-<p>Ubuntu中启动命令跟Centos中不一样，Ubuntu使用<code>service</code></p>
-</li>
-<li><p>docker: unrecognized service</p>
-<p>貌似是版本问题，参考菜鸟教程的安装方式，装了Docker version 20.10.6成功了。之前19的版本</p>
-</li>
-</ul>
+<li><p>安卓抓包ssl</p>
+<p><code>安卓5.0后不信任用户证书，安装的charles等证书无效，需要更改到系统证书目录下才可以抓HTTPS的包</code></p>
+<p>解决参考：↙️</p>
+<p><a target="_blank" rel="noopener" href="https://www.notion.so/Charles-dc4c8701890249eb9628902ed0df3c5b">Charles 手机安装证书</a></p>
 </li>
 </ul>
 
@@ -324,11 +281,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
-                    
                       <a class="hover-with-bg" href="/tags/docker/">docker</a>
                     
-                      <a class="hover-with-bg" href="/tags/contos/">contos</a>
+                      <a class="hover-with-bg" href="/tags/genymotion/">genymotion</a>
                     
                   </div>
                 
@@ -345,18 +300,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/202104/cknjrvrpx000gvoue363f1iic/3b1d0077f9be/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Docker 常用命令</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/202104/cknjrvrpu000cvouecziw1sfx/c427816ed3b6/">
-                        <span class="hidden-mobile">信息获取方式的变迁</span>
+                      <a href="/202104/cknjxe1ag00125oue63qw2wb1/2243a327cdd9/">
+                        <span class="hidden-mobile">一些接码合集</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

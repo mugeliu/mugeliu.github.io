@@ -18,7 +18,7 @@
   <meta name="author" content="mmm6">
   <meta name="keywords" content="">
   
-  <title>Docker 常用命令 - XiRang&#39;s</title>
+  <title>node增加全局环境配置 - XiRang&#39;s</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -158,12 +158,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://images.unsplash.com/photo-1527645746751-d4dc7aa53163') no-repeat center center;
+         style="background: url('https://images.unsplash.com/photo-1590796992955-b0124a34ab04') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Docker 常用命令">
+            <span class="h2" id="subtitle" title="node增加全局环境配置">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-09 17:25" pubdate>
-        2021年4月9日 下午
+      <time datetime="2021-04-03 00:19" pubdate>
+        2021年4月3日 凌晨
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      585 字
+      31 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      1
        分钟
     </span>
   
@@ -225,70 +225,10 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Docker 常用命令</h1>
+            <h1 style="display: none">node增加全局环境配置</h1>
             
             <div class="markdown-body">
-              <blockquote>
-<p>容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。</p>
-</blockquote>
-<p><a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/docker/">Docker命令行参考</a></p>
-<h3 id="镜像（image）"><a href="#镜像（image）" class="headerlink" title="镜像（image）"></a>镜像（image）</h3><p>Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。</p>
-<ul>
-<li><p>拉取仓库代码到本地</p>
-<p><code>docker image pull library/hello-world</code></p>
-<p>docker官方提供的默认在library中，可以省略library</p>
-<p><code>docker image pull hello-world</code></p>
-</li>
-<li><p>查看所有镜像文件</p>
-<p><code>docker image list</code></p>
-</li>
-</ul>
-<p>docker run&amp; docker container run 区别：前者是1.13之前使用的命令，后者是1.13后新增加的，作用效果一样。<a target="_blank" rel="noopener" href="https://www.docker.com/blog/whats-new-in-docker-1-13/">参考说明</a></p>
-<ul>
-<li><p>从image文件中生成一个正在运行的容器实例</p>
-<p><code>docker container run xxxx</code></p>
-</li>
-<li><p>手动终止运行的容器</p>
-<p><code>docker container kill xxxx</code></p>
-</li>
-<li><p>以交互模式运行容器 (后边可以跟需要打开的shell)</p>
-<p><code>docker container run -it xxxx (bin/bash)</code></p>
-</li>
-</ul>
-<h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>更多命令参考   👉🏻 <strong>(<a target="_blank" rel="noopener" href="https://docs.docker.com/engine/reference/commandline/container/">官方文档</a>)</strong></p>
-<ul>
-<li><p>列出本机正在运行的容器</p>
-<p><code>docker container list</code></p>
-</li>
-<li><p>列出本机所有容器，包括终止运行的容器</p>
-<p><code>docker container ls -all</code></p>
-</li>
-<li><p>启动终止的容器</p>
-<p><code>docker container start &lt;container id&gt;</code></p>
-<p>run和start的区别：第一次使用run;  容器已经生成并且已经停止运行使用start     *<strong>容器后台运行加 -d 参数*</strong></p>
-</li>
-<li><p>重启正在运行的容器</p>
-<p><code>docker container restart &lt;container id&gt;</code></p>
-</li>
-<li><p>停止正在运行的容器</p>
-<p><code>docker container stop &lt;container id&gt;</code></p>
-</li>
-<li><p>删除容器文件(终止运行的容器文件，依然会占据硬盘空间)</p>
-<p><code>docker container rm &lt;container id&gt;</code></p>
-</li>
-<li><p>获取容器的运行的输出</p>
-<p><code>docker container logs &lt;container id&gt;</code></p>
-</li>
-<li><p>进入容器</p>
-<p>使用attach命令进入容器后，如果从这个stdin中exit,会导致容器的停止。使用exec容器则不会停止</p>
-<p><code>docker container attach &lt;container id&gt;</code></p>
-<p><code>docker container exec -it &lt;container id&gt; (bash)</code></p>
-</li>
-<li><p>清理掉所有处于终止状态的容器</p>
-<p><code>docker container prune</code></p>
-</li>
-</ul>
-
+              <h3 id="node设置全局缓存和环境变量"><a href="#node设置全局缓存和环境变量" class="headerlink" title="node设置全局缓存和环境变量"></a>node设置全局缓存和环境变量</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs swift">npm config <span class="hljs-keyword">set</span> <span class="hljs-keyword">prefix</span> <span class="hljs-string">&quot;D:\xxxx<span class="hljs-subst">\n</span>ode_modules<span class="hljs-subst">\n</span>ode_global&quot;</span><br>npm config <span class="hljs-keyword">set</span> cache <span class="hljs-string">&quot;D:\xxxx<span class="hljs-subst">\n</span>ode_modules<span class="hljs-subst">\n</span>ode_cache&quot;</span><br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -305,7 +245,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/docker/">docker</a>
+                      <a class="hover-with-bg" href="/tags/node/">node</a>
                     
                   </div>
                 
@@ -322,9 +262,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/202104/cknjrvrpx000ivoue70q87m8p/2ce7f3e3d355/">
+                      <a href="/202104/cknjxe1a600055oueavex8a3w/c427816ed3b6/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">docker 使用的一些理解</span>
+                        <span class="hidden-mobile">信息获取方式的变迁</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -332,8 +272,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/202104/cknjrvrpw000evouedg9t7rsn/9fb2e4d9e972/">
-                        <span class="hidden-mobile">Linux 安装docker</span>
+                      <a href="/202104/cknjxe1a100015oueey5cdmxp/96748c343230/">
+                        <span class="hidden-mobile">linux常用命令</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
