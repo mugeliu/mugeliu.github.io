@@ -18,9 +18,25 @@
   <meta name="author" content="mmm6">
   <meta name="keywords" content="">
   
-  <title>标签 - genymotion - XiRang&#39;s</title>
+  <title>docker 使用的一些理解 - XiRang&#39;s</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -48,7 +64,7 @@
 
 
 <body>
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -142,22 +158,55 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.png') no-repeat center center;
+         style="background: url('https://images.unsplash.com/photo-1569742676440-c90d64e4d56e') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="标签 - genymotion">
+            <span class="h2" id="subtitle" title="docker 使用的一些理解">
               
             </span>
 
             
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-13 18:45" pubdate>
+        2021年4月13日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      312 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -166,40 +215,104 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 1 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2021</p>
-    
-    <a href="/202104/cknrakaft000jz0ue5roth1n7/92cdbd2901f8/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">解决win系统docker和模拟器冲突</span>
-      <time style="float: right;">04-16</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">docker 使用的一些理解</h1>
+            
+            <div class="markdown-body">
+              <h3 id="docker容器访问宿主机"><a href="#docker容器访问宿主机" class="headerlink" title="docker容器访问宿主机"></a>docker容器访问宿主机</h3><p>docker相当于一个单独的系统，所以访问宿主机上mysql等，不能直接使用<code>127.0.0.1</code>或者<code>localhost</code>，使用这两个访问的是docker容器内部自身的回环地址。</p>
+<p>如何访问宿主机呢。需要用到docker的创建的一个linux网桥, 一般使用ifconfig可以看到。</p>
+<p><img src="https://www.hualigs.cn/image/6075796b28434.jpg" srcset="/img/loading.gif" lazyload alt="docker network"></p>
+<p>所以在docker容器中地址需要使用<code>172.17.0.1</code>就能访问了。当然还需要宿主机的mysql或者其他应用开启ip访问才可以</p>
+<h3 id="宿主机器访问docker容器中的服务"><a href="#宿主机器访问docker容器中的服务" class="headerlink" title="宿主机器访问docker容器中的服务"></a>宿主机器访问docker容器中的服务</h3><p>如果想要外部访问到docker容器中的服务，在使用<code>docker run</code>命令第一次启动时，一定要做端口映射，把docker中的端口映射到本地端口上。那样本地才可以进行访问。不加端口映射本地直接端口是不通的。</p>
+<p><code>docker container run -d -p 主机(宿主)端口:容器端口  container_id  </code></p>
+<h3 id="进入docker容器内部"><a href="#进入docker容器内部" class="headerlink" title="进入docker容器内部"></a>进入docker容器内部</h3><p><code>docker container exec -it &lt;container id&gt; /bin/bash(bash)</code></p>
+<p>使用exec 命令进入一个容器内容，相当于进入一台linux机器中。需要在容器中安装应用宝，或者其他操作，就需要进入到容器重进行操作。</p>
 
-
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/docker/">docker</a>
+                    
+                      <a class="hover-with-bg" href="/tags/liunx/">liunx</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/202104/cknrakafs000gz0ue0641e6er/2243a327cdd9/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一些接码合集</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/202104/cknrakafq000bz0ue1lni0vdk/3b1d0077f9be/">
+                        <span class="hidden-mobile">Docker 常用命令</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -304,9 +417,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
