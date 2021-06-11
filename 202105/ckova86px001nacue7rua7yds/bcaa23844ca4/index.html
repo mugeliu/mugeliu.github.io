@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      438 字
+      639 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      8
        分钟
     </span>
   
@@ -262,6 +262,8 @@
 <ul>
 <li>normalize-space    删除指定字符串的开头和结尾的空白，并把内部的所有空白序列替换为一个，然后返回结果。如果没有 string 参数，则处理当前节点。</li>
 </ul>
+<h3 id="一些示例"><a href="#一些示例" class="headerlink" title="一些示例"></a>一些示例</h3><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-comment"># 根据text获取指定的节点，对不需要的节点进行排除。</span><br>xpath<span class="hljs-params">(&#x27;//span[@<span class="hljs-attr">class</span>=&quot;title-name&quot;][contains(text()</span>,<span class="hljs-string">&quot;出品&quot;</span>) and not <span class="hljs-params">(contains(text()</span>,<span class="hljs-string">&quot;联合出品&quot;</span>))]<span class="hljs-string">/ancestor</span>:<span class="hljs-function">:dl</span>/dd/<span class="hljs-string">/div</span>[@class=<span class="hljs-string">&quot;p-item&quot;</span>][position<span class="hljs-params">()</span>&lt;4]<span class="hljs-string">//p/text</span><span class="hljs-params">()</span>&#x27;)<br><br><span class="hljs-comment"># 合并两个节点的值 （115.2，万 &gt;&gt;&gt; 115.2万）</span><br>xpath<span class="hljs-params">(&#x27;concat(//p[contains(text()</span>,<span class="hljs-string">&quot;话题讨论量&quot;</span>)]<span class="hljs-string">/following-sibling</span>:<span class="hljs-function">:p</span>/<span class="hljs-string">/span</span>[1]<span class="hljs-string">/text</span><span class="hljs-params">()</span>,<span class="hljs-string">//p</span>[contains<span class="hljs-params">(text()</span>,<span class="hljs-string">&quot;话题讨论量&quot;</span>)]<span class="hljs-string">/following-sibling</span>:<span class="hljs-function">:p</span>/<span class="hljs-string">/span</span>[2]<span class="hljs-string">/text</span><span class="hljs-params">()</span>)&#x27;)<br><br><span class="hljs-comment">#猫眼历史最高热度值获取</span><br>xpath<span class="hljs-params">(&#x27;//*[@<span class="hljs-attr">class</span>=&quot;tv-baseinfo&quot;]//span[contains(text()</span>,<span class="hljs-string">&quot;热度值&quot;</span>)]<span class="hljs-string">/ancestor</span>:<span class="hljs-function">:a</span>/<span class="hljs-string">/p</span>[contains<span class="hljs-params">(text()</span>,<span class="hljs-string">&quot;历史最高&quot;</span>)]<span class="hljs-string">/following-sibling</span>:<span class="hljs-function">:p</span>/span/text<span class="hljs-params">()</span>&#x27;)<br><br><span class="hljs-comment"># 根据class属性含有的值进行查找</span><br>xpath<span class="hljs-params">(&#x27;//div[contains(@class,&quot;movie-item-title&quot;)</span>]<span class="hljs-string">/a/text</span><span class="hljs-params">()</span>&#x27;)<br><br><span class="hljs-comment"># 去除空格 换行符</span><br>xpath<span class="hljs-params">(&#x27;normalize-space(//div/a/text()</span>)&#x27;)<br></code></pre></td></tr></table></figure>
+
 
             </div>
             <hr>
