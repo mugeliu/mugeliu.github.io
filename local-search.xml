@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>win系统启动celery服务</title>
+    <link href="/202109/cku58ttzo0000dkue2zhbb46b/721a27074fac/"/>
+    <url>/202109/cku58ttzo0000dkue2zhbb46b/721a27074fac/</url>
+    
+    <content type="html"><![CDATA[<p>win系统启动celery服务后，不执行任务，获取任务结果timeout</p><p>在win系统上安装好celery后，使用redis做bockers,按照官方教程启动celery后，总是不能获取任务结果，获取任务结果就报<code>celery.exceptions.TimeoutError: The operation timed out.</code> 异常。</p><p>搜索相关的问题后发现，celery对win系统支持并不友好。直接按照官网在win系统上启动服务的话，任务能正常添加，但是不会执行，导致获取任务一直timeout</p><p>启动服务时，需要指定 <code>- -pool</code>参数,  可以使用<code>- - pool=solo</code>或者<code>- - pool=gevent</code> (需要自行安装)</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">celery -A tasks worker --pool=solo --loglevel=INFO<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>编程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>celery</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>搭建aria2下载</title>
     <link href="/202108/cksofqv4q0022gwuedhzhdqd9/38ef6adc48bc/"/>
     <url>/202108/cksofqv4q0022gwuedhzhdqd9/38ef6adc48bc/</url>
