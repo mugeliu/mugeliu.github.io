@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>某漫画请求头md5加密值分析</title>
+    <link href="/202111/ckwg1qjxd0000jsue9riu265k/f85bb863db6b/"/>
+    <url>/202111/ckwg1qjxd0000jsue9riu265k/f85bb863db6b/</url>
+    
+    <content type="html"><![CDATA[<p>🤖 吧-嗒请求头md5值</p><ul><li><p>抓包分析请求参数</p><p><img src="https://i.loli.net/2021/11/26/UYxTy8koaCVWONb.png" alt="Untitled"></p><p>对比发现请求header中的md5参数是每次都变化的，改变url的参数，后端会直接校验不通过，所以需要。</p></li><li><p>使用jadx反编译搜索相关函数</p></li><li><p><img src="https://i.loli.net/2021/11/26/unZEmXCTNWew3Ri.png" alt="imgs"></p><p>但是这里java相关基础太薄弱，看不懂是怎么调用的，只能换个思路</p></li><li><p>因为之前做过旧版本的，知道现在好多都是native方法中加密，所以搜索native方法看下</p><p><img src="https://i.loli.net/2021/11/26/zb2wshYAoFCGB51.png" alt="Untitled"></p><p>搜索出来的方法一大堆，首先要排除掉不想关的类,只关注com.qiyi相关的。在排查的过程中发现有个类名中有protect(保护, 加密不就是为了保护嘛)，所以重点排查下</p></li><li><p>使用objection工具hook相关的代码类。</p><p>发出请求后发现确实调用到这里来了， 只不过调用的是getQdsc和getQdscJNI方法，</p><p>相关调用堆栈中也有我们最开始排查的md5参数赋值的方法。</p><p>getQdsc方法接受一个obj对象和一个str字符串，盲猜str应该跟请求参数相关</p></li><li><p>对getQdsc方法hook相关参数分析</p><p><img src="https://i.loli.net/2021/11/26/vjZ9nmyTxoVSg4Q.png" alt="Untitled"></p><p>确认了相关猜测，getQdsc确实是加密方法，传入了上下文和需要加密的url字符串。</p></li><li><p>rpc调用</p><p>技术不到位，native方法还是直接走rpc调用</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python">hook_code = <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">        function getresult(str1) &#123;</span><br><span class="hljs-string">            var result = &quot;&quot;;</span><br><span class="hljs-string">            Java.perform(function () &#123;</span><br><span class="hljs-string">                var current_application = Java.use(&#x27;android.app.ActivityThread&#x27;).currentApplication();</span><br><span class="hljs-string">                var context = current_application.getApplicationContext();</span><br><span class="hljs-string">                var make_md5 = Java.use(&#x27;com.qiyi.Protect&#x27;);</span><br><span class="hljs-string">                result = make_md5.getQdsc(context,str1);</span><br><span class="hljs-string">            &#125;)</span><br><span class="hljs-string">            return result;</span><br><span class="hljs-string">        &#125;</span><br><span class="hljs-string">        rpc.exports = &#123;</span><br><span class="hljs-string">            getmd5: getresult,</span><br><span class="hljs-string">        &#125;</span><br><span class="hljs-string">    &#x27;&#x27;&#x27;</span><br></code></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>编程</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>apk,frida</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>win系统启动celery服务</title>
     <link href="/202109/cku58ttzo0000dkue2zhbb46b/721a27074fac/"/>
     <url>/202109/cku58ttzo0000dkue2zhbb46b/721a27074fac/</url>
