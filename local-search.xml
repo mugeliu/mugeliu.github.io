@@ -20,7 +20,9 @@
     
     <tags>
       
-      <tag>apk,frida</tag>
+      <tag>apk</tag>
+      
+      <tag>frida</tag>
       
     </tags>
     
@@ -70,7 +72,9 @@
     
     <tags>
       
-      <tag>aria2,下载</tag>
+      <tag>aria2</tag>
+      
+      <tag>下载</tag>
       
     </tags>
     
