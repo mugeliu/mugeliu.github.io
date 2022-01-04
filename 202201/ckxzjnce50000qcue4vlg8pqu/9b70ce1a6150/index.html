@@ -18,7 +18,7 @@
   <meta name="author" content="mmm6">
   <meta name="keywords" content="">
   
-  <title>一些代码片段 - XiRang&#39;s</title>
+  <title>Linux基本安全设置 - XiRang&#39;s</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -158,12 +158,12 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://images.unsplash.com/photo-1507238691740-187a5b1d37b8') no-repeat center center;
+         style="background: url('https://images.unsplash.com/photo-1568367767372-6a3d3ba45b3d') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="一些代码片段">
+            <span class="h2" id="subtitle" title="Linux基本安全设置">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-11-30 16:49" pubdate>
-        星期二, 十一月 30日 2021, 4:49 下午
+      <time datetime="2022-01-04 11:05" pubdate>
+        星期二, 一月 4日 2022, 11:05 上午
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      163 字
+      410 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      6
        分钟
     </span>
   
@@ -225,18 +225,48 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">一些代码片段</h1>
+            <h1 style="display: none">Linux基本安全设置</h1>
             
             <div class="markdown-body">
-              <ul>
-<li><p>同一行中打开多个文件</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">with</span> <span class="hljs-built_in">open</span>(input_file_path) <span class="hljs-keyword">as</span> inputfile, <span class="hljs-built_in">open</span>(output_file_path, ‘w’) <span class="hljs-keyword">as</span> outputfile:<br>    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> inputfile:<br>        outputfile.write(process(line))<br></code></pre></td></tr></table></figure></li>
-<li><p>打开任意数量的列表</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">compute_average_salary</span>(<span class="hljs-params">person_salary</span>):</span><br>    person, *salary = person_salary<br>    <span class="hljs-keyword">return</span> person, (<span class="hljs-built_in">sum</span>(salary) / <span class="hljs-built_in">float</span>(<span class="hljs-built_in">len</span>(salary)))<br><br>person, average_salary, age = compute_average_salary([“mike”, <span class="hljs-number">40000</span>, <span class="hljs-number">50000</span>, <span class="hljs-number">60000</span>, <span class="hljs-number">42</span>])<br><span class="hljs-built_in">print</span>(age) <span class="hljs-comment"># 42</span><br><br></code></pre></td></tr></table></figure></li>
-<li><p>对字典的操作</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">aa = &#123;<span class="hljs-string">&quot;mike&quot;</span>: <span class="hljs-string">&quot;male&quot;</span>, <span class="hljs-string">&quot;kathy&quot;</span>: <span class="hljs-string">&quot;female&quot;</span>, <span class="hljs-string">&quot;steve&quot;</span>: <span class="hljs-string">&quot;male&quot;</span>, <span class="hljs-string">&quot;hillary&quot;</span>: <span class="hljs-string">&quot;female&quot;</span>&#125;<br>bb = &#123;<span class="hljs-string">&quot;mike&quot;</span>: <span class="hljs-string">&quot;male&quot;</span>, <span class="hljs-string">&quot;ben&quot;</span>: <span class="hljs-string">&quot;male&quot;</span>, <span class="hljs-string">&quot;hillary&quot;</span>: <span class="hljs-string">&quot;female&quot;</span>&#125;<br><br><span class="hljs-built_in">print</span>(aa.keys() &amp; bb.keys()) <span class="hljs-comment"># &#123;‘mike’, ‘hillary’&#125; # these are set-like</span><br><span class="hljs-built_in">print</span>(aa.keys() - bb.keys()) <span class="hljs-comment"># &#123;‘kathy’, ‘steve’&#125;</span><br><span class="hljs-comment"># If you want to get the common key-value pairs in the two dictionaries</span><br><span class="hljs-built_in">print</span>(aa.items() &amp; bb.items()) <span class="hljs-comment"># &#123;(‘mike’, ‘male’), (‘hillary’, ‘female’)&#125;</span><br></code></pre></td></tr></table></figure></li>
-</ul>
+              <aside>
+ℹ️ 来源：**[Sol Love](https://sollove.com/2013/03/03/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers/)**
 
+</aside>
+
+<p><em><code>以下命令用于ubuntu主机，其他linux命令可能不相同</code></em></p>
+<h3 id="更改root密码"><a href="#更改root密码" class="headerlink" title="更改root密码"></a>更改root密码</h3><p><code>passwd</code></p>
+<p>将root密码更改为长而且复杂的密码，不需要记住他，只需要存在在安全的地方。只有无法通过ssh登录或丢失sodu密码时才需要此密码</p>
+<h3 id="安装Fail2ban"><a href="#安装Fail2ban" class="headerlink" title="安装Fail2ban"></a>安装<strong>Fail2ban</strong></h3><p><code>apt-get  install  fail2ban</code></p>
+<p>创建新用户</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">useradd deploy<br>mkdir /home/deploy<br>mkdir /home/deploy/.ssh<br>chmod <span class="hljs-number">700</span> /home/deploy/.ssh<br></code></pre></td></tr></table></figure>
+
+<h3 id="使用公钥认证"><a href="#使用公钥认证" class="headerlink" title="使用公钥认证"></a>使用公钥认证</h3><p><code>vim  /home/deploy/.ssh/authorized_keys</code></p>
+<p>添加本地机器的公钥id_rsa.pub的内容到此文件中</p>
+<p><code>chmod 400 /home/deploy/.ssh/authorized_keys</code></p>
+<p><code>chown deploy:deploy /home/deploy -R</code></p>
+<h3 id="测试新用户启动"><a href="#测试新用户启动" class="headerlink" title="测试新用户启动"></a>测试新用户启动</h3><p>为新用户设置密码 (设置复杂密码，是需要sudo的权限的密码)</p>
+<p><code>passwd deploy</code></p>
+<p>设置sudo权限 （*<code>visudo的文件是/etc/sudoers，但是不要直接修改此文件，修改请使用visudo命令</code>*）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">visudo<br><br>root    ALL=(ALL) ALL<br>deploy  ALL=(ALL) ALL<br></code></pre></td></tr></table></figure>
+
+<h3 id="锁定SSH"><a href="#锁定SSH" class="headerlink" title="锁定SSH"></a>锁定SSH</h3><p>配置ssh以防止密码和root登录并将ssh锁定到特定IP</p>
+<p><code>vim /etc/ssh/sshd_config</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">PermitRootLogin no<br>PasswordAuthentication no<br>AllowUsers deploy@(your-ip) deploy@(another-ip-if-any)<br></code></pre></td></tr></table></figure>
+
+<p>重新启动ssh</p>
+<p><code>service ssh restart</code></p>
+<h3 id="设置防火墙"><a href="#设置防火墙" class="headerlink" title="设置防火墙"></a>设置防火墙</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">ufw allow from &#123;your-ip&#125; to any port 22<br>ufw allow 80<br>ufw allow 443<br>ufw <span class="hljs-built_in">enable</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="启动安全更新"><a href="#启动安全更新" class="headerlink" title="启动安全更新"></a>启动安全更新</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-get install unattended-upgrades<br>vim /etc/apt/apt.conf.d/10periodic<br></code></pre></td></tr></table></figure>
+
+<p>将文件更新成以下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">APT::Periodic::Update-Package-Lists <span class="hljs-string">&quot;1&quot;</span>;<br>APT::Periodic::Download-Upgradeable-Packages <span class="hljs-string">&quot;1&quot;</span>;<br>APT::Periodic::AutocleanInterval <span class="hljs-string">&quot;7&quot;</span>;<br>APT::Periodic::Unattended-Upgrade <span class="hljs-string">&quot;1&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>另一个需要更改的问题</p>
+<p><code>vim /etc/apt/apt.conf.d/50unattended-upgrades</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">Unattended-Upgrade::Allowed-Origins &#123;<br>        <span class="hljs-string">&quot;Ubuntu lucid-security&quot;</span>;<br>//      <span class="hljs-string">&quot;Ubuntu lucid-updates&quot;</span>;<br>&#125;;<br></code></pre></td></tr></table></figure>
+
+<h3 id="安装Logwatch监视"><a href="#安装Logwatch监视" class="headerlink" title="安装Logwatch监视"></a>安装Logwatch监视</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">apt-get install logwatch<br><br>vim /etc/cron.daily/00logwatch<br><br>/usr/sbin/logwatch --output mail --mailto <span class="hljs-built_in">test</span>@gmail.com --detail high<br></code></pre></td></tr></table></figure>
             </div>
             <hr>
             <div>
@@ -253,9 +283,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/">代码片段</a>
+                      <a class="hover-with-bg" href="/tags/linux/">linux</a>
                     
-                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                      <a class="hover-with-bg" href="/tags/%E5%AE%89%E5%85%A8/">安全</a>
                     
                   </div>
                 
@@ -272,18 +302,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/202201/ckxzjnce50000qcue4vlg8pqu/9b70ce1a6150/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linux基本安全设置</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/202111/ckxzjashy001cckuedeh99981/f85bb863db6b/">
-                        <span class="hidden-mobile">某漫画请求头md5加密值分析</span>
+                      <a href="/202111/ckxzjasi8002uckue3yrh6i7a/7f2b057eaccd/">
+                        <span class="hidden-mobile">一些代码片段</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
