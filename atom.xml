@@ -6,7 +6,7 @@
   <link href="http://mfcp.fun/atom.xml" rel="self"/>
   
   <link href="http://mfcp.fun/"/>
-  <updated>2022-02-28T01:47:52.281Z</updated>
+  <updated>2022-03-01T02:12:03.642Z</updated>
   <id>http://mfcp.fun/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用alembic数据库迁移</title>
+    <link href="http://mfcp.fun/202203/cl07hymn70000csuedpel4xwl/2fbeec3b7acc/"/>
+    <id>http://mfcp.fun/202203/cl07hymn70000csuedpel4xwl/2fbeec3b7acc/</id>
+    <published>2022-03-01T02:08:33.000Z</published>
+    <updated>2022-03-01T02:12:03.642Z</updated>
+    
+    <content type="html"><![CDATA[<p><a href="https://alembic.sqlalchemy.org/en/latest/tutorial.html">Alembic</a>是一个轻量级的数据库迁移工具，可与SQLAlchemy一起配合使用</p><ul><li><p>安装    <code>pip install alembic</code></p></li><li><p>初始化    <code>alembic init alembic</code></p><p>初始化后会生成alembic目录和 alembic.ini 文件，其中.ini文件是默认配置文件，其中的具体参数说明参考<a href="https://alembic.sqlalchemy.org/en/latest/tutorial.html">官方文档</a></p></li><li><p>使用SQLAlchemy创建数据模型</p></li><li><p>修改alembic目录中 <a href="http://env.py/">env.py</a> 文件配置</p><p>根据自己项目实际情况修改以下值</p><p>将target_metadata修改为模型的元数据metadata</p><p>定义sqlalchemy.url路径</p><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> app.core.config <span class="keyword">import</span> get_app_settings</span><br><span class="line"><span class="keyword">from</span> app.db.models <span class="keyword">import</span> Base</span><br><span class="line"></span><br><span class="line">SETTINGS = get_app_settings()</span><br><span class="line">DATABASE_URL = SETTINGS.database_url</span><br><span class="line">config.set_main_option(<span class="string">&quot;sqlalchemy.url&quot;</span>, str(DATABASE_URL))</span><br><span class="line">target_metadata = Base.metadata</span><br></pre></td></tr></table></figure></li><li><p>创建版本文件 <code>alembic revision --autogenerate -m “create_user_table&quot;</code></p></li><li><p>执行更改  <code>alembic upgrade head</code></p></li><li><p>其他命令</p><p>查看历史和记录  <code>alembic history</code></p><p>回退上一个升级的版本  <code>alembic downgrade -1</code></p></li></ul>]]></content>
+    
+    
+    <summary type="html">使用alembic对orm模型进行迁移</summary>
+    
+    
+    
+    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="alembic" scheme="http://mfcp.fun/tags/alembic/"/>
+    
+    <category term="SQLAlchemy" scheme="http://mfcp.fun/tags/SQLAlchemy/"/>
+    
+  </entry>
   
   <entry>
     <title>正则表达式</title>
@@ -444,27 +467,6 @@
     <category term="docker" scheme="http://mfcp.fun/tags/docker/"/>
     
     <category term="contos" scheme="http://mfcp.fun/tags/contos/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>信息获取方式的变迁</title>
-    <link href="http://mfcp.fun/202104/cl062f7fx00069wue1mk15y84/c427816ed3b6/"/>
-    <id>http://mfcp.fun/202104/cl062f7fx00069wue1mk15y84/c427816ed3b6/</id>
-    <published>2021-04-03T07:44:13.000Z</published>
-    <updated>2022-02-28T01:47:52.209Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="信息的获取方式"><a href="#信息的获取方式" class="headerlink" title="信息的获取方式"></a>信息的获取方式</h3><blockquote><p>今天去剪头发，跟理发的小哥闲聊，说到打理头发上面，我说我一般都不太打理头发，第一是懒，第二也是不太会。小哥就给我说，你在抖音上看，有好多教男生抓头发的视频。在回来的路上，我突然就想到了，信息的获取方式发生了很大的变化。</p></blockquote><p>在pc时代，大多数的信息主要集中在一些头部的门户网站上面和一些个人博客上。到了4G普及，进入移动互联网，信息的获取主要集中在了各种app上面。</p><p>信息的展现方式也由原来的图文变成了视频。带来的好处就是信息更加直观，更加容易理解。同时信息的碎片化也更加严重。</p><p>如果你不看抖音、不刷微博，没有小红书，那很明显一些很火的东西你就会比别人很晚的接收到。虽然接不接收这些信息对你的生活没有太大的影响。</p><p>视频的一个很大问题，就是把很多的知识点都全部压缩在一个几分钟左右的短片中。包含同样知识点的一篇文章就要好几千字，可能当你看到这篇文章长度就偷偷打了退堂鼓。但同样的图文的好处就是可以在阅读的过程中，你会有稍微的停顿去思考。有没看懂的可以很方便的拖回去再细细看一遍。视频虽然把所有的知识点都压缩到一个片段中，但是你很难精确的划到自己不明白想要重新去看的地方。</p>]]></content>
-    
-    
-    <summary type="html">自己的一些记录</summary>
-    
-    
-    
-    <category term="记录" scheme="http://mfcp.fun/categories/%E8%AE%B0%E5%BD%95/"/>
-    
-    
-    <category term="杂记" scheme="http://mfcp.fun/tags/%E6%9D%82%E8%AE%B0/"/>
     
   </entry>
   
