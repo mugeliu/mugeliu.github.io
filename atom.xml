@@ -6,7 +6,7 @@
   <link href="http://mfcp.fun/atom.xml" rel="self"/>
   
   <link href="http://mfcp.fun/"/>
-  <updated>2022-03-01T02:12:03.642Z</updated>
+  <updated>2022-03-08T09:44:24.035Z</updated>
   <id>http://mfcp.fun/</id>
   
   <author>
@@ -17,9 +17,53 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>celery动态添加定时任务</title>
+    <link href="http://mfcp.fun/202203/cl0hy5fvf003vc8ue76f29fuv/ac157fbce6dc/"/>
+    <id>http://mfcp.fun/202203/cl0hy5fvf003vc8ue76f29fuv/ac157fbce6dc/</id>
+    <published>2022-03-08T09:39:32.000Z</published>
+    <updated>2022-03-08T09:44:24.035Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Celery动态添加定时任务"><a href="#Celery动态添加定时任务" class="headerlink" title="Celery动态添加定时任务"></a>Celery动态添加定时任务</h1><aside>🖇️ Celery添加定时任务后，如果想要更改，就必须更改完重启定时任务。如果想不重启直接添加更改定时任务。就需要自定义调度程度。<ul><li><strong><a href="https://github.com/sibson/redbeat">RedBeat</a></strong>  基于reids的调度程序</li><li><strong><a href="https://github.com/zmap/celerybeat-mongo">celerybeat-mongo</a></strong> 基于mongo的自定义调度</li></ul><h3 id="使用RedBeat"><a href="#使用RedBeat" class="headerlink" title="使用RedBeat"></a>使用RedBeat</h3><ol><li><a href="https://github.com/sibson/redbeat">github</a>   </li><li><a href="https://redbeat.readthedocs.io/en/latest/index.html">文档地址</a>  </li><li><a href="https://blog.heroku.com/redbeat-celery-beat-scheduler">相关文章</a></li></ol><hr><ul><li><p>安装</p><p><code>pip install celery-redbeat</code></p></li><li><p>在celery中设置调度地址</p><p><code>redbeat_redis_url = &quot;redis://localhost:6379/1&quot;</code></p></li><li><p>启动celery beat (如果在配置文件中没有设置<code>beat_scheduler</code>的值，则需要启动时-S参数指定调度程序)</p><p><code>celery -A proj beat -S redbeat.RedBeatScheduler</code>  </p></li><li><p>启动工作进程</p><p><code>celery -A proj worker --pool=solo --loglevel=info</code></p></li></ul><hr><p><strong>示例代码</strong></p><ul><li><p>目录结构</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">|-- proj</span><br><span class="line">|-- celery.py           <span class="comment"># celery主应用</span></span><br><span class="line">|-- celeryconfig.py     <span class="comment"># 配置文件</span></span><br><span class="line">|-- tasks.py            <span class="comment"># 任务装饰地方</span></span><br><span class="line">|-- task_add.py             <span class="comment"># 添加更改定时任务</span></span><br></pre></td></tr></table></figure></li><li><p>celery.py</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> celery <span class="keyword">import</span> Celery</span><br><span class="line"></span><br><span class="line">app = Celery()</span><br><span class="line">app.config_from_object(<span class="string">&quot;proj.celeryconfig&quot;</span>)</span><br></pre></td></tr></table></figure></li><li><p>celeryconfig.py</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> celery.schedules <span class="keyword">import</span> crontab</span><br><span class="line"></span><br><span class="line"><span class="comment"># 工作程序启动时要导入的一系列模块。</span></span><br><span class="line">imports = [<span class="string">&#x27;proj.tasks&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">## 加载的任务文件</span></span><br><span class="line"><span class="comment">#include=[&#x27;task_list&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 时区，默认使用UTC</span></span><br><span class="line">timezone = <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line">enable_utc = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># broker任务队列</span></span><br><span class="line">broker_url = <span class="string">&#x27;redis://127.0.0.1:6379/2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果存放地址</span></span><br><span class="line">result_backend = <span class="string">&#x27;redis://127.0.0.1:6379/3&#x27;</span></span><br><span class="line"><span class="comment"># 结果过期时间</span></span><br><span class="line">result_expires= <span class="number">3600</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># redis调度</span></span><br><span class="line">redbeat_redis_url = <span class="string">&quot;redis://localhost:6379/6&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 任务计划</span></span><br><span class="line">beat_schedule = &#123;</span><br><span class="line">    <span class="comment">#任务名称自定义可随意</span></span><br><span class="line">    <span class="string">&#x27;get_banner-task&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;task&#x27;</span>: <span class="string">&#x27;proj.tasks.get_baidu_info&#x27;</span>,<span class="comment">#任务所在路径且指定哪个任务</span></span><br><span class="line">        <span class="string">&#x27;schedule&#x27;</span>: crontab(minute=<span class="string">&#x27;*/1&#x27;</span>),  <span class="comment">#定时任务相关</span></span><br><span class="line">        <span class="string">&#x27;args&#x27;</span>: (<span class="string">&quot;spider_baidu&quot;</span>,<span class="string">&quot;python spider_baidu.py&quot;</span>)</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 默认调度程序类  对应的命令行中-S参数的值</span></span><br><span class="line">beat_scheduler = <span class="string">&quot;redbeat.RedBeatScheduler&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#celery worker的并发数，默认为4</span></span><br><span class="line">worker_concurrency = <span class="number">2</span></span><br><span class="line"></span><br></pre></td></tr></table></figure></li><li><p>tasks.py</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.task</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_baidu_info</span>(<span class="params">name, args</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;执行到定时任务： <span class="subst">&#123;name&#125;</span>...args: <span class="subst">&#123;args&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;成功执行任务&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@app.task</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_content</span>(<span class="params">text</span>):</span></span><br><span class="line">    <span class="built_in">print</span>(text)</span><br></pre></td></tr></table></figure></li><li><p>task_add.py</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> redbeat <span class="keyword">import</span> RedBeatSchedulerEntry <span class="keyword">as</span> Entry</span><br><span class="line"><span class="keyword">from</span> celery.schedules <span class="keyword">import</span> schedule</span><br><span class="line"><span class="keyword">from</span> celery.schedules <span class="keyword">import</span> crontab</span><br><span class="line"><span class="keyword">from</span> proj.celery <span class="keyword">import</span> app</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加任务</span></span><br><span class="line">cron = crontab()  <span class="comment"># seconds</span></span><br><span class="line">entry = Entry(<span class="string">&#x27;task-mul&#x27;</span>, <span class="string">&#x27;proj.tasks.mul&#x27;</span>, cron, args=[<span class="number">2</span>, <span class="number">3</span>], app=app)</span><br><span class="line">entry.save()</span><br><span class="line"></span><br><span class="line"><span class="comment">#更改任务</span></span><br><span class="line"><span class="comment"># e = Entry.from_key(&quot;redbeat:print_content&quot;,  app=app)</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># # Update schedule to 5 seconds</span></span><br><span class="line"><span class="comment"># e.schedule = schedule(5)</span></span><br><span class="line"><span class="comment"># e.save()</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># # Update metadata to print Goodbye instead of Hello</span></span><br><span class="line"><span class="comment"># # We simply change the args passed to the task</span></span><br><span class="line"><span class="comment"># e.args = [1,2]</span></span><br><span class="line"><span class="comment"># e.save()</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 删除任务</span></span><br><span class="line"><span class="comment"># e.delete()</span></span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+    <summary type="html">Celery添加定时任务后，如果想要更改，就必须更改完重启定时任务。如果想不重启直接添加更改定时任务。就需要自定义调度程度。</summary>
+    
+    
+    
+    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="celery" scheme="http://mfcp.fun/tags/celery/"/>
+    
+    <category term="RedBeat" scheme="http://mfcp.fun/tags/RedBeat/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>celery 基础</title>
+    <link href="http://mfcp.fun/202203/cl0hy5fv4001vc8ue6hmfbeal/9717bbfa9213/"/>
+    <id>http://mfcp.fun/202203/cl0hy5fv4001vc8ue6hmfbeal/9717bbfa9213/</id>
+    <published>2022-03-08T09:39:21.000Z</published>
+    <updated>2022-03-08T09:41:26.560Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Celery基础"><a href="#Celery基础" class="headerlink" title="Celery基础"></a>Celery基础</h1><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>Celery 是一个简单、灵活、可靠的分布式系统，可处理大量消息，同时为操作提供维护此类系统所需的工具。它是一个专注于实时处理的任务队列，同时也支持任务调度。</p><aside>📖 官方文档：[Celery 5.2.0](https://docs.celeryproject.org/en/v5.2.0/#)如果你刚开始学习，参考文档[新手教程](https://docs.celeryproject.org/en/v5.2.0/getting-started/first-steps-with-celery.html)<ul><li><p>安装Celery</p><p><code>pip install Celery</code></p></li><li><p>启动Celery工作服务进程</p><p><code>celery -A xxxx worker --loglevel=INFO</code></p><p>(从4.0开始不再支持windows，如果启动后报错<code>The operation timed out.</code>，则需要安装<code>pip install eventlet</code> 在启动命令中添加 -P enentlet 或者 - - pool=solo)</p></li><li><p>配置</p><ol><li><p>可以在应用实例上直接设置</p><p><code>app = Celery(``backend=xxx,</code> <code>broker=xxx,</code> <code>include=xxx)</code></p></li><li><p>可以直接设置值</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app = Celery()</span><br><span class="line">app.conf.timezone = <span class="string">&quot;Asia/Shanghai&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多个值则更新</span></span><br><span class="line">app.conf.update(</span><br><span class="line">enable_utc=True,</span><br><span class="line">timezone=<span class="string">&#x27;Europe/London&#x27;</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure></li><li><p>使用配置文件, </p><p><code>app.config_from_object(&#39;celeryconfig&#39;)</code></p><p>config_from_object()  方法接受模块名称，也接受实际传入的模块对象。具体参考<a href="https://docs.celeryproject.org/en/v5.2.3/userguide/application.html">官方文档</a> </p><aside>⚠️ 需要注意的是，新版的参数由原来的大写改成了小写，如果你参考网上教程有些是大写的，那需要所有的都大写，不能大小写混用。</li></ol></li></ul><pre><code> &lt;/aside&gt; 以下参考[配置含义和默认值](https://docs.celeryproject.org/en/v5.2.3/userguide/configuration.html#configuration) <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> celery.schedules <span class="keyword">import</span> crontab</span><br><span class="line"></span><br><span class="line"><span class="comment"># 工作程序启动时要导入的一系列模块。</span></span><br><span class="line">imports = [<span class="string">&#x27;proj.tasks&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">## 加载的任务文件</span></span><br><span class="line"><span class="comment">#include=[&#x27;task_list&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 时区，默认使用UTC</span></span><br><span class="line">timezone = <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line">enable_utc = <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># broker任务队列</span></span><br><span class="line">broker_url = <span class="string">&#x27;redis://127.0.0.1:6379/2&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 结果存放地址</span></span><br><span class="line">result_backend = <span class="string">&#x27;redis://127.0.0.1:6379/3&#x27;</span></span><br><span class="line"><span class="comment"># 结果过期时间</span></span><br><span class="line">result_expires= <span class="number">3600</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># redis调度</span></span><br><span class="line">redbeat_redis_url = <span class="string">&quot;redis://localhost:6379/6&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## 任务计划</span></span><br><span class="line">beat_schedule = &#123;</span><br><span class="line">    <span class="comment">#任务名称自定义可随意</span></span><br><span class="line">    <span class="string">&#x27;get_banner-task&#x27;</span>: &#123;</span><br><span class="line">        <span class="string">&#x27;task&#x27;</span>: <span class="string">&#x27;proj.tasks.get_baidu_info&#x27;</span>,<span class="comment">#任务所在路径且指定哪个任务</span></span><br><span class="line">        <span class="string">&#x27;schedule&#x27;</span>: crontab(minute=<span class="string">&#x27;*/1&#x27;</span>),  <span class="comment">#定时任务相关</span></span><br><span class="line">        <span class="string">&#x27;args&#x27;</span>: (<span class="string">&quot;spider_baidu&quot;</span>,<span class="string">&quot;spider_baidu.py&quot;</span>,)</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置调度程序类  对应的命令行中-S参数的值</span></span><br><span class="line">beat_scheduler = <span class="string">&quot;redbeat.RedBeatScheduler&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#执行任务的并发工作进程/线程/绿色线程的数量。 也是命令行-c指定的数目，默认为4</span></span><br><span class="line">worker_concurrency = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 池工作进程在被新进程替换之前可以执行的最大任务数。默认为无限制。</span></span><br><span class="line">worker_max_tasks_per_child = <span class="number">12000</span></span><br></pre></td></tr></table></figure></code></pre>]]></content>
+    
+    
+    <summary type="html">Celery 是一个简单、灵活、可靠的分布式系统，可处理大量消息，同时为操作提供维护此类系统所需的工具。它是一个专注于实时处理的任务队列，同时也支持任务调度。</summary>
+    
+    
+    
+    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="celery" scheme="http://mfcp.fun/tags/celery/"/>
+    
+  </entry>
+  
+  <entry>
     <title>使用alembic数据库迁移</title>
-    <link href="http://mfcp.fun/202203/cl07hymn70000csuedpel4xwl/2fbeec3b7acc/"/>
-    <id>http://mfcp.fun/202203/cl07hymn70000csuedpel4xwl/2fbeec3b7acc/</id>
+    <link href="http://mfcp.fun/202203/cl0hy5fv3001sc8ue4xvdddb1/2fbeec3b7acc/"/>
+    <id>http://mfcp.fun/202203/cl0hy5fv3001sc8ue4xvdddb1/2fbeec3b7acc/</id>
     <published>2022-03-01T02:08:33.000Z</published>
     <updated>2022-03-01T02:12:03.642Z</updated>
     
@@ -41,8 +85,8 @@
   
   <entry>
     <title>正则表达式</title>
-    <link href="http://mfcp.fun/202202/cl062f7gd001q9wue3z3n7kik/760a2d7f228a/"/>
-    <id>http://mfcp.fun/202202/cl062f7gd001q9wue3z3n7kik/760a2d7f228a/</id>
+    <link href="http://mfcp.fun/202202/cl0hy5fv2001qc8uefxvl9efz/760a2d7f228a/"/>
+    <id>http://mfcp.fun/202202/cl0hy5fv2001qc8uefxvl9efz/760a2d7f228a/</id>
     <published>2022-02-17T07:14:29.000Z</published>
     <updated>2022-02-28T01:47:52.281Z</updated>
     
@@ -64,8 +108,8 @@
   
   <entry>
     <title>scrapy设置请求头默认referer</title>
-    <link href="http://mfcp.fun/202202/cl062f7gc001m9wue55mt41f2/76dfaf55693f/"/>
-    <id>http://mfcp.fun/202202/cl062f7gc001m9wue55mt41f2/76dfaf55693f/</id>
+    <link href="http://mfcp.fun/202202/cl0hy5fv1001mc8ue8tfo5m9b/76dfaf55693f/"/>
+    <id>http://mfcp.fun/202202/cl0hy5fv1001mc8ue8tfo5m9b/76dfaf55693f/</id>
     <published>2022-02-08T07:13:17.000Z</published>
     <updated>2022-02-28T01:47:52.280Z</updated>
     
@@ -87,8 +131,8 @@
   
   <entry>
     <title>Linux基本安全设置</title>
-    <link href="http://mfcp.fun/202201/cl062f7gc001j9wued6h713dt/9b70ce1a6150/"/>
-    <id>http://mfcp.fun/202201/cl062f7gc001j9wued6h713dt/9b70ce1a6150/</id>
+    <link href="http://mfcp.fun/202201/cl0hy5fv1001jc8ueg305ajgy/9b70ce1a6150/"/>
+    <id>http://mfcp.fun/202201/cl0hy5fv1001jc8ueg305ajgy/9b70ce1a6150/</id>
     <published>2022-01-04T03:05:58.000Z</published>
     <updated>2022-02-28T01:47:52.270Z</updated>
     
@@ -110,8 +154,8 @@
   
   <entry>
     <title>一些代码片段</title>
-    <link href="http://mfcp.fun/202111/cl062f7gb001f9wue4k3970vq/7f2b057eaccd/"/>
-    <id>http://mfcp.fun/202111/cl062f7gb001f9wue4k3970vq/7f2b057eaccd/</id>
+    <link href="http://mfcp.fun/202111/cl0hy5fv0001fc8ue6dzaesom/7f2b057eaccd/"/>
+    <id>http://mfcp.fun/202111/cl0hy5fv0001fc8ue6dzaesom/7f2b057eaccd/</id>
     <published>2021-11-30T08:49:55.000Z</published>
     <updated>2022-02-28T01:47:52.261Z</updated>
     
@@ -133,8 +177,8 @@
   
   <entry>
     <title>某漫画请求头md5加密值分析</title>
-    <link href="http://mfcp.fun/202111/cl062f7ga001c9wueb6f0gw0n/f85bb863db6b/"/>
-    <id>http://mfcp.fun/202111/cl062f7ga001c9wueb6f0gw0n/f85bb863db6b/</id>
+    <link href="http://mfcp.fun/202111/cl0hy5fuz001cc8ue973offrh/f85bb863db6b/"/>
+    <id>http://mfcp.fun/202111/cl0hy5fuz001cc8ue973offrh/f85bb863db6b/</id>
     <published>2021-11-26T07:07:15.000Z</published>
     <updated>2022-02-28T01:47:52.261Z</updated>
     
@@ -156,8 +200,8 @@
   
   <entry>
     <title>win系统启动celery服务</title>
-    <link href="http://mfcp.fun/202109/cl062f7g900199wueggkyfjxe/721a27074fac/"/>
-    <id>http://mfcp.fun/202109/cl062f7g900199wueggkyfjxe/721a27074fac/</id>
+    <link href="http://mfcp.fun/202109/cl0hy5fuy0019c8ue7yl64bsv/721a27074fac/"/>
+    <id>http://mfcp.fun/202109/cl0hy5fuy0019c8ue7yl64bsv/721a27074fac/</id>
     <published>2021-09-29T08:02:59.000Z</published>
     <updated>2022-02-28T01:47:52.260Z</updated>
     
@@ -177,8 +221,8 @@
   
   <entry>
     <title>搭建aria2下载</title>
-    <link href="http://mfcp.fun/202108/cl062f7g900179wue6xjo9a4a/38ef6adc48bc/"/>
-    <id>http://mfcp.fun/202108/cl062f7g900179wue6xjo9a4a/38ef6adc48bc/</id>
+    <link href="http://mfcp.fun/202108/cl0hy5fuy0017c8uealnl4wq9/38ef6adc48bc/"/>
+    <id>http://mfcp.fun/202108/cl0hy5fuy0017c8uealnl4wq9/38ef6adc48bc/</id>
     <published>2021-08-23T09:21:06.000Z</published>
     <updated>2022-02-28T01:47:52.255Z</updated>
     
@@ -200,8 +244,8 @@
   
   <entry>
     <title>scrapy 设置</title>
-    <link href="http://mfcp.fun/202108/cl062f7g800149wued4jpbqzo/dd415759b5a3/"/>
-    <id>http://mfcp.fun/202108/cl062f7g800149wued4jpbqzo/dd415759b5a3/</id>
+    <link href="http://mfcp.fun/202108/cl0hy5fux0014c8ue11jm8iyw/dd415759b5a3/"/>
+    <id>http://mfcp.fun/202108/cl0hy5fux0014c8ue11jm8iyw/dd415759b5a3/</id>
     <published>2021-08-19T02:42:05.000Z</published>
     <updated>2022-02-28T01:47:52.255Z</updated>
     
@@ -223,8 +267,8 @@
   
   <entry>
     <title>命令行输出彩色</title>
-    <link href="http://mfcp.fun/202108/cl062f7g800129wueg0y868tu/2b9f03d5d49c/"/>
-    <id>http://mfcp.fun/202108/cl062f7g800129wueg0y868tu/2b9f03d5d49c/</id>
+    <link href="http://mfcp.fun/202108/cl0hy5fux0012c8ueb1lr24g6/2b9f03d5d49c/"/>
+    <id>http://mfcp.fun/202108/cl0hy5fux0012c8ueb1lr24g6/2b9f03d5d49c/</id>
     <published>2021-08-18T09:03:25.000Z</published>
     <updated>2022-02-28T01:47:52.254Z</updated>
     
@@ -246,8 +290,8 @@
   
   <entry>
     <title>mitmproxy 抓包</title>
-    <link href="http://mfcp.fun/202106/cl062f7g7000z9wuegewvasmw/9b674f306d61/"/>
-    <id>http://mfcp.fun/202106/cl062f7g7000z9wuegewvasmw/9b674f306d61/</id>
+    <link href="http://mfcp.fun/202106/cl0hy5fuw000zc8ue9m2m40w2/9b674f306d61/"/>
+    <id>http://mfcp.fun/202106/cl0hy5fuw000zc8ue9m2m40w2/9b674f306d61/</id>
     <published>2021-06-15T09:35:31.000Z</published>
     <updated>2022-02-28T01:47:52.238Z</updated>
     
@@ -269,8 +313,8 @@
   
   <entry>
     <title>xpath 轴 运算符</title>
-    <link href="http://mfcp.fun/202105/cl062f7g6000u9wue1zp6heqz/bcaa23844ca4/"/>
-    <id>http://mfcp.fun/202105/cl062f7g6000u9wue1zp6heqz/bcaa23844ca4/</id>
+    <link href="http://mfcp.fun/202105/cl0hy5fuv000xc8uefcwt5j12/bcaa23844ca4/"/>
+    <id>http://mfcp.fun/202105/cl0hy5fuv000xc8uefcwt5j12/bcaa23844ca4/</id>
     <published>2021-05-19T09:46:01.000Z</published>
     <updated>2022-02-28T01:47:52.238Z</updated>
     
@@ -290,8 +334,8 @@
   
   <entry>
     <title>docker 使用问题记录</title>
-    <link href="http://mfcp.fun/202104/cl062f7g6000x9wueckws3d6w/762cef0d8677/"/>
-    <id>http://mfcp.fun/202104/cl062f7g6000x9wueckws3d6w/762cef0d8677/</id>
+    <link href="http://mfcp.fun/202104/cl0hy5fuv000uc8uea7zu89v8/762cef0d8677/"/>
+    <id>http://mfcp.fun/202104/cl0hy5fuv000uc8uea7zu89v8/762cef0d8677/</id>
     <published>2021-04-27T03:58:28.000Z</published>
     <updated>2022-02-28T01:47:52.238Z</updated>
     
@@ -313,8 +357,8 @@
   
   <entry>
     <title>nginx 指定ip访问</title>
-    <link href="http://mfcp.fun/202104/cl062f7g5000q9wue5xzldtb3/efada7c055a4/"/>
-    <id>http://mfcp.fun/202104/cl062f7g5000q9wue5xzldtb3/efada7c055a4/</id>
+    <link href="http://mfcp.fun/202104/cl0hy5fut000nc8ue2ulm7k9z/efada7c055a4/"/>
+    <id>http://mfcp.fun/202104/cl0hy5fut000nc8ue2ulm7k9z/efada7c055a4/</id>
     <published>2021-04-21T10:00:51.000Z</published>
     <updated>2022-02-28T01:47:52.223Z</updated>
     
@@ -336,8 +380,8 @@
   
   <entry>
     <title>安卓高版本抓包解决</title>
-    <link href="http://mfcp.fun/202104/cl062f7g4000n9wue98nngv3y/e03df9c257da/"/>
-    <id>http://mfcp.fun/202104/cl062f7g4000n9wue98nngv3y/e03df9c257da/</id>
+    <link href="http://mfcp.fun/202104/cl0hy5fus000jc8ue3ty773kr/e03df9c257da/"/>
+    <id>http://mfcp.fun/202104/cl0hy5fus000jc8ue3ty773kr/e03df9c257da/</id>
     <published>2021-04-19T02:43:33.000Z</published>
     <updated>2022-02-28T01:47:52.213Z</updated>
     
@@ -359,8 +403,8 @@
   
   <entry>
     <title>解决win系统docker和模拟器冲突</title>
-    <link href="http://mfcp.fun/202104/cl062f7g3000j9wuebd80h1hc/92cdbd2901f8/"/>
-    <id>http://mfcp.fun/202104/cl062f7g3000j9wuebd80h1hc/92cdbd2901f8/</id>
+    <link href="http://mfcp.fun/202104/cl0hy5fuu000qc8ue596f10uz/92cdbd2901f8/"/>
+    <id>http://mfcp.fun/202104/cl0hy5fuu000qc8ue596f10uz/92cdbd2901f8/</id>
     <published>2021-04-16T06:17:28.000Z</published>
     <updated>2022-02-28T01:47:52.212Z</updated>
     
@@ -382,8 +426,8 @@
   
   <entry>
     <title>一些接码合集</title>
-    <link href="http://mfcp.fun/202104/cl062f7g2000g9wue1auk2xty/2243a327cdd9/"/>
-    <id>http://mfcp.fun/202104/cl062f7g2000g9wue1auk2xty/2243a327cdd9/</id>
+    <link href="http://mfcp.fun/202104/cl0hy5fur000gc8ue1f42fz9i/2243a327cdd9/"/>
+    <id>http://mfcp.fun/202104/cl0hy5fur000gc8ue1f42fz9i/2243a327cdd9/</id>
     <published>2021-04-14T10:25:17.000Z</published>
     <updated>2022-02-28T01:47:52.212Z</updated>
     
@@ -403,8 +447,8 @@
   
   <entry>
     <title>docker 使用的一些理解</title>
-    <link href="http://mfcp.fun/202104/cl062f7g1000c9wuectjuam2j/2ce7f3e3d355/"/>
-    <id>http://mfcp.fun/202104/cl062f7g1000c9wuectjuam2j/2ce7f3e3d355/</id>
+    <link href="http://mfcp.fun/202104/cl0hy5fuq000cc8uehe4e8o0o/2ce7f3e3d355/"/>
+    <id>http://mfcp.fun/202104/cl0hy5fuq000cc8uehe4e8o0o/2ce7f3e3d355/</id>
     <published>2021-04-13T10:45:13.000Z</published>
     <updated>2022-02-28T01:47:52.211Z</updated>
     
@@ -421,52 +465,6 @@
     <category term="docker" scheme="http://mfcp.fun/tags/docker/"/>
     
     <category term="liunx" scheme="http://mfcp.fun/tags/liunx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Docker 常用命令</title>
-    <link href="http://mfcp.fun/202104/cl062f7g0000b9wuebwt66pbr/3b1d0077f9be/"/>
-    <id>http://mfcp.fun/202104/cl062f7g0000b9wuebwt66pbr/3b1d0077f9be/</id>
-    <published>2021-04-09T09:25:09.000Z</published>
-    <updated>2022-02-28T01:47:52.210Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p>容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。</p></blockquote><p><a href="https://docs.docker.com/engine/reference/commandline/docker/">Docker命令行参考</a></p><h3 id="镜像（image）"><a href="#镜像（image）" class="headerlink" title="镜像（image）"></a>镜像（image）</h3><p>Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。</p><ul><li><p>拉取仓库代码到本地</p><p><code>docker image pull library/hello-world</code></p><p>docker官方提供的默认在library中，可以省略library</p><p><code>docker image pull hello-world</code></p></li><li><p>查看所有镜像文件</p><p><code>docker image list</code></p></li></ul><p>docker run&amp; docker container run 区别：前者是1.13之前使用的命令，后者是1.13后新增加的，作用效果一样。<a href="https://www.docker.com/blog/whats-new-in-docker-1-13/">参考说明</a></p><ul><li><p>从image文件中生成一个正在运行的容器实例</p><p><code>docker container run xxxx</code></p></li><li><p>手动终止运行的容器</p><p><code>docker container kill xxxx</code></p></li><li><p>以交互模式运行容器 (后边可以跟需要打开的shell)</p><p><code>docker container run -it xxxx (bin/bash)</code></p></li></ul><h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>更多命令参考   👉🏻 <strong>(<a href="https://docs.docker.com/engine/reference/commandline/container/">官方文档</a>)</strong></p><ul><li><p>列出本机正在运行的容器</p><p><code>docker container list</code></p></li><li><p>列出本机所有容器，包括终止运行的容器</p><p><code>docker container ls -all</code></p></li><li><p>启动终止的容器</p><p><code>docker container start &lt;container id&gt;</code></p><p>run和start的区别：第一次使用run;  容器已经生成并且已经停止运行使用start     *<strong>容器后台运行加 -d 参数*</strong></p></li><li><p>重启正在运行的容器</p><p><code>docker container restart &lt;container id&gt;</code></p></li><li><p>停止正在运行的容器</p><p><code>docker container stop &lt;container id&gt;</code></p></li><li><p>删除容器文件(终止运行的容器文件，依然会占据硬盘空间)</p><p><code>docker container rm &lt;container id&gt;</code></p></li><li><p>获取容器的运行的输出</p><p><code>docker container logs &lt;container id&gt;</code></p></li><li><p>进入容器</p><p>使用attach命令进入容器后，如果从这个stdin中exit,会导致容器的停止。使用exec容器则不会停止</p><p><code>docker container attach &lt;container id&gt;</code></p><p><code>docker container exec -it &lt;container id&gt; (bash)</code></p></li><li><p>清理掉所有处于终止状态的容器</p><p><code>docker container prune</code></p></li><li><p>复制主机文件到docker容器</p><p><code>docker container cp 主机文件 docker地址</code></p></li></ul>]]></content>
-    
-    
-    <summary type="html">docker的常用命令</summary>
-    
-    
-    
-    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="docker" scheme="http://mfcp.fun/tags/docker/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux 安装docker</title>
-    <link href="http://mfcp.fun/202104/cl062f7fy00079wue03f080li/9fb2e4d9e972/"/>
-    <id>http://mfcp.fun/202104/cl062f7fy00079wue03f080li/9fb2e4d9e972/</id>
-    <published>2021-04-08T10:20:24.000Z</published>
-    <updated>2022-02-28T01:47:52.210Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="Linux-安装docker"><a href="#Linux-安装docker" class="headerlink" title="Linux 安装docker"></a>Linux 安装docker</h1><ul><li><p><strong>docker:</strong>  属于 Linux 容器的一种封装，提供简单易用的容器使用接口</p><pre><code>        👉 [**官方文档**](https://docs.docker.com/)</code></pre><p><strong>docker-compose:</strong> 一个集群管理方式，可以利用名为docker-compose.yml的yaml文件来定义需要启动的容器</p><p><strong>Kubernetes（K8S）:</strong> 非常强大的容器编排工具，可以管理大型集群、微服务、分布式应用等等</p><h2 id="Centos7"><a href="#Centos7" class="headerlink" title="Centos7"></a>Centos7</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><ul><li><p>使用Docker的存储库安装</p><p>参考 ：**<a href="https://docs.docker.com/engine/install/">安装Docker Engine</a>    ||   <a href="https://docs.docker.com/engine/install/centos/">**在centos上安装</a>    <strong>||</strong>   <a href="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html">Docker入门教程</a></p></li><li><p><code>sudo yum install -y yum-utils</code></p></li><li><p><code>sudo yum-config-manager  --add-repo  https://download.docker.com/linux/centos/docker-ce.repo</code></p></li><li><p><code>sudo yum install docker-ce docker-ce-cli containerd.io</code></p></li><li><p><code>sudo systemctl start docker</code></p></li><li><p>验证是否安装成功</p><p><code>sudo docker run hello-world</code></p></li></ul><h3 id="配置开机自启动"><a href="#配置开机自启动" class="headerlink" title="配置开机自启动"></a>配置开机自启动</h3><p>（禁止启动则使用disable关键字替换enable执行命令）</p><ul><li><code>sudo systemctl enable docker.service</code></li><li><code>sudo systemctl enable containerd.service</code></li></ul><h3 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h3><ul><li>linux下参考<a href="https://docs.docker.com/compose/install/#install-compose">官方文档</a></li><li>也可以使用pip进行安装 <code>pip install docker-compose</code></li></ul><h3 id="卸载docker"><a href="#卸载docker" class="headerlink" title="卸载docker"></a>卸载docker</h3><ul><li><p>卸载Docker Engine，CLI和Containerd软件包</p><p><code>sudo yum remove docker-ce docker-ce-cli [containerd.io](http://containerd.io/)</code></p></li><li><p>Images, containers, volumes 需要手动删除</p><p><code>sudo rm -rf /var/lib/docker</code></p><p><code>sudo rm -rf /var/lib/containerd</code></p></li></ul><h2 id="Ubuntu-安装"><a href="#Ubuntu-安装" class="headerlink" title="Ubuntu 安装"></a>Ubuntu 安装</h2><h3 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h3><ul><li><p>使用Docker的存储库安装</p><p>参考：  <a href="https://docs.docker.com/engine/install/ubuntu/">Ubuntu上安装</a>   || <a href="https://www.runoob.com/docker/ubuntu-docker-install.html">菜鸟教程</a></p><p><code>sudo apt-get update</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install \</span><br><span class="line">    apt-transport-https \</span><br><span class="line">    ca-certificates \</span><br><span class="line">    curl \</span><br><span class="line">    gnupg \</span><br><span class="line">    lsb-release</span><br></pre></td></tr></table></figure><p><code>curl -fsSL [https://download.docker.com/linux/ubuntu/gpg](https://download.docker.com/linux/ubuntu/gpg) | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg</code></p><p><code>sudo apt-get update</code></p><p><code>sudo apt-get install docker-ce docker-ce-cli [containerd.io](http://containerd.io/)</code></p><p><code>sudo docker run hello-world</code></p></li></ul><h3 id="卸载docker-1"><a href="#卸载docker-1" class="headerlink" title="卸载docker"></a>卸载docker</h3><ul><li><p>卸载Docker Engine，CLI和Containerd软件包</p><p><code>sudo apt-get purge docker-ce docker-ce-cli containerd.io</code></p></li><li><p>Images, containers, volumes 需要手动删除</p><p><code>sudo rm -rf /var/lib/docker</code></p><p><code>sudo rm -rf /var/lib/containerd</code></p></li></ul><h2 id="创建docker用户组"><a href="#创建docker用户组" class="headerlink" title="创建docker用户组"></a>创建docker用户组</h2><ul><li>这一步的作用是为了其他用户使用docke命令时不加sudo  (参考：<a href="https://docs.docker.com/engine/install/linux-postinstall/">Linux安装后的步骤</a>)</li><li><code>sudo groupadd  docker</code></li><li><code>sudo usermod -aG docker $USER</code>  (这个是把当前登录用户加入到docker用户组中)</li></ul><h2 id="遇到的问题："><a href="#遇到的问题：" class="headerlink" title="遇到的问题："></a>遇到的问题：</h2><ul><li><p>Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?</p><p>这个是因为docker服务没有启动。 ubtuntu使用 <code>service docker start</code> 命令启动。  centos使用<code>systemctl  start docker</code> 启动</p></li><li><p>System has not been booted with systemd as init system (PID 1). Can’t operate</p><p>Ubuntu中启动命令跟Centos中不一样，Ubuntu使用<code>service</code></p></li><li><p>docker: unrecognized service</p><p>貌似是版本问题，参考菜鸟教程的安装方式，装了Docker version 20.10.6成功了。之前19的版本</p></li></ul></li></ul>]]></content>
-    
-    
-    <summary type="html">linux下安装docker</summary>
-    
-    
-    
-    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="linux" scheme="http://mfcp.fun/tags/linux/"/>
-    
-    <category term="docker" scheme="http://mfcp.fun/tags/docker/"/>
-    
-    <category term="contos" scheme="http://mfcp.fun/tags/contos/"/>
     
   </entry>
   
