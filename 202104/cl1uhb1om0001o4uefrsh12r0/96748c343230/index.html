@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>linux常用命令 | XiRang's</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="/css/dark.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/normalize.css/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/purecss/build/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script type="text/javascript" src="//cdn.jsdelivr.net/npm/clipboard/dist/clipboard.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.js"></script><link rel="stylesheet" href="//cdn.jsdelivr.net/gh/codeseven/toastr/build/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 5.4.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">linux常用命令</h1><a id="logo" href="/.">XiRang's</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">linux常用命令</h1><div class="post-meta">2021-04-02<span> | </span><span class="category"><a href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></span></div><div class="post-content"><h3 id="目录相关"><a href="#目录相关" class="headerlink" title="目录相关"></a>目录相关</h3><ul>
+<li><strong><code>pwd</code>    查看当前工作的位置</strong></li>
+<li><strong><code>ls</code>     查看目录的内容</strong></li>
+<li><strong><code>mkdir</code>    创建目录</strong></li>
+<li><strong><code>cd</code></strong>     <strong>从当前位置跳转到指定目录</strong></li>
+<li><strong><code>rmdir</code>    *删除目录*</strong></li>
+</ul>
+<h3 id="文件管理"><a href="#文件管理" class="headerlink" title="文件管理"></a>文件管理</h3><ul>
+<li><strong><code>touch</code>     新建文件</strong></li>
+<li><strong><code>cat</code>      查看文本</strong></li>
+<li><strong><code>cp</code>       复制文件</strong></li>
+<li><strong><code>file</code>       查看文件类型</strong></li>
+<li><strong><code>rm</code>     删除文件</strong></li>
+<li><strong><code>mv</code>     移动文件，给文件命名</strong></li>
+<li><code>**find</code>     查找文件**</li>
+</ul>
+<h3 id="查看、统计文件"><a href="#查看、统计文件" class="headerlink" title="查看、统计文件"></a>查看、统计文件</h3><ul>
+<li><code>more</code>   按屏显示文本文件<ul>
+<li>常用参数</li>
+</ul>
+</li>
+<li><code>less</code>    与more类似，区别在于可以使用Pageup向上查看<ul>
+<li>常用参数</li>
+</ul>
+</li>
+<li><strong><code>head、tail</code>     局部显示文件，head 显示文件头部，tail显示文件尾部</strong></li>
+<li><strong><code>wc</code> 文件内容统计</strong></li>
+<li><strong><code>grep</code>   查找文本文件中与指定模式匹配的行</strong></li>
+</ul>
+<h3 id="用户相关"><a href="#用户相关" class="headerlink" title="用户相关"></a>用户相关</h3><ul>
+<li><strong><code>adduser</code>  添加</strong></li>
+<li><strong><code>passwd</code>       设置或更改用户密码</strong></li>
+<li><strong><code>userdel</code>     删除用户</strong></li>
+<li><strong><code>usermod</code>    修改用户属性，常用于启用、禁用账号</strong></li>
+<li><strong><code>su</code>   改变用户身份</strong></li>
+<li><strong><code>who</code>     查看当前登录到系统的用户是谁</strong></li>
+</ul>
+<h3 id="用户组相关"><a href="#用户组相关" class="headerlink" title="用户组相关"></a>用户组相关</h3><ul>
+<li><strong><code>group</code></strong></li>
+<li><strong><code>groupadd</code>    添加用户组</strong></li>
+<li><strong><code>groupdel</code>   删除组，   删除之前组内不能有用户</strong></li>
+<li><strong><code>usermod</code>    更改组账号</strong></li>
+</ul>
+<h3 id="权限相关"><a href="#权限相关" class="headerlink" title="权限相关"></a>权限相关</h3><p>-rw-rw-r–      第一个位置指定了文件类型。-表示非目录的文件，d表示目录文件。2-4位表示属主权限，5-7位表示属主同组的用户权限，8-10表示其他用户权限 数值设定发： 0表示没有权限，1表示可执行权限，2表示可写权限，4表示可读权限。    644 (属主可读可写，同组和其他用户可读权限)</p>
+<ul>
+<li><strong><code>chmod</code>   用于改变文件或目录的访问权限</strong></li>
+<li><strong><code>chown</code>   更改文件或目录的所有者</strong></li>
+</ul>
+<h3 id="重定向与管道"><a href="#重定向与管道" class="headerlink" title="重定向与管道"></a>重定向与管道</h3><ul>
+<li><strong><code>&gt;</code></strong>   将结果重定向到某个位置     <code>&gt;&gt;</code> 表示输出追加到文件末尾</li>
+<li><strong><code>grep &#39;am&#39;&lt; filename</code></strong>    输入重定向（grep是在filename文件中搜索“am”字符串）</li>
+</ul>
+<h3 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h3><ul>
+<li><strong><code>ps</code>   显示进程</strong></li>
+<li><strong><code>top</code>    动态显示进程</strong></li>
+<li><strong><code>kill</code>    中断进程</strong></li>
+</ul>
+<h3 id="文件压缩"><a href="#文件压缩" class="headerlink" title="文件压缩"></a>文件压缩</h3><ul>
+<li><strong><code>zip</code>  打包和压缩文件</strong></li>
+<li><strong><code>unzip</code>    对压缩包进行解压缩</strong></li>
+<li><strong><code>gzip</code>     压缩文件，不能压缩多个</strong></li>
+<li><strong><code>tar</code>    打包文件，gzip不能压缩多个文件，先打包再压缩。<code>.tgz</code> 后缀</strong></li>
+<li><strong><code>gunzip</code>    对压缩包解压缩</strong></li>
+</ul>
+<h2 id="source命令"><a href="#source命令" class="headerlink" title="source命令"></a>source命令</h2><h3 id="source-filename-与-sh-filename-及-filename执行脚本的区别"><a href="#source-filename-与-sh-filename-及-filename执行脚本的区别" class="headerlink" title="source filename 与 sh filename 及./filename执行脚本的区别"></a><strong>source filename 与 sh filename 及./filename执行脚本的区别</strong></h3><ol>
+<li>当shell脚本具有可执行权限时，用<code>sh filename</code>与<code>./filename</code>执行脚本是没有区别得。<code>./filename</code>是因为当前目录没有在PATH中，所有”.”是用来表示当前目录的。</li>
+<li><code>sh filename</code> 重新建立一个子shell，在子shell中执行脚本里面的语句，该子shell继承父shell的环境变量，但子shell新建的、改变的变量不会被带回父shell，除非使用export。</li>
+<li><code>source filename</code>：这个命令其实只是简单地读取脚本里面的语句依次在当前shell里面执行，没有建立新的子shell。那么脚本里面所有新建、改变变量的语句都会保存在当前shell里面。</li>
+</ol>
+<h2 id="nohup"><a href="#nohup" class="headerlink" title="nohup"></a>nohup</h2><p><code>nohup xxxx &amp;</code> 将程序以忽略挂起信号的方式运行起来</p>
+<ul>
+<li><p><code>jobs -l</code>  查看后台进程，只能查看当前终端，关闭终端后不能查看。</p>
+</li>
+<li><pre><code>ps -aux |gerp xxxx
+</code></pre>
+<p>  查看后台程序</p>
+<ol>
+<li>a : 显示所有程序</li>
+<li>u: 以用户为主的格式来显示</li>
+<li>x: 显示所有程序，不以终端机来区分</li>
+</ol>
+</li>
+<li><p>nohup 默认输出到附加到当前目录的nohup.out文件中 如果当前的nohup.out 文件不可写，则输出重定向到 $HOME/nohup.out文件 如果没有文件能创建或者打开用于追加，则需要的运行的命令不可调用</p>
+</li>
+<li><p>执行shell命令时，默认打开3个文件。<code>标准输入</code>  <code>标准输出</code>  <code>错误输出</code></p>
+</li>
+</ul>
+<p><a target="_blank" rel="noopener" href="https://imgtu.com/i/cexWXn"><img src="https://z3.ax1x.com/2021/04/02/cexWXn.png" alt="cexWXn.png"></a></p>
+<ul>
+<li><p><code>&gt;/dev/null</code>   /dev/null代表linux的空设备文件，所有往这个文件里面写入的内容都会丢失</p>
+</li>
+<li><p><code>nohup xxx &gt;/dev/null 2&gt;&amp;1 &amp;</code>     什么信息也不输出</p>
+<p>2&gt;&amp;1 重定向绑定，采用&amp;可以将两个输出绑定在一起。这条命令的作用是错误输出将和标准输出同用一个文件描述符，说人话就是错误输出将会和标准输出输出到同一个地方</p>
+</li>
+<li><p><code>nohup xxx &gt;/dev/null 2&gt;log &amp;</code>    只输出错误输出到log文件中</p>
+</li>
+</ul>
+<h2 id="amp-amp-和-amp-、-和"><a href="#amp-amp-和-amp-、-和" class="headerlink" title="&amp;&amp;和&amp; 、|和||"></a><code>&amp;&amp;和&amp;</code> 、<code>|和||</code></h2><ul>
+<li>&amp; 表示任务在后台执行，如要在后台运行redis-server,则有 redis-server &amp;</li>
+<li>&amp;&amp; 表示前一条命令执行成功时，才执行后一条命令 ，如 echo ‘1‘ &amp;&amp; echo ‘2’</li>
+<li>| 表示管道，上一条命令的输出，作为下一条命令参数，如 echo ‘yes’ | wc -l</li>
+<li>|| 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo “fail”</li>
+</ul>
+<h3 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h3><p><code>ln -s xxx.sh /usr/local/bin</code>   把shell脚本添加软链接全局执行</p>
+<h3 id="Linux脚本开头-bin-bash-bin-sh"><a href="#Linux脚本开头-bin-bash-bin-sh" class="headerlink" title="Linux脚本开头#!/bin/bash  #!/bin/sh"></a>Linux脚本开头<code>#!/bin/bash</code>  <code>#!/bin/sh</code></h3><p>#!/bin/sh是指此脚本使用/bin/sh来解释执行，#!是特殊的表示符，其后面根的是此解释此脚本的shell的路径</p>
+</div><div class="tags"><a href="/tags/git/"><i class="fa fa-tag"></i>git</a></div><div class="post-nav"><a class="pre" href="/202104/cl1uhb1op0002o4ue8umo2w1p/46fad839a23f/">node增加全局环境配置</a><a class="next" href="/202104/cl1uhb1os0005o4ue9x0vecqj/c99ce9de858a/">使用hexo部署静态blog</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"/><input type="hidden" name="sitesearch" value="http://mfcp.fun"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BC%96%E7%A8%8B/">编程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%B0%E5%BD%95/">记录</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/hexo/" style="font-size: 15px;">hexo</a> <a href="/tags/%E6%9D%82%E8%AE%B0/" style="font-size: 15px;">杂记</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a> <a href="/tags/docker/" style="font-size: 15px;">docker</a> <a href="/tags/contos/" style="font-size: 15px;">contos</a> <a href="/tags/liunx/" style="font-size: 15px;">liunx</a> <a href="/tags/%E9%AA%8C%E8%AF%81%E7%A0%81/" style="font-size: 15px;">验证码</a> <a href="/tags/genymotion/" style="font-size: 15px;">genymotion</a> <a href="/tags/charles/" style="font-size: 15px;">charles</a> <a href="/tags/https/" style="font-size: 15px;">https</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/xpath/" style="font-size: 15px;">xpath</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%8A%93%E5%8C%85/" style="font-size: 15px;">中间人抓包</a> <a href="/tags/mitmproxy/" style="font-size: 15px;">mitmproxy</a> <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" style="font-size: 15px;">命令行</a> <a href="/tags/%E5%BD%A9%E8%89%B2%E6%98%BE%E7%A4%BA/" style="font-size: 15px;">彩色显示</a> <a href="/tags/scrapy/" style="font-size: 15px;">scrapy</a> <a href="/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/" style="font-size: 15px;">中间件</a> <a href="/tags/aria2/" style="font-size: 15px;">aria2</a> <a href="/tags/%E4%B8%8B%E8%BD%BD/" style="font-size: 15px;">下载</a> <a href="/tags/celery/" style="font-size: 15px;">celery</a> <a href="/tags/apk/" style="font-size: 15px;">apk</a> <a href="/tags/frida/" style="font-size: 15px;">frida</a> <a href="/tags/%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5/" style="font-size: 15px;">代码片段</a> <a href="/tags/python/" style="font-size: 15px;">python</a> <a href="/tags/%E5%AE%89%E5%85%A8/" style="font-size: 15px;">安全</a> <a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 15px;">正则</a> <a href="/tags/re/" style="font-size: 15px;">re</a> <a href="/tags/alembic/" style="font-size: 15px;">alembic</a> <a href="/tags/SQLAlchemy/" style="font-size: 15px;">SQLAlchemy</a> <a href="/tags/RedBeat/" style="font-size: 15px;">RedBeat</a> <a href="/tags/%E5%BA%94%E6%80%A5%E5%82%A8%E5%A4%87/" style="font-size: 15px;">应急储备</a> <a href="/tags/%E7%89%A9%E8%B5%84%E6%B8%85%E5%8D%95/" style="font-size: 15px;">物资清单</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/202204/cl1uhb1pu003wo4uegwo98zr2/6acca3e5b9b6/">北京市居民家庭应急物资储备建议清单（2020）</a></li><li class="post-list-item"><a class="post-list-link" href="/202203/cl1uhb1pt003vo4ue30tbhzrq/ac157fbce6dc/">celery动态添加定时任务</a></li><li class="post-list-item"><a class="post-list-link" href="/202203/cl1uhb1ph001vo4ueby7wb3b3/9717bbfa9213/">celery 基础</a></li><li class="post-list-item"><a class="post-list-link" href="/202203/cl1uhb1pg001so4ue6mkugak6/2fbeec3b7acc/">使用alembic数据库迁移</a></li><li class="post-list-item"><a class="post-list-link" href="/202202/cl1uhb1pf001qo4ueazbjbb0o/760a2d7f228a/">正则表达式</a></li><li class="post-list-item"><a class="post-list-link" href="/202202/cl1uhb1pf001mo4uec7gzhncs/76dfaf55693f/">scrapy设置请求头默认referer</a></li><li class="post-list-item"><a class="post-list-link" href="/202201/cl1uhb1pe001jo4ue4od8bpcn/9b70ce1a6150/">Linux基本安全设置</a></li><li class="post-list-item"><a class="post-list-link" href="/202111/cl1uhb1pd001fo4ue0zcz8vuw/7f2b057eaccd/">一些代码片段</a></li><li class="post-list-item"><a class="post-list-link" href="/202111/cl1uhb1pd001co4ue3lhh4sg8/f85bb863db6b/">某漫画请求头md5加密值分析</a></li><li class="post-list-item"><a class="post-list-link" href="/202109/cl1uhb1pc0019o4ue4nkrfs4q/721a27074fac/">win系统启动celery服务</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <a href="/." rel="nofollow">XiRang's.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox/dist/jquery.fancybox.min.css"><script type="text/javascript" src="/js/copycode.js" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>
