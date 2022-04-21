@@ -6,7 +6,7 @@
   <link href="http://mfcp.fun/atom.xml" rel="self"/>
   
   <link href="http://mfcp.fun/"/>
-  <updated>2022-04-11T08:54:19.994Z</updated>
+  <updated>2022-04-21T09:36:04.772Z</updated>
   <id>http://mfcp.fun/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>深拷贝与浅拷贝问题的记录</title>
+    <link href="http://mfcp.fun/202204/cl28tbhso000eroue3cj4f3vu/2d77175d7860/"/>
+    <id>http://mfcp.fun/202204/cl28tbhso000eroue3cj4f3vu/2d77175d7860/</id>
+    <published>2022-04-21T09:33:49.000Z</published>
+    <updated>2022-04-21T09:36:04.772Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="深浅拷贝的问题记录"><a href="#深浅拷贝的问题记录" class="headerlink" title="深浅拷贝的问题记录"></a>深浅拷贝的问题记录</h1><p>创建时间: April 21, 2022 3:31 PM<br>标签: scrapy, 问题记录</p><aside>🖇️ 在抓取排行榜数据时，发现抓取的排行榜数据总是最后的一条。但是排行榜的数据量是没有问题的。在仔细检查逻辑后发现并没有什么问题。最后搜索排查是深浅拷贝的问题，遂记录一下。<p><strong><code>*原代码*</code></strong></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">parse_more_rank</span>(<span class="params">self, response</span>):</span></span><br><span class="line">    items = response.meta.get(<span class="string">&quot;items&quot;</span>)</span><br><span class="line">    url_list = response.xpath(<span class="string">&#x27;//a[@class=&quot;figure_pic&quot;]/@href&#x27;</span>).getall()</span><br><span class="line">    ranking_list = response.xpath(<span class="string">&#x27;//a[@class=&quot;figure_pic&quot;]/span/text()&#x27;</span>).getall()</span><br><span class="line">    title_list = response.xpath(<span class="string">&#x27;//a[@class=&quot;figure_pic&quot;]/following-sibling::strong/a/text()&#x27;</span>).getall()</span><br><span class="line">    cover_id_list = [u.split(<span class="string">&#x27;cover/&#x27;</span>)[<span class="number">1</span>].split(<span class="string">&quot;.&quot;</span>)[<span class="number">0</span>] <span class="keyword">for</span> u <span class="keyword">in</span> url_list]</span><br><span class="line">    <span class="keyword">for</span> url,ranking,title,cover_id <span class="keyword">in</span> <span class="built_in">zip</span>(url_list,ranking_list,title_list,cover_id_list):</span><br><span class="line">        items[<span class="string">&quot;ranking&quot;</span>] = ranking</span><br><span class="line">        items[<span class="string">&quot;title&quot;</span>] = title</span><br><span class="line">        items[<span class="string">&quot;cover_id&quot;</span>] = cover_id</span><br><span class="line">        <span class="keyword">yield</span> scrapy.Request(url, callback=self.parse_detail,</span><br><span class="line">                             meta=&#123;<span class="string">&quot;items&quot;</span>: items&#125;, dont_filter=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure><p>程序运行到for循环都是没有问题的。到一个解析回调<code>self.parse_detail</code>的时候就出现了问题。存储的所有数据都是最后一条。（因为不同的排行榜中有相同的作品，所以没有过滤重复请求。）</p><p>最后排查是传递meta传递items的时候的问题，没有使用深拷贝，导致最后解析回调的时候都是同一个对象。</p><p><strong><code>更改后</code></strong></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">yield</span> scrapy.Request(url, callback=self.parse_detail,</span><br><span class="line">                                 meta=copy.deepcopy(&#123;<span class="string">&quot;items&quot;</span>: items&#125;), dont_filter=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure><h3 id="python赋值、深、浅拷贝"><a href="#python赋值、深、浅拷贝" class="headerlink" title="python赋值、深、浅拷贝"></a>python赋值、深、浅拷贝</h3><p>参考：</p><p><a href="https://www.runoob.com/w3cnote/python-understanding-dict-copy-shallow-or-deep.html"></a></p><ul><li><strong>直接赋值：</strong>其实就是对象的引用（别名）。</li><li><strong>浅拷贝(copy)：</strong>拷贝父对象，不会拷贝对象的内部的子对象。</li><li><strong>深拷贝(deepcopy)：</strong> copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。</li></ul>]]></content>
+    
+    
+    <summary type="html">记录scrapy中关于python对象拷贝的问题</summary>
+    
+    
+    
+    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="scrapy" scheme="http://mfcp.fun/tags/scrapy/"/>
+    
+    <category term="问题记录" scheme="http://mfcp.fun/tags/%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/"/>
+    
+  </entry>
   
   <entry>
     <title>北京市居民家庭应急物资储备建议清单（2020）</title>
@@ -36,6 +59,52 @@
     <category term="应急储备" scheme="http://mfcp.fun/tags/%E5%BA%94%E6%80%A5%E5%82%A8%E5%A4%87/"/>
     
     <category term="物资清单" scheme="http://mfcp.fun/tags/%E7%89%A9%E8%B5%84%E6%B8%85%E5%8D%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Google搜索小技巧</title>
+    <link href="http://mfcp.fun/202203/cl28tbhsd0001roue4ll5c6j6/a35c72901a49/"/>
+    <id>http://mfcp.fun/202203/cl28tbhsd0001roue4ll5c6j6/a35c72901a49/</id>
+    <published>2022-03-14T11:42:01.000Z</published>
+    <updated>2022-04-11T09:00:04.353Z</updated>
+    
+    <content type="html"><![CDATA[<aside> 🕷️ 突然翻到了google的搜索及技巧的文章。遂整理记录<h3 id="逻辑运算符"><a href="#逻辑运算符" class="headerlink" title="逻辑运算符"></a>逻辑运算符</h3><ul><li>“” 返回的结果中必须包含引号中的关键词或短语</li><li>OR (|) 连接搜索关键词，或的关系，必须大写</li><li>AND (+)  一般是空格</li><li>()  对条件分组进行搜索</li><li><ul><li>排斥某些关键词的结果。可以和site:连用</li></ul></li><li><ul><li>通配符，用来匹配任何单词或短语</li></ul></li><li>~  搜索除了跟关键词外还要搜索跟~后边关键词相关的词汇</li><li>.. 两个数之间 $250..$1000</li></ul><h3 id="搜索高级操作符"><a href="#搜索高级操作符" class="headerlink" title="搜索高级操作符"></a>搜索<a href="http://www.googleguide.com/advanced_operators_reference.html#location">高级操作符</a></h3><ul><li><p>intitle  allintitle</p><p>  allintitle  只返回包含标题中每个单词的结果。   intitle: 只查找命令后面的单词</p><p>  查询结果类似，如果关键词中有连接符，优先使用allintitle</p><p>  <code>allintitle:Where&#39;s the Cat? Board book</code></p></li><li><p>inurl   allinurl</p><p>  与intitle类似，在url中搜索关键词</p><p>  ↘️以下示例搜索url中包含“marketing”和“strategy”的结果</p><p>  <code>allinurl:marketing strategy</code></p></li><li><p>filetype</p><p>  查找特定类型的文件，一般配合其他运算符使用</p><p>  <code>allintext:python django filetype:PDF</code></p></li><li><p>intext  allintext</p><p>  allintext返回正文中包含搜索词的网页,但正文中每个单词的出现顺序并不按照搜索关键词的特定顺序     intext返回的结果的并不包含关键词的所有单词</p><p>  <code>site:quora.com allintext:long tail pro serpstat</code></p></li><li><p>site</p><p>  指定搜索的站点</p><p>  <code>site:zhihu.com &quot;旅游攻略&quot;</code></p></li><li><p>link</p><p>  搜索结果展示链接到指定页面的结果</p><p>  <code>link seo-hacker.com  -site:seo-hacker.com</code></p></li><li><p>allinanchor   inanchor</p><p>  搜索结果展示锚点文本中出现相关关键词的网页</p><p>  <code>allinanchor:best bed mattress philippines</code></p></li><li><p>define</p><p>  此高级搜索运算符可用于查找单词、短语和首字母缩略词的定义</p></li><li><p>cache</p><p>  搜索结果展示相关网页最后一次缓存</p><p>  <code>cache:baidu.com</code></p></li><li><p>info</p><p>  展示gothotel.com主页的信息</p><p>  <code>info:gothotel.com</code></p></li><li><p>related</p><p>  搜索结果展示类似的站点</p><p>  <code>related:similarweb.com</code></p></li><li><p>location</p><p>  返回指定位置的搜索结果</p><p>  <code>queen location:canada</code></p></li><li><p>movie</p><p>  查找电影相关的信息</p></li></ul>]]></content>
+    
+    
+    <summary type="html">记录一些google的高级搜索方式。</summary>
+    
+    
+    
+    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="google" scheme="http://mfcp.fun/tags/google/"/>
+    
+    <category term="搜索技巧" scheme="http://mfcp.fun/tags/%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CloudFlare的绕过与抓取</title>
+    <link href="http://mfcp.fun/202203/cl28tbhse0003rouehkg62da9/ed0d622b1902/"/>
+    <id>http://mfcp.fun/202203/cl28tbhse0003rouehkg62da9/ed0d622b1902/</id>
+    <published>2022-03-14T11:38:44.000Z</published>
+    <updated>2022-04-11T09:00:04.353Z</updated>
+    
+    <content type="html"><![CDATA[<aside> 🍲 周末发现某动漫网站不能获取到数据了，上班赶快排查了下情况，发现站点新上了Cloudflare保护措施，程序请求直接挂掉<h3 id="解决方案："><a href="#解决方案：" class="headerlink" title="解决方案："></a>解决方案：</h3><ol><li><p>之前看过有大佬们写过有关CloudFlare文章，github上直接有现成的轮子可以用。</p><p> 🔗 <a href="https://mp.weixin.qq.com/s/zwmatF3yTgSyS0gz8sinaA"><code>一日一技：如何捅穿Cloud Flare的5秒盾</code></a></p><p> 🔗 <a href="https://github.com/venomous/cloudscraper">CloudScraper</a></p><p> 下载安装完成后，首先报错openssl问题，我的python版本是3.7.5，openssl版本是1.0.8，要求openssl版本是1.1.1，又经过了一番折腾。运次起来后又报错</p><p> <code>cloudscraper.exceptions.CloudflareChallengeError: Detected a Cloudflare version 2 challenge, This feature is not available in the opensource (free) version.</code></p><p> 啥意思呢，就是这个免费的开源版本不能过，收费版本应该可以，感情半天激动折腾了个寂寞🙄</p></li><li><p>没有了思路，直接扣代码直接劝退。在google搜索“CloudFlare bypass”发现了几篇文章，用了另一个思路过掉了cloudflare。</p><p> 🖇️ <strong><a href="https://blog.detectify.com/2019/07/31/bypassing-cloudflare-waf-with-the-origin-server-ip-address/">Bypassing Cloudflare WAF with the origin server IP address</a></strong>  （<strong>👈这篇文章是重点</strong>）</p><p> 🖇️ <em><strong>*<a href="http://www.securityidiots.com/Web-Pentest/Information-Gathering/Cloudflare-Bypass/Part-2-Cloudflare-Security-Bypass.html">How i was able to bypass Cloudflare WAF for SQLi payload</a>*</strong></em></p><p> 这个方法的主要关键点是获取的真实的服务器ip地址，通过直接访问真实服务器来绕过WAF的防御策略。</p><ul><li><a href="https://search.censys.io/">censys</a>  搜索域名的服务器</li><li>通过邮件服务器查询</li></ul></li></ol><h3 id="其他："><a href="#其他：" class="headerlink" title="其他："></a>其他：</h3><p>去掉直接访问ip的warnings提示， 在请求头上添加“Host”</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">InsecureRequestWarning: Unverified HTTPS request <span class="keyword">is</span> being made to host <span class="string">&#x27;xxx.xxx.xx.xxx&#x27;</span>. Adding certificate verification <span class="keyword">is</span> strongly advised. See: &lt;https://urllib3.readthedocs.io/en/latest/advanced-usage.html<span class="comment">#ssl-warnings&gt;</span></span><br><span class="line"> warnings.warn</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加上以下代码</span></span><br><span class="line"><span class="keyword">from</span> requests.packages.urllib3.exceptions <span class="keyword">import</span> InsecureRequestWarning</span><br><span class="line">requests.packages.urllib3.disable_warnings(InsecureRequestWarning)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">通过直接访问真实服务器ip的方式绕过CloudFlare对站点的保护。</summary>
+    
+    
+    
+    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="CloudFlare" scheme="http://mfcp.fun/tags/CloudFlare/"/>
+    
+    <category term="反爬" scheme="http://mfcp.fun/tags/%E5%8F%8D%E7%88%AC/"/>
     
   </entry>
   
@@ -398,73 +467,6 @@
     <category term="linux" scheme="http://mfcp.fun/tags/linux/"/>
     
     <category term="nginx" scheme="http://mfcp.fun/tags/nginx/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>安卓高版本抓包解决</title>
-    <link href="http://mfcp.fun/202104/cl1uhb1p6000no4ue4hx86doj/e03df9c257da/"/>
-    <id>http://mfcp.fun/202104/cl1uhb1p6000no4ue4hx86doj/e03df9c257da/</id>
-    <published>2021-04-19T02:43:33.000Z</published>
-    <updated>2022-02-28T01:47:52.213Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="迁移charles到系统证书"><a href="#迁移charles到系统证书" class="headerlink" title="迁移charles到系统证书"></a>迁移charles到系统证书</h3><ul><li><p>安卓4.4之前手机信任用户证书，配置好代理在浏览器访问 <a href="http://chls.pro/ssl">chls.pro/ssl</a> 安装charle证书即可。</p><p>最好使用第三方手机浏览器进行下载。有部分浏览器下载的.pem的不能安装，换个浏览器下载就行。正确的是.crt格式</p></li><li><p>安卓4.4之后手机不在信任用户证书</p><p>解决证书信任问题有两种办法。 在app里设置信任用户证书，这样的话需要重新打包。 或者把charles的证书设置为系统证书。</p><p><code>以下是第二种方式，不用涉及到重新打包</code></p><ol><li><p>首先需要获取手机root 权限</p></li><li><p>同样先下载charles证书到手机，先安装到用户证书上。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">用户证书安装路径</span><br><span class="line">&#x2F;data&#x2F;misc&#x2F;user&#x2F;0&#x2F;cacerts-added</span><br><span class="line">系统证书安装路径</span><br><span class="line">&#x2F;system&#x2F;etc&#x2F;security&#x2F;cacerts</span><br><span class="line"></span><br><span class="line">其中的每个证书的命名规则如下：</span><br><span class="line">&lt;Certificate_Hash&gt;.&lt;Number&gt;</span><br><span class="line">文件名是一个Hash值，而后缀是一个数字。</span><br><span class="line">文件名可以用下面的命令计算出来：</span><br><span class="line">openssl x509 -subject_hash_old -in &lt;Certificate_File&gt;</span><br><span class="line">后缀名的数字是为了防止文件名冲突的，比如如果两个证书算出的Hash值是一样的话，</span><br><span class="line">那么一个证书的后缀名数字可以设置成0，而另一个证书的后缀名数字可以设置成1</span><br></pre></td></tr></table></figure></li><li><p>先安装到用户证书的目的就是不用计算证明的命名Hash值</p></li><li><p>adb 命令进入到用户证书路径下,查看证书所属权限和所属组，不对则需要修改成root用户。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb shell</span><br><span class="line">cd &#x2F;data&#x2F;misc&#x2F;user&#x2F;0&#x2F;cacerts-added</span><br><span class="line">chmod 644  &lt;xxxx&gt;.0</span><br><span class="line">chown root &lt;xxxx&gt;.0</span><br><span class="line">chgrp root &lt;xxxx&gt;.0</span><br></pre></td></tr></table></figure></li><li><p>然后要调整安卓system分区权限，不然移动证书到根证书会报错 只有可读权限#</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 查看system 权限</span><br><span class="line">mount | grep &#x2F;system    </span><br><span class="line">#  查看system 路径</span><br><span class="line">cat &#x2F;proc&#x2F;mounts</span><br><span class="line"></span><br><span class="line"># 一般为 &#x2F;dev&#x2F;xxxx&#x2F;xxxx &#x2F;system</span><br><span class="line"># ro表示只读，rw表示读写</span><br><span class="line">mount -o rw,remount &#x2F;dev&#x2F;xxxx&#x2F;xxxx &#x2F;system</span><br></pre></td></tr></table></figure><p>system目录权限调整后，误删文件系统会崩溃。 最好改回去…</p></li><li><p>然后移动用户证书目录到系统证书就可以了。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv &lt;xxxx&gt;.0 &#x2F;system&#x2F;etc&#x2F;security&#x2F;cacerts&#x2F;</span><br></pre></td></tr></table></figure></li><li><p>重启手机或者模拟器</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb reboot     <span class="comment">#  或者手动重启</span></span><br></pre></td></tr></table></figure></li><li><p>然后就可以愉快的抓包了</p></li></ol></li></ul>]]></content>
-    
-    
-    <summary type="html">安卓高版本抓包解决</summary>
-    
-    
-    
-    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="charles" scheme="http://mfcp.fun/tags/charles/"/>
-    
-    <category term="https" scheme="http://mfcp.fun/tags/https/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>解决win系统docker和模拟器冲突</title>
-    <link href="http://mfcp.fun/202104/cl1uhb1p5000jo4uedqmk599e/92cdbd2901f8/"/>
-    <id>http://mfcp.fun/202104/cl1uhb1p5000jo4uedqmk599e/92cdbd2901f8/</id>
-    <published>2021-04-16T06:17:28.000Z</published>
-    <updated>2022-02-28T01:47:52.212Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote><p> Win子系统安装了Ubuntu之后，需要开启WSL2.  wsl2底层是借助Hyper-V实现的，使用Ubuntu需要在<code>启用windows功能</code>中打开Hyper-V。 但是一些安卓模拟器不使用Hyper-V，夜神模拟器会报错，木木模拟器会直接蓝屏</p></blockquote><p>为了安装模拟器进行抓包和调试，同时使用能在win上使用docker。docker也是使用Hyper-V实现的。</p><p>官方给出的解决办法：</p><p>微软：</p><p><a href="https://devblogs.microsoft.com/visualstudio/hyper-v-android-emulator-support/">Hyper-V Android emulator support | Visual Studio Blog</a></p><p>谷歌：</p><p><a href="https://android-developers.googleblog.com/2018/07/android-emulator-amd-processor-hyper-v.html">Android Emulator - AMD Processor &amp; Hyper-V Support</a></p><p>解决办法：</p><p>安装<code>genymotion</code> 模拟器完美实现需求。</p><p>实现Win子系统Ubuntu和模拟器的共存，在Ubuntu中安装docker。</p><hr><h3 id="Genymotion-安装"><a href="#Genymotion-安装" class="headerlink" title="Genymotion 安装"></a>Genymotion 安装</h3><ul><li><p><a href="https://www.genymotion.com/download/">下载地址</a></p></li><li><p>Genymotion的启动需要用到VirtualBox，所以没有装的话安装完Genymotion打开会提示让你装</p></li><li><p>安装VirtualBox，（一般下载选第一个<code>使用VirtualBox</code>）就不需要单独安装VirtualBox了</p></li><li><p>安装完成后打开按**<code>+</code>**添加模拟器</p><p><img src="https://i.loli.net/2021/04/16/LrUpJfGh6lX8ePt.png" alt="https://i.loli.net/2021/04/16/LrUpJfGh6lX8ePt.png"></p></li><li><p>添加完成后就可以启动模拟器了。</p></li></ul><h3 id="问题记录"><a href="#问题记录" class="headerlink" title="问题记录"></a>问题记录</h3><ul><li><p>由于电脑是x86架构，直接安装apk到模拟器会失败，需要转换程序</p><p>👉🏻 <a href="https://github.com/m9rco/Genymotion_ARM_Translation">转换包</a> （安卓4.3到安卓8的转换包）</p></li><li><p>安卓抓包ssl</p><p><code>安卓5.0后不信任用户证书，安装的charles等证书无效，需要更改到系统证书目录下才可以抓HTTPS的包</code></p><p>解决参考：↙️</p><p><a href="https://www.notion.so/Charles-dc4c8701890249eb9628902ed0df3c5b">Charles 手机安装证书</a></p></li></ul>]]></content>
-    
-    
-    <summary type="html">win子系统和安卓模拟器共存</summary>
-    
-    
-    
-    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="docker" scheme="http://mfcp.fun/tags/docker/"/>
-    
-    <category term="genymotion" scheme="http://mfcp.fun/tags/genymotion/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>一些接码合集</title>
-    <link href="http://mfcp.fun/202104/cl1uhb1p4000go4ue884i6dmk/2243a327cdd9/"/>
-    <id>http://mfcp.fun/202104/cl1uhb1p4000go4ue884i6dmk/2243a327cdd9/</id>
-    <published>2021-04-14T10:25:17.000Z</published>
-    <updated>2022-02-28T01:47:52.212Z</updated>
-    
-    <content type="html"><![CDATA[<p>合集网（接码平台备用）：</p><h2 id="国外免费接码平台"><a href="#国外免费接码平台" class="headerlink" title="国外免费接码平台"></a>国外免费接码平台</h2><p>（从大佬那里看到复制过来的..    感谢大佬。）</p><ul><li><a href="https://sms24.me/">https://sms24.me/</a> 有中国和中国香港手机号码</li><li><a href="https://receive-sms.cc/">https://receive-sms.cc</a></li><li><a href="https://receive-sms-online.com/">https://receive-sms-online.com</a></li><li><a href="https://getfreesmsnumber.com/">https://getfreesmsnumber.com</a> 有越南手机号码</li><li><a href="http://7sim.net/">http://7sim.net</a></li><li><a href="https://receive-sms-free.net/">https://receive-sms-free.net</a></li><li><a href="http://sms.sellaite.com/">http://sms.sellaite.com</a></li><li><a href="https://ch.freephonenum.com/">https://ch.freephonenum.com</a></li><li><a href="https://smsreceivefree.com/">https://smsreceivefree.com</a></li><li><a href="https://zh.mytrashmobile.com/">https://zh.mytrashmobile.com</a></li><li><a href="https://www.receive-sms-online.info/">https://www.receive-sms-online.info</a></li><li><a href="https://receiveasms.com/">https://receiveasms.com</a></li><li><a href="https://sms-online.co/receive-free-sms">https://sms-online.co/receive-free-sms</a></li><li><a href="https://receive-sms.com/">https://receive-sms.com</a></li><li><a href="http://receivefreesms.com/">http://receivefreesms.com/</a></li><li><a href="https://www.receivesmsonline.net/">https://www.receivesmsonline.net/</a></li><li><a href="https://www.freeonlinephone.org/">https://www.freeonlinephone.org/</a> </li><li><a href="https://us-phone-number.com/">https://us-phone-number.com</a></li><li><a href="https://temporary-phone-number.com/">https://temporary-phone-number.com</a></li><li><a href="https://www.receivesms.co/">https://www.receivesms.co/</a> </li><li><a href="https://www.smstibo.com/">https://www.smstibo.com/</a> </li><li>PingMe 免费接码平台： <a href="https://pingme.tel/receive-sms-online-cn/">https://pingme.tel/receive-sms-online-cn/</a> </li><li><a href="http://receivefreesms.net/">http://receivefreesms.net/</a> </li><li><a href="http://receivesmsonline.in/">http://receivesmsonline.in/</a> </li><li><a href="https://sms-receive.net/">https://sms-receive.net/</a> </li><li><a href="https://www.receivesms.net/">https://www.receivesms.net/</a> </li></ul><h2 id="国内免费接码平台"><a href="#国内免费接码平台" class="headerlink" title="国内免费接码平台"></a>国内免费接码平台</h2><ul><li>超级云短信： <a href="http://www.bfkdim.com/">http://www.bfkdim.com/</a></li><li>隐私短信：<a href="https://www.yinsiduanxin.com/">https://www.yinsiduanxin.com</a></li><li>云短信： <a href="https://www.materialtools.com/">https://www.materialtools.com/</a></li><li>在线短信：<a href="http://www.smszk.com/">http://www.smszk.com/</a></li><li>游客短信：<a href="https://www.visitorsms.com/cn">https://www.visitorsms.com/cn</a></li><li>免费接码：<a href="https://www.becmd.com/">https://www.becmd.com/</a></li><li>接码平台：<a href="http://www.114sim.com/">http://www.114sim.com/</a> <a href="http://zg.114sim.com/">http://zg.114sim.com/</a></li><li>云短信：<a href="https://www.materialtools.com/">https://www.materialtools.com</a></li><li>免费接码：<a href="http://z-sms.com/">http://z-sms.com/</a></li><li>云短信：<a href="https://www.zusms.com/">https://www.zusms.com</a></li><li>免费接码：<a href="https://www.shejiinn.com/">https://www.shejiinn.com/</a></li><li>云接码：<a href="https://yunjiema.net/">https://yunjiema.net</a></li><li>云验证码：<a href="https://www.cnwml.com/">https://www.cnwml.com</a></li><li>免费接码：<a href="https://www.mffac.com/">https://www.mffac.com</a></li><li>接码科技免费平台：<a href="https://f4.work/">https://f4.work/</a></li><li>主站<a href="http://jiema.tech/sms/">http://jiema.tech/</a></li><li>接码号：<a href="https://jiemahao.com/">https://jiemahao.com</a></li><li>免费接码： <a href="https://mianfeijiema.com/">https://mianfeijiema.com/</a></li><li>小鸟接码平台： <a href="http://www.xnsms.com/">http://www.xnsms.com/</a></li><li>zero接码平台： <a href="https://xinghai.party/">https://xinghai.party/</a></li><li>LotHelper： <a href="https://www.lothelper.com/cn">https://www.lothelper.com/cn</a></li><li>免费接码平台： <a href="http://www.zsrq.net/">http://www.zsrq.net/</a></li><li>免费接收短信验证码：<a href="https://www.we39.cn/">https://www.we39.cn</a></li><li>KaKa接码平台：<a href="http://www.kakasms.com/">http://www.kakasms.com</a></li><li>随用随弃：<a href="https://www.suiyongsuiqi.com/">https://www.suiyongsuiqi.com</a></li></ul><h2 id="国外收费接码平台"><a href="#国外收费接码平台" class="headerlink" title="国外收费接码平台"></a>国外收费接码平台</h2><ul><li><a href="https://sms-activate.ru/?ref=486565">https://sms-activate.ru/cn/</a> 1$起充，有中文页面</li><li><a href="https://5sim.net/">https://5sim.net</a></li><li>便宜国家：俄罗斯（ Russia ）罗马尼亚（ Romania ）菲律宾（ Philippines ）蒙古（ Mongolia ）拉脱维亚（ Latvia ）哈萨克斯坦（ Kazakhstan ）以色列（ Israel ）哥伦比亚（ Colombia ）</li><li>注意：这个网站如果您超过1年不使用帐户，则该帐户将被删除，余额将不会恢复。</li><li><a href="http://smspva.com/">http://smspva.com</a> 这家起步就是0.1$，也就是最便宜7毛起步</li><li>注意：这个网站会注册时发明文密码到邮箱，不知道是不是明文保存密码，请注意不要使用常用密码注册。</li><li>国内充值支持支付宝和信用卡，比特币</li><li><a href="http://give-sms.com/?ref=28795">http://give-sms.com</a> 俄罗斯接码平台</li><li><a href="http://simsms.org/">http://simsms.org</a> 俄罗斯平台，多国号码接码，不过没有国内常用支付方式</li><li><a href="https://onlinesim.ru/zh?ref=1899314">https://onlinesim.ru/zh</a> 就俄罗斯的码便宜，每个码最少1卢布</li><li><a href="https://www.jindousms.com/">https://www.jindousms.com/</a> 国人开的国外号码接码平台，不做国内业务</li><li><a href="https://t.me/jindou">TG群</a></li><li><a href="https://meiguojiema.com/">https://meiguojiema.com</a> 又一个国人开的国外接码，主要美国和加拿大号码</li><li><a href="https://www.smsjiema.com/">https://www.smsjiema.com/</a> 美国实体卡号码，可以注册GV</li><li><a href="https://www.textverified.com/">https://www.textverified.com/</a> 2刀起充，接码也挺贵的</li><li><a href="https://autofications.com/">https://autofications.com/</a> 不算贵也不算便宜，最低$0.5一个码</li><li><a href="https://service.pvaverify.com/">https://service.pvaverify.com/</a> 美国实体卡</li><li><a href="https://getsms.online/">https://getsms.online/</a> 俄罗斯接码平台，项目不是很多，但是常见的都有，支持VISA信用卡，比特币，PayPal充值，最低一个码0.01美元</li><li><a href="https://sms-acktiwator.ru/">https://sms-acktiwator.ru/</a> 俄罗斯接码平台，没有国内方便充值的渠道，50卢布起充</li><li>52验证码 <a href="http://52yzm.top/">http://52yzm.top/</a> 国人运营的国外手机号码接码平台，可充值任意金额，提供多国号码，部分国外实体卡，接码1元/个起步，注意不能接二次短信，备用网址：<a href="http://66765.top/%EF%BC%8C%E6%9C%89%E5%BE%AE%E4%BF%A1%E3%80%81%E6%B7%98%E5%AE%9D%E7%AD%89%E5%9B%BD%E5%86%85%E9%A1%B9%E7%9B%AE%EF%BC%8C%E4%BD%86%E5%AE%9E%E9%99%85%E8%83%BD%E4%B8%8D%E8%83%BD%E6%8E%A5%E5%88%B0%E7%A0%81%E6%9C%AA%E8%AF%95%EF%BC%8C%E6%94%AF%E4%BB%98%E5%AE%9D%E5%85%85%E5%80%BC%E3%80%82">http://66765.top/，有微信、淘宝等国内项目，但实际能不能接到码未试，支付宝充值。</a></li><li>YY验证码：<a href="https://yyyzm.com/">https://yyyzm.com</a> 国人运营的国外手机号码接码平台，只有国外项目。优点充值方便，支付宝充值。</li><li></li></ul><h2 id="国内收费接码平台"><a href="#国内收费接码平台" class="headerlink" title="国内收费接码平台"></a><strong>国内收费接码平台</strong></h2><p>不确定什么时候会跑路，用多少充多少</p><ul><li>云仓码平台：<a href="http://119.188.210.233:8080/">http://119.188.210.233:8080/</a> 10元起充，无网页版</li><li>蓝马云科技：<a href="http://www.tiandekeji.com/">http://www.tiandekeji.com/</a> 10元起充</li><li>乘码平台：<a href="http://www.cmddaaicheng.com:8088/index.html">http://www.cmddaaicheng.com:8088/index.html</a></li><li>胖米手機sim卡收驗證碼收碼平台：<a href="http://www.simlife.club/">http://www.simlife.club/</a> 1元起充。项目少（<a href="https://www.heji.ltd/28.html/comment-page-1#comment-179">陌生人</a>）</li><li>蓝猫云：<a href="https://wwa.lanzous.com/b00nx1tjg">https://wwa.lanzous.com/b00nx1tjg</a> 1元起充，恢复正常，账号充值的钱都在（<a href="https://www.heji.ltd/28.html/comment-page-1#comment-122">pxw2002</a>）</li><li>UU云：<a href="http://www.uuyunma.com/">http://www.uuyunma.com/</a> 10元起充</li><li>速码接码平台：<a href="https://n459.com/dir/30470514-41826455-127bf2">https://n459.com/dir/30470514-41826455-127bf2</a> 10元起充</li><li>坚果花开-网络共享接码平台：<a href="http://a.userms.com/">http://a.userms.com/</a> 10元起充</li><li>上瑞码平台：<a href="http://101.200.180.158/download.html">http://101.200.180.158/download.html</a> 没有网页版</li><li>云海接码平台：<a href="http://www.uasea.cn/">http://www.uasea.cn/</a> 全是虚拟号（<a href="https://www.heji.ltd/28.html/comment-page-1#comment-180">陌生人</a>）</li><li>小萌云接码：<a href="http://dbl.caomeixiao.com/home">http://dbl.caomeixiao.com/home</a></li><li>蜜蜂码：<a href="http://mifeng666.cn:91/">http://mifeng666.cn:91/</a></li><li>小肥羊接码：<a href="http://box160338464058.nb3.site.my-qcloud.com/">http://box160338464058.nb3.site.my-qcloud.com/</a> 无网页版</li><li>四色云：<a href="http://i.zisan.net:9009/">http://i.zisan.net:9009/</a></li><li>电竞云：<a href="http://e-sports888.cn:81/">http://e-sports888.cn:81/</a> 10元起充。全部虚拟号码，基本全是170 165号段（<a href="https://www.heji.ltd/28.html/comment-page-1#comment-179">陌生人</a>）</li><li>奥巴码接码平台：<a href="https://pc.aobama.co/">https://pc.aobama.co/</a> 5元起充</li><li>玉米网络服务平台：<a href="http://www.97io.cn/">http://www.97io.cn/</a> 1元起充 充了钱不能接码(<a href="https://www.heji.ltd/28.html#comment-168">lvluo</a>)</li><li>大麦云：<a href="http://api.dabiwal.cn/">http://api.dabiwal.cn/</a> 5元起充</li><li>番薯云：<a href="https://guanfangdiping.com/">https://guanfangdiping.com</a> 5元起充。实体号比较少，比较卡（<a href="https://www.heji.ltd/28.html/comment-page-1#comment-179">陌生人</a>）</li><li>战狼接码：<a href="https://yh.jxacw.cn//login/reg.html">https://yh.jxacw.cn//login/reg.html</a> 5元起充。找不到卡密购买链接（<a href="https://www.heji.ltd/28.html/comment-page-1#comment-179">陌生人</a>）</li><li>蓝鲸云数据共享平台：<a href="http://www.lanjingyun.vip/">http://www.lanjingyun.vip/</a> 余额可能莫名其妙的没（<a href="https://www.heji.ltd/28.html/comment-page-1#comment-190">陌生人</a>）</li><li>JieMa.Tech：<a href="https://f4.work/">https://f4.work</a> 邀请码：1C4CA423</li><li>随用随弃：<a href="https://www.suiyongsuiqi.com/">https://www.suiyongsuiqi.com</a> 收费号码解锁需要180豆子，100豆子=1元</li><li>德芙云：<a href="http://h5.do668.com:81/">http://h5.do668.com:81/</a> 10元起充。又能访问了</li><li>小熊云：<a href="http://119.188.210.205:8083/">http://119.188.210.205:8083/</a> 5元起充。部分号码收不到码</li><li>易码：<a href="http://yima.senyzc.com:9999/">http://yima.senyzc.com:9999</a> 10元起充</li><li>飞猪接码：<a href="https://feizhu.lanzous.com/b01be8zbg">https://feizhu.lanzous.com/b01be8zbg</a> 30元起充</li><li>海码：<a href="http://hmyzm.cool/">http://hmyzm.cool</a> 20元起充。都是虚拟共享号码</li><li>宝云平台：<a href="http://bm.bangnasendp.com/">http://bm.bangnasendp.com</a></li><li>锤子云：<a href="http://27.124.25.114:8080/">http://27.124.25.114:8080</a> 10元起充</li><li>闪电码：<a href="http://shandianma.shop/">http://shandianma.shop</a></li><li>朱雀短信验证码平台：<a href="http://www.xf-qd.com/">http://www.xf-qd.com</a> 10元起充</li><li></li></ul><h2 id="TG接码频道"><a href="#TG接码频道" class="headerlink" title="TG接码频道"></a>TG接码频道</h2><p>国外交流软件telegram的频道</p><ul><li>sms board：<a href="https://t.me/FreeSmsBoard">https://t.me/FreeSmsBoard</a> 目前测试阶段只有一个号码，公共频道，所有人都可以看到这个号码收到的短信内容</li></ul><h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><p>有网友把部分免费接码网站的手机号码聚合成了软件版和APP版</p><h2 id="免费发短信"><a href="#免费发短信" class="headerlink" title="免费发短信"></a>免费发短信</h2><ul><li>aFreeSms：<a href="https://www.afreesms.com/">https://www.afreesms.com</a> 提供很多国家免费发送短信</li><li><a href="http://www.freesms.net/">http://www.freesms.net</a></li></ul>]]></content>
-    
-    
-    <summary type="html">一些接码网站</summary>
-    
-    
-    
-    <category term="工具" scheme="http://mfcp.fun/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-    <category term="验证码" scheme="http://mfcp.fun/tags/%E9%AA%8C%E8%AF%81%E7%A0%81/"/>
     
   </entry>
   
