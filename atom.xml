@@ -6,7 +6,7 @@
   <link href="http://mfcp.fun/atom.xml" rel="self"/>
   
   <link href="http://mfcp.fun/"/>
-  <updated>2022-07-07T10:00:23.222Z</updated>
+  <updated>2022-07-15T05:20:45.371Z</updated>
   <id>http://mfcp.fun/</id>
   
   <author>
@@ -17,13 +17,36 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>某漫画请求头sc参数实现和response解密</title>
+    <link href="http://mfcp.fun/202207/cl5m0ift6005284ue670q0ukn/73f48bc8694b/"/>
+    <id>http://mfcp.fun/202207/cl5m0ift6005284ue670q0ukn/73f48bc8694b/</id>
+    <published>2022-07-15T03:17:28.000Z</published>
+    <updated>2022-07-15T05:20:45.371Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">最近要工作中需要抓取某漫画的所有章节信息，只能抓取app的信息，但是该app的请求头有个sc参数是随着请求每次变化的，而且返回来的每个response都是加密的，需要解密才能获取。</span><br></pre></td></tr></table></figure><h3 id="请求头sn参数"><a href="#请求头sn参数" class="headerlink" title="请求头sn参数"></a>请求头sn参数</h3><p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207151123602.png" alt="image-20220715112317655"></p><p>通过重放观察，<code>sc</code>参数每次都是变化的。而且跟<code>localtime</code>、<code>qimei</code>有关</p><p>jadx反编译apk搜索<code>sc</code>关键字。</p><p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207151128533.png" alt="image-20220715112822476"></p><p>正好搜索到的就是往header中添加sc参数的，追进去看下。</p><p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207151131659.png" alt="image-20220715113121617"></p><p>有locatime跟qimei参数，使用objection验证一下</p><p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207151135214.png" alt="image-20220715113514171"></p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sc 参数就是把`URL(path路径)+host+0+qimei+localtime+字符串`做了md5加密</span></span><br><span class="line">sc_str = <span class="string">f&quot;/9.9.5/Comic/comicDetail/comic_id/<span class="subst">&#123;cid&#125;</span>a.ac.qq.com0<span class="subst">&#123;qimei&#125;</span><span class="subst">&#123;ts&#125;</span>4jo2YHMm0d2VGt59tVYndX9P7eFcw8TvRv5lMqFP1TT&quot;</span></span><br></pre></td></tr></table></figure><h3 id="响应体解密"><a href="#响应体解密" class="headerlink" title="响应体解密"></a>响应体解密</h3><p>刚开始一直没有找到头绪，后来在<a href="https://www.jb51.net/article/236944.htm">一篇文章</a>中看到了相关的请求分析。</p><p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207151145230.png" alt="image-20220715114533181"></p><p>找到解密操作的相关实现</p><p>刚开始遇到DES3有点懵圈，在python中没法还远，使用了rpc进行解密。</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">stringToBytes</span>(<span class="params">str</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> javaString = Java.use(<span class="string">&#x27;java.lang.String&#x27;</span>);</span><br><span class="line">    <span class="keyword">var</span> bytes = [];</span><br><span class="line">    bytes = javaString.$new(str).getBytes();</span><br><span class="line">    <span class="keyword">return</span> bytes;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get_json</span>(<span class="params">resp</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> result = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    Java.perform(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> clazz = Java.use(<span class="string">&#x27;com.qq.ac.android.utils.CryptUtils&#x27;</span>);</span><br><span class="line">        <span class="keyword">var</span> bArr = Java.array(<span class="string">&#x27;byte&#x27;</span>, stringToBytes(resp));</span><br><span class="line">        result = clazz.decodeHttpRequest(bArr);</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">rpc.exports = &#123;</span><br><span class="line">    decrypt: get_json</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>返回来的是bytes类型，需要bytes(data).decode()转换成str。</p><p>使用rpc调用apk有点不稳定，经常会崩掉</p><p>后来又重新研究了一下python的DES，可以使用python直接解密。</p><p>hook相关方法拿到DES的key值，因为没有偏移量，所以也就不用iv值了。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Crypto.Cipher <span class="keyword">import</span> DES3</span><br><span class="line"><span class="keyword">import</span> codecs</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">EncryptDate</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, key</span>):</span></span><br><span class="line">        self.key = key  <span class="comment"># 初始化密钥</span></span><br><span class="line">        self.iv = <span class="string">b&#x27;01234567&#x27;</span> <span class="comment"># 偏移量</span></span><br><span class="line">        self.length = DES3.block_size  <span class="comment"># 初始化数据块大小</span></span><br><span class="line">        self.des3 = DES3.new(self.key, DES3.MODE_ECB)  <span class="comment"># 初始化AES,CBC模式的实例</span></span><br><span class="line">        <span class="comment"># 截断函数，去除填充的字符</span></span><br><span class="line">        self.unpad = <span class="keyword">lambda</span> date: date[<span class="number">0</span>:-<span class="built_in">ord</span>(date[-<span class="number">1</span>])]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">pad</span>(<span class="params">self, text</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        #填充函数，使被加密数据的字节码长度是block_size的整数倍</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        count = <span class="built_in">len</span>(text.encode(<span class="string">&#x27;utf-8&#x27;</span>))</span><br><span class="line">        add = self.length - (count % self.length)</span><br><span class="line">        entext = text + (<span class="built_in">chr</span>(add) * add)</span><br><span class="line">        <span class="keyword">return</span> entext</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">encrypt</span>(<span class="params">self, encrData</span>):</span>  <span class="comment"># 加密函数</span></span><br><span class="line"></span><br><span class="line">        res = self.des3.encrypt(self.pad(encrData).encode(<span class="string">&quot;utf8&quot;</span>))</span><br><span class="line">        msg = <span class="built_in">str</span>(base64.b64encode(res), encoding=<span class="string">&quot;utf8&quot;</span>)</span><br><span class="line">        <span class="comment"># msg =  res.hex()</span></span><br><span class="line">        <span class="keyword">return</span> msg</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">decrypt</span>(<span class="params">self, decrData</span>):</span>  <span class="comment"># 解密函数</span></span><br><span class="line">        res = base64.decodebytes(decrData.encode(<span class="string">&quot;utf8&quot;</span>))</span><br><span class="line">        <span class="comment"># res = bytes.fromhex(decrData)</span></span><br><span class="line">        msg = self.des3.decrypt(res).decode(<span class="string">&quot;utf8&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> self.unpad(msg)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">eg = EncryptDate(<span class="string">&quot;babf73a94156d1d931e87f87&quot;</span>)  <span class="comment"># 这里密钥的长度必须是16的倍数</span></span><br><span class="line">res = eg.encrypt(<span class="string">&quot;13918238353&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(res)</span><br><span class="line">eg1 = EncryptDate(<span class="string">&quot;babf73a94156d1d931e87f87&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(eg1.decrypt(res))</span><br></pre></td></tr></table></figure><p>网上某大佬的python实现</p><p>可以参照这个实现对响应体的解密操作，需要注意的是Crypto库不能使用，需要安装pycryptodome</p><p><code>pip install pycryptodome</code></p>]]></content>
+    
+    
+    <summary type="html">记录某漫画请求头sc参数和响应体解密操作的分析过程</summary>
+    
+    
+    
+    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="apk" scheme="http://mfcp.fun/tags/apk/"/>
+    
+    <category term="rpc" scheme="http://mfcp.fun/tags/rpc/"/>
+    
+  </entry>
+  
+  <entry>
     <title>git命令</title>
-    <link href="http://mfcp.fun/202207/cl5auvws50000h4ue8hsz8jui/c5697bb75f24/"/>
-    <id>http://mfcp.fun/202207/cl5auvws50000h4ue8hsz8jui/c5697bb75f24/</id>
+    <link href="http://mfcp.fun/202207/cl5m0ift6005184uecn21doqn/c5697bb75f24/"/>
+    <id>http://mfcp.fun/202207/cl5m0ift6005184uecn21doqn/c5697bb75f24/</id>
     <published>2022-07-07T09:38:13.000Z</published>
     <updated>2022-07-07T10:00:23.222Z</updated>
     
-    <content type="html"><![CDATA[<ul><li><p>资料：</p><p><a href="https://gitee.com/progit/">https://gitee.com/progit/</a></p><p><a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%85%B3%E4%BA%8E%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6">https://git-scm.com/book/zh/v2/起步-关于版本控制</a></p></li></ul><p>🕸️ 来源于阮一峰的网络日志</p><p><a href="http://www.ruanyifeng.com/blog/2014/06/git_remote.html">Git远程操作详解</a></p><p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a></p><p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207071750653.png" alt="Untitled"></p><blockquote><p>安装完成后   需要最后一步设置</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  --global参数    这台机器上的所有仓库都会使用这个配置</span></span><br><span class="line">git config --global user.name <span class="string">&quot;you name&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;email@exemple.com&quot;</span></span><br></pre></td></tr></table></figure><blockquote><p>工作区：git init的文件夹就是一个工作区                                                                        版本库：工作区里面一个隐藏目录 .git  (里面有暂存区和master分支)</p></blockquote><p>git add把文件添加进去，实际上是把文件修改添加到暂存区里面，git commit提交更改，实际上是把暂存区的所有内容提交到当前分支上。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git init                          <span class="comment"># 把当前目录编程git管理的仓库</span></span><br><span class="line">git add &lt;file&gt;                    <span class="comment"># 把当前文件添加到仓库  可以同时添加多个文件</span></span><br><span class="line">git commit -m <span class="string">&quot;message&quot;</span>           <span class="comment"># 把文件提交到仓库, -m 后边的是本次提交说明</span></span><br><span class="line"></span><br><span class="line">git status                        <span class="comment"># 查看当前工作区的转态，是否有文件修改</span></span><br><span class="line">git diff                          <span class="comment"># 查看修改内容</span></span><br><span class="line">git <span class="built_in">log</span>                           <span class="comment"># 显示从最近到最远的提交日志，</span></span><br><span class="line">git reflog                        <span class="comment"># 查看历史命令，以确定回到那个版本</span></span><br><span class="line">git <span class="built_in">log</span> --pretty=oneline          <span class="comment"># 只显示commit_id (版本号)</span></span><br><span class="line">git reset --hard commit_id        <span class="comment"># HEAD指向的版本是当前版本，可以根据commid 回退</span></span><br><span class="line">git diff HEAD  -- &lt;file&gt;          <span class="comment"># 查看工作区与版本库里面最新版本的区别</span></span><br></pre></td></tr></table></figure><blockquote><p>git checkout  - - file  把file中在工作区的修改全部撤销</p></blockquote><p>分两种情况，一种是file自修改后还没有被放到暂存区，现在撤销修改就回到了和版本库一样的状态；一种是file已经添加到了暂存区，又作了修改，现在撤销修改就回到添加到暂存区后的转态。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git  reset  HEAD  &lt;file&gt;         <span class="comment"># 把暂存区的修改撤销掉，重新放回工作区，HEAD表示最新的版本</span></span><br><span class="line">git  checkout -- &lt;file&gt;          <span class="comment"># 丢弃工作区的修改   -- 重要</span></span><br><span class="line">git ls-files                     <span class="comment"># 查看本地仓库文件</span></span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207071750240.png" alt="git"></p><h2 id="远程仓库的创建"><a href="#远程仓库的创建" class="headerlink" title="远程仓库的创建"></a>远程仓库的创建</h2><blockquote><p>ssh-keygen -t rsa -C “<a href="mailto:&#121;&#111;&#117;&#101;&#109;&#x61;&#105;&#x6c;&#64;&#101;&#120;&#97;&#109;&#112;&#x6c;&#101;&#46;&#x63;&#111;&#x6d;">&#121;&#111;&#117;&#101;&#109;&#x61;&#105;&#x6c;&#64;&#101;&#120;&#97;&#109;&#112;&#x6c;&#101;&#46;&#x63;&#111;&#x6d;</a>“                                                                用户主目录下.ssh目录, 存放着SSHkey的秘钥对。id_rsa.pub(公钥) , id_rsa(私钥)</p></blockquote><p>在GitHub上创建好远程仓库后，与本地仓库进行关联。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 本地仓库和远程仓库进行关联</span></span><br><span class="line">git remote add origin git@github.com:&lt;username&gt;/&lt;files&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把本地库的所有内容推送到远程库上</span></span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除关联的远程库</span></span><br><span class="line">git remote rm origin</span><br></pre></td></tr></table></figure><p>ursename: 你自己github的账户名；     files:你创建的远程仓库名称</p><p>origin 可换成github 或者gittee(码云)</p><p>第一次推送远程仓库需要加上 -U 参数把本地的master分支和远程的maser分支关联起来。以后就可以简化命令，不需要-u 参数。（第一次提交会有警告,输入yes回车就可以了）</p><h3 id="从远程仓库克隆一本地库"><a href="#从远程仓库克隆一本地库" class="headerlink" title="从远程仓库克隆一本地库"></a>从远程仓库克隆一本地库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从远程仓库拉取到本地</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:&lt;username&gt;/&lt;files&gt;.git</span><br></pre></td></tr></table></figure><h3 id="删除git远程仓库的文件"><a href="#删除git远程仓库的文件" class="headerlink" title="删除git远程仓库的文件"></a>删除git远程仓库的文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  删除test文件夹下的a.txt文件</span></span><br><span class="line">git rm -r --cached <span class="built_in">test</span>/a.txt </span><br><span class="line"><span class="comment">#  执行 删除缓存 提交删除说明</span></span><br><span class="line">git commit -m <span class="string">&quot;删除a.txt文件&quot;</span></span><br></pre></td></tr></table></figure><h3 id="创建分支和合并分支"><a href="#创建分支和合并分支" class="headerlink" title="创建分支和合并分支"></a>创建分支和合并分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建分支并切换到分支上</span></span><br><span class="line">git checkout -b &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上下两个命令等价</span></span><br><span class="line">git branch &lt;name&gt;</span><br><span class="line">git checkout &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前分支(列出所有分支，当前分支上会有*号)</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支 （先切换,再合并）</span></span><br><span class="line">git checkout &lt;name&gt;           <span class="comment"># 切换到指定分支</span></span><br><span class="line">git merge &lt;name&gt;                 <span class="comment"># 合并指定分支到当前分支</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支dev</span></span><br><span class="line">git branch -d &lt;name&gt;</span><br></pre></td></tr></table></figure><h3 id="bug-分支"><a href="#bug-分支" class="headerlink" title="bug 分支"></a>bug 分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 隐藏当前工作现场，清空工作区创建临时分支</span></span><br><span class="line">git stash  </span><br><span class="line"></span><br><span class="line">git stash list                <span class="comment">#查看之前的工作现场</span></span><br><span class="line"><span class="comment"># 恢复之前工作区有两个办法</span></span><br><span class="line">git stash apply </span><br><span class="line">git stash drop            <span class="comment"># 第一种方法</span></span><br><span class="line">git stash pop             <span class="comment"># 第二种方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以多次使用stash, 恢复时先查看隐藏的工作现场，再使用以下命令</span></span><br><span class="line">git stash list</span><br><span class="line">git stash apply stash@&#123;&lt;int&gt;&#125;</span><br></pre></td></tr></table></figure><p>恢复之前隐藏工作区的两种方法的区别是，第一种恢复后stash内容并不删除，需要手动删除，第二种方法是恢复的同时把stash内容也删除了</p><blockquote><p>开发一个新ferture,最好先新建一个分支，如果丢弃一个没有被合并过的分支，可以通过 git branch -D <name> 强行删除</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看远程库信息</span></span><br><span class="line">git remote -v</span><br><span class="line"><span class="comment"># 从远程抓取分支</span></span><br><span class="line">git pull</span><br><span class="line"><span class="comment"># 从本地推送分支</span></span><br><span class="line">git push origin branch-name</span><br></pre></td></tr></table></figure><h3 id="创建和操作标签"><a href="#创建和操作标签" class="headerlink" title="创建和操作标签"></a>创建和操作标签</h3><blockquote><p>先切换到需要打标签的分支上</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建版本标签</span></span><br><span class="line">git tag &lt;name&gt;   </span><br><span class="line"><span class="comment"># 创建带有说明的标签</span></span><br><span class="line">git tag -a &lt;name&gt; -m <span class="string">&quot;message&quot;</span> </span><br><span class="line"><span class="comment"># 查看所有标签</span></span><br><span class="line">git tag</span><br><span class="line"><span class="comment"># 历史版本创建标签</span></span><br><span class="line">git tag &lt;name&gt; commit_id</span><br><span class="line"><span class="comment"># 查看标签信息</span></span><br><span class="line">git show &lt;tagname&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除标签</span></span><br><span class="line">git tad -d &lt;tagname&gt;</span><br><span class="line"><span class="comment"># 推送某个标签到远程</span></span><br><span class="line">git push origin &lt;tagname&gt;</span><br><span class="line"><span class="comment"># 一次性推送所有本地未推送的标签到远程</span></span><br><span class="line">git push origin --tags</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除远程标签，先本地删除，在远程删除</span></span><br><span class="line">git tag -d &lt;tagname&gt;</span><br><span class="line">git push origin :refs/tags/&lt;tagname&gt;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<ul><li><p>资料：</p><p><a href="https://gitee.com/progit/">https://gitee.com/progit/</a></p><p><a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%85%B3%E4%BA%8E%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6">https://git-scm.com/book/zh/v2/起步-关于版本控制</a></p></li></ul><p>🕸️ 来源于阮一峰的网络日志</p><p><a href="http://www.ruanyifeng.com/blog/2014/06/git_remote.html">Git远程操作详解</a></p><p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a></p><p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207071750653.png" alt="Untitled"></p><blockquote><p>安装完成后   需要最后一步设置</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  --global参数    这台机器上的所有仓库都会使用这个配置</span></span><br><span class="line">git config --global user.name <span class="string">&quot;you name&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;email@exemple.com&quot;</span></span><br></pre></td></tr></table></figure><blockquote><p>工作区：git init的文件夹就是一个工作区                                                                        版本库：工作区里面一个隐藏目录 .git  (里面有暂存区和master分支)</p></blockquote><p>git add把文件添加进去，实际上是把文件修改添加到暂存区里面，git commit提交更改，实际上是把暂存区的所有内容提交到当前分支上。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">git init                          <span class="comment"># 把当前目录编程git管理的仓库</span></span><br><span class="line">git add &lt;file&gt;                    <span class="comment"># 把当前文件添加到仓库  可以同时添加多个文件</span></span><br><span class="line">git commit -m <span class="string">&quot;message&quot;</span>           <span class="comment"># 把文件提交到仓库, -m 后边的是本次提交说明</span></span><br><span class="line"></span><br><span class="line">git status                        <span class="comment"># 查看当前工作区的转态，是否有文件修改</span></span><br><span class="line">git diff                          <span class="comment"># 查看修改内容</span></span><br><span class="line">git <span class="built_in">log</span>                           <span class="comment"># 显示从最近到最远的提交日志，</span></span><br><span class="line">git reflog                        <span class="comment"># 查看历史命令，以确定回到那个版本</span></span><br><span class="line">git <span class="built_in">log</span> --pretty=oneline          <span class="comment"># 只显示commit_id (版本号)</span></span><br><span class="line">git reset --hard commit_id        <span class="comment"># HEAD指向的版本是当前版本，可以根据commid 回退</span></span><br><span class="line">git diff HEAD  -- &lt;file&gt;          <span class="comment"># 查看工作区与版本库里面最新版本的区别</span></span><br></pre></td></tr></table></figure><blockquote><p>git checkout  - - file  把file中在工作区的修改全部撤销</p></blockquote><p>分两种情况，一种是file自修改后还没有被放到暂存区，现在撤销修改就回到了和版本库一样的状态；一种是file已经添加到了暂存区，又作了修改，现在撤销修改就回到添加到暂存区后的转态。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git  reset  HEAD  &lt;file&gt;         <span class="comment"># 把暂存区的修改撤销掉，重新放回工作区，HEAD表示最新的版本</span></span><br><span class="line">git  checkout -- &lt;file&gt;          <span class="comment"># 丢弃工作区的修改   -- 重要</span></span><br><span class="line">git ls-files                     <span class="comment"># 查看本地仓库文件</span></span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207071750240.png" alt="git"></p><h2 id="远程仓库的创建"><a href="#远程仓库的创建" class="headerlink" title="远程仓库的创建"></a>远程仓库的创建</h2><blockquote><p>ssh-keygen -t rsa -C “<a href="mailto:&#x79;&#x6f;&#x75;&#x65;&#109;&#97;&#105;&#108;&#64;&#x65;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;">&#x79;&#x6f;&#x75;&#x65;&#109;&#97;&#105;&#108;&#64;&#x65;&#120;&#x61;&#109;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;</a>“                                                                用户主目录下.ssh目录, 存放着SSHkey的秘钥对。id_rsa.pub(公钥) , id_rsa(私钥)</p></blockquote><p>在GitHub上创建好远程仓库后，与本地仓库进行关联。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 本地仓库和远程仓库进行关联</span></span><br><span class="line">git remote add origin git@github.com:&lt;username&gt;/&lt;files&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 把本地库的所有内容推送到远程库上</span></span><br><span class="line">git push -u origin master</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除关联的远程库</span></span><br><span class="line">git remote rm origin</span><br></pre></td></tr></table></figure><p>ursename: 你自己github的账户名；     files:你创建的远程仓库名称</p><p>origin 可换成github 或者gittee(码云)</p><p>第一次推送远程仓库需要加上 -U 参数把本地的master分支和远程的maser分支关联起来。以后就可以简化命令，不需要-u 参数。（第一次提交会有警告,输入yes回车就可以了）</p><h3 id="从远程仓库克隆一本地库"><a href="#从远程仓库克隆一本地库" class="headerlink" title="从远程仓库克隆一本地库"></a>从远程仓库克隆一本地库</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 从远程仓库拉取到本地</span></span><br><span class="line">git <span class="built_in">clone</span> git@github.com:&lt;username&gt;/&lt;files&gt;.git</span><br></pre></td></tr></table></figure><h3 id="删除git远程仓库的文件"><a href="#删除git远程仓库的文件" class="headerlink" title="删除git远程仓库的文件"></a>删除git远程仓库的文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  删除test文件夹下的a.txt文件</span></span><br><span class="line">git rm -r --cached <span class="built_in">test</span>/a.txt </span><br><span class="line"><span class="comment">#  执行 删除缓存 提交删除说明</span></span><br><span class="line">git commit -m <span class="string">&quot;删除a.txt文件&quot;</span></span><br></pre></td></tr></table></figure><h3 id="创建分支和合并分支"><a href="#创建分支和合并分支" class="headerlink" title="创建分支和合并分支"></a>创建分支和合并分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建分支并切换到分支上</span></span><br><span class="line">git checkout -b &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 上下两个命令等价</span></span><br><span class="line">git branch &lt;name&gt;</span><br><span class="line">git checkout &lt;name&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查看当前分支(列出所有分支，当前分支上会有*号)</span></span><br><span class="line">git branch</span><br><span class="line"></span><br><span class="line"><span class="comment"># 合并分支 （先切换,再合并）</span></span><br><span class="line">git checkout &lt;name&gt;           <span class="comment"># 切换到指定分支</span></span><br><span class="line">git merge &lt;name&gt;                 <span class="comment"># 合并指定分支到当前分支</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除分支dev</span></span><br><span class="line">git branch -d &lt;name&gt;</span><br></pre></td></tr></table></figure><h3 id="bug-分支"><a href="#bug-分支" class="headerlink" title="bug 分支"></a>bug 分支</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 隐藏当前工作现场，清空工作区创建临时分支</span></span><br><span class="line">git stash  </span><br><span class="line"></span><br><span class="line">git stash list                <span class="comment">#查看之前的工作现场</span></span><br><span class="line"><span class="comment"># 恢复之前工作区有两个办法</span></span><br><span class="line">git stash apply </span><br><span class="line">git stash drop            <span class="comment"># 第一种方法</span></span><br><span class="line">git stash pop             <span class="comment"># 第二种方法</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以多次使用stash, 恢复时先查看隐藏的工作现场，再使用以下命令</span></span><br><span class="line">git stash list</span><br><span class="line">git stash apply stash@&#123;&lt;int&gt;&#125;</span><br></pre></td></tr></table></figure><p>恢复之前隐藏工作区的两种方法的区别是，第一种恢复后stash内容并不删除，需要手动删除，第二种方法是恢复的同时把stash内容也删除了</p><blockquote><p>开发一个新ferture,最好先新建一个分支，如果丢弃一个没有被合并过的分支，可以通过 git branch -D <name> 强行删除</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看远程库信息</span></span><br><span class="line">git remote -v</span><br><span class="line"><span class="comment"># 从远程抓取分支</span></span><br><span class="line">git pull</span><br><span class="line"><span class="comment"># 从本地推送分支</span></span><br><span class="line">git push origin branch-name</span><br></pre></td></tr></table></figure><h3 id="创建和操作标签"><a href="#创建和操作标签" class="headerlink" title="创建和操作标签"></a>创建和操作标签</h3><blockquote><p>先切换到需要打标签的分支上</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建版本标签</span></span><br><span class="line">git tag &lt;name&gt;   </span><br><span class="line"><span class="comment"># 创建带有说明的标签</span></span><br><span class="line">git tag -a &lt;name&gt; -m <span class="string">&quot;message&quot;</span> </span><br><span class="line"><span class="comment"># 查看所有标签</span></span><br><span class="line">git tag</span><br><span class="line"><span class="comment"># 历史版本创建标签</span></span><br><span class="line">git tag &lt;name&gt; commit_id</span><br><span class="line"><span class="comment"># 查看标签信息</span></span><br><span class="line">git show &lt;tagname&gt;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除标签</span></span><br><span class="line">git tad -d &lt;tagname&gt;</span><br><span class="line"><span class="comment"># 推送某个标签到远程</span></span><br><span class="line">git push origin &lt;tagname&gt;</span><br><span class="line"><span class="comment"># 一次性推送所有本地未推送的标签到远程</span></span><br><span class="line">git push origin --tags</span><br><span class="line"></span><br><span class="line"><span class="comment">#删除远程标签，先本地删除，在远程删除</span></span><br><span class="line">git tag -d &lt;tagname&gt;</span><br><span class="line">git push origin :refs/tags/&lt;tagname&gt;</span><br></pre></td></tr></table></figure>]]></content>
     
     
     <summary type="html">记录一下git的常用操作，方便查看</summary>
@@ -38,9 +61,76 @@
   </entry>
   
   <entry>
+    <title>记一次重装系统</title>
+    <link href="http://mfcp.fun/202207/cl5m0ifsm002j84uehg03euhy/663d2c71e83f/"/>
+    <id>http://mfcp.fun/202207/cl5m0ifsm002j84uehg03euhy/663d2c71e83f/</id>
+    <published>2022-07-05T16:48:06.000Z</published>
+    <updated>2022-07-07T10:10:25.902Z</updated>
+    
+    <content type="html"><![CDATA[<p>电脑去年装了双系统，但是没有用过，还一直占用这一个盘，所以就想着删除linux系统，但是我是先有的win10,再装的manjaro,所以导致win的引导分区不正确</p><p>幸好之前装软件的时候都是装在了F盘，重装完系统以后，又是各种激活乱七八糟</p><p>这几天再整理之前装的软件，大部分都重新安装了，还有chrome的各种插件，各种书签算是找不回来了</p><p>在装软件的过程中，就会有各种各样以前踩过的坑，又重新趟了一遍。</p><p>比如写这篇文章就是因为之前搭建好的hexo博客，重装了系统，各种问题。</p><p>写这个文章的目的就是为了验证上传有没有问题</p><p>最后，我想说</p><p><del>**没啥大事，千万别重装系统给自己找事 **</del></p>]]></content>
+    
+    
+    <summary type="html">重装了系统，导致后续一堆坑</summary>
+    
+    
+    
+    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="window" scheme="http://mfcp.fun/tags/window/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Mysql导出数据科学计数法问题</title>
+    <link href="http://mfcp.fun/202205/cl5m0ifsk002d84uegjo1bzq0/bfdc51b50195/"/>
+    <id>http://mfcp.fun/202205/cl5m0ifsk002d84uegjo1bzq0/bfdc51b50195/</id>
+    <published>2022-05-12T05:20:33.000Z</published>
+    <updated>2022-07-07T10:10:25.901Z</updated>
+    
+    <content type="html"><![CDATA[<aside> 🚫 在一次导出数据的过程中，因为有个字段是大于15位的数字，只要导出到execl，打开后就变成了科学计数法，改变了表格的字段格式后。最后面的数字就会变成00。</aside><h3 id="原因："><a href="#原因：" class="headerlink" title="原因："></a>原因：</h3><p>Excel显示数字时，如果数字大于12位，它会自动转化为科学计数法；如果数字大于15位，它不仅用于科学技术法表示，还会只保留高15位，其他位都变0</p><h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><p>在需要处理的字段<strong>字符串结尾加上制表符”\t”</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELECT  CONCAT(字段名, ‘\\t’) AS 新字段名  FROM  表名</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">Mysql导出数据科学计数法</summary>
+    
+    
+    
+    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="Mysql" scheme="http://mfcp.fun/tags/Mysql/"/>
+    
+    <category term="Excel" scheme="http://mfcp.fun/tags/Excel/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>win系统python3.10在scrapy使用asyncio问题记录</title>
+    <link href="http://mfcp.fun/202204/cl5m0ifsn002l84ueepicehjd/9343ff35b1cb/"/>
+    <id>http://mfcp.fun/202204/cl5m0ifsn002l84ueepicehjd/9343ff35b1cb/</id>
+    <published>2022-04-26T08:08:10.000Z</published>
+    <updated>2022-07-07T10:10:25.901Z</updated>
+    
+    <content type="html"><![CDATA[<aside>🚫 前一段时间，把自己电脑上的python版本更新到了3.10，好多支持包都出现了问题，在windows上使用scrapy，因为程序中还同时使用了asyncio异步，运行后出现了报错`TypeError: ProactorEventLoop is not supported, got: <ProactorEventLoop running=False closed=False debug=False>`<h3 id="问题的原因"><a href="#问题的原因" class="headerlink" title="问题的原因"></a>问题的原因</h3><p>网上搜了搜，发现有人遇到了同样的问题：</p><p><em>Windows 实现<code>[asyncio](https://docs.python.org/3/library/asyncio.html#module-asyncio)</code>可以使用两种事件循环实现</em></p><ul><li><strong><code>[SelectorEventLoop](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.SelectorEventLoop)</code></strong>, Python 3.8 之前的默认值，使用 Twisted 时需要。</li><li>**<code>[ProactorEventLoop](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.ProactorEventLoop)</code>**，自 Python 3.8 起默认，不能与 Twisted 一起使用。</li></ul><p>我安装的是3.10版本的python,Twisted并不支持大于python3.8版本的windows事件循环默认实现**<code>[ProactorEventLoop](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.ProactorEventLoop)</code>**</p><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">### twisted/internet/asyncioreactor.py</span><br><span class="line"></span><br><span class="line">def __init__(self, <span class="attr">eventloop</span>: Optional[AbstractEventLoop] = None):</span><br><span class="line">        <span class="keyword">if</span> eventloop is None:</span><br><span class="line">            _eventloop: AbstractEventLoop = get_event_loop()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            _eventloop = eventloop</span><br><span class="line"></span><br><span class="line">        # On Python 3.8+, asyncio.get_event_loop() on</span><br><span class="line">        # Windows was changed to return a ProactorEventLoop</span><br><span class="line">        # unless the loop policy has been changed.</span><br><span class="line">        <span class="keyword">if</span> sys.platform == <span class="string">&quot;win32&quot;</span>:</span><br><span class="line">            <span class="keyword">from</span> asyncio <span class="keyword">import</span> ProactorEventLoop</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> isinstance(_eventloop, ProactorEventLoop):</span><br><span class="line">                raise <span class="built_in">TypeError</span>(</span><br><span class="line">                    f<span class="string">&quot;ProactorEventLoop is not supported, got: &#123;_eventloop&#125;&quot;</span></span><br><span class="line">                )</span><br><span class="line"></span><br><span class="line">        self._asyncioEventloop: AbstractEventLoop = _eventloop</span><br><span class="line">        self._writers: Dict[Type[FileDescriptor], int] = &#123;&#125;</span><br><span class="line">        self._readers: Dict[Type[FileDescriptor], int] = &#123;&#125;</span><br><span class="line">        self._continuousPolling = _ContinuousPolling(self)</span><br><span class="line"></span><br><span class="line">        self._scheduledAt = None</span><br><span class="line">        self._timerHandle = None</span><br><span class="line"></span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br></pre></td></tr></table></figure><h3 id="解决方法："><a href="#解决方法：" class="headerlink" title="解决方法："></a>解决方法：</h3><p><a href="https://github.com/scrapy/scrapy/issues/4976">https://github.com/scrapy/scrapy/issues/4976</a></p><p><a href="https://github.com/scrapy/scrapy/pull/5315">https://github.com/scrapy/scrapy/pull/5315</a></p><p>目前twisted的版本并没有更新修复，需要自行手动修复。</p><p><a href="https://github.com/scrapy/scrapy/pull/5315/files/c19836e64aed5b4c8712267b7d6f8e0d8b97ad19#diff-4d67582d276e2f5ffbdb2a1f6128dc07f75afaaa9fb725de5620d9c237ae80a3">Set WindowsSelectorEventLoopPolicy on Windows. by wRAR · Pull Request #5315 · scrapy/scrapy</a></p><p><img src="https://s3.bmp.ovh/imgs/2022/04/26/f0dc0cee302de163.png"></p><p><a href="https://github.com/wRAR/scrapy/blob/c19836e64aed5b4c8712267b7d6f8e0d8b97ad19/scrapy/utils/reactor.py">scrapy/reactor.py at c19836e64aed5b4c8712267b7d6f8e0d8b97ad19 · wRAR/scrapy</a></p><p>因为我不需要CrawlerProcess运行，所以只替换了reactor.py文件。替换完成后就可以正常运行了</p>]]></content>
+    
+    
+    <summary type="html">win系统python3.10在scrapy中使用asyncio问题解决记录。</summary>
+    
+    
+    
+    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="scrapy" scheme="http://mfcp.fun/tags/scrapy/"/>
+    
+    <category term="asyncio" scheme="http://mfcp.fun/tags/asyncio/"/>
+    
+  </entry>
+  
+  <entry>
     <title>深拷贝与浅拷贝问题的记录</title>
-    <link href="http://mfcp.fun/202204/cl28tbhso000eroue3cj4f3vu/2d77175d7860/"/>
-    <id>http://mfcp.fun/202204/cl28tbhso000eroue3cj4f3vu/2d77175d7860/</id>
+    <link href="http://mfcp.fun/202204/cl5m0ifsl002g84ue53ie6baj/2d77175d7860/"/>
+    <id>http://mfcp.fun/202204/cl5m0ifsl002g84ue53ie6baj/2d77175d7860/</id>
     <published>2022-04-21T09:33:49.000Z</published>
     <updated>2022-04-21T09:36:04.772Z</updated>
     
@@ -62,8 +152,8 @@
   
   <entry>
     <title>北京市居民家庭应急物资储备建议清单（2020）</title>
-    <link href="http://mfcp.fun/202204/cl1uhb1pu003wo4uegwo98zr2/6acca3e5b9b6/"/>
-    <id>http://mfcp.fun/202204/cl1uhb1pu003wo4uegwo98zr2/6acca3e5b9b6/</id>
+    <link href="http://mfcp.fun/202204/cl5m0ifsi002a84ueclpz2rrt/6acca3e5b9b6/"/>
+    <id>http://mfcp.fun/202204/cl5m0ifsi002a84ueclpz2rrt/6acca3e5b9b6/</id>
     <published>2022-04-11T08:43:05.000Z</published>
     <updated>2022-04-11T08:54:19.994Z</updated>
     
@@ -85,8 +175,8 @@
   
   <entry>
     <title>Google搜索小技巧</title>
-    <link href="http://mfcp.fun/202203/cl28tbhsd0001roue4ll5c6j6/a35c72901a49/"/>
-    <id>http://mfcp.fun/202203/cl28tbhsd0001roue4ll5c6j6/a35c72901a49/</id>
+    <link href="http://mfcp.fun/202203/cl5m0ifsh002684uef4y9a3po/a35c72901a49/"/>
+    <id>http://mfcp.fun/202203/cl5m0ifsh002684uef4y9a3po/a35c72901a49/</id>
     <published>2022-03-14T11:42:01.000Z</published>
     <updated>2022-04-11T09:00:04.353Z</updated>
     
@@ -108,8 +198,8 @@
   
   <entry>
     <title>CloudFlare的绕过与抓取</title>
-    <link href="http://mfcp.fun/202203/cl28tbhse0003rouehkg62da9/ed0d622b1902/"/>
-    <id>http://mfcp.fun/202203/cl28tbhse0003rouehkg62da9/ed0d622b1902/</id>
+    <link href="http://mfcp.fun/202203/cl5m0ifsg002384ue11kl4i6c/ed0d622b1902/"/>
+    <id>http://mfcp.fun/202203/cl5m0ifsg002384ue11kl4i6c/ed0d622b1902/</id>
     <published>2022-03-14T11:38:44.000Z</published>
     <updated>2022-04-11T09:00:04.353Z</updated>
     
@@ -131,8 +221,8 @@
   
   <entry>
     <title>celery动态添加定时任务</title>
-    <link href="http://mfcp.fun/202203/cl1uhb1pt003vo4ue30tbhzrq/ac157fbce6dc/"/>
-    <id>http://mfcp.fun/202203/cl1uhb1pt003vo4ue30tbhzrq/ac157fbce6dc/</id>
+    <link href="http://mfcp.fun/202203/cl5m0ifsf002084ue1qi3blkj/ac157fbce6dc/"/>
+    <id>http://mfcp.fun/202203/cl5m0ifsf002084ue1qi3blkj/ac157fbce6dc/</id>
     <published>2022-03-08T09:39:32.000Z</published>
     <updated>2022-03-08T09:49:14.132Z</updated>
     
@@ -154,8 +244,8 @@
   
   <entry>
     <title>celery 基础</title>
-    <link href="http://mfcp.fun/202203/cl1uhb1ph001vo4ueby7wb3b3/9717bbfa9213/"/>
-    <id>http://mfcp.fun/202203/cl1uhb1ph001vo4ueby7wb3b3/9717bbfa9213/</id>
+    <link href="http://mfcp.fun/202203/cl5m0ifsc001s84uefilkasbb/9717bbfa9213/"/>
+    <id>http://mfcp.fun/202203/cl5m0ifsc001s84uefilkasbb/9717bbfa9213/</id>
     <published>2022-03-08T09:39:21.000Z</published>
     <updated>2022-03-08T09:41:26.560Z</updated>
     
@@ -175,8 +265,8 @@
   
   <entry>
     <title>使用alembic数据库迁移</title>
-    <link href="http://mfcp.fun/202203/cl1uhb1pg001so4ue6mkugak6/2fbeec3b7acc/"/>
-    <id>http://mfcp.fun/202203/cl1uhb1pg001so4ue6mkugak6/2fbeec3b7acc/</id>
+    <link href="http://mfcp.fun/202203/cl5m0ifsd001v84ue0zz47y6g/2fbeec3b7acc/"/>
+    <id>http://mfcp.fun/202203/cl5m0ifsd001v84ue0zz47y6g/2fbeec3b7acc/</id>
     <published>2022-03-01T02:08:33.000Z</published>
     <updated>2022-03-01T02:12:03.642Z</updated>
     
@@ -198,8 +288,8 @@
   
   <entry>
     <title>正则表达式</title>
-    <link href="http://mfcp.fun/202202/cl1uhb1pf001qo4ueazbjbb0o/760a2d7f228a/"/>
-    <id>http://mfcp.fun/202202/cl1uhb1pf001qo4ueazbjbb0o/760a2d7f228a/</id>
+    <link href="http://mfcp.fun/202202/cl5m0ifsf001y84ue7k1vb2oz/760a2d7f228a/"/>
+    <id>http://mfcp.fun/202202/cl5m0ifsf001y84ue7k1vb2oz/760a2d7f228a/</id>
     <published>2022-02-17T07:14:29.000Z</published>
     <updated>2022-02-28T01:47:52.281Z</updated>
     
@@ -221,8 +311,8 @@
   
   <entry>
     <title>scrapy设置请求头默认referer</title>
-    <link href="http://mfcp.fun/202202/cl1uhb1pf001mo4uec7gzhncs/76dfaf55693f/"/>
-    <id>http://mfcp.fun/202202/cl1uhb1pf001mo4uec7gzhncs/76dfaf55693f/</id>
+    <link href="http://mfcp.fun/202202/cl5m0ifsb001p84ued53udk6d/76dfaf55693f/"/>
+    <id>http://mfcp.fun/202202/cl5m0ifsb001p84ued53udk6d/76dfaf55693f/</id>
     <published>2022-02-08T07:13:17.000Z</published>
     <updated>2022-02-28T01:47:52.280Z</updated>
     
@@ -244,8 +334,8 @@
   
   <entry>
     <title>Linux基本安全设置</title>
-    <link href="http://mfcp.fun/202201/cl1uhb1pe001jo4ue4od8bpcn/9b70ce1a6150/"/>
-    <id>http://mfcp.fun/202201/cl1uhb1pe001jo4ue4od8bpcn/9b70ce1a6150/</id>
+    <link href="http://mfcp.fun/202201/cl5m0ifsa001m84ueh8f6hq79/9b70ce1a6150/"/>
+    <id>http://mfcp.fun/202201/cl5m0ifsa001m84ueh8f6hq79/9b70ce1a6150/</id>
     <published>2022-01-04T03:05:58.000Z</published>
     <updated>2022-02-28T01:47:52.270Z</updated>
     
@@ -267,8 +357,8 @@
   
   <entry>
     <title>一些代码片段</title>
-    <link href="http://mfcp.fun/202111/cl1uhb1pd001fo4ue0zcz8vuw/7f2b057eaccd/"/>
-    <id>http://mfcp.fun/202111/cl1uhb1pd001fo4ue0zcz8vuw/7f2b057eaccd/</id>
+    <link href="http://mfcp.fun/202111/cl5m0ifs9001j84ue5mwo4z3l/7f2b057eaccd/"/>
+    <id>http://mfcp.fun/202111/cl5m0ifs9001j84ue5mwo4z3l/7f2b057eaccd/</id>
     <published>2021-11-30T08:49:55.000Z</published>
     <updated>2022-02-28T01:47:52.261Z</updated>
     
@@ -290,8 +380,8 @@
   
   <entry>
     <title>某漫画请求头md5加密值分析</title>
-    <link href="http://mfcp.fun/202111/cl1uhb1pd001co4ue3lhh4sg8/f85bb863db6b/"/>
-    <id>http://mfcp.fun/202111/cl1uhb1pd001co4ue3lhh4sg8/f85bb863db6b/</id>
+    <link href="http://mfcp.fun/202111/cl5m0ifs8001g84ued0em0ybt/f85bb863db6b/"/>
+    <id>http://mfcp.fun/202111/cl5m0ifs8001g84ued0em0ybt/f85bb863db6b/</id>
     <published>2021-11-26T07:07:15.000Z</published>
     <updated>2022-02-28T01:47:52.261Z</updated>
     
@@ -313,8 +403,8 @@
   
   <entry>
     <title>win系统启动celery服务</title>
-    <link href="http://mfcp.fun/202109/cl1uhb1pc0019o4ue4nkrfs4q/721a27074fac/"/>
-    <id>http://mfcp.fun/202109/cl1uhb1pc0019o4ue4nkrfs4q/721a27074fac/</id>
+    <link href="http://mfcp.fun/202109/cl5m0ifs7001c84ueeve2a405/721a27074fac/"/>
+    <id>http://mfcp.fun/202109/cl5m0ifs7001c84ueeve2a405/721a27074fac/</id>
     <published>2021-09-29T08:02:59.000Z</published>
     <updated>2022-02-28T01:47:52.260Z</updated>
     
@@ -334,8 +424,8 @@
   
   <entry>
     <title>搭建aria2下载</title>
-    <link href="http://mfcp.fun/202108/cl1uhb1pb0017o4uecnj62n9j/38ef6adc48bc/"/>
-    <id>http://mfcp.fun/202108/cl1uhb1pb0017o4uecnj62n9j/38ef6adc48bc/</id>
+    <link href="http://mfcp.fun/202108/cl5m0ifs7001984ue38nw017e/38ef6adc48bc/"/>
+    <id>http://mfcp.fun/202108/cl5m0ifs7001984ue38nw017e/38ef6adc48bc/</id>
     <published>2021-08-23T09:21:06.000Z</published>
     <updated>2022-02-28T01:47:52.255Z</updated>
     
@@ -357,8 +447,8 @@
   
   <entry>
     <title>scrapy 设置</title>
-    <link href="http://mfcp.fun/202108/cl1uhb1pb0014o4uegy7q0ykk/dd415759b5a3/"/>
-    <id>http://mfcp.fun/202108/cl1uhb1pb0014o4uegy7q0ykk/dd415759b5a3/</id>
+    <link href="http://mfcp.fun/202108/cl5m0ifs6001584ue5iqqcwht/dd415759b5a3/"/>
+    <id>http://mfcp.fun/202108/cl5m0ifs6001584ue5iqqcwht/dd415759b5a3/</id>
     <published>2021-08-19T02:42:05.000Z</published>
     <updated>2022-02-28T01:47:52.255Z</updated>
     
@@ -375,96 +465,6 @@
     <category term="scrapy" scheme="http://mfcp.fun/tags/scrapy/"/>
     
     <category term="中间件" scheme="http://mfcp.fun/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>命令行输出彩色</title>
-    <link href="http://mfcp.fun/202108/cl1uhb1pa0012o4ue721nbpzc/2b9f03d5d49c/"/>
-    <id>http://mfcp.fun/202108/cl1uhb1pa0012o4ue721nbpzc/2b9f03d5d49c/</id>
-    <published>2021-08-18T09:03:25.000Z</published>
-    <updated>2022-02-28T01:47:52.254Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">RED = &#x27;\x1b[31m&#x27;</span><br><span class="line">GRE = &#x27;\x1b[32m&#x27;</span><br><span class="line">BRO = &#x27;\x1b[33m&#x27;</span><br><span class="line">BLU = &#x27;\x1b[34m&#x27;</span><br><span class="line">PUR = &#x27;\x1b[35m&#x27;</span><br><span class="line">CYA = &#x27;\x1b[36m&#x27;</span><br><span class="line">WHI = &#x27;\x1b[37m&#x27;</span><br><span class="line">NOR = &#x27;\x1b[0m&#x27;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(f&#x27;&#123;RED&#125;爆竹声中一岁除，&#x27;)</span><br><span class="line">print(f&#x27;&#123;GRE&#125;爆竹声中一岁除，&#x27;)</span><br><span class="line">print(f&#x27;&#123;BRO&#125;爆竹声中一岁除，&#x27;)</span><br><span class="line">print(f&#x27;&#123;BLU&#125;爆竹声中一岁除，&#x27;)</span><br><span class="line">print(f&#x27;&#123;PUR&#125;爆竹声中一岁除，&#x27;)</span><br><span class="line">print(f&#x27;&#123;CYA&#125;爆竹声中一岁除，&#x27;)</span><br><span class="line">print(f&#x27;&#123;WHI&#125;爆竹声中一岁除，&#x27;)</span><br><span class="line">print(f&#x27;&#123;NOR&#125;爆竹声中一岁除，&#x27;)</span><br></pre></td></tr></table></figure><p><code>安装完openresty,发现blog的页面效果没有生效导致格式混乱，重新发文章更新</code></p>]]></content>
-    
-    
-    <summary type="html">命令行输出彩色</summary>
-    
-    
-    
-    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="命令行" scheme="http://mfcp.fun/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/"/>
-    
-    <category term="彩色显示" scheme="http://mfcp.fun/tags/%E5%BD%A9%E8%89%B2%E6%98%BE%E7%A4%BA/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>mitmproxy 抓包</title>
-    <link href="http://mfcp.fun/202106/cl1uhb1p9000zo4ue3k24gcd1/9b674f306d61/"/>
-    <id>http://mfcp.fun/202106/cl1uhb1p9000zo4ue3k24gcd1/9b674f306d61/</id>
-    <published>2021-06-15T09:35:31.000Z</published>
-    <updated>2022-02-28T01:47:52.238Z</updated>
-    
-    <content type="html"><![CDATA[<p>官网：<a href="https://mitmproxy.org/">MitmProxy</a>    <a href="https://github.com/mitmproxy/mitmproxy">Github</a></p><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p><code>pip install mitmproxy</code></p><p>mitmproxy有三种形式，分别是mitmproxy（命令行）、mitmweb（web界面， web端口8081）、mitmdump（python api形式）</p><p>在windows上不能使用mitmproxy，只能使用mitmweb和mitmdump  安装缺少c++报错可以官网下载exe安装</p><p>在用户目录.mitmproxy(隐藏文件夹)文件夹中有安装证书。手机配置好代理访问 <a href="http://mitm.it/">mitm.it</a> 安装证书</p><p><code>**遇到问题的问题**</code></p><ol><li><p>配置好代理,访问网页报错</p><p>解决办法：启动时加上参数  - - set block_global=false</p></li></ol><h3 id="手机端配置"><a href="#手机端配置" class="headerlink" title="手机端配置"></a>手机端配置</h3><p>如果想要抓安卓7.0之后的https的包，需要安装mitm证书，并把证书设置成系统信任证书，否则不能抓https的包</p><p>↘️ 安装证书，并迁移到系统证书目录   </p><h3 id="使用mitmproxy抓包"><a href="#使用mitmproxy抓包" class="headerlink" title="使用mitmproxy抓包"></a>使用mitmproxy抓包</h3><ul><li><p>-p  指定端口，默认为8080     -s 指定api加载的文件</p><p>指定的端口必须和手机设置的代理端口一致，否则不能拦截到请求包数据</p></li><li><p>mitmweb 命令启动web界面</p></li><li><p>mitmdump -s xxxx.py加载python文件</p></li></ul><p>官方示例：<a href="https://github.com/mitmproxy/mitmproxy/tree/main/mitmproxy/addons">https://github.com/mitmproxy/mitmproxy/tree/main/mitmproxy/addons</a></p>]]></content>
-    
-    
-    <summary type="html">mitmproxy抓包的示例</summary>
-    
-    
-    
-    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="中间人抓包" scheme="http://mfcp.fun/tags/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%8A%93%E5%8C%85/"/>
-    
-    <category term="mitmproxy" scheme="http://mfcp.fun/tags/mitmproxy/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>xpath 轴 运算符</title>
-    <link href="http://mfcp.fun/202105/cl1uhb1p9000xo4uefsk590d6/bcaa23844ca4/"/>
-    <id>http://mfcp.fun/202105/cl1uhb1p9000xo4uefsk590d6/bcaa23844ca4/</id>
-    <published>2021-05-19T09:46:01.000Z</published>
-    <updated>2022-02-28T01:47:52.238Z</updated>
-    
-    <content type="html"><![CDATA[<ul><li><p>参考：</p><p><a href="https://www.cnblogs.com/zhaozhan/archive/2009/09/10/1564330.html">https://www.cnblogs.com/zhaozhan/archive/2009/09/10/1564330.html</a></p><p><a href="http://www.zvon.org/xxl/XPathTutorial/General_chi/examples.html">http://www.zvon.org/xxl/XPathTutorial/General_chi/examples.html</a></p><p><a href="https://www.w3school.com.cn/xpath/xpath_syntax.asp">https://www.w3school.com.cn/xpath/xpath_syntax.asp</a></p><p><a href="https://www.w3school.com.cn/xpath/xpath_operators.asp">https://www.w3school.com.cn/xpath/xpath_operators.asp</a></p></li></ul><h3 id="Xpath轴"><a href="#Xpath轴" class="headerlink" title="Xpath轴"></a>Xpath轴</h3><ul><li>child   选取当前节点的所有子元素</li><li>parent  选取当前节点的父节点</li><li>descendant 选取当前节点的所有后代元素（子、孙等）</li><li>ancestor  选取当前节点的所有先辈（父、祖父等）</li><li>descendant-or-self 选取当前节点的所有后代元素（子、孙等）以及当前节点本身</li><li>ancestor-or-self  选取当前节点的所有先辈（父、祖父等）以及当前节点本身</li><li>preceding-sibling 选取当前节点之前的所有同级节点</li><li>following-sibling 选取当前节点之后的所有同级节点</li><li>preceding   选取文档中当前节点的开始标签之前的所有节点</li><li>following   选取文档中当前节点的结束标签之后的所有节点</li><li>self  选取当前节点</li><li>attribute  选取当前节点的所有属性</li><li>namespace 选取当前节点的所有命名空间节点</li></ul><p><code>/AAA/XXX/preceding-sibling::*</code> /AAA/XXX节点的所有之前同级节点</p><h3 id="谓语"><a href="#谓语" class="headerlink" title="谓语"></a>谓语</h3><ul><li>last()     选取最后一个元素    <code>/bookstore/book[last()]</code></li><li>position()&lt;3     选取最前面的两个属于 bookstore 元素的子元素的 book 元素<br><code>/bookstore/book[position()&lt;3]</code></li><li>price&gt;35.00 选取 bookstore 元素的所有 book 元素，且其中的 price 元素的值须大于 35.00。<br><code>/bookstore/book[price&gt;35.00]</code></li></ul><h3 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h3><p><a href="https://www.w3school.com.cn/xpath/xpath_operators.asp">https://www.w3school.com.cn/xpath/xpath_operators.asp</a></p><h3 id="XPath、XQuery-以及-XSLT-函数"><a href="#XPath、XQuery-以及-XSLT-函数" class="headerlink" title="XPath、XQuery 以及 XSLT 函数"></a>XPath、XQuery 以及 XSLT 函数</h3><p><a href="https://www.w3school.com.cn/xpath/xpath_functions.asp">https://www.w3school.com.cn/xpath/xpath_functions.asp</a></p><ul><li>normalize-space    删除指定字符串的开头和结尾的空白，并把内部的所有空白序列替换为一个，然后返回结果。如果没有 string 参数，则处理当前节点。</li></ul><h3 id="一些示例"><a href="#一些示例" class="headerlink" title="一些示例"></a>一些示例</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># 根据text获取指定的节点，对不需要的节点进行排除。</span><br><span class="line">xpath(&#39;&#x2F;&#x2F;span[@class&#x3D;&quot;title-name&quot;][contains(text(),&quot;出品&quot;) and not (contains(text(),&quot;联合出品&quot;))]&#x2F;ancestor::dl&#x2F;dd&#x2F;&#x2F;div[@class&#x3D;&quot;p-item&quot;][position()&lt;4]&#x2F;&#x2F;p&#x2F;text()&#39;)</span><br><span class="line"></span><br><span class="line"># 合并两个节点的值 （115.2，万 &gt;&gt;&gt; 115.2万）</span><br><span class="line">xpath(&#39;concat(&#x2F;&#x2F;p[contains(text(),&quot;话题讨论量&quot;)]&#x2F;following-sibling::p&#x2F;&#x2F;span[1]&#x2F;text(),&#x2F;&#x2F;p[contains(text(),&quot;话题讨论量&quot;)]&#x2F;following-sibling::p&#x2F;&#x2F;span[2]&#x2F;text())&#39;)</span><br><span class="line"></span><br><span class="line">#猫眼历史最高热度值获取</span><br><span class="line">xpath(&#39;&#x2F;&#x2F;*[@class&#x3D;&quot;tv-baseinfo&quot;]&#x2F;&#x2F;span[contains(text(),&quot;热度值&quot;)]&#x2F;ancestor::a&#x2F;&#x2F;p[contains(text(),&quot;历史最高&quot;)]&#x2F;following-sibling::p&#x2F;span&#x2F;text()&#39;)</span><br><span class="line"></span><br><span class="line"># 根据class属性含有的值进行查找</span><br><span class="line">xpath(&#39;&#x2F;&#x2F;div[contains(@class,&quot;movie-item-title&quot;)]&#x2F;a&#x2F;text()&#39;)</span><br><span class="line"></span><br><span class="line"># 去除空格 换行符</span><br><span class="line">xpath(&#39;normalize-space(&#x2F;&#x2F;div&#x2F;a&#x2F;text())&#39;)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">xpath 一些示例</summary>
-    
-    
-    
-    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="xpath" scheme="http://mfcp.fun/tags/xpath/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>docker 使用问题记录</title>
-    <link href="http://mfcp.fun/202104/cl1uhb1p8000uo4ue6r1277pl/762cef0d8677/"/>
-    <id>http://mfcp.fun/202104/cl1uhb1p8000uo4ue6r1277pl/762cef0d8677/</id>
-    <published>2021-04-27T03:58:28.000Z</published>
-    <updated>2022-02-28T01:47:52.238Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="问题记录："><a href="#问题记录：" class="headerlink" title="问题记录："></a>问题记录：</h3><ol><li><p>docker容器中服务访问宿主机mysql.</p><p>使用<code>docker0</code> 网卡访问宿主机mysql,一直报错密码错误，<code>1045, &quot;Access denied for user &#39;xxxxx&#39;@&#39;172.18.0.2&#39; (using passwor）</code>原因是mysql账号没有开始指定ip的访问，导致连接被拒绝。</p><p>解决步骤： <a href="https://zhuanlan.zhihu.com/p/266219198">Docker容器内连接宿主机的Mysql服务器</a></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt;GRANT ALL PRIVILEGES ON *.* TO <span class="string">&#x27;root&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED BY <span class="string">&#x27;123456&#x27;</span> WITH GRANT OPTION;</span><br><span class="line"> mysql&gt;flush privileges;</span><br><span class="line">// 其中各字符的含义：</span><br><span class="line">// *.* 对任意数据库任意表有效</span><br><span class="line">// <span class="string">&quot;root&quot;</span> <span class="string">&quot;123456&quot;</span> 是数据库用户名和密码</span><br><span class="line">// <span class="string">&#x27;%&#x27;</span> 允许访问数据库的IP地址，%意思是任意IP，也可以指定IP</span><br><span class="line">// flush privileges 刷新权限信息</span><br></pre></td></tr></table></figure></li><li><p>docker容器中应用访问宿主机服务</p><p>宿主机搭建了代理服务，使用了nginx进行了端口转发。在容器中访问代理服务端口，一直访问不通</p><p>解决步骤：可能因为宿主机的端口被nginx做了转发，（docker网络访问这一块有点没搞明白）</p><p>排查步骤：</p><ol><li>先排查服务器防火墙和端口是否打开，（没打开）</li><li>进入到docker容器内ping <code>docker0</code> 网卡，看是否ping通（可以通）</li><li>更改nginx设置，放开<code>docker0</code> 网卡的访问权限（在nginx中有限制ip的访问）</li><li>请求访问返回403，打开nginx日志，查看访问的ip, 把访问的ip加入到允许权限中，</li><li>直接访问80端口可以访问宿主机的代理服务了。</li></ol></li></ol>]]></content>
-    
-    
-    <summary type="html">docker使用问题记录</summary>
-    
-    
-    
-    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="linux" scheme="http://mfcp.fun/tags/linux/"/>
-    
-    <category term="docker" scheme="http://mfcp.fun/tags/docker/"/>
     
   </entry>
   
