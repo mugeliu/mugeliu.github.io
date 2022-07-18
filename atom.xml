@@ -6,7 +6,7 @@
   <link href="http://mfcp.fun/atom.xml" rel="self"/>
   
   <link href="http://mfcp.fun/"/>
-  <updated>2022-07-15T05:28:47.071Z</updated>
+  <updated>2022-07-18T01:59:02.148Z</updated>
   <id>http://mfcp.fun/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows Terminal安装与美化</title>
+    <link href="http://mfcp.fun/202207/cl5q3mllw0000wsue0lfa4crw/427a75f2828d/"/>
+    <id>http://mfcp.fun/202207/cl5q3mllw0000wsue0lfa4crw/427a75f2828d/</id>
+    <published>2022-07-17T16:58:39.000Z</published>
+    <updated>2022-07-18T01:59:02.148Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="安装Windows-Terminal"><a href="#安装Windows-Terminal" class="headerlink" title="安装Windows Terminal"></a>安装Windows Terminal</h3><p><strong>github:</strong> <a href="https://github.com/microsoft/terminal">microsoft/terminal</a></p><p>提供了说明中的安装方式，可以选择Windows应用商店安装或者直接下载安装文件安装</p><p>因为我应用商店下载安装失败了，所以选择在github上下载安装文件</p><p>下载完后后直接双击就可以安装了</p><p><em>如果想变得更好看一点，就需要美化一下，这里使用了oh-my-posh进行美化</em></p><h3 id="安装-oh-my-posh"><a href="#安装-oh-my-posh" class="headerlink" title="安装 oh-my-posh"></a>安装 oh-my-posh</h3><p><strong>github:</strong> <a href="https://github.com/jandedobbeleer/oh-my-posh">jandedobbeleer/oh-my-posh</a></p><p><strong>官方文档：</strong> <a href="https://ohmyposh.dev/docs">ohmyposh</a></p><blockquote><p>如果你安装，尽可能使用官方文档中提供的教程进行安装，网上搜索出来的安装教程有些可能过时，或者存在各种各样的问题，官方文档中提供了很详细的安装说明，windows、mac、linux的都有，根据安装说明一步步操作即可</p></blockquote><p>安装完成后，根据文档提示安装<a href="https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Meslo.zip">Meslo LGM NF</a>字体，不安装有些字符可能显示不正常。</p><p>然后就可以设置powershell、cmd、bash等各种终端的样式了</p><blockquote><p><code>cannot be loaded because runni ng scripts is disabled on this system. For more information, see about_Execution_Policies</code></p><p>是因为windows执行策略的问题</p></blockquote><p>使用管理员身份打开powershell，输入<code>Set-ExecutionPolicy RemoteSigned</code> ，输入<code>yes</code>就可以了</p><p>如果你想更改样式，可以在文档中<a href="https://ohmyposh.dev/docs/themes">Themes</a>预览自己喜欢的主题，然后更改对应的设置就可以了，</p><p><em><strong>需要注意是</strong></em></p><p><code>--config参数后的的路径,在windows下使用完整路径，如果不使用完整路径，需要确保能访问到主题文件，刚开始我使用文档中的命令，发现怎么也更改不了主题，就是因为路径的问题。而且官方文档中也说明了建议使用完整的路径。</code></p><h4 id="以下是我的配置样式"><a href="#以下是我的配置样式" class="headerlink" title="以下是我的配置样式"></a>以下是我的配置样式</h4><p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/image-20220718011844853.png" alt="image-20220718011844853"></p><p><em>debian的样式</em></p><p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/image-20220718011941957.png" alt="image-20220718011941957"></p><p>美化后的效果在Window Terminal中是没有问题的，但是直接打开powershell有些符号显示就会不正常。</p><p>所以我只对powershell、wsl的样式进行了修改，cmd的还需要<a href="https://chrisant996.github.io/clink/">Clink</a>的支持，所以还是保持了原样，没有进行美化。</p>]]></content>
+    
+    
+    <summary type="html">记录Window下Terminal安装与美化的过程,安装教程一定要首选官方文档，根据官方文档的说明进行操作。</summary>
+    
+    
+    
+    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="terminal" scheme="http://mfcp.fun/tags/terminal/"/>
+    
+    <category term="oh-my-posh" scheme="http://mfcp.fun/tags/oh-my-posh/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>docker基础</title>
+    <link href="http://mfcp.fun/202207/cl5q3mlm90006wsueck1p9xp3/7db511d18426/"/>
+    <id>http://mfcp.fun/202207/cl5q3mlm90006wsueck1p9xp3/7db511d18426/</id>
+    <published>2022-07-17T11:20:42.000Z</published>
+    <updated>2022-07-18T01:55:44.481Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Docker基础"><a href="#Docker基础" class="headerlink" title="Docker基础"></a>Docker基础</h1><blockquote><p>容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。</p></blockquote><p><a href="https://docs.docker.com/engine/reference/commandline/docker/">Docker命令行参考</a></p><h3 id="镜像（image）"><a href="#镜像（image）" class="headerlink" title="镜像（image）"></a>镜像（image）</h3><p>Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。</p><ul><li><p>拉取仓库代码到本地</p><p><code>docker image pull library/hello-world</code></p><p>docker官方提供的默认在library中，可以省略library</p><p><code>docker image pull hello-world</code></p></li><li><p>查看所有镜像文件</p><p><code>docker image list</code></p></li></ul><aside> ⚠️ docker run& docker container run 区别：前者是1.13之前使用的命令，后者是1.13后新增加的，作用效果一样。[参考说明](https://www.docker.com/blog/whats-new-in-docker-1-13/)</aside><ul><li><p>从image文件中生成一个正在运行的容器实例</p><p><code>docker container run  xxxx</code></p></li><li><p>手动终止运行的容器</p><p><code>docker container kill  xxxx</code></p></li><li><p>以交互模式运行容器 (后边可以跟需要打开的shell)</p><p><code>docker container run -it  xxxx (bin/bash)</code></p></li></ul><h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3><p>更多命令参考   👉🏻 <strong>(<a href="https://docs.docker.com/engine/reference/commandline/container/">官方文档</a>)</strong></p><ul><li><p>列出本机正在运行的容器</p><p><code>docker container list</code></p></li><li><p>列出本机所有容器，包括终止运行的容器</p><p><code>docker container ls -all</code></p></li><li><p>启动终止的容器</p><p><code>docker container start  &lt;container id&gt;</code></p><aside> 📌 run和start的区别：第一次使用run;  容器已经生成并且已经停止运行使用start     ***容器后台运行加 -d 参数***</aside></li><li><p>重启正在运行的容器</p><p><code>docker container restart  &lt;container id&gt;</code></p></li><li><p>停止正在运行的容器</p><p><code>docker container stop  &lt;container id&gt;</code></p></li><li><p>删除容器文件(终止运行的容器文件，依然会占据硬盘空间)</p><p><code>docker container rm &lt;container id&gt;</code></p></li><li><p>获取容器的运行的输出</p><p><code>docker container logs &lt;container id&gt;</code></p></li><li><p>进入容器</p><p>使用attach命令进入容器后，如果从这个stdin中exit,会导致容器的停止。使用exec容器则不会停止</p><p><code>docker container attach &lt;container id&gt;</code></p><p><code>docker container exec  -it &lt;container id&gt; (bash)</code></p></li><li><p>清理掉所有处于终止状态的容器</p><p><code>docker  container prune</code></p></li><li><p>复制主机文件到docker中</p><p><code>docker container cp  主机文件  docker地址</code></p></li></ul>]]></content>
+    
+    
+    <summary type="html">记录docker的一些常用命令</summary>
+    
+    
+    
+    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+    <category term="linux" scheme="http://mfcp.fun/tags/linux/"/>
+    
+    <category term="docker" scheme="http://mfcp.fun/tags/docker/"/>
+    
+  </entry>
   
   <entry>
     <title>某漫画请求头sc参数实现和response解密</title>
@@ -419,52 +465,6 @@
     
     
     <category term="celery" scheme="http://mfcp.fun/tags/celery/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>搭建aria2下载</title>
-    <link href="http://mfcp.fun/202108/cl5m0ifs7001984ue38nw017e/38ef6adc48bc/"/>
-    <id>http://mfcp.fun/202108/cl5m0ifs7001984ue38nw017e/38ef6adc48bc/</id>
-    <published>2021-08-23T09:21:06.000Z</published>
-    <updated>2022-02-28T01:47:52.255Z</updated>
-    
-    <content type="html"><![CDATA[<p><code>github地址： https://github.com/aria2/aria2</code></p><h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><ul><li><p><a href="https://github.com/aria2/aria2/releases/tag/release-1.36.0">下载</a></p><p><img src="https://i.loli.net/2021/08/23/hbW3OURyzxkLiZJ.png" alt="Untitled.png"></p></li><li><p>在解压目录后创建启动文件</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">aria2.conf    <span class="comment"># 配置文件 可以自己根据说明修改</span></span><br><span class="line">aria2.session <span class="comment"># 任务保存文件 未完成任务会保存在这里， （空文件）</span></span><br><span class="line">aria2.log     <span class="comment"># 日志文件，（空文件）</span></span><br></pre></td></tr></table></figure><p>配置文件模板可以参考 <strong><a href="http://aria2c.com/usage.html">Aria2 &amp; YAAW 使用说明</a></strong></p><p>其中配置文件中，下载地址 dir (自行指定)  save-session、input-file (这两个指向创建好的aria2.session即可)</p></li><li><p>启动JSONRPC</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aria2c --conf-path=aria2.conf</span><br></pre></td></tr></table></figure><p>如果需要headers,可以在 启动启动是增加 - - headers 参数   也可以在Web界面中配置(部分支持)</p><p>其他参数可以参考 <a href="https://aria2.github.io/manual/en/html/aria2c.html#synopsis">aria2c文档</a></p></li></ul><h3 id="配置Web-UI界面"><a href="#配置Web-UI界面" class="headerlink" title="配置Web UI界面"></a>配置Web UI界面</h3><ul><li><p><a href="https://github.com/mayswind/AriaNg">AriaNg</a>  (推荐)</p><p>从<a href="https://github.com/mayswind/AriaNg/releases">releases</a>下载 AriaNg-1.2.2-AllInOne.zip解压后打开index.html即可</p></li><li><p><a href="http://aria2c.com/">arir</a></p><p>直接打开网址即可使用</p><p>如果打开网址后出现 错误: Aria2 RPC 服务器错误 大概率是因为rpc设置的是https或者wss, 更改成http即可正常显示下载请求</p><p><img src="https://i.loli.net/2021/08/23/qNRZKl4aCJ8Y7n2.png" alt="Untitled 1.png"></p></li><li><p><a href="https://github.com/binux/yaaw">yaaw</a> (无搭建测试)</p></li><li><p><a href="https://github.com/ziahamza/webui-aria2">webui-aria2</a> （无搭建测试）</p></li></ul>]]></content>
-    
-    
-    <summary type="html">使用aria2搭建下载服务</summary>
-    
-    
-    
-    <category term="工具" scheme="http://mfcp.fun/categories/%E5%B7%A5%E5%85%B7/"/>
-    
-    
-    <category term="aria2" scheme="http://mfcp.fun/tags/aria2/"/>
-    
-    <category term="下载" scheme="http://mfcp.fun/tags/%E4%B8%8B%E8%BD%BD/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>scrapy 设置</title>
-    <link href="http://mfcp.fun/202108/cl5m0ifs6001584ue5iqqcwht/dd415759b5a3/"/>
-    <id>http://mfcp.fun/202108/cl5m0ifs6001584ue5iqqcwht/dd415759b5a3/</id>
-    <published>2021-08-19T02:42:05.000Z</published>
-    <updated>2022-02-28T01:47:52.255Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="每个爬虫单独设置setting"><a href="#每个爬虫单独设置setting" class="headerlink" title="每个爬虫单独设置setting"></a>每个爬虫单独设置setting</h3><p><a href="https://docs.scrapy.org/en/latest/topics/settings.html">官方文档</a></p><p>1、Command line options (most precedence)    命令行选项(最优先级) 2、Settings per-spider    每个蜘蛛的设置 3、Project settings module    项目设置模块 4、Default settings per-command     每个命令的默认设置 5、Default global settings (less precedence)      默认全局设置(优先级较低)</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ComicWbcomicRankAppSpider</span>(<span class="params">scrapy.Spider</span>):</span></span><br><span class="line">    name = <span class="string">&#x27;wbcomic_rank&#x27;</span></span><br><span class="line">    custom_settings = &#123;</span><br><span class="line">        <span class="string">&quot;DOWNLOAD_TIMEOUT&quot;</span> : <span class="number">20</span>,</span><br><span class="line">        <span class="string">&quot;DOWNLOAD_DELAY&quot;</span> :<span class="number">3</span>,</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h3 id="中间件更改response对象"><a href="#中间件更改response对象" class="headerlink" title="中间件更改response对象"></a>中间件更改response对象</h3><p><a href="https://docs.scrapy.org/en/latest/topics/request-response.html?highlight=response"><strong>Request和Response</strong></a></p><p>中间件中更改返回的response, 默认的Response的body属性是byte类型，如果body属性不是byte类型，需要使用HtmlResponse或者TextResponse.</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">process_request</span>(<span class="params">self, request, spider</span>):</span></span><br><span class="line">request.headers.setdefault(<span class="string">&#x27;enrandom&#x27;</span>, t)</span><br><span class="line">        request.headers.setdefault(<span class="string">&#x27;enresult&#x27;</span>, self.rpc.get_enresult(request.url,t))</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_response</span>(<span class="params">self, request, response, spider</span>):</span></span><br><span class="line">        data = self.rpc.get_json(response.text)</span><br><span class="line">        spider.logger.debug(<span class="string">&quot;调用rpc解密response&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> HtmlResponse(</span><br><span class="line">            request.url,</span><br><span class="line">            body=data,</span><br><span class="line">            encoding=<span class="string">&#x27;utf-8&#x27;</span>,</span><br><span class="line">            request=request,</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-    <summary type="html">scrapy中间件设置</summary>
-    
-    
-    
-    <category term="编程" scheme="http://mfcp.fun/categories/%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="scrapy" scheme="http://mfcp.fun/tags/scrapy/"/>
-    
-    <category term="中间件" scheme="http://mfcp.fun/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/"/>
     
   </entry>
   
