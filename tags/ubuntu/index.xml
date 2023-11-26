@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ubuntu on Awesome Hugo blog</title><link>https://mugeliu.github.io/tags/ubuntu/</link><description>Recent content in ubuntu on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 23 Aug 2023 00:53:59 +0800</lastBuildDate><atom:link href="https://mugeliu.github.io/tags/ubuntu/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu服务器基础操作</title><link>https://mugeliu.github.io/posts/ad5bcc507ff11a28bcbc66c6a3300f5e/</link><pubDate>Wed, 23 Aug 2023 00:53:59 +0800</pubDate><guid>https://mugeliu.github.io/posts/ad5bcc507ff11a28bcbc66c6a3300f5e/</guid><description>三年前在阿里云买了自己的第一台服务器，后续到期后在腾讯云买了第二台服务器，这台服务器陪伴了三年，从刚接触程序，第一次面对一个黑框框的界面到现在对程序不恐惧不陌生，时间过得真快啊
+因为换了工作，不在从事技术相关的国内工作，这台服务器也基本闲置了一年，只有上面搭建的博客在运行，最近想起来这台服务器马上就快要到期了，想着能不能搭建个stable-diffusion 来玩一下，网上看了很多教程，都是在windows上搭建的，就直接重装成了win服务器，后来发现不行
+想着centos停止支持，ubuntu使用的也比较多，又从最原先的centos换成了ubuntu。记录下从新配置的整个过程
+配置ssh密钥登录 首先你得电脑上要有ssh密钥。win系统一般在用户目录的 .ssh文件夹中。id_rsa.pub这个是公钥文件，需要上传到服务中
+先用默认的密码登录服务器，ubuntu默认登录没有root用户，但是有sudo权限。
+把你的公钥文件内容添加到authorized_keys这个文件中
+修改/etc/ssh/sshd_config文件 (需要使用sudo权限编辑)
+#允许密钥认证 RSAAuthentication yes PubkeyAuthentication yes PermitRootLogin yes #允许root用户ssh登录 PasswordAuthentication no #禁用密码登录 配置完重启ssh服务 service sshd restart
+使用xshell或者MobaXterm登录服务器
+在哪个用户目录下只能用那个用户登录，我使用的是默认的ubuntu用户
+安装nginx 更新apt源，安装nginx
+sudo apt update sudo apt install nginx 安装完成后启动Nginx
+sudo systemctl status nginx 安装启动成功后就是绿色的running，失败则是红色的fail
+使用公网ip访问访问http页面，出现以下页面说明安装成功
+配置文件位置 主要的配置目录在 /etc/nginx 主要的配置文件 /etc/nginx/nginx.conf 站点的配置文件 /etc/nginx/sites-available/ 方便查看文件夹命名为自己 域名.conf 日志文件在 /var/log/nginx 一些注意的问题 如果不能访问，查看服务器的安全组是否放开，服务器的防火墙是否打开
+sudo ufw status # 查看防火墙是否开启 sudo ufw enable|disable #开启或者关闭防火墙 默认关闭 sudo ufw allow &amp;#34;nginx full&amp;#34; #放开nginx 80/443 首次配置需要注意，如果打开了服务器的防火墙，添加nginx后要放开22端口，之前操作已经禁止了密码登录，22端口关闭后就不能登录服务器，陷入死循环</description></item><item><title>Linux基本安全设置</title><link>https://mugeliu.github.io/posts/2022-01-04-linux%E5%9F%BA%E6%9C%AC%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/</link><pubDate>Tue, 04 Jan 2022 11:05:58 +0000</pubDate><guid>https://mugeliu.github.io/posts/2022-01-04-linux%E5%9F%BA%E6%9C%AC%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/</guid><description>ℹ️ 来源：Sol Love
+以下命令用于ubuntu主机，其他linux命令可能不相同
+更改root密码 passwd
+将root密码更改为长而且复杂的密码，不需要记住他，只需要存在在安全的地方。只有无法通过ssh登录或丢失sodu密码时才需要此密码
+安装Fail2ban apt-get install fail2ban
+创建新用户
+useradd deploy mkdir /home/deploy mkdir /home/deploy/.ssh chmod 700 /home/deploy/.ssh 使用公钥认证 vim /home/deploy/.ssh/authorized_keys
+添加本地机器的公钥id_rsa.pub的内容到此文件中
+chmod 400 /home/deploy/.ssh/authorized_keys
+chown deploy:deploy /home/deploy -R
+测试新用户启动 为新用户设置密码 (设置复杂密码，是需要sudo的权限的密码)
+passwd deploy
+设置sudo权限 （visudo的文件是/etc/sudoers，但是不要直接修改此文件，修改请使用visudo命令）
+visudo root ALL=(ALL) ALL deploy ALL=(ALL) ALL 锁定SSH 配置ssh以防止密码和root登录并将ssh锁定到特定IP
+vim /etc/ssh/sshd_config
+PermitRootLogin no PasswordAuthentication no AllowUsers deploy@(your-ip) deploy@(another-ip-if-any) 重新启动ssh
+service ssh restart
+设置防火墙 ufw allow from {your-ip} to any port 22 ufw allow 80 ufw allow 443 ufw enable 启动安全更新 apt-get install unattended-upgrades vim /etc/apt/apt.</description></item><item><title>Linux 安装docker</title><link>https://mugeliu.github.io/posts/2021-04-08-linux-%E5%AE%89%E8%A3%85docker/</link><pubDate>Thu, 08 Apr 2021 18:20:24 +0000</pubDate><guid>https://mugeliu.github.io/posts/2021-04-08-linux-%E5%AE%89%E8%A3%85docker/</guid><description>Linux 安装docker docker: 属于 Linux 容器的一种封装，提供简单易用的容器使用接口 👉 官方文档
+docker-compose: 一个集群管理方式，可以利用名为docker-compose.yml的yaml文件来定义需要启动的容器
+Kubernetes（K8S）: 非常强大的容器编排工具，可以管理大型集群、微服务、分布式应用等等
+Centos7 安装 使用Docker的存储库安装
+参考 ：**安装Docker Engine || **在centos上安装 || Docker入门教程
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum install docker-ce docker-ce-cli containerd.io
+sudo systemctl start docker
+验证是否安装成功
+sudo docker run hello-world
+配置开机自启动 （禁止启动则使用disable关键字替换enable执行命令）
+sudo systemctl enable docker.service sudo systemctl enable containerd.service 安装docker-compose linux下参考官方文档 也可以使用pip进行安装 pip install docker-compose 卸载docker 卸载Docker Engine，CLI和Containerd软件包
+sudo yum remove docker-ce docker-ce-cli [containerd.</description></item></channel></rss>

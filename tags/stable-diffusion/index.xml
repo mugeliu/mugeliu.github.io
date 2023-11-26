@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Stable Diffusion on Awesome Hugo blog</title><link>https://mugeliu.github.io/tags/stable-diffusion/</link><description>Recent content in Stable Diffusion on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 13 Oct 2023 23:38:29 +0800</lastBuildDate><atom:link href="https://mugeliu.github.io/tags/stable-diffusion/index.xml" rel="self" type="application/rss+xml"/><item><title>Stable Diffusion系列一 | 安装webui</title><link>https://mugeliu.github.io/posts/b86adb06a9246b489312401c23b0b1a5/</link><pubDate>Fri, 13 Oct 2023 23:38:29 +0800</pubDate><guid>https://mugeliu.github.io/posts/b86adb06a9246b489312401c23b0b1a5/</guid><description>最近想深入学习一下Stable Diffusion，买了腾讯云服务器，在windows上和linux上都自己搭建了一遍，记录下搭建遇到的各种坑，如果不熟悉Linux，使用一键安装包即可，自己在Linux部署的话尽量使用境外服务器，有些模型会遇到不可说的问题下载不下来
+&amp;#x1f447;一些用到的地址
+Stable Diffusion Stable Diffusion webui civitai huggingface 我购买的是腾讯云的GN7服务器使用生成图片确实要比较快，每张图片几十秒就能生成好
+Windows windows上我使用了B站秋叶大佬的一键安装包
+具体下载可以看文章 Stable Diffusion整合包v4.4发布
+也可以使用我保存的：网盘地址
+整体安装比较简单，配置好远程登录，只需要把整合包下载到服务器，安装好整合包中的依赖即可，
+还有个需要注意的是，window安装的默认没有装gpu启动，需要自己下载安装。我刚开始没有装使用的cpu生成的，速度比较慢，装了以后生成速度大大提升。
+驱动下载地址：https://www.nvidia.cn/Download/index.aspx
+Gn7的驱动配置如下，下载安装到服务器即可。
+安装完成后启动&amp;#x1f447;
+Linux 使用腾讯云在ubuntu安装的一个好处是在安装过程中就装好了gpu驱动包，不用后期再单独装，但是境内的服务器网络问题都很头疼，大模型基础都下载失败，我都是手动下载后上传
+安装 需要安装python 、 git、 GPU驱动（未安装的情况下）
+参考github主页的安装教程即可，只有四步，但是国内的网络会严重影响模型下载，导致启动报错
+以下一些问题记录：
+#查看gpu驱动是否安装
+nvidia-smi 需要的版本是python3.10以上版本，我使用了3.10.6版本，使用Anaconda管理比较方便
+报错1，网络问题导致github拉取失败，可以手动github下载stable diffusion项目后上传到 xxxx\stable-diffusion-webui/repositories/stable-diffusion-stability-ai
+报错2，还是网络问题，导致模型下载失败，需要手动下载上传并更改模型的加载位置
+上传模型到/xxx/.cache/huggingface/transformers/clip-vit-large-patch14 跟下方修改对应即可
+根据报错位置我修改的是/xx/xxx/stable-diffusion-webui/repositories/stable-diffusion-stability-ai/ldm/modules/encoders/modules.py
+sd默认使用的模型为v1-5-pruned-emaonly.safetensors,下载失败的话需要自己手动下载并上传到模型文件夹
+/xxxx/xxx/stable-diffusion-webui/models/Stable-diffusion
+配置Nginx 域名，解析指向这些就不展开了，需要注意的是sd-webui中使用了websocket,在nginx配置中需要填写正确，我刚开始配置错误，可以访问但是一直报错。
+我在nginx配置了密码校验，所以没有在sdweiui中开启。
+以下配置内容参考网上大佬的文章
+server { listen 80; listen [::]:80; server_name xxx.xxx.com; return 301 https://$server_name$request_uri; } server { listen 443 ssl; listen [::]:443 ssl; server_name xxx.xxx.com; ssl_certificate /etc/nginx/cert/xxx.</description></item></channel></rss>

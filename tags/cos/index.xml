@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>cos on Awesome Hugo blog</title><link>https://mugeliu.github.io/tags/cos/</link><description>Recent content in cos on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 20 Aug 2023 00:30:33 +0800</lastBuildDate><atom:link href="https://mugeliu.github.io/tags/cos/index.xml" rel="self" type="application/rss+xml"/><item><title>使用腾讯云cos搭建博客图床</title><link>https://mugeliu.github.io/posts/da417dd65a33f8a3951f8dac1c31556c/</link><pubDate>Sun, 20 Aug 2023 00:30:33 +0800</pubDate><guid>https://mugeliu.github.io/posts/da417dd65a33f8a3951f8dac1c31556c/</guid><description>本文也是为了记录顺利搭建了cos图床，并开启的新的博客之路的过程 顺便体验一下typora来写文章，上传图片的丝滑操作 不出意外的话本文图片都是直接搭配picgo上传到cos存储中的 使用github搭建图床 github的图床最大的问题是国内访问受限
+刚开始使用github的资源搭建了图床，使使用 jsdelivr 做了cdn的加速
+虽然小博客没有多少访问需求，但是github的访问时断时续，没有特殊的手段访问的话好多图都是裂了的，
+这样的话就导致访问体验就很糟糕，因为有些技术文章都是上传了图片的，看不到图片等于文章也没有什么价值，自己回过头看都想不起来写的是什么，本来文章最主要的功能是方便自己后续记录回忆的。
+使用腾讯云cos搭建图床 腾讯云搭建的图床虽然有一点小成本，但是访问不受限，小博客也花费不了多少钱，还能带来更好的使用体验
+以下几点注意事项 &amp;#x1f53d;
+做好防盗链，不然钱花费的飞起 有域名备案的可以自定义域名， cos设置成私有读写。（链接简短还省钱） 以下是搭建完成的一些遗憾 &amp;#x1f447;
+如果开启了防盗链，picgo图片预览是不能访问的，暂时还没看到好的方法
+直接在浏览器中访问的话由于没有Referer来源，所以也是403不能预览的，好处就是防止别人盗刷流量造成不必要的扣费，不过在浏览器中可以使用一些chrome插件来设置规则添加访问时的请求头，我是用的是 gooreplacer
+搭建步骤 在腾讯云中开启cos存储并创建存储桶 在安全设置中创建api密钥 本地下载好 picgo 并做好相关的密钥填写 在腾讯云中开启cdn，并设置好自定义域名（前提是你有个域名并且做好了相关的备案） 搭建完成后配合typora就可以有一个愉快的写作体验了
+详细的搭建步骤网上一搜一大堆，而且还很详细，这里就不献丑了，这篇文章也是为了验证cos图床是否能访问成功而写</description></item></channel></rss>

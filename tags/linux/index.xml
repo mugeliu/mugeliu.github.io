@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>linux on Awesome Hugo blog</title><link>https://mugeliu.github.io/tags/linux/</link><description>Recent content in linux on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 23 Aug 2023 00:53:59 +0800</lastBuildDate><atom:link href="https://mugeliu.github.io/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu服务器基础操作</title><link>https://mugeliu.github.io/posts/ad5bcc507ff11a28bcbc66c6a3300f5e/</link><pubDate>Wed, 23 Aug 2023 00:53:59 +0800</pubDate><guid>https://mugeliu.github.io/posts/ad5bcc507ff11a28bcbc66c6a3300f5e/</guid><description>三年前在阿里云买了自己的第一台服务器，后续到期后在腾讯云买了第二台服务器，这台服务器陪伴了三年，从刚接触程序，第一次面对一个黑框框的界面到现在对程序不恐惧不陌生，时间过得真快啊
+因为换了工作，不在从事技术相关的国内工作，这台服务器也基本闲置了一年，只有上面搭建的博客在运行，最近想起来这台服务器马上就快要到期了，想着能不能搭建个stable-diffusion 来玩一下，网上看了很多教程，都是在windows上搭建的，就直接重装成了win服务器，后来发现不行
+想着centos停止支持，ubuntu使用的也比较多，又从最原先的centos换成了ubuntu。记录下从新配置的整个过程
+配置ssh密钥登录 首先你得电脑上要有ssh密钥。win系统一般在用户目录的 .ssh文件夹中。id_rsa.pub这个是公钥文件，需要上传到服务中
+先用默认的密码登录服务器，ubuntu默认登录没有root用户，但是有sudo权限。
+把你的公钥文件内容添加到authorized_keys这个文件中
+修改/etc/ssh/sshd_config文件 (需要使用sudo权限编辑)
+#允许密钥认证 RSAAuthentication yes PubkeyAuthentication yes PermitRootLogin yes #允许root用户ssh登录 PasswordAuthentication no #禁用密码登录 配置完重启ssh服务 service sshd restart
+使用xshell或者MobaXterm登录服务器
+在哪个用户目录下只能用那个用户登录，我使用的是默认的ubuntu用户
+安装nginx 更新apt源，安装nginx
+sudo apt update sudo apt install nginx 安装完成后启动Nginx
+sudo systemctl status nginx 安装启动成功后就是绿色的running，失败则是红色的fail
+使用公网ip访问访问http页面，出现以下页面说明安装成功
+配置文件位置 主要的配置目录在 /etc/nginx 主要的配置文件 /etc/nginx/nginx.conf 站点的配置文件 /etc/nginx/sites-available/ 方便查看文件夹命名为自己 域名.conf 日志文件在 /var/log/nginx 一些注意的问题 如果不能访问，查看服务器的安全组是否放开，服务器的防火墙是否打开
+sudo ufw status # 查看防火墙是否开启 sudo ufw enable|disable #开启或者关闭防火墙 默认关闭 sudo ufw allow &amp;#34;nginx full&amp;#34; #放开nginx 80/443 首次配置需要注意，如果打开了服务器的防火墙，添加nginx后要放开22端口，之前操作已经禁止了密码登录，22端口关闭后就不能登录服务器，陷入死循环</description></item><item><title>Linux基础命令</title><link>https://mugeliu.github.io/posts/62bfad7a36da70d16da2cbd16e4e29a0/</link><pubDate>Fri, 14 Oct 2022 23:43:37 +0800</pubDate><guid>https://mugeliu.github.io/posts/62bfad7a36da70d16da2cbd16e4e29a0/</guid><description>目录相关 系统目录结构
+/bin 这个目录存放着最经常使用的命令
+/boot 这里存放的是启动Linux时使用的一些核心文件,包括一些链接文件以及镜像文件
+/dev 这里存放的是Linux的外部设备,在Linux中访问设备的方式和访问文件的方式是相同的
+/etc 这个目录是用来存放所有的系统管理所需要的配置文件和子目录。
+/home 用户的主目录,在Linux中,每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的
+/lib 这个目录里存放着系统最基本的动态连接共享库，其作用类似于Windows里的DLL文件,几乎所有的应用程序都会用到这些共享库
+/lost+found 这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。
+/media Linux系统会自动识别一些设备,例如光驱、u盘等等,等识别后,linux会把识别的设备挂载到这个目录下。
+/mnt 系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载/mnt上,然后进入该目录就可以查看光驱的内容了
+/opt 这是给主机额外安装软件所拜访的目录。比如安装数据库则可以放在这个目录下,默认是空
+/proc 这个目录是一个虚拟的目录，他是系统内存的映射，我们可以用过直接访问这个目录来获取系统信息。这个目录不是在硬盘上而是在内存里
+/root 该目录为系统管理员，也称作超级权限者的用户主目录
+/sbin 这里存放着的是系统管理员使用的系统管理程序。
+/selinux 这个目录是Redhat/CentOS 所特有的目录,Selinux是一个安全机制，类似于windows防火墙
+/srv 这个目录存放一些服务启动之后需要提取的数据
+/sys 该目录下安装了2.6内核中新出现的一个文件系统 sysfs 。sysfs文件系统集成了下面3种文件系统的信息：针对进程信息的proc文件系统、针对设备的devfs文件系统以及针对伪终端的devpts文件系统。
+该文件系统是内核设备树的一个直观反映。
+当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。
+/tmp 这个目录是用来存放一些临时文件的。
+/usr 这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于windows下的program files目录。
+/usr/bin 系统用户使用的应用程序。
+/usr/sbin 超级用户使用的比较高级的管理程序和系统守护程序。
+/usr/src 内核源代码默认的放置目录
+/var 这个目录中放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放到这个目录下，包括各种日志文件
+/run 这是一个临时文件系统，存储系统启动以来的信息.当系统重启市，这个目录下的文件应该被删掉或者清除。如果你的系统上有/var/run目录，应该让它指向run
+👉 重要目录：
+/etc 系统配置文件,更改可能导致系统无法启动。
+/bin /sbin /usr/bin /usr/sbin 这是系统预设的执行文件的放置目录。
+/bin /usr/bin是给系统用户使用的指令 /sbin /sur/sbin 是给root用户使用的指令 /var 这是一个重要的目录，系统上跑了很多程序，每个程序运行的日志都保存在这个目录( /var/log )下面。</description></item><item><title>docker基础知识</title><link>https://mugeliu.github.io/posts/2022-07-17-docker%E5%9F%BA%E7%A1%80/</link><pubDate>Sun, 17 Jul 2022 19:20:42 +0000</pubDate><guid>https://mugeliu.github.io/posts/2022-07-17-docker%E5%9F%BA%E7%A1%80/</guid><description>Docker基础 容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。
+Docker命令行参考
+镜像（image） Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。
+拉取仓库代码到本地
+docker image pull library/hello-world
+docker官方提供的默认在library中，可以省略library
+docker image pull hello-world
+查看所有镜像文件
+docker image list
+⚠️ docker run&amp; docker container run 区别：前者是1.13之前使用的命令，后者是1.13后新增加的，作用效果一样。[参考说明](https://www.docker.com/blog/whats-new-in-docker-1-13/) 从image文件中生成一个正在运行的容器实例
+docker container run xxxx
+手动终止运行的容器
+docker container kill xxxx
+以交互模式运行容器 (后边可以跟需要打开的shell)
+docker container run -it xxxx (bin/bash)
+容器 更多命令参考 👉🏻 (官方文档)
+列出本机正在运行的容器
+docker container list
+列出本机所有容器，包括终止运行的容器
+docker container ls -all
+启动终止的容器
+docker container start &amp;lt;container id&amp;gt;</description></item><item><title>Linux基本安全设置</title><link>https://mugeliu.github.io/posts/2022-01-04-linux%E5%9F%BA%E6%9C%AC%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/</link><pubDate>Tue, 04 Jan 2022 11:05:58 +0000</pubDate><guid>https://mugeliu.github.io/posts/2022-01-04-linux%E5%9F%BA%E6%9C%AC%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/</guid><description>ℹ️ 来源：Sol Love
+以下命令用于ubuntu主机，其他linux命令可能不相同
+更改root密码 passwd
+将root密码更改为长而且复杂的密码，不需要记住他，只需要存在在安全的地方。只有无法通过ssh登录或丢失sodu密码时才需要此密码
+安装Fail2ban apt-get install fail2ban
+创建新用户
+useradd deploy mkdir /home/deploy mkdir /home/deploy/.ssh chmod 700 /home/deploy/.ssh 使用公钥认证 vim /home/deploy/.ssh/authorized_keys
+添加本地机器的公钥id_rsa.pub的内容到此文件中
+chmod 400 /home/deploy/.ssh/authorized_keys
+chown deploy:deploy /home/deploy -R
+测试新用户启动 为新用户设置密码 (设置复杂密码，是需要sudo的权限的密码)
+passwd deploy
+设置sudo权限 （visudo的文件是/etc/sudoers，但是不要直接修改此文件，修改请使用visudo命令）
+visudo root ALL=(ALL) ALL deploy ALL=(ALL) ALL 锁定SSH 配置ssh以防止密码和root登录并将ssh锁定到特定IP
+vim /etc/ssh/sshd_config
+PermitRootLogin no PasswordAuthentication no AllowUsers deploy@(your-ip) deploy@(another-ip-if-any) 重新启动ssh
+service ssh restart
+设置防火墙 ufw allow from {your-ip} to any port 22 ufw allow 80 ufw allow 443 ufw enable 启动安全更新 apt-get install unattended-upgrades vim /etc/apt/apt.</description></item><item><title>Linux 安装docker</title><link>https://mugeliu.github.io/posts/2021-04-08-linux-%E5%AE%89%E8%A3%85docker/</link><pubDate>Thu, 08 Apr 2021 18:20:24 +0000</pubDate><guid>https://mugeliu.github.io/posts/2021-04-08-linux-%E5%AE%89%E8%A3%85docker/</guid><description>Linux 安装docker docker: 属于 Linux 容器的一种封装，提供简单易用的容器使用接口 👉 官方文档
+docker-compose: 一个集群管理方式，可以利用名为docker-compose.yml的yaml文件来定义需要启动的容器
+Kubernetes（K8S）: 非常强大的容器编排工具，可以管理大型集群、微服务、分布式应用等等
+Centos7 安装 使用Docker的存储库安装
+参考 ：**安装Docker Engine || **在centos上安装 || Docker入门教程
+sudo yum install -y yum-utils
+sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+sudo yum install docker-ce docker-ce-cli containerd.io
+sudo systemctl start docker
+验证是否安装成功
+sudo docker run hello-world
+配置开机自启动 （禁止启动则使用disable关键字替换enable执行命令）
+sudo systemctl enable docker.service sudo systemctl enable containerd.service 安装docker-compose linux下参考官方文档 也可以使用pip进行安装 pip install docker-compose 卸载docker 卸载Docker Engine，CLI和Containerd软件包
+sudo yum remove docker-ce docker-ce-cli [containerd.</description></item></channel></rss>
