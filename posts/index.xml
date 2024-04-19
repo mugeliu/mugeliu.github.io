@@ -1,61 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>文章集合 on Awesome Hugo blog</title><link>https://blog.mfcp.fun/posts/</link><description>Recent content in 文章集合 on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 10 Dec 2023 00:35:45 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>关于从小到大的学习经历</title><link>https://blog.mfcp.fun/posts/2d3a3f4ab9b25413e144a1e06fcfae26/</link><pubDate>Sun, 10 Dec 2023 00:35:45 +0800</pubDate><guid>https://blog.mfcp.fun/posts/2d3a3f4ab9b25413e144a1e06fcfae26/</guid><description>最近在学习自由泳，在这个过程中想到了自己的一些学习经历，感触良多，特有此文记录
-在学校 小学阶段
-因为直接从一年级开始上学，导致分数刚及格再加上年龄偏小，所以被老师留级了，新的一年变成了年级前三（估计第几忘了，当时还留了一张我的照片在光荣榜挂了好久），以后怎么也没想到这也是我学生生涯中最高光的一次。
-初中阶段
-初中学习马马虎虎，但是在初三不知道怎么的破天荒的突飞猛进，那个时间还上网打游戏通宵，但是学习成绩除了英语拖后腿，其他的都还行
-记得有一次仗着视力好偷看了同学答案，英语破天荒的考到了80 多，结果一下给我干到了班级前十名。英语倒现在都是我过不去的一个坎，后悔当时没好好学习
-高中阶段
-上了高中就直接沉沦在了电子书的世界里不能自拔，三年不知道看了多少本玄幻小说，早上去教室的门开始就开启了玄幻世界的生活，直到9 点多晚自习结束还要回去奋战到两三点才睡。
-平时在学校看困了就趴着睡觉，睡醒了就接着看，一点也没有学习的欲望，导致高考失利，复读了一年才勉强上了一个大专。
-大学阶段
-本来我想着去离家很远的地方的，但是家里人不让去，扣在了离家不远的小县城待了三年，当然也是我成绩就在那里放着，学校在本地的口碑还是 不错的。
-但是三年也从没上过课，要不在宿舍睡大觉，要不就在网吧打游戏，混了一个毕业证出来，还有一个发的教师资格证。我们是最后一届还发教室资格证的人， 这也算是占了一个便宜。
-当时流行考三支一扶，好多人从大一进学校就开始相关的准备了，我根本没有兴趣，现在回过头看也不知道受了什么影响，一心想着出去看看外面的世界，所以一天书也没有看，理所当然的没有考上，但讽刺的是看过书的人还没有我考的高，这个倒不是我聪明，只是因为考的那个题就是个笑话。
-踏入社会 学习编程
-为什么要学习程序呢？第一个是我从小对于这些比较感兴趣，就是好奇心比较重，总是想弄清楚背后是怎么弄的。第二点就觉得这个很酷，在大学的时候还看到有个黑客大佬开的训练营，只不过我看的时候已经结束了。
-当时离开学校去了北京入职了一家创业公司，名义上说是运营，但其实干着客服的活，就在想自己不能这样下去，有一天这个工作没了自己还能干什么，就想到编程，那个时候还什么也不会。
-第一家公司客服的经历让我学会了打字，还记得那个时候电脑下载了一个金山打字通练习了好久，那可是 2017 年。我记得我们上小学的微机课上就有这个游戏。
-然后就是第二家公司，那个时候在学习 Python，正好公司的业务涉及到爬虫知识，所以就刚好在工作中接触了一些编程的知识。
-第三家公司才是我真正入职的编程的工作，开始了爬虫工程师。
-当初为什么学 Python入了爬虫的坑也蛮搞笑的
-刚开始对什么也不了解，就在网上各种搜索，看到好多人都说 Python 简单，入门容易，就想着这玩意这么难，自己也不太聪明，就先入门再说吧，所以就学了 Python
-后来要选方向，又看到网上有人说，爬虫简单，一行代码写爬虫，从此就入了爬虫的坑。
-从我学编程的经历来说，只要多练习，自己有一颗想学的心，能耐得住寂寞和枯燥，没有什么是学不会的，只是因为大部分人都受不了，所以才觉得难，看到密密麻麻的报错，内心是抗拒的。
-还有一个学习编程英语不好行不行，我的亲身经历来说是可以的，编程跟英语有关系，但不是特别重要的关系，关系到你是否阅读到优质的知识并理解它，后期想要精进，英语是特别重要的
-学习游泳
-因为大学时候腰椎突出困扰，网上都说游泳比较好，就想着学会游泳，本身从西北农村出来，就是一个旱鸭子，但就像学会游泳。
-在北京温泉体育中心开始了第一次游泳，刚开始飘都不飘不起来，然后一点点开始学习，每周去一到两次，后来开始慢慢的可以飘起来，到后来可以划拉几下。
-后来中途第二家公司跟第三家公司的时候有一年换了住的地方，所以没有继续
-在水立方传媒馆学会了蛙泳，总算自己能蹦哒几下了，但是当时挺羡慕能去深水区的人，看着他们在深水区想着自己也有一天要去深水区，北京的深水区是要考深水证的。
-但是花了一千多报了自由泳的课程，想着把自由泳学会，加上疫情断断续续，再加上自己离开了北京，所以自由泳就搁置在那里了。
-在苏州这边的泳池真的多，再也不用跑老远去找泳池了，在一个 25 米的池子中学会了踩水，刚开始不太娴熟，但是现在已经很稳定了，蛙泳已经能游的很快了，现在在学习自由泳快要学会了
-说了这么多自己的学习过程，给我感受最深的一点就是，以目前大多数的知识来说，真的不用拼智力的程度，只需要有一颗想学习的心，对某些东西有渴望，能克服自己的懒惰，能忍受的了学习的寂寞和枯燥，都是可以学会的，达不到顶尖的水平， 但是超越大部分没有学习的人还是很容易的。
-我的一些问题就是虽然学习了，也学会了，但是进度很慢，第一是自己没有好好规划，比较佛系的在学习，再加上学习了没有好好复盘一些知识点，纯靠一些孰能生巧学会的，如果能加强这两方面的训练，对于新知识的掌握会更快一点。
-这是我上学工作这么多年的学习感觉到自己最缺乏的两点，真正的在学校学习不了太多东西，除了基础只是，现有学校学习的都是为了应付开始，对于如何学习，如何规划方面的知识基本是缺乏的，虽然我一直到大的学习成绩都不太好，但有时我真觉得挺好的，让我走了一条不同的路，淌了一遍学习的坑，直到该怎么学习了要比考试能考 100 分对我更加重要。</description></item><item><title>关于房地产的一些思考</title><link>https://blog.mfcp.fun/posts/4bcbd45490a0dbc20f0a4f4c5f9b91e4/</link><pubDate>Thu, 30 Nov 2023 23:23:05 +0800</pubDate><guid>https://blog.mfcp.fun/posts/4bcbd45490a0dbc20f0a4f4c5f9b91e4/</guid><description>当你放弃在买房这个事情，就会发现其实生活可以过的很好的
-一 去从年12 月份开始来了苏州，正式离开了互联网行业，放弃了程序员这个身份，入职房地产行业开始做自媒体，想法很好，落地很难。面临着经济的下行，地产行业的衰落，大型头部的房产企业资不抵债，其中作为地产行业一环的中介的日子也是越过越苦。成交量逐渐变少，大家也都在想各种办法来增加爆光和获客的渠道。
-其中自媒体抖音就是中介们看好的一片战场，纷纷入局做房产短视频，我也从一个小白踏入了房地产行业中的一环，准确的说是房地产中介行业，前前后后也做了很多，从一开始剪辑视频做起，到后来开始涉及直播的整体搭建等一系列的事情。对于房产行业也有了初步的了解。
-二 目前的房地产形式就是贝壳一家独大，整体的占有率在 70% 左右，58 系占据 20% 左右，其他个人经济品牌占据 10%，这个数据来源于在平时接触中的一些中介给到的信息。房产中介交易的收费模式就是贝壳，58 系旗下的安居客等收取中介佣金，在抖音做自媒体的一帮房产中介们，还是没有更改这种传统的成交模式，只是增加一个新的宣传渠道。
-贝壳的佣金目前是 3 个点，房东一个点，买房人 2 个点。在贝壳的体系中，一套房子是有多个维护人，成交人，房源维护人，还有视频拍摄着等等一系列的人员。交易完成后佣金由不同的角色进行分配，优势在于大量的经纪人维护房源，保证房源的数量足够多，同贝壳旗下的子品牌共用一套系统，一套房子只要你有角色参与其中，只要成交你都能分配到钱。
-58系的类似于贝壳的模式，但是由于整体的体量比较少，会出现明显的房源偏少的情况居多，而且 58 的佣金并不是固定的 3 个点，在 1.5 到 2 个点，具体的看怎么跟客户谈。
-新房比二手房的一个优点就是中介带看的佣金部分是由开发商直接出的，新房不涉及到买卖双方的佣金问题，唯一涉及的问题就是开发商结佣金的问题。
-比较有争议并且有创新的就是抖音号【房东来了】，通过抖音的短视频平台，做到房源的推广，并且一单只收三千的推广费用，剩下后续服务由买卖双方自行办理或他们协助办理。
-三 内部与外部环境的各种原因，加上三年的疫情，整个经济处于一个下行期，大家的兜里都没有了钱，中国的地产行业狂飙了 20 多年，就像caoz说的，有些欠的债是要用来还的，越来越多的烂尾楼，越来越多的大型房地产公司开始没钱倒闭，最后传递到每一个人的头上，我看过一个说法，说是中国的房地产在走香港的路子，但偏偏学就学了一半，所以导致这么多的烂尾楼出现，因为不是房产行业资深的从业人士，对于这个说法并不能判断是否正确。
-但就我这一年在房产中介行业的感受就是大多数人都处于一个观望的态度，就目前的各种情况想着是不是还会降一点，大批高峰期买房的客户现在就比较难受，一方面是高昂的贷款压力，一方面又是每月的还债压力。双方一个共同点就是对于未来的预期不足，裁员等等不确定风险的更加保守。
-四 最近我再想是不是可以借助采用房东来了这种模式，开发一个产品，由卖家跟买家直接沟通价格来直接成交，二手房的交易费用由原来的一笔中介费打散成不同的服务项由客户进行选择来进行。
-这种方式适用于二手房的成交过程，新房的佣金结算方式的不同导致此方式不适合，还有豪宅别墅的成交方式跟此方式并不适合，具体的成交需要私密性且较为专业人士协助处理为佳，还有跟物业租售的并没有相同。
-以上是一些不太成熟的想法，只有一个大体的框架，一些稍微细节性的东西还是漏洞太多，整个房产链条是一个庞大的体系，中间的环节众多，此后想到了什么再补充到此条。</description></item><item><title>最近一年的一些变化与思考</title><link>https://blog.mfcp.fun/posts/bf698d3b16cc0bb9988364dd0c52fe58/</link><pubDate>Tue, 28 Nov 2023 22:19:40 +0800</pubDate><guid>https://blog.mfcp.fun/posts/bf698d3b16cc0bb9988364dd0c52fe58/</guid><description>大部分需求都是伪需求，只是自己给自己创造出来的需求
-马上 23 年就要过去了，新的一年又要开始了，怎么说呢，变化还是蛮大的，首先第一个是从北京离开到了苏州，第二个是放弃了编程进入了一个陌生的行业。晃晃悠悠的一年好像还挺忙，忙到了基本没有什么节假日，天天在上班，有结果吗？目前来说一点结果也没有看到，而且越久越看不到希望。
-今天还在cao&amp;rsquo;z的直播间里听到要勇敢的去尝试，但是要设置一个止损线，觉得我只是尝试了，但是没有设置自己的止损线。对未来的规划有，但是不清晰，拖延症比较严重，好多事情都是一拖再拖，对自己也不够狠心下来。整个人没有静下来，没有沉下心来做自己的事情，整个人显得很浮躁。
-今年其实也学到了很多，这也是成长路上的一课吧，早经历早有帮助，不要把希望寄托在别人身上，一切都要靠自己的。
-还有不知道在哪里看到的一句话了，“大树底下长不出新的大树”
-接下来说一下今年的一些改变吧。
-最近发现之前囤的游泳票只用了一小部分，还有一个月就到期了，剩了 30 多张，自由泳已经拖了一年还没有学会，从北京学到了苏州，从水立方学到了乐动力还没有学会，今天晚上在游泳的路上突然想到，自己的好多看起来是合理的需求，但仔细一想其实都是伪需求
-比如说之前一直想要有自己的一个 NAS 做存储，把自己的相片文件都存储起来，买了机箱，又等了两三个月买了主板，买了各种配件，买了三块硬盘，之前买机箱的时候，两盘位的还看不上，买了个六盘位的，现在只是装了一个 pve，装了一个 TrueNas，也没有放置文件，也没有装服务，只是在空跑，相片备份到哪里了呢，备份到了一块 2T 的单独机械硬盘上
-想了想，其实自己的需求看起来是真需求，其实都有很多都是自己给自己创造出来需求，实际并不是影响你生活的需求。
-今年给自己换了手机，换了电脑，分了 24 期，再买手机的过程中，在苹果店员的营销下我买了AppleCare+的服务，大概率我是用不到的，但是想了想还是最终决定买了。买了的第一个感受就是我并不是很在乎手机是否摔伤这种问题，对于手机也是平常心看待了。其实之前四千多的手机完全还能使用，促使我换机的原因是那个MAX 机型确实有点大，握持感并不好，玩手机老被砸脸，第二个就是我买的别人的是 12，现在已经 15 了，再用掉价会更多，还不如直接抵扣换成新机器。
-电脑了话其实自己的那个还能凑合使用，日常轻办公是没有什么问题。但是毕竟是五六年前的笔记本，再加上我一直对于mac有种想买的欲望，开发续航各方面确实不错。现在入手之后觉得确实挺好。这一篇文章就是在Mac 上写下来的，使用体验感就是 Mac 的键盘使用起来是真的舒服，而且触摸板是那种用了以后不想再用会 Windows 笔记本的那种感觉，当然现在新的笔记本可能做的也还不错。但是苹果的各方面确实牛，买了笔记本已经要发挥出它最大的价值，而不是只能买了，如果不出意外。这个笔记本要陪伴我很多年，在这个笔记本上实现一些不一样的东西出来。
-除了NAS，手机，笔记本，其实还想要一辆自行车，因为自己很喜欢骑行，之前陪伴自己的自行车离开北京的时候便宜处理，想要重新买一辆，从 3 千的山地车看到了 4 千 5 的山地车，最近因为别人的推荐，又看到精灵的公路车。一套下来基本上要到小一万，我现在再想自己真的需要那么贵的自行车吗？可能并不需要，再想想自己的规划，并没有那么多时间去骑车。</description></item><item><title>Stable Diffusion系列一 | 安装webui</title><link>https://blog.mfcp.fun/posts/b86adb06a9246b489312401c23b0b1a5/</link><pubDate>Fri, 13 Oct 2023 23:38:29 +0800</pubDate><guid>https://blog.mfcp.fun/posts/b86adb06a9246b489312401c23b0b1a5/</guid><description>最近想深入学习一下Stable Diffusion，买了腾讯云服务器，在windows上和linux上都自己搭建了一遍，记录下搭建遇到的各种坑，如果不熟悉Linux，使用一键安装包即可，自己在Linux部署的话尽量使用境外服务器，有些模型会遇到不可说的问题下载不下来
-&amp;#x1f447;一些用到的地址
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>文章集合 on Awesome Hugo blog</title><link>https://blog.mfcp.fun/posts/</link><description>Recent content in 文章集合 on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Fri, 13 Oct 2023 23:38:29 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Stable Diffusion系列一 | 安装webui</title><link>https://blog.mfcp.fun/posts/b86adb06a9246b489312401c23b0b1a5/</link><pubDate>Fri, 13 Oct 2023 23:38:29 +0800</pubDate><guid>https://blog.mfcp.fun/posts/b86adb06a9246b489312401c23b0b1a5/</guid><description>最近想深入学习一下Stable Diffusion，买了腾讯云服务器，在windows上和linux上都自己搭建了一遍，记录下搭建遇到的各种坑，如果不熟悉Linux，使用一键安装包即可，自己在Linux部署的话尽量使用境外服务器，有些模型会遇到不可说的问题下载不下来
+👇一些用到的地址
 Stable Diffusion Stable Diffusion webui civitai huggingface 我购买的是腾讯云的GN7服务器使用生成图片确实要比较快，每张图片几十秒就能生成好
 Windows windows上我使用了B站秋叶大佬的一键安装包
 具体下载可以看文章 Stable Diffusion整合包v4.4发布
@@ -64,7 +8,7 @@ Windows windows上我使用了B站秋叶大佬的一键安装包
 还有个需要注意的是，window安装的默认没有装gpu启动，需要自己下载安装。我刚开始没有装使用的cpu生成的，速度比较慢，装了以后生成速度大大提升。
 驱动下载地址：https://www.nvidia.cn/Download/index.aspx
 Gn7的驱动配置如下，下载安装到服务器即可。
-安装完成后启动&amp;#x1f447;
+安装完成后启动👇
 Linux 使用腾讯云在ubuntu安装的一个好处是在安装过程中就装好了gpu驱动包，不用后期再单独装，但是境内的服务器网络问题都很头疼，大模型基础都下载失败，我都是手动下载后上传
 安装 需要安装python 、 git、 GPU驱动（未安装的情况下）
 参考github主页的安装教程即可，只有四步，但是国内的网络会严重影响模型下载，导致启动报错
@@ -82,7 +26,7 @@ sd默认使用的模型为v1-5-pruned-emaonly.safetensors,下载失败的话需�
 以下配置内容参考网上大佬的文章
 server { listen 80; listen [::]:80; server_name xxx.xxx.com; return 301 https://$server_name$request_uri; } server { listen 443 ssl; listen [::]:443 ssl; server_name xxx.xxx.com; ssl_certificate /etc/nginx/cert/xxx.</description></item><item><title>Anaconda学习笔记</title><link>https://blog.mfcp.fun/posts/d02aa061f94ef96b5fc191b736a21b97/</link><pubDate>Fri, 13 Oct 2023 22:46:37 +0800</pubDate><guid>https://blog.mfcp.fun/posts/d02aa061f94ef96b5fc191b736a21b97/</guid><description> 由于最近想学习一下 Stable Diffusion ,刚开始使用的是windows安装的，远程访问并不是很方便，再加上linux使用习惯了以后，还是更希望在Linux上操作。
 在搭建了Stable Diffusion过程中需要使用指定的python版本，不想升级系统自带的python版本，以避免后期出现奇怪的问题，所以使用anaconda来管理不同的python版本。
-安装 &amp;#x1f449; Anaconda官方
+安装 👉 Anaconda官方
 安装相关的依赖组件
 apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6 下载安装包，整个安装包有1个多G，如果服务器不太好，可以在本机下载后上传
 服务器安装 bash ~/xxxx/Anaconda3-20xx.xx-Linux-x86_64.sh
@@ -95,7 +39,7 @@ apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxc
 体脂秤使用派健康可以正常使用，音响刷入新系统，也能使用，音质也比100大洋的要好点。
 最开始在n1上刷入了第三方的固件，当成一个软路由使用，虽然能正常使用也带有wifi但是总感觉信号不是特别好。看到b站 酱紫表 评测200元无线路由器性价比高的无线路由器，下手了一个。
 H3C NX30 pro 在拼多多上补贴中169大洋拿下，原本H3C的系统挺好使的，但是因为我的主要目的是出国，想着只在路由器上刷入出国服务就可以了。
-刷机过程参考了 酱紫表的 &amp;#x1f449; 教程
+刷机过程参考了 酱紫表的 👉 教程
 输入过程重要的就是刷入uboot，只要备份了出厂原系统，刷成功了uboot，你就可以随便刷系统了。
 我没有刷入他的系统，使用了 openwrt 定制了自己的固件
 由于它的内存比较小，刷入太多的第三方包会导致刷入失败，不能启动。
@@ -109,26 +53,26 @@ N1安装Armbian和基于Docker的OpenWRT N1盒子刷Armbian系统 斐讯N1挂载
 armbian-install -&amp;gt; 101 -&amp;gt; 1 -&amp;gt; poweroff
 创建/etc/apt/keyrings文件夹，然后信任Docker的GPG公钥
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg 其他没什么大问题，每个人遇到的情况都不太相同，有问题多google，总能找到一些解决办法。</description></item><item><title>搭建git服务器并配置blog自动部署</title><link>https://blog.mfcp.fun/posts/ef734f00e58c413acb9b7f60f8147607/</link><pubDate>Sat, 26 Aug 2023 01:18:03 +0800</pubDate><guid>https://blog.mfcp.fun/posts/ef734f00e58c413acb9b7f60f8147607/</guid><description>最方便的还是查看git的官方文档 中关于服务器上git配置的相关章节，比较详细
-&amp;#x1f449; 服务器上的-Git-配置服务器
+👉 服务器上的-Git-配置服务器
 记录下我搭建过程中的思路以及一些需要注意的点
 搭建思路 在本地搭建了hugo配合typora写文章
 图片部分使用腾讯云的oss存储实现图床功能 ，（做了防盗链话费不了多钱）
 文章写好后推送到github的私有库中，配合action功能自动部署推送到公开库中展示
-&amp;#x1f4d1; Github Page 原先计划
+📑 Github Page 原先计划
 在腾讯云搭建git服务，写好文章同时推送到腾讯云 在服务器中安装hugo，使用git中的钩子功能提交文章后在git服务器编译到指定的目录中
 这次重新搭建折腾了好久都卡在vps拉取的环节上了，所以放弃
 使用action的burnett01/rsync-deployments实现对编译好文件的上传
 搭建nginx，配置域名实现公网访问
 server { listen 80; server_name blog.mfcp.fun; location / { alias /var/www/blog_site/; } } 问题记录 创建完git用户后设置git-shell,用户就不能登录shell了，正常推送是没有问题的
 根据git文档中搭建好git服务后，根据文档中的说明，更改了git用户的默认shell，只能通过git协议推送代码，不能登录shell，但是我们要新建仓库必须要在shell中操作。
-两种解决办法 &amp;#x1f447;
+两种解决办法 👇
 第一是通过高权限账户使用**chsh**命令临时更改git用户的默认shell，创建完在改回去
 # 查看系统shell cat /etc/shells # 第二种 chsh -s /bin/sh git #更改git用户的shell 第二种是通过高权限账户创建好文件，然后更改把文件夹的用户和用户组更改为git用户。
 创建的目录和文件要注意权限问题，所属权限不是git用户的话后期推送会失败
 git的钩子功能post-receive需要可执行权限才能成功执行
 由于github page跟腾讯云的baseurl不一致，同一个config文件不能使用,创建单独的配置文件编译
 同步到腾讯云ubuntu上需要创建ssh密钥文件，把公钥写入到authorized_keys中，把私钥文件写入到github项目的Security中通过虚拟变量形式来访问
-&amp;#x1f447;以下是成功的action文件shili
+👇以下是成功的action文件shili
 # .github/workflows/gh-pages.yml name: GitHub Pages on: push: branches: - master jobs: build-deploy: runs-on: ubuntu-22.</description></item><item><title>Ubuntu服务器基础操作</title><link>https://blog.mfcp.fun/posts/ad5bcc507ff11a28bcbc66c6a3300f5e/</link><pubDate>Wed, 23 Aug 2023 00:53:59 +0800</pubDate><guid>https://blog.mfcp.fun/posts/ad5bcc507ff11a28bcbc66c6a3300f5e/</guid><description>三年前在阿里云买了自己的第一台服务器，后续到期后在腾讯云买了第二台服务器，这台服务器陪伴了三年，从刚接触程序，第一次面对一个黑框框的界面到现在对程序不恐惧不陌生，时间过得真快啊
 因为换了工作，不在从事技术相关的国内工作，这台服务器也基本闲置了一年，只有上面搭建的博客在运行，最近想起来这台服务器马上就快要到期了，想着能不能搭建个stable-diffusion 来玩一下，网上看了很多教程，都是在windows上搭建的，就直接重装成了win服务器，后来发现不行
 想着centos停止支持，ubuntu使用的也比较多，又从最原先的centos换成了ubuntu。记录下从新配置的整个过程
@@ -149,8 +93,8 @@ sudo ufw status # 查看防火墙是否开启 sudo ufw enable|disable #开启或
 虽然小博客没有多少访问需求，但是github的访问时断时续，没有特殊的手段访问的话好多图都是裂了的，
 这样的话就导致访问体验就很糟糕，因为有些技术文章都是上传了图片的，看不到图片等于文章也没有什么价值，自己回过头看都想不起来写的是什么，本来文章最主要的功能是方便自己后续记录回忆的。
 使用腾讯云cos搭建图床 腾讯云搭建的图床虽然有一点小成本，但是访问不受限，小博客也花费不了多少钱，还能带来更好的使用体验
-以下几点注意事项 &amp;#x1f53d;
-做好防盗链，不然钱花费的飞起 有域名备案的可以自定义域名， cos设置成私有读写。（链接简短还省钱） 以下是搭建完成的一些遗憾 &amp;#x1f447;
+以下几点注意事项 🔽
+做好防盗链，不然钱花费的飞起 有域名备案的可以自定义域名， cos设置成私有读写。（链接简短还省钱） 以下是搭建完成的一些遗憾 👇
 如果开启了防盗链，picgo图片预览是不能访问的，暂时还没看到好的方法
 直接在浏览器中访问的话由于没有Referer来源，所以也是403不能预览的，好处就是防止别人盗刷流量造成不必要的扣费，不过在浏览器中可以使用一些chrome插件来设置规则添加访问时的请求头，我是用的是 gooreplacer
 搭建步骤 在腾讯云中开启cos存储并创建存储桶 在安全设置中创建api密钥 本地下载好 picgo 并做好相关的密钥填写 在腾讯云中开启cdn，并设置好自定义域名（前提是你有个域名并且做好了相关的备案） 搭建完成后配合typora就可以有一个愉快的写作体验了
@@ -225,7 +169,7 @@ Git远程操作详解
 安装完成后 需要最后一步设置
 # --global参数 这台机器上的所有仓库都会使用这个配置 git config --global user.name &amp;#34;you name&amp;#34; git config --global user.email &amp;#34;email@exemple.com&amp;#34; 工作区：git init的文件夹就是一个工作区 版本库：工作区里面一个隐藏目录 .git (里面有暂存区和master分支)
 git add把文件添加进去，实际上是把文件修改添加到暂存区里面，git commit提交更改，实际上是把暂存区的所有内容提交到当前分支上。
-git init # 把当前目录编程git管理的仓库 git add &amp;lt;file&amp;gt; # 把当前文件添加到仓库 可以同时添加多个文件 git commit -m &amp;#34;message&amp;#34; # 把文件提交到仓库, -m 后边的是本次提交说明 git status # 查看当前工作区的转态，是否有文件修改 git diff # 查看修改内容 git log # 显示从最近到最远的提交日志， git reflog # 查看历史命令，以确定回到那个版本 git log --pretty=oneline # 只显示commit_id (版本号) git reset --hard commit_id # HEAD指向的版本是当前版本，可以根据commid 回退 git diff HEAD -- &amp;lt;file&amp;gt; # 查看工作区与版本库里面最新版本的区别 git checkout - - file 把file中在工作区的修改全部撤销</description></item><item><title>深拷贝与浅拷贝问题的记录</title><link>https://blog.mfcp.fun/posts/2022-04-21-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/</link><pubDate>Thu, 21 Apr 2022 17:33:49 +0000</pubDate><guid>https://blog.mfcp.fun/posts/2022-04-21-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/</guid><description>深浅拷贝的问题记录 🖇️ 在抓取排行榜数据时，发现抓取的排行榜数据总是最后的一条。但是排行榜的数据量是没有问题的。在仔细检查逻辑后发现并没有什么问题。最后搜索排查是深浅拷贝的问题，遂记录一下。 原代码 &amp;#x1f447;
+git init # 把当前目录编程git管理的仓库 git add &amp;lt;file&amp;gt; # 把当前文件添加到仓库 可以同时添加多个文件 git commit -m &amp;#34;message&amp;#34; # 把文件提交到仓库, -m 后边的是本次提交说明 git status # 查看当前工作区的转态，是否有文件修改 git diff # 查看修改内容 git log # 显示从最近到最远的提交日志， git reflog # 查看历史命令，以确定回到那个版本 git log --pretty=oneline # 只显示commit_id (版本号) git reset --hard commit_id # HEAD指向的版本是当前版本，可以根据commid 回退 git diff HEAD -- &amp;lt;file&amp;gt; # 查看工作区与版本库里面最新版本的区别 git checkout - - file 把file中在工作区的修改全部撤销</description></item><item><title>深拷贝与浅拷贝问题的记录</title><link>https://blog.mfcp.fun/posts/2022-04-21-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/</link><pubDate>Thu, 21 Apr 2022 17:33:49 +0000</pubDate><guid>https://blog.mfcp.fun/posts/2022-04-21-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/</guid><description>深浅拷贝的问题记录 🖇️ 在抓取排行榜数据时，发现抓取的排行榜数据总是最后的一条。但是排行榜的数据量是没有问题的。在仔细检查逻辑后发现并没有什么问题。最后搜索排查是深浅拷贝的问题，遂记录一下。 原代码 👇
 def parse_more_rank(self, response): items = response.meta.get(&amp;#34;items&amp;#34;) url_list = response.xpath(&amp;#39;//a[@class=&amp;#34;figure_pic&amp;#34;]/@href&amp;#39;).getall() ranking_list = response.xpath(&amp;#39;//a[@class=&amp;#34;figure_pic&amp;#34;]/span/text()&amp;#39;).getall() title_list = response.xpath(&amp;#39;//a[@class=&amp;#34;figure_pic&amp;#34;]/following-sibling::strong/a/text()&amp;#39;).getall() cover_id_list = [u.split(&amp;#39;cover/&amp;#39;)[1].split(&amp;#34;.&amp;#34;)[0] for u in url_list] for url,ranking,title,cover_id in zip(url_list,ranking_list,title_list,cover_id_list): items[&amp;#34;ranking&amp;#34;] = ranking items[&amp;#34;title&amp;#34;] = title items[&amp;#34;cover_id&amp;#34;] = cover_id yield scrapy.Request(url, callback=self.parse_detail, meta={&amp;#34;items&amp;#34;: items}, dont_filter=True) 程序运行到for循环都是没有问题的。到一个解析回调self.parse_detail的时候就出现了问题。存储的所有数据都是最后一条。（因为不同的排行榜中有相同的作品，所以没有过滤重复请求。）
 最后排查是传递meta传递items的时候的问题，没有使用深拷贝，导致最后解析回调的时候都是同一个对象。
 更改后

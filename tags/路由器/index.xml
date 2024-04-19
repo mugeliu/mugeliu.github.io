@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>路由器 on Awesome Hugo blog</title><link>https://blog.mfcp.fun/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/</link><description>Recent content in 路由器 on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 10 Sep 2023 22:30:38 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>NX30Pro与斐讯n1折腾记录</title><link>https://blog.mfcp.fun/posts/e85b6dfba09c43d9e017e43052e8e72b/</link><pubDate>Sun, 10 Sep 2023 22:30:38 +0800</pubDate><guid>https://blog.mfcp.fun/posts/e85b6dfba09c43d9e017e43052e8e72b/</guid><description>之前一直在自己电脑上，手机上下载软件来实现出国服务，有些像ios系统软件还需要外区账号操作起来比较麻烦，想着搞一个软路由来实现出国服务
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>路由器 on Awesome Hugo blog</title><link>https://blog.mfcp.fun/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/</link><description>Recent content in 路由器 on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Sun, 10 Sep 2023 22:30:38 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>NX30Pro与斐讯n1折腾记录</title><link>https://blog.mfcp.fun/posts/e85b6dfba09c43d9e017e43052e8e72b/</link><pubDate>Sun, 10 Sep 2023 22:30:38 +0800</pubDate><guid>https://blog.mfcp.fun/posts/e85b6dfba09c43d9e017e43052e8e72b/</guid><description>之前一直在自己电脑上，手机上下载软件来实现出国服务，有些像ios系统软件还需要外区账号操作起来比较麻烦，想着搞一个软路由来实现出国服务
 斐讯N1时代 在B站上看了许多测评软件，看到斐讯N1性价比高，而且还能玩一下docker，遂148块大洋购买了N1，比当时80快钱的时候已经高太多了，斐讯虽然倒下了，留下的一些遗产确实真的不多，便宜又好使用，再写文章的同时又39块大洋购买了体脂秤S1和99大洋买了音响R1.
 体脂秤使用派健康可以正常使用，音响刷入新系统，也能使用，音质也比100大洋的要好点。
 最开始在n1上刷入了第三方的固件，当成一个软路由使用，虽然能正常使用也带有wifi但是总感觉信号不是特别好。看到b站 酱紫表 评测200元无线路由器性价比高的无线路由器，下手了一个。
 H3C NX30 pro 在拼多多上补贴中169大洋拿下，原本H3C的系统挺好使的，但是因为我的主要目的是出国，想着只在路由器上刷入出国服务就可以了。
-刷机过程参考了 酱紫表的 &amp;#x1f449; 教程
+刷机过程参考了 酱紫表的 👉 教程
 输入过程重要的就是刷入uboot，只要备份了出厂原系统，刷成功了uboot，你就可以随便刷系统了。
 我没有刷入他的系统，使用了 openwrt 定制了自己的固件
 由于它的内存比较小，刷入太多的第三方包会导致刷入失败，不能启动。
