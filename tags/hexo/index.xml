@@ -1,11 +1,35 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>hexo on Awesome Hugo blog</title><link>https://blog.mfcp.fun/tags/hexo/</link><description>Recent content in hexo on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Fri, 04 Aug 2023 00:04:45 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/hexo/index.xml" rel="self" type="application/rss+xml"/><item><title>从hexo迁移博客到hugo</title><link>https://blog.mfcp.fun/posts/d41d8cd98f00b204e9800998ecf8427e/</link><pubDate>Fri, 04 Aug 2023 00:04:45 +0800</pubDate><guid>https://blog.mfcp.fun/posts/d41d8cd98f00b204e9800998ecf8427e/</guid><description>为什么要自己搭建1 刚开始接触编程的时候，看着大佬们都有个自己的博客，就按照教程自己琢磨搭建，正好也学习了编程的相关知识，后来越来越讨厌平台的各种审核删帖，虽然也并不会发什么不该发的东西，但是命门捏在别人手中的感受总是不好的
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>hexo on Awesome Hugo blog</title>
+    <link>https://blog.mfcp.fun/tags/hexo/</link>
+    <description>Recent content in hexo on Awesome Hugo blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 04 Aug 2023 00:04:45 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/hexo/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>从hexo迁移博客到hugo</title>
+      <link>https://blog.mfcp.fun/posts/d41d8cd98f00b204e9800998ecf8427e/</link>
+      <pubDate>Fri, 04 Aug 2023 00:04:45 +0800</pubDate>
+      
+      <guid>https://blog.mfcp.fun/posts/d41d8cd98f00b204e9800998ecf8427e/</guid>
+      <description>为什么要自己搭建1 刚开始接触编程的时候，看着大佬们都有个自己的博客，就按照教程自己琢磨搭建，正好也学习了编程的相关知识，后来越来越讨厌平台的各种审核删帖，虽然也并不会发什么不该发的东西，但是命门捏在别人手中的感受总是不好的
 就一直想着有个自己可以随心所欲写东西的地方，所以搭建了这个博客
 hexo搭建 刚开始是使用hexo搭建的，第一呢是因为hexo比较早，用的人也比较多，当时网上找的教程也比较多，能比较方便快捷的搭建起来，出了问题晚上也可以找到一堆教程。
 但是hexo有个问题就是渲染文章量不多的话速度还可以， 后来自己写了一些编程笔记后整体渲染笔记就比较慢了。看了看网上各位大佬说的hugo的速度比较快，社区也比较成熟，所以迁移了过来
 hugo 刚开始使用了cango主题，刚开始看着各方面还都挺好，后来还是觉得图片太麻烦不太好，而且不简洁，我只需要一个写东西，看东西的方便的主题
 找到了目前这个主题hugo-blog-awesome比较符合我的要求，唯一的缺点是没有搜索功能，后期考虑给它加上搜索
 这是目前第一篇文章，后期可能把之前的文章同步过来，现在的状况就是比较散乱，有放在notion中的，有在之前腾讯云服务器的。
-The above quote is excerpted from Rob Pike&amp;rsquo;s talk during Gopherfest, November 18, 2015.&amp;#160;&amp;#x21a9;&amp;#xfe0e;</description></item><item><title>使用hexo部署静态blog</title><link>https://blog.mfcp.fun/posts/2021-04-02-%E4%BD%BF%E7%94%A8hexo%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81blog/</link><pubDate>Fri, 02 Apr 2021 11:13:36 +0000</pubDate><guid>https://blog.mfcp.fun/posts/2021-04-02-%E4%BD%BF%E7%94%A8hexo%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81blog/</guid><description>安装hexo 安装node环境
+The above quote is excerpted from Rob Pike&amp;rsquo;s talk during Gopherfest, November 18, 2015.&amp;#160;&amp;#x21a9;&amp;#xfe0e;</description>
+    </item>
+    
+    <item>
+      <title>使用hexo部署静态blog</title>
+      <link>https://blog.mfcp.fun/posts/2021-04-02-%E4%BD%BF%E7%94%A8hexo%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81blog/</link>
+      <pubDate>Fri, 02 Apr 2021 11:13:36 +0000</pubDate>
+      
+      <guid>https://blog.mfcp.fun/posts/2021-04-02-%E4%BD%BF%E7%94%A8hexo%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81blog/</guid>
+      <description>安装hexo 安装node环境
 npm install hexo
 安装git
 廖雪峰-安装git
@@ -25,4 +49,8 @@ git (主要用于拉取和同步代码)
 如果git能正常提交，但是钩子脚本没有生效，一般情况下是因为文件目录读写权限的问题，仔细检查相关目录权限就可以了
 PUBLIC_WWW 这个目录为hexo生成的静态文件目录
 配置nginx 安装参考：👇
-sudo yum install nginx</description></item></channel></rss>
+sudo yum install nginx</description>
+    </item>
+    
+  </channel>
+</rss>

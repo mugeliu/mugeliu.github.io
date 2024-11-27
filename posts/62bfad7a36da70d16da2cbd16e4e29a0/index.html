@@ -1,46 +1,556 @@
-<!doctype html><html lang=en-gb><head><meta charset=utf-8><meta http-equiv=content-type content="text/html"><meta name=viewport content="width=device-width,initial-scale=1"><title itemprop=name>Linux基础命令 | Awesome Hugo blog</title><meta property="og:title" content="Linux基础命令 | Awesome Hugo blog"><meta name=twitter:title content="Linux基础命令 | Awesome Hugo blog"><meta itemprop=name content="Linux基础命令 | Awesome Hugo blog"><meta name=application-name content="Linux基础命令 | Awesome Hugo blog"><meta property="og:site_name" content="xirang'blog"><meta name=description content="Minimal Hugo blog theme with light and dark mode support"><meta itemprop=description content="Minimal Hugo blog theme with light and dark mode support"><meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support"><meta name=twitter:description content="Minimal Hugo blog theme with light and dark mode support"><meta property="og:locale" content="en-gb"><meta name=language content="en-gb"><meta itemprop=image content="https://blog.mfcp.fun/"><meta property="og:image" content="https://blog.mfcp.fun/"><meta name=twitter:image content="https://blog.mfcp.fun/"><meta name=twitter:image:src content="https://blog.mfcp.fun/"><meta property="og:type" content="article"><meta property="og:article:published_time" content="2022-10-14T23:43:37+0800"><meta property="article:published_time" content="2022-10-14T23:43:37+0800"><script defer type=application/ld+json>{"@context":"http://schema.org","@type":"Article","headline":"Linux基础命令","author":{"@type":"Person","name":""},"datePublished":"2022-10-14","description":"","wordCount":528,"mainEntityOfPage":"True","dateModified":"2022-10-14","image":{"@type":"imageObject","url":""},"publisher":{"@type":"Organization","name":"Awesome Hugo blog"}}</script><meta name=generator content="Hugo 0.112.4"><link rel=canonical href=https://blog.mfcp.fun/posts/62bfad7a36da70d16da2cbd16e4e29a0/><link href=/style.min.840eada6dfddec7b8ccfcf867f039bf80b1f16a265ec6e01dc553a3dddc9d509.css rel=stylesheet><link href=/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css rel=stylesheet><link rel=apple-touch-icon sizes=180x180 href=/icons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/icons/favicon-16x16.png><link rel=mask-icon href=/icons/safari-pinned-tab.svg><link rel="shortcut icon" href=/favicon.ico><link rel=manifest href=https://blog.mfcp.fun/site.webmanifest><meta name=msapplication-config content="/browserconfig.xml"><meta name=msapplication-TileColor content="#2d89ef"><meta name=theme-color content="#434648"><link rel=icon type=image/svg+xml href=/icons/favicon.svg></head><body data-theme=auto class=notransition><script src=/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script><div class=navbar role=navigation><nav class=menu aria-label="Main Navigation"><a href=https://blog.mfcp.fun/ class=logo><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><title>Home</title><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></a><input type=checkbox id=menu-trigger class=menu-trigger>
-<label for=menu-trigger><span class=menu-icon><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentcolor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7H3.40726"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M.5 12.5V1.5c0-.552285.447715-1 1-1h11C13.0523.5 13.5.947715 13.5 1.5v11C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C.947715 13.5.5 13.0523.5 12.5z"/></svg></span></label><div class=trigger><ul class=trigger-container><li><a class=menu-link href=/>Home</a></li><li><a class="menu-link active" href=/posts/>Posts</a></li><li><a class=menu-link href=/pages/about/>About</a></li><li class=menu-separator><span>|</span></li></ul><a id=mode href=#><svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg><svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg></a></div></nav></div><div class="wrapper post"><main class=page-content aria-label=Content><article><header class=header><h1 class=header-title>Linux基础命令</h1><div class=post-meta><time datetime=2022-10-14T23:43:37+08:00 itemprop=datePublished>14 Oct 2022</time></div></header><details class=toc><summary><b>Table of Contents</b></summary><nav id=TableOfContents><ul><li><ul><li><a href=#目录相关>目录相关</a></li><li><a href=#文件管理>文件管理</a></li><li><a href=#查看统计文件>查看、统计文件</a></li><li><a href=#用户相关>用户相关</a></li><li><a href=#用户组相关>用户组相关</a></li><li><a href=#权限相关>权限相关</a></li><li><a href=#重定向与管道>重定向与管道</a></li><li><a href=#进程管理>进程管理</a></li><li><a href=#文件压缩>文件压缩</a></li><li><a href=#常用命令>常用命令</a></li></ul></li><li><a href=#source命令>source命令</a><ul><li><a href=#source-filename-与-sh-filename-及filename执行脚本的区别><strong>source filename 与 sh filename 及./filename执行脚本的区别</strong></a></li></ul></li><li><a href=#nohup>nohup</a></li><li><a href=#和-和><code>&&和&</code> 、<code>|和||</code></a><ul><li><a href=#软链接>软链接</a></li><li><a href=#linux脚本开头binbash--binsh>Linux脚本开头<code>#!/bin/bash</code> <code>#!/bin/sh</code></a></li><li><a href=#释放缓存>释放缓存</a></li></ul></li></ul></nav></details><div class=page-content><h3 id=目录相关>目录相关</h3><ul><li><p>系统目录结构</p><p><code>/bin</code> 这个目录存放着最经常使用的命令</p><hr><p><code>/boot</code> 这里存放的是启动Linux时使用的一些核心文件,包括一些链接文件以及镜像文件</p><hr><p><code>/dev</code> 这里存放的是Linux的外部设备,在Linux中访问设备的方式和访问文件的方式是相同的</p><hr><p><code>/etc</code> 这个目录是用来存放所有的系统管理所需要的配置文件和子目录。</p><hr><p><code>/home</code> 用户的主目录,在Linux中,每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的</p><hr><p><code>/lib</code> 这个目录里存放着系统最基本的动态连接共享库，其作用类似于Windows里的DLL文件,几乎所有的应用程序都会用到这些共享库</p><hr><p><code>/lost+found</code> 这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p><hr><p><code>/media</code> Linux系统会自动识别一些设备,例如光驱、u盘等等,等识别后,linux会把识别的设备挂载到这个目录下。</p><hr><p><code>/mnt</code> 系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载/mnt上,然后进入该目录就可以查看光驱的内容了</p><hr><p><code>/opt</code> 这是给主机额外安装软件所拜访的目录。比如安装数据库则可以放在这个目录下,默认是空</p><hr><p><code>/proc</code> 这个目录是一个虚拟的目录，他是系统内存的映射，我们可以用过直接访问这个目录来获取系统信息。这个目录不是在硬盘上而是在内存里</p><hr><p><code>/root</code> 该目录为系统管理员，也称作超级权限者的用户主目录</p><hr><p><code>/sbin</code> 这里存放着的是系统管理员使用的系统管理程序。</p><hr><p><code>/selinux</code> 这个目录是Redhat/CentOS 所特有的目录,Selinux是一个安全机制，类似于windows防火墙</p><hr><p><code>/srv</code> 这个目录存放一些服务启动之后需要提取的数据</p><hr><p><code>/sys</code> 该目录下安装了2.6内核中新出现的一个文件系统 sysfs 。sysfs文件系统集成了下面3种文件系统的信息：针对进程信息的proc文件系统、针对设备的devfs文件系统以及针对伪终端的devpts文件系统。</p><p>该文件系统是内核设备树的一个直观反映。</p><p>当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。</p><hr><p><code>/tmp</code> 这个目录是用来存放一些临时文件的。</p><hr><p><code>/usr</code> 这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于windows下的program files目录。</p><hr><p><code>/usr/bin</code> 系统用户使用的应用程序。</p><hr><p><code>/usr/sbin</code> 超级用户使用的比较高级的管理程序和系统守护程序。</p><hr><p><code>/usr/src</code> 内核源代码默认的放置目录</p><hr><p><code>/var</code> 这个目录中放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放到这个目录下，包括各种日志文件</p><hr><p><code>/run</code> 这是一个临时文件系统，存储系统启动以来的信息.当系统重启市，这个目录下的文件应该被删掉或者清除。如果你的系统上有/var/run目录，应该让它指向run</p><hr><blockquote><p>👉 重要目录：</p><p><strong>/etc</strong> 系统配置文件,更改可能导致系统无法启动。</p><p><strong>/bin</strong> <strong>/sbin</strong> <strong>/usr/bin</strong> <strong>/usr/sbin</strong> 这是系统预设的执行文件的放置目录。</p><ul><li>/bin /usr/bin是给系统用户使用的指令</li><li>/sbin /sur/sbin 是给root用户使用的指令</li></ul><p><strong>/var</strong> 这是一个重要的目录，系统上跑了很多程序，每个程序运行的日志都保存在这个目录( /var/log )下面。</p></blockquote></li><li><p><strong><code>pwd</code> 查看当前工作的位置</strong></p></li><li><p><strong><code>ls</code> 查看目录的内容</strong></p></li><li><p><strong><code>mkdir</code> 创建目录</strong></p></li><li><p><strong><code>cd</code></strong> <strong>从当前位置跳转到指定目录</strong></p></li><li><p><strong><code>rmdir</code> *删除目录*</strong></p></li></ul><h3 id=文件管理>文件管理</h3><ul><li><strong><code>touch</code> 新建文件</strong></li><li><strong><code>cat</code> 查看文本</strong></li><li><strong><code>cp</code> 复制文件</strong></li><li><strong><code>file</code> 查看文件类型</strong></li><li><strong><code>rm</code> 删除文件</strong></li><li><strong><code>mv</code> 移动文件，给文件命名</strong></li><li><code>**find</code> 查找文件**</li></ul><h3 id=查看统计文件>查看、统计文件</h3><ul><li><p><strong><code>more</code> 按屏显示文本文件</strong></p><ul><li>常用参数<ul><li>Enter 向下n行，需要定义。默认为1行</li><li>Ctrl+F 向下滚动一屏</li><li>空格键 向下滚动一屏</li><li>Ctrl+B 返回上一屏</li><li>= 输出当前行的行号</li><li>：f 输出文件名和当前行的行号</li><li>V 调用vi编辑器</li><li>!命令 调用Shell，并执行命令</li><li>q 退出more</li></ul></li></ul></li><li><p><strong><code>less</code> 与more类似，区别在于可以使用Pageup向上查看</strong></p><ul><li><p>常用参数</p><p>-b &lt;缓冲区大小> 设置缓冲区的大小 -e 当文件显示结束后，自动离开 -f 强迫打开特殊文件，例如外围设备代号、目录和二进制文件 -g 只标志最后搜索的关键词 -i 忽略搜索时的大小写 -m 显示类似more命令的百分比 -N 显示每行的行号 -o &lt;文件名> 将less 输出的内容在指定文件中保存起来 -Q 不使用警告音 -s 显示连续空行为一行 -S 行过长时间将超出部分舍弃 -x &lt;数字> 将"tab"键显示为规定的数字空格 /字符串：向下搜索"字符串"的功能 ?字符串：向上搜索"字符串"的功能 n：重复前一个搜索（与 / 或 ? 有关） N：反向重复前一个搜索（与 / 或 ? 有关） b 向上翻一页 d 向后翻半页 h 显示帮助界面 Q 退出less 命令 u 向前滚动半页 y 向前滚动一行 空格键 滚动一页 回车键 滚动一行 [pagedown]： 向下翻动一页 [pageup]： 向上翻动一页</p></li></ul></li><li><p><strong><code>head、tail</code> 局部显示文件，head 显示文件头部，tail显示文件尾部</strong></p></li><li><p><strong><code>wc</code> 文件内容统计</strong></p></li><li><p><strong><code>grep</code> 查找文本文件中与指定模式匹配的行</strong></p></li></ul><h3 id=用户相关>用户相关</h3><ul><li><strong><code>adduser</code> 添加</strong></li><li><strong><code>passwd</code> 设置或更改用户密码</strong></li><li><strong><code>userdel</code> 删除用户</strong></li><li><strong><code>usermod</code> 修改用户属性，常用于启用、禁用账号</strong></li><li><strong><code>su</code> 改变用户身份</strong></li><li><strong><code>who</code> 查看当前登录到系统的用户是谁</strong></li></ul><h3 id=用户组相关>用户组相关</h3><ul><li><strong><code>group</code></strong></li><li><strong><code>groupadd</code> 添加用户组</strong></li><li><strong><code>groupdel</code> 删除组， 删除之前组内不能有用户</strong></li><li><strong><code>usermod</code> 更改组账号</strong></li></ul><h3 id=权限相关>权限相关</h3><blockquote><p>👇 <strong>-rw-rw-r&ndash;</strong></p><p>第一个位置指定了文件类型。-表示非目录的文件，d表示目录文件。</p><p>2-4位表示属主权限，5-7位表示属主同组的用户权限，8-10表示其他用户权限</p><p>数值设定发： 0表示没有权限，1表示可执行权限，2表示可写权限，4表示可读权限。</p><p>644 (属主可读可写，同组和其他用户可读权限)</p></blockquote><ul><li><strong><code>chmod</code> 用于改变文件或目录的访问权限</strong></li><li><strong><code>chown</code> 更改文件或目录的所有者</strong></li></ul><h3 id=重定向与管道>重定向与管道</h3><ul><li><strong><code>></code></strong> 将结果重定向到某个位置 <code>>></code> 表示输出追加到文件末尾</li><li><strong><code>grep 'am'&lt; filename</code></strong> 输入重定向（grep是在filename文件中搜索“am”字符串）</li></ul><h3 id=进程管理>进程管理</h3><ul><li><strong><code>ps</code> 显示进程</strong></li><li><strong><code>top</code> 动态显示进程</strong></li><li><strong><code>kill</code> 中断进程</strong></li></ul><h3 id=文件压缩>文件压缩</h3><ul><li><strong><code>zip</code> 打包和压缩文件</strong></li><li><strong><code>unzip</code> 对压缩包进行解压缩</strong></li><li><strong><code>gzip</code> 压缩文件，不能压缩多个</strong></li><li><strong><code>tar</code> 打包文件，gzip不能压缩多个文件，先打包再压缩。<code>.tgz</code> 后缀</strong></li><li><strong><code>gunzip</code> 对压缩包解压缩</strong></li></ul><h3 id=常用命令>常用命令</h3><p><strong>系统常用</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ssh root@0.0.0.0               <span class=c1># ssh登录linux</span>
-</span></span><span class=line><span class=cl><span class=nb>cd</span>                             <span class=c1>#  切换命令</span>
-</span></span><span class=line><span class=cl>cp                             <span class=c1>#  拷贝</span>
-</span></span><span class=line><span class=cl>mv                             <span class=c1>#  移动</span>
-</span></span><span class=line><span class=cl>mkdir                          <span class=c1>#  创建文件夹</span>
-</span></span><span class=line><span class=cl>touch                          <span class=c1>#  创建文件</span>
-</span></span><span class=line><span class=cl>rm                             <span class=c1>#  删除文件</span>
-</span></span><span class=line><span class=cl>rm -rf                         <span class=c1>#  强行删除</span>
-</span></span><span class=line><span class=cl>rmdir                          <span class=c1>#  删除文件夹</span>
-</span></span><span class=line><span class=cl>ll                             <span class=c1>#  查看文件列表</span>
-</span></span><span class=line><span class=cl>cat                            <span class=c1>#  查看文件全部内容</span>
-</span></span><span class=line><span class=cl>find                           <span class=c1>#  查找文件</span>
-</span></span><span class=line><span class=cl>ps -elf<span class=p>|</span>grep tomcat            <span class=c1>#  查看tomcat进程</span>
-</span></span><span class=line><span class=cl>ps -ef <span class=p>|</span> grep     
-</span></span><span class=line><span class=cl>ps -aux <span class=p>|</span> grep                 查看后台进程
-</span></span><span class=line><span class=cl>sudo su                        <span class=c1># 切换到root用户</span>
-</span></span><span class=line><span class=cl>clear reset                    <span class=c1># 清除命令行屏幕 (快捷键: ctrl + l)</span>
-</span></span><span class=line><span class=cl>xxx xxx <span class=p>&amp;</span>                      <span class=c1># 后台运行命令</span>
-</span></span><span class=line><span class=cl><span class=nb>jobs</span> -l                        <span class=c1># 显示所有任务的pid</span>
-</span></span><span class=line><span class=cl><span class=nb>kill</span> pid                       <span class=c1># 杀掉对应的pid</span>
-</span></span><span class=line><span class=cl>top -c                         <span class=c1># 查看cpu资源占用</span>
-</span></span><span class=line><span class=cl><span class=nb>history</span>                        <span class=c1># 查看历史命令</span>
-</span></span><span class=line><span class=cl>su user                        <span class=c1># 表示切换用户，</span>
-</span></span><span class=line><span class=cl>sudo                           <span class=c1># 表示获取临时的root权限命令</span>
-</span></span></code></pre></div><p><strong>vim</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Esc                     <span class=c1># 进入命令模式</span>
-</span></span><span class=line><span class=cl>:set nonu               <span class=c1># 关闭行号</span>
-</span></span><span class=line><span class=cl>:set num                <span class=c1># 开启行号</span>
-</span></span><span class=line><span class=cl>: wq                    <span class=c1># 保存并退出</span>
-</span></span><span class=line><span class=cl>: q                     <span class=c1># 不保存退出</span>
-</span></span><span class=line><span class=cl>: q!                    <span class=c1># 强制退出</span>
-</span></span><span class=line><span class=cl>i                       <span class=c1># 进入编辑模式</span>
-</span></span></code></pre></div><p>添加用户</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#    urseadd 选项 用户名</span>
-</span></span><span class=line><span class=cl>useradd -d /usr/sam -m sam             <span class=c1>#-d和-m选项用来为登录名sam产生一个主目录/usr/sam</span>
-</span></span><span class=line><span class=cl>passwd  username                     <span class=c1># 设置密码</span>
-</span></span><span class=line><span class=cl>groupadd <span class=nb>test</span>                         <span class=c1># 增加工作组</span>
-</span></span><span class=line><span class=cl>gpasswd -a username groupname         <span class=c1># 将用户添加到工作组</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>用户列表文件：/etc/passwd
-</span></span><span class=line><span class=cl>用户组列表文件：/etc/group
-</span></span></code></pre></div><blockquote><p>💡 添加用户到某一个组 可以使用 usermod -G groupname username这个命令可以添加一个用户到指定的组，但是以前添加的组就会清空掉。</p></blockquote><h2 id=source命令>source命令</h2><h3 id=source-filename-与-sh-filename-及filename执行脚本的区别><strong>source filename 与 sh filename 及./filename执行脚本的区别</strong></h3><ol><li>当shell脚本具有可执行权限时，用<code>sh filename</code>与<code>./filename</code>执行脚本是没有区别得。<code>./filename</code>是因为当前目录没有在PATH中，所有”.”是用来表示当前目录的。</li><li><code>sh filename</code> 重新建立一个子shell，在子shell中执行脚本里面的语句，该子shell继承父shell的环境变量，但子shell新建的、改变的变量不会被带回父shell，除非使用export。</li><li><code>source filename</code>：这个命令其实只是简单地读取脚本里面的语句依次在当前shell里面执行，没有建立新的子shell。那么脚本里面所有新建、改变变量的语句都会保存在当前shell里面。</li></ol><h2 id=nohup>nohup</h2><p><code>nohup xxxx &</code> 将程序以忽略挂起信号的方式运行起来</p><ul><li><p><code>jobs -l</code> 查看后台进程，只能查看当前终端，关闭终端后不能查看。</p></li><li><pre tabindex=0><code>ps -aux |gerp xxxx
-</code></pre><p>查看后台程序</p><ol><li>a : 显示所有程序</li><li>u: 以用户为主的格式来显示</li><li>x: 显示所有程序，不以终端机来区分</li></ol></li><li><p>nohup 默认输出到附加到当前目录的nohup.out文件中 如果当前的nohup.out 文件不可写，则输出重定向到 $HOME/nohup.out文件 如果没有文件能创建或者打开用于追加，则需要的运行的命令不可调用</p></li><li><p>执行shell命令时，默认打开3个文件。<code>标准输入</code> <code>标准输出</code> <code>错误输出</code></p><p><img src=https://img.mfcp.fun/blog-img/Untitled.png alt=Untitled></p></li><li><p><code>>/dev/null</code> /dev/null代表linux的空设备文件，所有往这个文件里面写入的内容都会丢失</p></li><li><p><code>nohup xxx >/dev/null 2>&amp;1 &</code> 什么信息也不输出</p><aside>📢 2>&1 重定向绑定，采用&可以将两个输出绑定在一起。这条命令的作用是错误输出将和标准输出同用一个文件描述符，说人话就是错误输出将会和标准输出输出到同一个地方</aside></li><li><p><code>nohup xxx >/dev/null 2>log &</code> 只输出错误输出到log文件中</p></li></ul><h2 id=和-和><code>&&和&</code> 、<code>|和||</code></h2><ul><li>& 表示任务在后台执行，如要在后台运行redis-server,则有 redis-server &</li><li>&& 表示前一条命令执行成功时，才执行后一条命令 ，如 echo ‘1‘ && echo ‘2’</li><li>| 表示管道，上一条命令的输出，作为下一条命令参数，如 echo ‘yes’ | wc -l</li><li>|| 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo “fail”</li></ul><h3 id=软链接>软链接</h3><aside>📢 2022-0606 今天发现直接在目录链接不行，报错找不到命令，cd到/usr/local/bin 然后执行 ln命令就可以。暂时未搞懂原因。</aside><p><code>ln -s xxx.sh /usr/local/bin</code> 把shell脚本添加软链接全局执行</p><h3 id=linux脚本开头binbash--binsh>Linux脚本开头<code>#!/bin/bash</code> <code>#!/bin/sh</code></h3><p>#!/bin/sh是指此脚本使用/bin/sh来解释执行，#!是特殊的表示符，其后面根的是此解释此脚本的shell的路径</p><h3 id=释放缓存>释放缓存</h3><pre tabindex=0><code>echo 1 &gt; /proc/sys/vm/drop_caches # 仅清除页面缓存` `echo 2 &gt; /proc/sys/vm/drop_caches # 清除目录项和inode` `echo 3 &gt; /proc/sys/vm/drop_caches # 清除页面缓存、目录项以及inode
-</code></pre></div></article></main></div><footer class=footer><span class=footer_item></span>&nbsp;<div class=footer_social-icons><a href=https://github.com/mugeliu/ target=_blank rel="noopener noreferrer me" title=Github><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a><a href=https://twitter.com target=_blank rel="noopener noreferrer me" title=Twitter><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a><a href=index.xml target=_blank rel="noopener noreferrer me" title=Rss><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></div><small class=footer_copyright>© 2024 mmm6.
-Powered by <a href=https://github.com/hugo-sid/hugo-blog-awesome target=_blank rel="noreferrer noopener">Hugo blog awesome</a>
-theme on
-<a href=https://gohugo.io target=_blank rel="noreferrer noopener">Hugo</a>.</small></footer><a href=# title="Go to top" id=totop><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentcolor" stroke="currentcolor" viewBox="0 96 960 960"><path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197z"/></svg></a><script src=https://blog.mfcp.fun/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30+lSNuSkl4QXuNyy8="></script></body></html>
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">Linux基础命令 | Awesome Hugo blog</title>
+<meta property="og:title" content="Linux基础命令 | Awesome Hugo blog" />
+<meta name="twitter:title" content="Linux基础命令 | Awesome Hugo blog" />
+<meta itemprop="name" content="Linux基础命令 | Awesome Hugo blog" />
+<meta name="application-name" content="Linux基础命令 | Awesome Hugo blog" />
+<meta property="og:site_name" content="xirang&#39;blog" />
+
+<meta name="description" content="Minimal Hugo blog theme with light and dark mode support">
+<meta itemprop="description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta name="twitter:description" content="Minimal Hugo blog theme with light and dark mode support" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+
+
+  <meta itemprop="image" content="https://blog.mfcp.fun/" />
+  <meta property="og:image" content="https://blog.mfcp.fun/" />
+  <meta name="twitter:image" content="https://blog.mfcp.fun/" />
+  <meta name="twitter:image:src" content="https://blog.mfcp.fun/" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2022-10-14T23:43:37&#43;0800 />
+    <meta property="article:published_time" content=2022-10-14T23:43:37&#43;0800 />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Linux基础命令",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2022-10-14",
+        "description": "",
+        "wordCount":  528 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2022-10-14",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Awesome Hugo blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.112.4">
+
+    
+
+    <link rel="canonical" href="https://blog.mfcp.fun/posts/62bfad7a36da70d16da2cbd16e4e29a0/">
+    <link href="/style.min.840eada6dfddec7b8ccfcf867f039bf80b1f16a265ec6e01dc553a3dddc9d509.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://blog.mfcp.fun/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.js"></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://blog.mfcp.fun/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Linux基础命令</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2022-10-14T23:43:37&#43;08:00" itemprop="datePublished"> 14 Oct 2022 </time>
+                </div>
+                
+            </header>
+            <details class="toc">
+                <summary><b>Table of Contents</b></summary>
+                <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#目录相关">目录相关</a></li>
+        <li><a href="#文件管理">文件管理</a></li>
+        <li><a href="#查看统计文件">查看、统计文件</a></li>
+        <li><a href="#用户相关">用户相关</a></li>
+        <li><a href="#用户组相关">用户组相关</a></li>
+        <li><a href="#权限相关">权限相关</a></li>
+        <li><a href="#重定向与管道">重定向与管道</a></li>
+        <li><a href="#进程管理">进程管理</a></li>
+        <li><a href="#文件压缩">文件压缩</a></li>
+        <li><a href="#常用命令">常用命令</a></li>
+      </ul>
+    </li>
+    <li><a href="#source命令">source命令</a>
+      <ul>
+        <li><a href="#source-filename-与-sh-filename-及filename执行脚本的区别"><strong>source filename 与 sh filename 及./filename执行脚本的区别</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#nohup">nohup</a></li>
+    <li><a href="#和-和"><code>&amp;&amp;和&amp;</code> 、<code>|和||</code></a>
+      <ul>
+        <li><a href="#软链接">软链接</a></li>
+        <li><a href="#linux脚本开头binbash--binsh">Linux脚本开头<code>#!/bin/bash</code>  <code>#!/bin/sh</code></a></li>
+        <li><a href="#释放缓存">释放缓存</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </details><div class="page-content">
+                <h3 id="目录相关">目录相关</h3>
+<ul>
+<li>
+<p>系统目录结构</p>
+<p><code>/bin </code>        这个目录存放着最经常使用的命令</p>
+<hr>
+<p><code>/boot </code>      这里存放的是启动Linux时使用的一些核心文件,包括一些链接文件以及镜像文件</p>
+<hr>
+<p><code>/dev </code>        这里存放的是Linux的外部设备,在Linux中访问设备的方式和访问文件的方式是相同的</p>
+<hr>
+<p><code>/etc </code>        这个目录是用来存放所有的系统管理所需要的配置文件和子目录。</p>
+<hr>
+<p><code>/home</code>      用户的主目录,在Linux中,每个用户都有一个自己的目录，一般该目录名是以用户的账号命名的</p>
+<hr>
+<p><code>/lib</code>       这个目录里存放着系统最基本的动态连接共享库，其作用类似于Windows里的DLL文件,几乎所有的应用程序都会用到这些共享库</p>
+<hr>
+<p><code>/lost+found </code>        这个目录一般情况下是空的，当系统非法关机后，这里就存放了一些文件。</p>
+<hr>
+<p><code>/media </code>        Linux系统会自动识别一些设备,例如光驱、u盘等等,等识别后,linux会把识别的设备挂载到这个目录下。</p>
+<hr>
+<p><code>/mnt </code>        系统提供该目录是为了让用户临时挂载别的文件系统的，我们可以将光驱挂载/mnt上,然后进入该目录就可以查看光驱的内容了</p>
+<hr>
+<p><code>/opt</code>        这是给主机额外安装软件所拜访的目录。比如安装数据库则可以放在这个目录下,默认是空</p>
+<hr>
+<p><code>/proc </code>        这个目录是一个虚拟的目录，他是系统内存的映射，我们可以用过直接访问这个目录来获取系统信息。这个目录不是在硬盘上而是在内存里</p>
+<hr>
+<p><code>/root</code>  该目录为系统管理员，也称作超级权限者的用户主目录</p>
+<hr>
+<p><code>/sbin</code>   这里存放着的是系统管理员使用的系统管理程序。</p>
+<hr>
+<p><code>/selinux</code>  这个目录是Redhat/CentOS 所特有的目录,Selinux是一个安全机制，类似于windows防火墙</p>
+<hr>
+<p><code>/srv</code>  这个目录存放一些服务启动之后需要提取的数据</p>
+<hr>
+<p><code>/sys</code>     该目录下安装了2.6内核中新出现的一个文件系统 sysfs 。sysfs文件系统集成了下面3种文件系统的信息：针对进程信息的proc文件系统、针对设备的devfs文件系统以及针对伪终端的devpts文件系统。</p>
+<p>该文件系统是内核设备树的一个直观反映。</p>
+<p>当一个内核对象被创建的时候，对应的文件和目录也在内核对象子系统中被创建。</p>
+<hr>
+<p><code>/tmp</code>  这个目录是用来存放一些临时文件的。</p>
+<hr>
+<p><code>/usr</code> 这是一个非常重要的目录，用户的很多应用程序和文件都放在这个目录下，类似于windows下的program files目录。</p>
+<hr>
+<p><code>/usr/bin</code> 系统用户使用的应用程序。</p>
+<hr>
+<p><code>/usr/sbin</code> 超级用户使用的比较高级的管理程序和系统守护程序。</p>
+<hr>
+<p><code>/usr/src</code> 内核源代码默认的放置目录</p>
+<hr>
+<p><code>/var</code> 这个目录中放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放到这个目录下，包括各种日志文件</p>
+<hr>
+<p><code>/run</code> 这是一个临时文件系统，存储系统启动以来的信息.当系统重启市，这个目录下的文件应该被删掉或者清除。如果你的系统上有/var/run目录，应该让它指向run</p>
+<hr>
+<blockquote>
+<p>👉 重要目录：</p>
+<p><strong>/etc</strong>   系统配置文件,更改可能导致系统无法启动。</p>
+<p><strong>/bin</strong>  <strong>/sbin</strong>   <strong>/usr/bin</strong>   <strong>/usr/sbin</strong>  这是系统预设的执行文件的放置目录。</p>
+<ul>
+<li>/bin /usr/bin是给系统用户使用的指令</li>
+<li>/sbin /sur/sbin 是给root用户使用的指令</li>
+</ul>
+<p><strong>/var</strong>  这是一个重要的目录，系统上跑了很多程序，每个程序运行的日志都保存在这个目录( /var/log )下面。</p>
+</blockquote>
+</li>
+<li>
+<p><strong><code>pwd</code>    查看当前工作的位置</strong></p>
+</li>
+<li>
+<p><strong><code>ls</code>     查看目录的内容</strong></p>
+</li>
+<li>
+<p><strong><code>mkdir</code>    创建目录</strong></p>
+</li>
+<li>
+<p><strong><code>cd</code></strong>     <strong>从当前位置跳转到指定目录</strong></p>
+</li>
+<li>
+<p><strong><code>rmdir</code>    *删除目录*</strong></p>
+</li>
+</ul>
+<h3 id="文件管理">文件管理</h3>
+<ul>
+<li><strong><code>touch</code>     新建文件</strong></li>
+<li><strong><code>cat</code>      查看文本</strong></li>
+<li><strong><code>cp</code>       复制文件</strong></li>
+<li><strong><code>file</code>       查看文件类型</strong></li>
+<li><strong><code>rm</code>     删除文件</strong></li>
+<li><strong><code>mv</code>     移动文件，给文件命名</strong></li>
+<li><code>**find</code>     查找文件**</li>
+</ul>
+<h3 id="查看统计文件">查看、统计文件</h3>
+<ul>
+<li>
+<p><strong><code>more</code>   按屏显示文本文件</strong></p>
+<ul>
+<li>常用参数
+<ul>
+<li>Enter 向下n行，需要定义。默认为1行</li>
+<li>Ctrl+F 向下滚动一屏</li>
+<li>空格键 向下滚动一屏</li>
+<li>Ctrl+B 返回上一屏</li>
+<li>= 输出当前行的行号</li>
+<li>：f 输出文件名和当前行的行号</li>
+<li>V 调用vi编辑器</li>
+<li>!命令 调用Shell，并执行命令</li>
+<li>q 退出more</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>less</code>    与more类似，区别在于可以使用Pageup向上查看</strong></p>
+<ul>
+<li>
+<p>常用参数</p>
+<p>-b &lt;缓冲区大小&gt; 设置缓冲区的大小 -e 当文件显示结束后，自动离开 -f 强迫打开特殊文件，例如外围设备代号、目录和二进制文件 -g 只标志最后搜索的关键词 -i 忽略搜索时的大小写 -m 显示类似more命令的百分比 -N 显示每行的行号 -o &lt;文件名&gt; 将less 输出的内容在指定文件中保存起来 -Q 不使用警告音 -s 显示连续空行为一行 -S 行过长时间将超出部分舍弃 -x &lt;数字&gt; 将&quot;tab&quot;键显示为规定的数字空格 /字符串：向下搜索&quot;字符串&quot;的功能 ?字符串：向上搜索&quot;字符串&quot;的功能 n：重复前一个搜索（与 / 或 ? 有关） N：反向重复前一个搜索（与 / 或 ? 有关） b 向上翻一页 d 向后翻半页 h 显示帮助界面 Q 退出less 命令 u 向前滚动半页 y 向前滚动一行 空格键 滚动一页 回车键 滚动一行 [pagedown]： 向下翻动一页 [pageup]： 向上翻动一页</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong><code>head、tail</code>     局部显示文件，head 显示文件头部，tail显示文件尾部</strong></p>
+</li>
+<li>
+<p><strong><code>wc</code> 文件内容统计</strong></p>
+</li>
+<li>
+<p><strong><code>grep</code>   查找文本文件中与指定模式匹配的行</strong></p>
+</li>
+</ul>
+<h3 id="用户相关">用户相关</h3>
+<ul>
+<li><strong><code>adduser</code>  添加</strong></li>
+<li><strong><code>passwd</code>       设置或更改用户密码</strong></li>
+<li><strong><code>userdel</code>     删除用户</strong></li>
+<li><strong><code>usermod</code>    修改用户属性，常用于启用、禁用账号</strong></li>
+<li><strong><code>su</code>   改变用户身份</strong></li>
+<li><strong><code>who</code>     查看当前登录到系统的用户是谁</strong></li>
+</ul>
+<h3 id="用户组相关">用户组相关</h3>
+<ul>
+<li><strong><code>group</code></strong></li>
+<li><strong><code>groupadd</code>    添加用户组</strong></li>
+<li><strong><code>groupdel</code>   删除组，   删除之前组内不能有用户</strong></li>
+<li><strong><code>usermod</code>    更改组账号</strong></li>
+</ul>
+<h3 id="权限相关">权限相关</h3>
+<blockquote>
+<p>👇  <strong>-rw-rw-r&ndash;</strong></p>
+<p>第一个位置指定了文件类型。-表示非目录的文件，d表示目录文件。</p>
+<p>2-4位表示属主权限，5-7位表示属主同组的用户权限，8-10表示其他用户权限</p>
+<p>数值设定发： 0表示没有权限，1表示可执行权限，2表示可写权限，4表示可读权限。</p>
+<p>644 (属主可读可写，同组和其他用户可读权限)</p>
+</blockquote>
+<ul>
+<li><strong><code>chmod</code>   用于改变文件或目录的访问权限</strong></li>
+<li><strong><code>chown</code>   更改文件或目录的所有者</strong></li>
+</ul>
+<h3 id="重定向与管道">重定向与管道</h3>
+<ul>
+<li><strong><code>&gt;</code></strong>   将结果重定向到某个位置     <code>&gt;&gt;</code> 表示输出追加到文件末尾</li>
+<li><strong><code>grep 'am'&lt; filename</code></strong>    输入重定向（grep是在filename文件中搜索“am”字符串）</li>
+</ul>
+<h3 id="进程管理">进程管理</h3>
+<ul>
+<li><strong><code>ps</code>   显示进程</strong></li>
+<li><strong><code>top</code>    动态显示进程</strong></li>
+<li><strong><code>kill</code>    中断进程</strong></li>
+</ul>
+<h3 id="文件压缩">文件压缩</h3>
+<ul>
+<li><strong><code>zip</code>  打包和压缩文件</strong></li>
+<li><strong><code>unzip</code>    对压缩包进行解压缩</strong></li>
+<li><strong><code>gzip</code>     压缩文件，不能压缩多个</strong></li>
+<li><strong><code>tar</code>    打包文件，gzip不能压缩多个文件，先打包再压缩。<code>.tgz</code> 后缀</strong></li>
+<li><strong><code>gunzip</code>    对压缩包解压缩</strong></li>
+</ul>
+<h3 id="常用命令">常用命令</h3>
+<p><strong>系统常用</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">ssh root@0.0.0.0               <span class="c1"># ssh登录linux</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span>                             <span class="c1">#  切换命令</span>
+</span></span><span class="line"><span class="cl">cp                             <span class="c1">#  拷贝</span>
+</span></span><span class="line"><span class="cl">mv                             <span class="c1">#  移动</span>
+</span></span><span class="line"><span class="cl">mkdir                          <span class="c1">#  创建文件夹</span>
+</span></span><span class="line"><span class="cl">touch                          <span class="c1">#  创建文件</span>
+</span></span><span class="line"><span class="cl">rm                             <span class="c1">#  删除文件</span>
+</span></span><span class="line"><span class="cl">rm -rf                         <span class="c1">#  强行删除</span>
+</span></span><span class="line"><span class="cl">rmdir                          <span class="c1">#  删除文件夹</span>
+</span></span><span class="line"><span class="cl">ll                             <span class="c1">#  查看文件列表</span>
+</span></span><span class="line"><span class="cl">cat                            <span class="c1">#  查看文件全部内容</span>
+</span></span><span class="line"><span class="cl">find                           <span class="c1">#  查找文件</span>
+</span></span><span class="line"><span class="cl">ps -elf<span class="p">|</span>grep tomcat            <span class="c1">#  查看tomcat进程</span>
+</span></span><span class="line"><span class="cl">ps -ef <span class="p">|</span> grep     
+</span></span><span class="line"><span class="cl">ps -aux <span class="p">|</span> grep                 查看后台进程
+</span></span><span class="line"><span class="cl">sudo su                        <span class="c1"># 切换到root用户</span>
+</span></span><span class="line"><span class="cl">clear reset                    <span class="c1"># 清除命令行屏幕 (快捷键: ctrl + l)</span>
+</span></span><span class="line"><span class="cl">xxx xxx <span class="p">&amp;</span>                      <span class="c1"># 后台运行命令</span>
+</span></span><span class="line"><span class="cl"><span class="nb">jobs</span> -l                        <span class="c1"># 显示所有任务的pid</span>
+</span></span><span class="line"><span class="cl"><span class="nb">kill</span> pid                       <span class="c1"># 杀掉对应的pid</span>
+</span></span><span class="line"><span class="cl">top -c                         <span class="c1"># 查看cpu资源占用</span>
+</span></span><span class="line"><span class="cl"><span class="nb">history</span>                        <span class="c1"># 查看历史命令</span>
+</span></span><span class="line"><span class="cl">su user                        <span class="c1"># 表示切换用户，</span>
+</span></span><span class="line"><span class="cl">sudo                           <span class="c1"># 表示获取临时的root权限命令</span>
+</span></span></code></pre></div><p><strong>vim</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Esc                     <span class="c1"># 进入命令模式</span>
+</span></span><span class="line"><span class="cl">:set nonu               <span class="c1"># 关闭行号</span>
+</span></span><span class="line"><span class="cl">:set num                <span class="c1"># 开启行号</span>
+</span></span><span class="line"><span class="cl">: wq                    <span class="c1"># 保存并退出</span>
+</span></span><span class="line"><span class="cl">: q                     <span class="c1"># 不保存退出</span>
+</span></span><span class="line"><span class="cl">: q!                    <span class="c1"># 强制退出</span>
+</span></span><span class="line"><span class="cl">i                       <span class="c1"># 进入编辑模式</span>
+</span></span></code></pre></div><p>添加用户</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#    urseadd 选项 用户名</span>
+</span></span><span class="line"><span class="cl">useradd -d /usr/sam -m sam             <span class="c1">#-d和-m选项用来为登录名sam产生一个主目录/usr/sam</span>
+</span></span><span class="line"><span class="cl">passwd  username                     <span class="c1"># 设置密码</span>
+</span></span><span class="line"><span class="cl">groupadd <span class="nb">test</span>                         <span class="c1"># 增加工作组</span>
+</span></span><span class="line"><span class="cl">gpasswd -a username groupname         <span class="c1"># 将用户添加到工作组</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">用户列表文件：/etc/passwd
+</span></span><span class="line"><span class="cl">用户组列表文件：/etc/group
+</span></span></code></pre></div><blockquote>
+<p>💡 添加用户到某一个组 可以使用 usermod  -G  groupname  username这个命令可以添加一个用户到指定的组，但是以前添加的组就会清空掉。</p>
+</blockquote>
+<h2 id="source命令">source命令</h2>
+<h3 id="source-filename-与-sh-filename-及filename执行脚本的区别"><strong>source filename 与 sh filename 及./filename执行脚本的区别</strong></h3>
+<ol>
+<li>当shell脚本具有可执行权限时，用<code>sh filename</code>与<code>./filename</code>执行脚本是没有区别得。<code>./filename</code>是因为当前目录没有在PATH中，所有”.”是用来表示当前目录的。</li>
+<li><code>sh filename</code> 重新建立一个子shell，在子shell中执行脚本里面的语句，该子shell继承父shell的环境变量，但子shell新建的、改变的变量不会被带回父shell，除非使用export。</li>
+<li><code>source filename</code>：这个命令其实只是简单地读取脚本里面的语句依次在当前shell里面执行，没有建立新的子shell。那么脚本里面所有新建、改变变量的语句都会保存在当前shell里面。</li>
+</ol>
+<h2 id="nohup">nohup</h2>
+<p><code>nohup xxxx  &amp;</code> 将程序以忽略挂起信号的方式运行起来</p>
+<ul>
+<li>
+<p><code>jobs -l</code>  查看后台进程，只能查看当前终端，关闭终端后不能查看。</p>
+</li>
+<li>
+<pre tabindex="0"><code>ps -aux |gerp xxxx
+</code></pre><p>查看后台程序</p>
+<ol>
+<li>a : 显示所有程序</li>
+<li>u: 以用户为主的格式来显示</li>
+<li>x: 显示所有程序，不以终端机来区分</li>
+</ol>
+</li>
+<li>
+<p>nohup 默认输出到附加到当前目录的nohup.out文件中 如果当前的nohup.out 文件不可写，则输出重定向到 $HOME/nohup.out文件 如果没有文件能创建或者打开用于追加，则需要的运行的命令不可调用</p>
+</li>
+<li>
+<p>执行shell命令时，默认打开3个文件。<code>标准输入</code>  <code>标准输出</code>  <code>错误输出</code></p>
+<p><img src="https://img.mfcp.fun/blog-img/Untitled.png" alt="Untitled"></p>
+</li>
+<li>
+<p><code>&gt;/dev/null</code>   /dev/null代表linux的空设备文件，所有往这个文件里面写入的内容都会丢失</p>
+</li>
+<li>
+<p><code>nohup xxx &gt;/dev/null 2&gt;&amp;1 &amp;</code>     什么信息也不输出</p>
+<aside> 📢 2>&1 重定向绑定，采用&可以将两个输出绑定在一起。这条命令的作用是错误输出将和标准输出同用一个文件描述符，说人话就是错误输出将会和标准输出输出到同一个地方
+</aside>
+</li>
+<li>
+<p><code>nohup xxx &gt;/dev/null 2&gt;log &amp;</code>    只输出错误输出到log文件中</p>
+</li>
+</ul>
+<h2 id="和-和"><code>&amp;&amp;和&amp;</code> 、<code>|和||</code></h2>
+<ul>
+<li>&amp; 表示任务在后台执行，如要在后台运行redis-server,则有 redis-server &amp;</li>
+<li>&amp;&amp; 表示前一条命令执行成功时，才执行后一条命令 ，如 echo ‘1‘ &amp;&amp; echo ‘2’</li>
+<li>| 表示管道，上一条命令的输出，作为下一条命令参数，如 echo ‘yes’ | wc -l</li>
+<li>|| 表示上一条命令执行失败后，才执行下一条命令，如 cat nofile || echo “fail”</li>
+</ul>
+<h3 id="软链接">软链接</h3>
+<aside> 📢 2022-0606  今天发现直接在目录链接不行，报错找不到命令，cd到/usr/local/bin 然后执行 ln命令就可以。暂时未搞懂原因。
+</aside>
+<p><code>ln -s xxx.sh /usr/local/bin</code>   把shell脚本添加软链接全局执行</p>
+<h3 id="linux脚本开头binbash--binsh">Linux脚本开头<code>#!/bin/bash</code>  <code>#!/bin/sh</code></h3>
+<p>#!/bin/sh是指此脚本使用/bin/sh来解释执行，#!是特殊的表示符，其后面根的是此解释此脚本的shell的路径</p>
+<h3 id="释放缓存">释放缓存</h3>
+<pre tabindex="0"><code>echo 1 &gt; /proc/sys/vm/drop_caches # 仅清除页面缓存` `echo 2 &gt; /proc/sys/vm/drop_caches # 清除目录项和inode` `echo 3 &gt; /proc/sys/vm/drop_caches # 清除页面缓存、目录项以及inode
+</code></pre>
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/mugeliu/" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2024 mmm6.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noreferrer noopener">Hugo blog awesome</a>
+        theme on
+        <a href="https://gohugo.io" target="_blank" rel="noreferrer noopener">Hugo</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script async src="https://blog.mfcp.fun/js/main.js" ></script>
+
+    
+
+</body>
+</html>

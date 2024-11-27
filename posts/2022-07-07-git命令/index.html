@@ -1,107 +1,420 @@
-<!doctype html><html lang=en-gb><head><meta charset=utf-8><meta http-equiv=content-type content="text/html"><meta name=viewport content="width=device-width,initial-scale=1"><title itemprop=name>git命令 | Awesome Hugo blog</title><meta property="og:title" content="git命令 | Awesome Hugo blog"><meta name=twitter:title content="git命令 | Awesome Hugo blog"><meta itemprop=name content="git命令 | Awesome Hugo blog"><meta name=application-name content="git命令 | Awesome Hugo blog"><meta property="og:site_name" content="xirang'blog"><meta name=description content="Minimal Hugo blog theme with light and dark mode support"><meta itemprop=description content="Minimal Hugo blog theme with light and dark mode support"><meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support"><meta name=twitter:description content="Minimal Hugo blog theme with light and dark mode support"><meta property="og:locale" content="en-gb"><meta name=language content="en-gb"><meta itemprop=image content="https://blog.mfcp.fun/"><meta property="og:image" content="https://blog.mfcp.fun/"><meta name=twitter:image content="https://blog.mfcp.fun/"><meta name=twitter:image:src content="https://blog.mfcp.fun/"><meta property="og:type" content="article"><meta property="og:article:published_time" content="2022-07-07T17:38:13Z"><meta property="article:published_time" content="2022-07-07T17:38:13Z"><script defer type=application/ld+json>{"@context":"http://schema.org","@type":"Article","headline":"git命令","author":{"@type":"Person","name":""},"datePublished":"2022-07-07","description":"","wordCount":443,"mainEntityOfPage":"True","dateModified":"2022-07-07","image":{"@type":"imageObject","url":""},"publisher":{"@type":"Organization","name":"Awesome Hugo blog"}}</script><meta name=generator content="Hugo 0.112.4"><link rel=canonical href=https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/><link href=/style.min.840eada6dfddec7b8ccfcf867f039bf80b1f16a265ec6e01dc553a3dddc9d509.css rel=stylesheet><link href=/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css rel=stylesheet><link rel=apple-touch-icon sizes=180x180 href=/icons/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/icons/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/icons/favicon-16x16.png><link rel=mask-icon href=/icons/safari-pinned-tab.svg><link rel="shortcut icon" href=/favicon.ico><link rel=manifest href=https://blog.mfcp.fun/site.webmanifest><meta name=msapplication-config content="/browserconfig.xml"><meta name=msapplication-TileColor content="#2d89ef"><meta name=theme-color content="#434648"><link rel=icon type=image/svg+xml href=/icons/favicon.svg></head><body data-theme=auto class=notransition><script src=/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script><div class=navbar role=navigation><nav class=menu aria-label="Main Navigation"><a href=https://blog.mfcp.fun/ class=logo><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><title>Home</title><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></a><input type=checkbox id=menu-trigger class=menu-trigger>
-<label for=menu-trigger><span class=menu-icon><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentcolor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7H3.40726"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"/><path stroke-linecap="round" stroke-linejoin="round" d="M.5 12.5V1.5c0-.552285.447715-1 1-1h11C13.0523.5 13.5.947715 13.5 1.5v11C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C.947715 13.5.5 13.0523.5 12.5z"/></svg></span></label><div class=trigger><ul class=trigger-container><li><a class=menu-link href=/>Home</a></li><li><a class="menu-link active" href=/posts/>Posts</a></li><li><a class=menu-link href=/pages/about/>About</a></li><li class=menu-separator><span>|</span></li></ul><a id=mode href=#><svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg><svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1"><title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1=".5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1=".5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g></svg></a></div></nav></div><div class="wrapper post"><main class=page-content aria-label=Content><article><header class=header><h1 class=header-title>git命令</h1><div class=post-meta><time datetime=2022-07-07T17:38:13+00:00 itemprop=datePublished>7 Jul 2022</time></div></header><details class=toc><summary><b>Table of Contents</b></summary><nav id=TableOfContents><ul><li><a href=#远程仓库的创建>远程仓库的创建</a><ul><li><a href=#从远程仓库克隆一本地库>从远程仓库克隆一本地库</a></li><li><a href=#删除git远程仓库的文件>删除git远程仓库的文件</a></li><li><a href=#创建分支和合并分支>创建分支和合并分支</a></li><li><a href=#bug-分支>bug 分支</a></li><li><a href=#创建和操作标签>创建和操作标签</a></li><li><a href=#使用gitignore文件排除提交目录>使用.gitignore文件排除提交目录</a></li><li><a href=#连接远程失败>连接远程失败</a></li><li><a href=#crlf问题>CRLF问题</a></li></ul></li></ul></nav></details><div class=page-content><ul><li><p>资料：</p><p><a href=https://gitee.com/progit/>https://gitee.com/progit/</a></p><p><a href=https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%85%B3%E4%BA%8E%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6>https://git-scm.com/book/zh/v2/起步-关于版本控制</a></p></li></ul><p>🕸️ 来源于阮一峰的网络日志</p><p><a href=http://www.ruanyifeng.com/blog/2014/06/git_remote.html>Git远程操作详解</a></p><p><a href=http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html>常用 Git 命令清单</a></p><p><img src=https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207071750653.png alt=Untitled></p><blockquote><p>安装完成后 需要最后一步设置</p></blockquote><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#  --global参数    这台机器上的所有仓库都会使用这个配置</span>
-</span></span><span class=line><span class=cl>git config --global user.name <span class=s2>&#34;you name&#34;</span>
-</span></span><span class=line><span class=cl>git config --global user.email <span class=s2>&#34;email@exemple.com&#34;</span>
-</span></span></code></pre></div><blockquote><p>工作区：git init的文件夹就是一个工作区 版本库：工作区里面一个隐藏目录 .git (里面有暂存区和master分支)</p></blockquote><p>git add把文件添加进去，实际上是把文件修改添加到暂存区里面，git commit提交更改，实际上是把暂存区的所有内容提交到当前分支上。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git init                          <span class=c1># 把当前目录编程git管理的仓库</span>
-</span></span><span class=line><span class=cl>git add &lt;file&gt;                    <span class=c1># 把当前文件添加到仓库  可以同时添加多个文件</span>
-</span></span><span class=line><span class=cl>git commit -m <span class=s2>&#34;message&#34;</span>           <span class=c1># 把文件提交到仓库, -m 后边的是本次提交说明</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>git status                        <span class=c1># 查看当前工作区的转态，是否有文件修改</span>
-</span></span><span class=line><span class=cl>git diff                          <span class=c1># 查看修改内容</span>
-</span></span><span class=line><span class=cl>git log                           <span class=c1># 显示从最近到最远的提交日志，</span>
-</span></span><span class=line><span class=cl>git reflog                        <span class=c1># 查看历史命令，以确定回到那个版本</span>
-</span></span><span class=line><span class=cl>git log --pretty<span class=o>=</span>oneline          <span class=c1># 只显示commit_id (版本号)</span>
-</span></span><span class=line><span class=cl>git reset --hard commit_id        <span class=c1># HEAD指向的版本是当前版本，可以根据commid 回退</span>
-</span></span><span class=line><span class=cl>git diff HEAD  -- &lt;file&gt;          <span class=c1># 查看工作区与版本库里面最新版本的区别</span>
-</span></span></code></pre></div><blockquote><p>git checkout - - file 把file中在工作区的修改全部撤销</p></blockquote><p>分两种情况，一种是file自修改后还没有被放到暂存区，现在撤销修改就回到了和版本库一样的状态；一种是file已经添加到了暂存区，又作了修改，现在撤销修改就回到添加到暂存区后的转态。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git  reset  HEAD  &lt;file&gt;         <span class=c1># 把暂存区的修改撤销掉，重新放回工作区，HEAD表示最新的版本</span>
-</span></span><span class=line><span class=cl>git  checkout -- &lt;file&gt;          <span class=c1># 丢弃工作区的修改   -- 重要</span>
-</span></span><span class=line><span class=cl>git ls-files                     <span class=c1># 查看本地仓库文件</span>
-</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207071750240.png alt=git></p><h2 id=远程仓库的创建>远程仓库的创建</h2><blockquote><p>ssh-keygen -t rsa -C &ldquo;<a href=mailto:youemail@example.com>youemail@example.com</a>&rdquo; 用户主目录下.ssh目录, 存放着SSHkey的秘钥对。id_rsa.pub(公钥) , id_rsa(私钥)</p></blockquote><p>在GitHub上创建好远程仓库后，与本地仓库进行关联。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 本地仓库和远程仓库进行关联</span>
-</span></span><span class=line><span class=cl>git remote add origin git@github.com:&lt;username&gt;/&lt;files&gt;
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 把本地库的所有内容推送到远程库上</span>
-</span></span><span class=line><span class=cl>git push -u origin master
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 删除关联的远程库</span>
-</span></span><span class=line><span class=cl>git remote rm origin
-</span></span></code></pre></div><p>ursename: 你自己github的账户名； files:你创建的远程仓库名称</p><p>origin 可换成github 或者gittee(码云)</p><p>第一次推送远程仓库需要加上 -U 参数把本地的master分支和远程的maser分支关联起来。以后就可以简化命令，不需要-u 参数。（第一次提交会有警告,输入yes回车就可以了）</p><h3 id=从远程仓库克隆一本地库>从远程仓库克隆一本地库</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 从远程仓库拉取到本地</span>
-</span></span><span class=line><span class=cl>git clone git@github.com:&lt;username&gt;/&lt;files&gt;.git
-</span></span></code></pre></div><h3 id=删除git远程仓库的文件>删除git远程仓库的文件</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#  删除test文件夹下的a.txt文件</span>
-</span></span><span class=line><span class=cl>git rm -r --cached test/a.txt 
-</span></span><span class=line><span class=cl><span class=c1>#  执行 删除缓存 提交删除说明</span>
-</span></span><span class=line><span class=cl>git commit -m <span class=s2>&#34;删除a.txt文件&#34;</span>
-</span></span></code></pre></div><h3 id=创建分支和合并分支>创建分支和合并分支</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 创建分支并切换到分支上</span>
-</span></span><span class=line><span class=cl>git checkout -b &lt;name&gt;
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 上下两个命令等价</span>
-</span></span><span class=line><span class=cl>git branch &lt;name&gt;
-</span></span><span class=line><span class=cl>git checkout &lt;name&gt;
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 查看当前分支(列出所有分支，当前分支上会有*号)</span>
-</span></span><span class=line><span class=cl>git branch
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 合并分支 （先切换,再合并）</span>
-</span></span><span class=line><span class=cl>git checkout &lt;name&gt;           <span class=c1># 切换到指定分支</span>
-</span></span><span class=line><span class=cl>git merge &lt;name&gt;                 <span class=c1># 合并指定分支到当前分支</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 删除分支dev</span>
-</span></span><span class=line><span class=cl>git branch -d &lt;name&gt;
-</span></span></code></pre></div><h3 id=bug-分支>bug 分支</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 隐藏当前工作现场，清空工作区创建临时分支</span>
-</span></span><span class=line><span class=cl>git stash  
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>git stash list                <span class=c1>#查看之前的工作现场</span>
-</span></span><span class=line><span class=cl><span class=c1># 恢复之前工作区有两个办法</span>
-</span></span><span class=line><span class=cl>git stash apply 
-</span></span><span class=line><span class=cl>git stash drop            <span class=c1># 第一种方法</span>
-</span></span><span class=line><span class=cl>git stash pop             <span class=c1># 第二种方法</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 可以多次使用stash, 恢复时先查看隐藏的工作现场，再使用以下命令</span>
-</span></span><span class=line><span class=cl>git stash list
-</span></span><span class=line><span class=cl>git stash apply stash@<span class=o>{</span>&lt;int&gt;<span class=o>}</span>
-</span></span></code></pre></div><p>恢复之前隐藏工作区的两种方法的区别是，第一种恢复后stash内容并不删除，需要手动删除，第二种方法是恢复的同时把stash内容也删除了</p><blockquote><p>开发一个新ferture,最好先新建一个分支，如果丢弃一个没有被合并过的分支，可以通过 git branch -D <name>强行删除</p></blockquote><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看远程库信息</span>
-</span></span><span class=line><span class=cl>git remote -v
-</span></span><span class=line><span class=cl><span class=c1># 从远程抓取分支</span>
-</span></span><span class=line><span class=cl>git pull
-</span></span><span class=line><span class=cl><span class=c1># 从本地推送分支</span>
-</span></span><span class=line><span class=cl>git push origin branch-name
-</span></span></code></pre></div><h3 id=创建和操作标签>创建和操作标签</h3><blockquote><p>先切换到需要打标签的分支上</p></blockquote><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 创建版本标签</span>
-</span></span><span class=line><span class=cl>git tag &lt;name&gt;   
-</span></span><span class=line><span class=cl><span class=c1># 创建带有说明的标签</span>
-</span></span><span class=line><span class=cl>git tag -a &lt;name&gt; -m <span class=s2>&#34;message&#34;</span> 
-</span></span><span class=line><span class=cl><span class=c1># 查看所有标签</span>
-</span></span><span class=line><span class=cl>git tag
-</span></span><span class=line><span class=cl><span class=c1># 历史版本创建标签</span>
-</span></span><span class=line><span class=cl>git tag &lt;name&gt; commit_id
-</span></span><span class=line><span class=cl><span class=c1># 查看标签信息</span>
-</span></span><span class=line><span class=cl>git show &lt;tagname&gt;
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 删除标签</span>
-</span></span><span class=line><span class=cl>git tad -d &lt;tagname&gt;
-</span></span><span class=line><span class=cl><span class=c1># 推送某个标签到远程</span>
-</span></span><span class=line><span class=cl>git push origin &lt;tagname&gt;
-</span></span><span class=line><span class=cl><span class=c1># 一次性推送所有本地未推送的标签到远程</span>
-</span></span><span class=line><span class=cl>git push origin --tags
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1>#删除远程标签，先本地删除，在远程删除</span>
-</span></span><span class=line><span class=cl>git tag -d &lt;tagname&gt;
-</span></span><span class=line><span class=cl>git push origin :refs/tags/&lt;tagname&gt;
-</span></span></code></pre></div><h3 id=使用gitignore文件排除提交目录>使用.gitignore文件排除提交目录</h3><p>在git提交中想要忽略某些文件(数据库、缓存文件)等，可以在.gitignore 文件中进行编辑排除</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl> <span class=o>*.</span><span class=n>a</span>       <span class=c1># 忽略所有 .a 结尾的文件</span>
-</span></span><span class=line><span class=cl> <span class=err>!</span><span class=n>lib</span><span class=o>.</span><span class=n>a</span>    <span class=c1># 但 lib.a 除外</span>
-</span></span><span class=line><span class=cl> <span class=o>/</span><span class=n>TODO</span>     <span class=c1># 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO</span>
-</span></span><span class=line><span class=cl> <span class=n>build</span><span class=o>/</span>    <span class=c1># 忽略 build/ 目录下的所有文件</span>
-</span></span><span class=line><span class=cl> <span class=n>doc</span><span class=o>/*.</span><span class=n>txt</span> <span class=c1># 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt</span>
-</span></span></code></pre></div><p>如果发现commit 后有些文件并没有被排除，则需要清空本地缓存后重新提交。如果某些文件已经被纳入了版本管理中，就算是在.gitignore中已经声明了忽略路径也是不起作用的</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 清楚缓存的命令</span>
-</span></span><span class=line><span class=cl>git rm -r --cached .  
-</span></span><span class=line><span class=cl>git add .
-</span></span><span class=line><span class=cl>git commit -m <span class=s2>&#34;update gitignore&#34;</span>
-</span></span></code></pre></div><h3 id=连接远程失败>连接远程失败</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>fatal: <span class=s1>&#39;/srv/program/workcode.git&#39;</span> does not appear to be a git repository
-</span></span><span class=line><span class=cl>fatal: Could not <span class=nb>read</span> from remote repository.
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>Please make sure you have the correct access rights
-</span></span><span class=line><span class=cl>and the repository exists.
-</span></span></code></pre></div><p>因为是在服务器上自建的git服务。直接使用了root账号初始化了git仓库。直接从本地提交没有对相关目录的操作权限。</p><p>解决办法：使用<code>chown -R git:git xxx.git</code> 命令更改仓库文件夹的权限。</p><h3 id=crlf问题>CRLF问题</h3><p>在Windows中使用CRLF标识一行的结束，而在Linux/UNIX系统中只使用LF标识一行的结束。CRLF即Carriage-Return Line-Feed的缩写。</p><p>通常情况下，Git库不会自动修改文件内容，但是默认会将入库的文件的行尾符设置为LF，会将检出的文件的行尾符设置为CRLF。但是在执行如下操作时出现如下警告：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=nx>warning</span><span class=o>:</span> <span class=nx>LF</span> <span class=nx>will</span> <span class=nx>be</span> <span class=nx>replaced</span> <span class=nx>by</span> <span class=nx>CRLF</span> <span class=k>in</span> <span class=nx>Pipfile</span>
-</span></span><span class=line><span class=cl><span class=nx>The</span> <span class=nx>file</span> <span class=nx>will</span> <span class=nx>have</span> <span class=nx>its</span> <span class=nx>original</span> <span class=nx>line</span> <span class=nx>endings</span> <span class=k>in</span> <span class=nx>your</span> <span class=nx>working</span> <span class=nx>directory</span>
-</span></span></code></pre></div><p>工作目录中的文件的行尾是LF，但是这里在即将入Git库之前，却将LF转换为CRLF。所以给出警告。该警告无伤大雅，因为在Git库中的该文件仍然以LF为行尾。</p><p>参考：<em><strong>*<a href=https://www.zhihu.com/question/50862500/answer/123197258>git如何避免”warning: LF will be replaced by CRLF“提示？</a>*</strong></em></p></div></article></main></div><footer class=footer><span class=footer_item></span>&nbsp;<div class=footer_social-icons><a href=https://github.com/mugeliu/ target=_blank rel="noopener noreferrer me" title=Github><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a><a href=https://twitter.com target=_blank rel="noopener noreferrer me" title=Twitter><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a><a href=index.xml target=_blank rel="noopener noreferrer me" title=Rss><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg></a></div><small class=footer_copyright>© 2024 mmm6.
-Powered by <a href=https://github.com/hugo-sid/hugo-blog-awesome target=_blank rel="noreferrer noopener">Hugo blog awesome</a>
-theme on
-<a href=https://gohugo.io target=_blank rel="noreferrer noopener">Hugo</a>.</small></footer><a href=# title="Go to top" id=totop><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentcolor" stroke="currentcolor" viewBox="0 96 960 960"><path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197z"/></svg></a><script src=https://blog.mfcp.fun/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30+lSNuSkl4QXuNyy8="></script></body></html>
+<!DOCTYPE html>
+<html lang="en-gb"><head><meta charset="utf-8">
+<meta http-equiv="content-type" content="text/html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title itemprop="name">git命令 | Awesome Hugo blog</title>
+<meta property="og:title" content="git命令 | Awesome Hugo blog" />
+<meta name="twitter:title" content="git命令 | Awesome Hugo blog" />
+<meta itemprop="name" content="git命令 | Awesome Hugo blog" />
+<meta name="application-name" content="git命令 | Awesome Hugo blog" />
+<meta property="og:site_name" content="xirang&#39;blog" />
+
+<meta name="description" content="Minimal Hugo blog theme with light and dark mode support">
+<meta itemprop="description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta property="og:description" content="Minimal Hugo blog theme with light and dark mode support" />
+<meta name="twitter:description" content="Minimal Hugo blog theme with light and dark mode support" />
+
+<meta property="og:locale" content="en-gb" />
+<meta name="language" content="en-gb" />
+
+
+
+  <meta itemprop="image" content="https://blog.mfcp.fun/" />
+  <meta property="og:image" content="https://blog.mfcp.fun/" />
+  <meta name="twitter:image" content="https://blog.mfcp.fun/" />
+  <meta name="twitter:image:src" content="https://blog.mfcp.fun/" />
+
+
+
+
+    
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2022-07-07T17:38:13Z />
+    <meta property="article:published_time" content=2022-07-07T17:38:13Z />
+
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "git命令",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2022-07-07",
+        "description": "",
+        "wordCount":  443 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2022-07-07",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Awesome Hugo blog"
+        }
+    }
+    </script>
+
+
+<meta name="generator" content="Hugo 0.112.4">
+
+    
+
+    <link rel="canonical" href="https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/">
+    <link href="/style.min.840eada6dfddec7b8ccfcf867f039bf80b1f16a265ec6e01dc553a3dddc9d509.css" rel="stylesheet">
+    <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
+
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="mask-icon" href="/icons/safari-pinned-tab.svg">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+
+
+
+<link rel="manifest" href="https://blog.mfcp.fun/site.webmanifest">
+
+<meta name="msapplication-config" content="/browserconfig.xml">
+<meta name="msapplication-TileColor" content="#2d89ef">
+<meta name="theme-color" content="#434648">
+
+    
+    <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
+
+    </head>
+<body data-theme = "auto" class="notransition">
+
+<script src="/js/theme.js"></script>
+
+<div class="navbar" role="navigation">
+    <nav class="menu" aria-label="Main Navigation">
+        <a href="https://blog.mfcp.fun/" class="logo">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" 
+viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+stroke-linejoin="round" class="feather feather-home">
+<title>Home</title>
+<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+<polyline points="9 22 9 12 15 12 15 22"></polyline>
+</svg>
+        </a>
+        <input type="checkbox" id="menu-trigger" class="menu-trigger" />
+        <label for="menu-trigger">
+            <span class="menu-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" stroke="currentColor" fill="none" viewBox="0 0 14 14"><title>Menu</title><path stroke-linecap="round" stroke-linejoin="round" d="M10.595 7L3.40726 7"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 3.51488L3.49301 3.51488"></path><path stroke-linecap="round" stroke-linejoin="round" d="M10.5096 10.4851H3.49301"></path><path stroke-linecap="round" stroke-linejoin="round" d="M0.5 12.5V1.5C0.5 0.947715 0.947715 0.5 1.5 0.5H12.5C13.0523 0.5 13.5 0.947715 13.5 1.5V12.5C13.5 13.0523 13.0523 13.5 12.5 13.5H1.5C0.947715 13.5 0.5 13.0523 0.5 12.5Z"></path></svg>
+            </span>
+        </label>
+
+        <div class="trigger">
+            <ul class="trigger-container">
+                
+                
+                <li>
+                    <a class="menu-link " href="/">
+                        Home
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link active" href="/posts/">
+                        Posts
+                    </a>
+                    
+                </li>
+                
+                <li>
+                    <a class="menu-link " href="/pages/about/">
+                        About
+                    </a>
+                    
+                </li>
+                
+                <li class="menu-separator">
+                    <span>|</span>
+                </li>
+            </ul>
+            <a id="mode" href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>LIGHT</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="mode-moon" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
+<title>DARK</title><g><circle cx="7" cy="7" r="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></circle><line x1="7" y1="0.5" x2="7" y2="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="2.4" x2="3.82" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="0.5" y1="7" x2="2.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="2.4" y1="11.6" x2="3.82" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="7" y1="13.5" x2="7" y2="11.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="11.6" x2="10.18" y2="10.18" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="13.5" y1="7" x2="11.5" y2="7" fill="none" stroke-linecap="round" stroke-linejoin="round"></line><line x1="11.6" y1="2.4" x2="10.18" y2="3.82" fill="none" stroke-linecap="round" stroke-linejoin="round"></line></g></svg>
+            </a>
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">git命令</h1>
+                
+                
+                <div class="post-meta">
+                    <time datetime="2022-07-07T17:38:13&#43;00:00" itemprop="datePublished"> 7 Jul 2022 </time>
+                </div>
+                
+            </header>
+            <details class="toc">
+                <summary><b>Table of Contents</b></summary>
+                <nav id="TableOfContents">
+  <ul>
+    <li><a href="#远程仓库的创建">远程仓库的创建</a>
+      <ul>
+        <li><a href="#从远程仓库克隆一本地库">从远程仓库克隆一本地库</a></li>
+        <li><a href="#删除git远程仓库的文件">删除git远程仓库的文件</a></li>
+        <li><a href="#创建分支和合并分支">创建分支和合并分支</a></li>
+        <li><a href="#bug-分支">bug 分支</a></li>
+        <li><a href="#创建和操作标签">创建和操作标签</a></li>
+        <li><a href="#使用gitignore文件排除提交目录">使用.gitignore文件排除提交目录</a></li>
+        <li><a href="#连接远程失败">连接远程失败</a></li>
+        <li><a href="#crlf问题">CRLF问题</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+            </details><div class="page-content">
+                <ul>
+<li>
+<p>资料：</p>
+<p><a href="https://gitee.com/progit/">https://gitee.com/progit/</a></p>
+<p><a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%85%B3%E4%BA%8E%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6">https://git-scm.com/book/zh/v2/起步-关于版本控制</a></p>
+</li>
+</ul>
+<p>🕸️ 来源于阮一峰的网络日志</p>
+<p><a href="http://www.ruanyifeng.com/blog/2014/06/git_remote.html">Git远程操作详解</a></p>
+<p><a href="http://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">常用 Git 命令清单</a></p>
+<p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207071750653.png" alt="Untitled"></p>
+<blockquote>
+<p>安装完成后   需要最后一步设置</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#  --global参数    这台机器上的所有仓库都会使用这个配置</span>
+</span></span><span class="line"><span class="cl">git config --global user.name <span class="s2">&#34;you name&#34;</span>
+</span></span><span class="line"><span class="cl">git config --global user.email <span class="s2">&#34;email@exemple.com&#34;</span>
+</span></span></code></pre></div><blockquote>
+<p>工作区：git init的文件夹就是一个工作区                                                                        版本库：工作区里面一个隐藏目录 .git  (里面有暂存区和master分支)</p>
+</blockquote>
+<p>git add把文件添加进去，实际上是把文件修改添加到暂存区里面，git commit提交更改，实际上是把暂存区的所有内容提交到当前分支上。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git init                          <span class="c1"># 把当前目录编程git管理的仓库</span>
+</span></span><span class="line"><span class="cl">git add &lt;file&gt;                    <span class="c1"># 把当前文件添加到仓库  可以同时添加多个文件</span>
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;message&#34;</span>           <span class="c1"># 把文件提交到仓库, -m 后边的是本次提交说明</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git status                        <span class="c1"># 查看当前工作区的转态，是否有文件修改</span>
+</span></span><span class="line"><span class="cl">git diff                          <span class="c1"># 查看修改内容</span>
+</span></span><span class="line"><span class="cl">git log                           <span class="c1"># 显示从最近到最远的提交日志，</span>
+</span></span><span class="line"><span class="cl">git reflog                        <span class="c1"># 查看历史命令，以确定回到那个版本</span>
+</span></span><span class="line"><span class="cl">git log --pretty<span class="o">=</span>oneline          <span class="c1"># 只显示commit_id (版本号)</span>
+</span></span><span class="line"><span class="cl">git reset --hard commit_id        <span class="c1"># HEAD指向的版本是当前版本，可以根据commid 回退</span>
+</span></span><span class="line"><span class="cl">git diff HEAD  -- &lt;file&gt;          <span class="c1"># 查看工作区与版本库里面最新版本的区别</span>
+</span></span></code></pre></div><blockquote>
+<p>git checkout  - - file  把file中在工作区的修改全部撤销</p>
+</blockquote>
+<p>分两种情况，一种是file自修改后还没有被放到暂存区，现在撤销修改就回到了和版本库一样的状态；一种是file已经添加到了暂存区，又作了修改，现在撤销修改就回到添加到暂存区后的转态。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git  reset  HEAD  &lt;file&gt;         <span class="c1"># 把暂存区的修改撤销掉，重新放回工作区，HEAD表示最新的版本</span>
+</span></span><span class="line"><span class="cl">git  checkout -- &lt;file&gt;          <span class="c1"># 丢弃工作区的修改   -- 重要</span>
+</span></span><span class="line"><span class="cl">git ls-files                     <span class="c1"># 查看本地仓库文件</span>
+</span></span></code></pre></div><p><img src="https://cdn.jsdelivr.net/gh/mugeliu/imgStorage/blog_img/202207071750240.png" alt="git"></p>
+<h2 id="远程仓库的创建">远程仓库的创建</h2>
+<blockquote>
+<p>ssh-keygen -t rsa -C &ldquo;<a href="mailto:youemail@example.com">youemail@example.com</a>&rdquo;                                                                用户主目录下.ssh目录, 存放着SSHkey的秘钥对。id_rsa.pub(公钥) , id_rsa(私钥)</p>
+</blockquote>
+<p>在GitHub上创建好远程仓库后，与本地仓库进行关联。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 本地仓库和远程仓库进行关联</span>
+</span></span><span class="line"><span class="cl">git remote add origin git@github.com:&lt;username&gt;/&lt;files&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 把本地库的所有内容推送到远程库上</span>
+</span></span><span class="line"><span class="cl">git push -u origin master
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除关联的远程库</span>
+</span></span><span class="line"><span class="cl">git remote rm origin
+</span></span></code></pre></div><p>ursename: 你自己github的账户名；     files:你创建的远程仓库名称</p>
+<p>origin 可换成github 或者gittee(码云)</p>
+<p>第一次推送远程仓库需要加上 -U 参数把本地的master分支和远程的maser分支关联起来。以后就可以简化命令，不需要-u 参数。（第一次提交会有警告,输入yes回车就可以了）</p>
+<h3 id="从远程仓库克隆一本地库">从远程仓库克隆一本地库</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 从远程仓库拉取到本地</span>
+</span></span><span class="line"><span class="cl">git clone git@github.com:&lt;username&gt;/&lt;files&gt;.git
+</span></span></code></pre></div><h3 id="删除git远程仓库的文件">删除git远程仓库的文件</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1">#  删除test文件夹下的a.txt文件</span>
+</span></span><span class="line"><span class="cl">git rm -r --cached test/a.txt 
+</span></span><span class="line"><span class="cl"><span class="c1">#  执行 删除缓存 提交删除说明</span>
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;删除a.txt文件&#34;</span>
+</span></span></code></pre></div><h3 id="创建分支和合并分支">创建分支和合并分支</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 创建分支并切换到分支上</span>
+</span></span><span class="line"><span class="cl">git checkout -b &lt;name&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 上下两个命令等价</span>
+</span></span><span class="line"><span class="cl">git branch &lt;name&gt;
+</span></span><span class="line"><span class="cl">git checkout &lt;name&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看当前分支(列出所有分支，当前分支上会有*号)</span>
+</span></span><span class="line"><span class="cl">git branch
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 合并分支 （先切换,再合并）</span>
+</span></span><span class="line"><span class="cl">git checkout &lt;name&gt;           <span class="c1"># 切换到指定分支</span>
+</span></span><span class="line"><span class="cl">git merge &lt;name&gt;                 <span class="c1"># 合并指定分支到当前分支</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除分支dev</span>
+</span></span><span class="line"><span class="cl">git branch -d &lt;name&gt;
+</span></span></code></pre></div><h3 id="bug-分支">bug 分支</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 隐藏当前工作现场，清空工作区创建临时分支</span>
+</span></span><span class="line"><span class="cl">git stash  
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">git stash list                <span class="c1">#查看之前的工作现场</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 恢复之前工作区有两个办法</span>
+</span></span><span class="line"><span class="cl">git stash apply 
+</span></span><span class="line"><span class="cl">git stash drop            <span class="c1"># 第一种方法</span>
+</span></span><span class="line"><span class="cl">git stash pop             <span class="c1"># 第二种方法</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 可以多次使用stash, 恢复时先查看隐藏的工作现场，再使用以下命令</span>
+</span></span><span class="line"><span class="cl">git stash list
+</span></span><span class="line"><span class="cl">git stash apply stash@<span class="o">{</span>&lt;int&gt;<span class="o">}</span>
+</span></span></code></pre></div><p>恢复之前隐藏工作区的两种方法的区别是，第一种恢复后stash内容并不删除，需要手动删除，第二种方法是恢复的同时把stash内容也删除了</p>
+<blockquote>
+<p>开发一个新ferture,最好先新建一个分支，如果丢弃一个没有被合并过的分支，可以通过 git branch -D <name> 强行删除</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 查看远程库信息</span>
+</span></span><span class="line"><span class="cl">git remote -v
+</span></span><span class="line"><span class="cl"><span class="c1"># 从远程抓取分支</span>
+</span></span><span class="line"><span class="cl">git pull
+</span></span><span class="line"><span class="cl"><span class="c1"># 从本地推送分支</span>
+</span></span><span class="line"><span class="cl">git push origin branch-name
+</span></span></code></pre></div><h3 id="创建和操作标签">创建和操作标签</h3>
+<blockquote>
+<p>先切换到需要打标签的分支上</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 创建版本标签</span>
+</span></span><span class="line"><span class="cl">git tag &lt;name&gt;   
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建带有说明的标签</span>
+</span></span><span class="line"><span class="cl">git tag -a &lt;name&gt; -m <span class="s2">&#34;message&#34;</span> 
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看所有标签</span>
+</span></span><span class="line"><span class="cl">git tag
+</span></span><span class="line"><span class="cl"><span class="c1"># 历史版本创建标签</span>
+</span></span><span class="line"><span class="cl">git tag &lt;name&gt; commit_id
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看标签信息</span>
+</span></span><span class="line"><span class="cl">git show &lt;tagname&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除标签</span>
+</span></span><span class="line"><span class="cl">git tad -d &lt;tagname&gt;
+</span></span><span class="line"><span class="cl"><span class="c1"># 推送某个标签到远程</span>
+</span></span><span class="line"><span class="cl">git push origin &lt;tagname&gt;
+</span></span><span class="line"><span class="cl"><span class="c1"># 一次性推送所有本地未推送的标签到远程</span>
+</span></span><span class="line"><span class="cl">git push origin --tags
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#删除远程标签，先本地删除，在远程删除</span>
+</span></span><span class="line"><span class="cl">git tag -d &lt;tagname&gt;
+</span></span><span class="line"><span class="cl">git push origin :refs/tags/&lt;tagname&gt;
+</span></span></code></pre></div><h3 id="使用gitignore文件排除提交目录">使用.gitignore文件排除提交目录</h3>
+<p>在git提交中想要忽略某些文件(数据库、缓存文件)等，可以在.gitignore 文件中进行编辑排除</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"> <span class="o">*.</span><span class="n">a</span>       <span class="c1"># 忽略所有 .a 结尾的文件</span>
+</span></span><span class="line"><span class="cl"> <span class="err">!</span><span class="n">lib</span><span class="o">.</span><span class="n">a</span>    <span class="c1"># 但 lib.a 除外</span>
+</span></span><span class="line"><span class="cl"> <span class="o">/</span><span class="n">TODO</span>     <span class="c1"># 仅仅忽略项目根目录下的 TODO 文件，不包括 subdir/TODO</span>
+</span></span><span class="line"><span class="cl"> <span class="n">build</span><span class="o">/</span>    <span class="c1"># 忽略 build/ 目录下的所有文件</span>
+</span></span><span class="line"><span class="cl"> <span class="n">doc</span><span class="o">/*.</span><span class="n">txt</span> <span class="c1"># 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt</span>
+</span></span></code></pre></div><p>如果发现commit 后有些文件并没有被排除，则需要清空本地缓存后重新提交。如果某些文件已经被纳入了版本管理中，就算是在.gitignore中已经声明了忽略路径也是不起作用的</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 清楚缓存的命令</span>
+</span></span><span class="line"><span class="cl">git rm -r --cached .  
+</span></span><span class="line"><span class="cl">git add .
+</span></span><span class="line"><span class="cl">git commit -m <span class="s2">&#34;update gitignore&#34;</span>
+</span></span></code></pre></div><h3 id="连接远程失败">连接远程失败</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">fatal: <span class="s1">&#39;/srv/program/workcode.git&#39;</span> does not appear to be a git repository
+</span></span><span class="line"><span class="cl">fatal: Could not <span class="nb">read</span> from remote repository.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Please make sure you have the correct access rights
+</span></span><span class="line"><span class="cl">and the repository exists.
+</span></span></code></pre></div><p>因为是在服务器上自建的git服务。直接使用了root账号初始化了git仓库。直接从本地提交没有对相关目录的操作权限。</p>
+<p>解决办法：使用<code>chown -R  git:git xxx.git</code> 命令更改仓库文件夹的权限。</p>
+<h3 id="crlf问题">CRLF问题</h3>
+<p>在Windows中使用CRLF标识一行的结束，而在Linux/UNIX系统中只使用LF标识一行的结束。CRLF即Carriage-Return Line-Feed的缩写。</p>
+<p>通常情况下，Git库不会自动修改文件内容，但是默认会将入库的文件的行尾符设置为LF，会将检出的文件的行尾符设置为CRLF。但是在执行如下操作时出现如下警告：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-jsx" data-lang="jsx"><span class="line"><span class="cl"><span class="nx">warning</span><span class="o">:</span> <span class="nx">LF</span> <span class="nx">will</span> <span class="nx">be</span> <span class="nx">replaced</span> <span class="nx">by</span> <span class="nx">CRLF</span> <span class="k">in</span> <span class="nx">Pipfile</span>
+</span></span><span class="line"><span class="cl"><span class="nx">The</span> <span class="nx">file</span> <span class="nx">will</span> <span class="nx">have</span> <span class="nx">its</span> <span class="nx">original</span> <span class="nx">line</span> <span class="nx">endings</span> <span class="k">in</span> <span class="nx">your</span> <span class="nx">working</span> <span class="nx">directory</span>
+</span></span></code></pre></div><p>工作目录中的文件的行尾是LF，但是这里在即将入Git库之前，却将LF转换为CRLF。所以给出警告。该警告无伤大雅，因为在Git库中的该文件仍然以LF为行尾。</p>
+<p>参考：<em><strong>*<a href="https://www.zhihu.com/question/50862500/answer/123197258">git如何避免”warning: LF will be replaced by CRLF“提示？</a>*</strong></em></p>
+
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
+    <span class="footer_item"> </span>
+    &nbsp;
+
+    <div class="footer_social-icons">
+<a href="https://github.com/mugeliu/" target="_blank" rel="noopener noreferrer me"
+    title="Github">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+    </path>
+</svg>
+</a>
+<a href="https://twitter.com" target="_blank" rel="noopener noreferrer me"
+    title="Twitter">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path
+        d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z">
+    </path>
+</svg>
+</a>
+<a href="index.xml" target="_blank" rel="noopener noreferrer me"
+    title="Rss">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11a9 9 0 0 1 9 9" />
+    <path d="M4 4a16 16 0 0 1 16 16" />
+    <circle cx="5" cy="19" r="1" />
+</svg>
+</a>
+</div>
+    <small class="footer_copyright">
+        © 2024 mmm6.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noreferrer noopener">Hugo blog awesome</a>
+        theme on
+        <a href="https://gohugo.io" target="_blank" rel="noreferrer noopener">Hugo</a>.
+    </small>
+</footer><a href="#" title="Go to top" id="totop">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
+    <path d="M283 704.739 234.261 656 480 410.261 725.739 656 677 704.739l-197-197-197 197Z"/>
+</svg>
+
+</a>
+
+
+    
+
+
+
+
+    
+    
+        
+    
+
+    
+    
+        
+    
+
+
+
+    
+    <script async src="https://blog.mfcp.fun/js/main.js" ></script>
+
+    
+
+</body>
+</html>

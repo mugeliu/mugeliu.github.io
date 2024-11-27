@@ -1,6 +1,25 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>blog on Awesome Hugo blog</title><link>https://blog.mfcp.fun/categories/blog/</link><description>Recent content in blog on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Tue, 18 Oct 2022 17:33:38 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/categories/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>使用github的actions自动部署文章</title><link>https://blog.mfcp.fun/posts/b0fa82c0302ee74da7ec8ea1658d9218/</link><pubDate>Tue, 18 Oct 2022 17:33:38 +0800</pubDate><guid>https://blog.mfcp.fun/posts/b0fa82c0302ee74da7ec8ea1658d9218/</guid><description>Github Pages 记录使用github的actions自动化部署博客出现的一些问题
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog on Awesome Hugo blog</title>
+    <link>https://blog.mfcp.fun/categories/blog/</link>
+    <description>Recent content in blog on Awesome Hugo blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Tue, 18 Oct 2022 17:33:38 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/categories/blog/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>使用github的actions自动部署文章</title>
+      <link>https://blog.mfcp.fun/posts/b0fa82c0302ee74da7ec8ea1658d9218/</link>
+      <pubDate>Tue, 18 Oct 2022 17:33:38 +0800</pubDate>
+      
+      <guid>https://blog.mfcp.fun/posts/b0fa82c0302ee74da7ec8ea1658d9218/</guid>
+      <description>Github Pages 记录使用github的actions自动化部署博客出现的一些问题
 两个库，一个私有库存储博客源文件，另一个公开库xxxx.github.io
 在setting &amp;gt; Developer settings &amp;gt; Personal access tokens申请一个token,放开repo所有权限和workflow
 在私有库中setting &amp;gt; Secrets &amp;gt; Actions 添加令牌,设置名称 HUGO_CL_TOKEN，值为上一步的token
 在repo中新建.github\workflows\xxx(自行设置).yml文件 (参考文章)
-name: HU CI # 名字自取 on: push: branches: [ master ] # 这里的意思是当 main分支发生push的时候，运行下面的jobs jobs: deploy: # 任务名自取 runs-on: ubuntu-latest # 在什么环境运行任务 steps: - name: Checkout uses: actions/checkout@v3 # 引用actions/checkout这个action，与所在的github仓库同名 with: submodules: &amp;#39;recursive&amp;#39; # Fetch Hugo themes (true OR recursive) 获取submodule主题 fetch-depth: 0 # Fetch all history for .GitInfo and .</description></item></channel></rss>
+name: HU CI # 名字自取 on: push: branches: [ master ] # 这里的意思是当 main分支发生push的时候，运行下面的jobs jobs: deploy: # 任务名自取 runs-on: ubuntu-latest	# 在什么环境运行任务 steps: - name: Checkout uses: actions/checkout@v3	# 引用actions/checkout这个action，与所在的github仓库同名 with: submodules: &amp;#39;recursive&amp;#39; # Fetch Hugo themes (true OR recursive) 获取submodule主题 fetch-depth: 0 # Fetch all history for .GitInfo and .</description>
+    </item>
+    
+  </channel>
+</rss>

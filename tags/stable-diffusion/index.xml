@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Stable Diffusion on Awesome Hugo blog</title><link>https://blog.mfcp.fun/tags/stable-diffusion/</link><description>Recent content in Stable Diffusion on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Fri, 13 Oct 2023 23:38:29 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/stable-diffusion/index.xml" rel="self" type="application/rss+xml"/><item><title>Stable Diffusion系列一 | 安装webui</title><link>https://blog.mfcp.fun/posts/b86adb06a9246b489312401c23b0b1a5/</link><pubDate>Fri, 13 Oct 2023 23:38:29 +0800</pubDate><guid>https://blog.mfcp.fun/posts/b86adb06a9246b489312401c23b0b1a5/</guid><description>最近想深入学习一下Stable Diffusion，买了腾讯云服务器，在windows上和linux上都自己搭建了一遍，记录下搭建遇到的各种坑，如果不熟悉Linux，使用一键安装包即可，自己在Linux部署的话尽量使用境外服务器，有些模型会遇到不可说的问题下载不下来
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Stable Diffusion on Awesome Hugo blog</title>
+    <link>https://blog.mfcp.fun/tags/stable-diffusion/</link>
+    <description>Recent content in Stable Diffusion on Awesome Hugo blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 13 Oct 2023 23:38:29 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/stable-diffusion/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Stable Diffusion系列一 | 安装webui</title>
+      <link>https://blog.mfcp.fun/posts/b86adb06a9246b489312401c23b0b1a5/</link>
+      <pubDate>Fri, 13 Oct 2023 23:38:29 +0800</pubDate>
+      
+      <guid>https://blog.mfcp.fun/posts/b86adb06a9246b489312401c23b0b1a5/</guid>
+      <description>最近想深入学习一下Stable Diffusion，买了腾讯云服务器，在windows上和linux上都自己搭建了一遍，记录下搭建遇到的各种坑，如果不熟悉Linux，使用一键安装包即可，自己在Linux部署的话尽量使用境外服务器，有些模型会遇到不可说的问题下载不下来
 👇一些用到的地址
 Stable Diffusion Stable Diffusion webui civitai huggingface 我购买的是腾讯云的GN7服务器使用生成图片确实要比较快，每张图片几十秒就能生成好
 Windows windows上我使用了B站秋叶大佬的一键安装包
@@ -24,4 +39,8 @@ sd默认使用的模型为v1-5-pruned-emaonly.safetensors,下载失败的话需�
 配置Nginx 域名，解析指向这些就不展开了，需要注意的是sd-webui中使用了websocket,在nginx配置中需要填写正确，我刚开始配置错误，可以访问但是一直报错。
 我在nginx配置了密码校验，所以没有在sdweiui中开启。
 以下配置内容参考网上大佬的文章
-server { listen 80; listen [::]:80; server_name xxx.xxx.com; return 301 https://$server_name$request_uri; } server { listen 443 ssl; listen [::]:443 ssl; server_name xxx.xxx.com; ssl_certificate /etc/nginx/cert/xxx.</description></item></channel></rss>
+server { listen 80; listen [::]:80; server_name xxx.xxx.com; return 301 https://$server_name$request_uri; } server { listen 443 ssl; listen [::]:443 ssl; server_name xxx.xxx.com; ssl_certificate /etc/nginx/cert/xxx.</description>
+    </item>
+    
+  </channel>
+</rss>

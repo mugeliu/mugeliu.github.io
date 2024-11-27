@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>github on Awesome Hugo blog</title><link>https://blog.mfcp.fun/tags/github/</link><description>Recent content in github on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Thu, 07 Jul 2022 17:38:13 +0000</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/github/index.xml" rel="self" type="application/rss+xml"/><item><title>git命令</title><link>https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 07 Jul 2022 17:38:13 +0000</pubDate><guid>https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/</guid><description>资料：
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>github on Awesome Hugo blog</title>
+    <link>https://blog.mfcp.fun/tags/github/</link>
+    <description>Recent content in github on Awesome Hugo blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Thu, 07 Jul 2022 17:38:13 +0000</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>git命令</title>
+      <link>https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Thu, 07 Jul 2022 17:38:13 +0000</pubDate>
+      
+      <guid>https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/</guid>
+      <description>资料：
 https://gitee.com/progit/
 https://git-scm.com/book/zh/v2/起步-关于版本控制
 🕸️ 来源于阮一峰的网络日志
@@ -7,4 +22,8 @@ Git远程操作详解
 安装完成后 需要最后一步设置
 # --global参数 这台机器上的所有仓库都会使用这个配置 git config --global user.name &amp;#34;you name&amp;#34; git config --global user.email &amp;#34;email@exemple.com&amp;#34; 工作区：git init的文件夹就是一个工作区 版本库：工作区里面一个隐藏目录 .git (里面有暂存区和master分支)
 git add把文件添加进去，实际上是把文件修改添加到暂存区里面，git commit提交更改，实际上是把暂存区的所有内容提交到当前分支上。
-git init # 把当前目录编程git管理的仓库 git add &amp;lt;file&amp;gt; # 把当前文件添加到仓库 可以同时添加多个文件 git commit -m &amp;#34;message&amp;#34; # 把文件提交到仓库, -m 后边的是本次提交说明 git status # 查看当前工作区的转态，是否有文件修改 git diff # 查看修改内容 git log # 显示从最近到最远的提交日志， git reflog # 查看历史命令，以确定回到那个版本 git log --pretty=oneline # 只显示commit_id (版本号) git reset --hard commit_id # HEAD指向的版本是当前版本，可以根据commid 回退 git diff HEAD -- &amp;lt;file&amp;gt; # 查看工作区与版本库里面最新版本的区别 git checkout - - file 把file中在工作区的修改全部撤销</description></item></channel></rss>
+git init # 把当前目录编程git管理的仓库 git add &amp;lt;file&amp;gt; # 把当前文件添加到仓库 可以同时添加多个文件 git commit -m &amp;#34;message&amp;#34; # 把文件提交到仓库, -m 后边的是本次提交说明 git status # 查看当前工作区的转态，是否有文件修改 git diff # 查看修改内容 git log # 显示从最近到最远的提交日志， git reflog # 查看历史命令，以确定回到那个版本 git log --pretty=oneline # 只显示commit_id (版本号) git reset --hard commit_id # HEAD指向的版本是当前版本，可以根据commid 回退 git diff HEAD -- &amp;lt;file&amp;gt; # 查看工作区与版本库里面最新版本的区别 git checkout - - file 把file中在工作区的修改全部撤销</description>
+    </item>
+    
+  </channel>
+</rss>

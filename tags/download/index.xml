@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>download on Awesome Hugo blog</title><link>https://blog.mfcp.fun/tags/download/</link><description>Recent content in download on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Mon, 23 Aug 2021 17:21:06 +0000</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/download/index.xml" rel="self" type="application/rss+xml"/><item><title>搭建aria2下载</title><link>https://blog.mfcp.fun/posts/2021-08-23-%E6%90%AD%E5%BB%BAaria2%E4%B8%8B%E8%BD%BD/</link><pubDate>Mon, 23 Aug 2021 17:21:06 +0000</pubDate><guid>https://blog.mfcp.fun/posts/2021-08-23-%E6%90%AD%E5%BB%BAaria2%E4%B8%8B%E8%BD%BD/</guid><description>github地址： https://github.com/aria2/aria2
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>download on Awesome Hugo blog</title>
+    <link>https://blog.mfcp.fun/tags/download/</link>
+    <description>Recent content in download on Awesome Hugo blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Mon, 23 Aug 2021 17:21:06 +0000</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/download/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>搭建aria2下载</title>
+      <link>https://blog.mfcp.fun/posts/2021-08-23-%E6%90%AD%E5%BB%BAaria2%E4%B8%8B%E8%BD%BD/</link>
+      <pubDate>Mon, 23 Aug 2021 17:21:06 +0000</pubDate>
+      
+      <guid>https://blog.mfcp.fun/posts/2021-08-23-%E6%90%AD%E5%BB%BAaria2%E4%B8%8B%E8%BD%BD/</guid>
+      <description>github地址： https://github.com/aria2/aria2
 Windows 下载
 在解压目录后创建启动文件
 aria2.conf # 配置文件 可以自己根据说明修改 aria2.session # 任务保存文件 未完成任务会保存在这里， （空文件） aria2.log # 日志文件，（空文件） 配置文件模板可以参考 Aria2 &amp;amp; YAAW 使用说明
@@ -12,4 +27,8 @@ arir
 直接打开网址即可使用
 如果打开网址后出现 错误: Aria2 RPC 服务器错误 大概率是因为rpc设置的是https或者wss, 更改成http即可正常显示下载请求
 yaaw (无搭建测试)
-webui-aria2 （无搭建测试）</description></item></channel></rss>
+webui-aria2 （无搭建测试）</description>
+    </item>
+    
+  </channel>
+</rss>

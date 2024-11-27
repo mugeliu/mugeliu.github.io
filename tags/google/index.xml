@@ -1,7 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>google on Awesome Hugo blog</title><link>https://blog.mfcp.fun/tags/google/</link><description>Recent content in google on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Mon, 14 Mar 2022 19:42:01 +0000</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/google/index.xml" rel="self" type="application/rss+xml"/><item><title>Google搜索小技巧</title><link>https://blog.mfcp.fun/posts/2022-03-14-google%E6%90%9C%E7%B4%A2%E5%B0%8F%E6%8A%80%E5%B7%A7/</link><pubDate>Mon, 14 Mar 2022 19:42:01 +0000</pubDate><guid>https://blog.mfcp.fun/posts/2022-03-14-google%E6%90%9C%E7%B4%A2%E5%B0%8F%E6%8A%80%E5%B7%A7/</guid><description>🕷️ 突然翻到了google的搜索及技巧的文章。遂整理记录 逻辑运算符 “” 返回的结果中必须包含引号中的关键词或短语 OR (|) 连接搜索关键词，或的关系，必须大写 AND (+) 一般是空格 () 对条件分组进行搜索 排斥某些关键词的结果。可以和site:连用 通配符，用来匹配任何单词或短语 ~ 搜索除了跟关键词外还要搜索跟~后边关键词相关的词汇 .. 两个数之间 $250..$1000 搜索高级操作符 intitle allintitle
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>google on Awesome Hugo blog</title>
+    <link>https://blog.mfcp.fun/tags/google/</link>
+    <description>Recent content in google on Awesome Hugo blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Mon, 14 Mar 2022 19:42:01 +0000</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/google/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Google搜索小技巧</title>
+      <link>https://blog.mfcp.fun/posts/2022-03-14-google%E6%90%9C%E7%B4%A2%E5%B0%8F%E6%8A%80%E5%B7%A7/</link>
+      <pubDate>Mon, 14 Mar 2022 19:42:01 +0000</pubDate>
+      
+      <guid>https://blog.mfcp.fun/posts/2022-03-14-google%E6%90%9C%E7%B4%A2%E5%B0%8F%E6%8A%80%E5%B7%A7/</guid>
+      <description>🕷️ 突然翻到了google的搜索及技巧的文章。遂整理记录逻辑运算符 “” 返回的结果中必须包含引号中的关键词或短语 OR (|) 连接搜索关键词，或的关系，必须大写 AND (+) 一般是空格 () 对条件分组进行搜索 排斥某些关键词的结果。可以和site:连用 通配符，用来匹配任何单词或短语 ~ 搜索除了跟关键词外还要搜索跟~后边关键词相关的词汇 .. 两个数之间 $250..$1000 搜索高级操作符 intitle allintitle
 allintitle 只返回包含标题中每个单词的结果。 intitle: 只查找命令后面的单词
 查询结果类似，如果关键词中有连接符，优先使用allintitle
-allintitle:Where's the Cat? Board book
+allintitle:Where&#39;s the Cat? Board book
 inurl allinurl
 与intitle类似，在url中搜索关键词
 ↘️以下示例搜索url中包含“marketing”和“strategy”的结果
@@ -20,4 +35,8 @@ link
 link seo-hacker.com -site:seo-hacker.com
 allinanchor inanchor
 搜索结果展示锚点文本中出现相关关键词的网页
-allinanchor:best bed mattress philippines</description></item></channel></rss>
+allinanchor:best bed mattress philippines</description>
+    </item>
+    
+  </channel>
+</rss>

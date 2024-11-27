@@ -1,4 +1,19 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>git on Awesome Hugo blog</title><link>https://blog.mfcp.fun/tags/git/</link><description>Recent content in git on Awesome Hugo blog</description><generator>Hugo -- gohugo.io</generator><language>en-gb</language><lastBuildDate>Sat, 26 Aug 2023 01:18:03 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>搭建git服务器并配置blog自动部署</title><link>https://blog.mfcp.fun/posts/ef734f00e58c413acb9b7f60f8147607/</link><pubDate>Sat, 26 Aug 2023 01:18:03 +0800</pubDate><guid>https://blog.mfcp.fun/posts/ef734f00e58c413acb9b7f60f8147607/</guid><description>最方便的还是查看git的官方文档 中关于服务器上git配置的相关章节，比较详细
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Awesome Hugo blog</title>
+    <link>https://blog.mfcp.fun/tags/git/</link>
+    <description>Recent content in git on Awesome Hugo blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 26 Aug 2023 01:18:03 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>搭建git服务器并配置blog自动部署</title>
+      <link>https://blog.mfcp.fun/posts/ef734f00e58c413acb9b7f60f8147607/</link>
+      <pubDate>Sat, 26 Aug 2023 01:18:03 +0800</pubDate>
+      
+      <guid>https://blog.mfcp.fun/posts/ef734f00e58c413acb9b7f60f8147607/</guid>
+      <description>最方便的还是查看git的官方文档 中关于服务器上git配置的相关章节，比较详细
 👉 服务器上的-Git-配置服务器
 记录下我搭建过程中的思路以及一些需要注意的点
 搭建思路 在本地搭建了hugo配合typora写文章
@@ -19,7 +34,16 @@ git的钩子功能post-receive需要可执行权限才能成功执行
 由于github page跟腾讯云的baseurl不一致，同一个config文件不能使用,创建单独的配置文件编译
 同步到腾讯云ubuntu上需要创建ssh密钥文件，把公钥写入到authorized_keys中，把私钥文件写入到github项目的Security中通过虚拟变量形式来访问
 👇以下是成功的action文件shili
-# .github/workflows/gh-pages.yml name: GitHub Pages on: push: branches: - master jobs: build-deploy: runs-on: ubuntu-22.</description></item><item><title>git命令</title><link>https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/</link><pubDate>Thu, 07 Jul 2022 17:38:13 +0000</pubDate><guid>https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/</guid><description>资料：
+# .github/workflows/gh-pages.yml name: GitHub Pages on: push: branches: - master jobs: build-deploy: runs-on: ubuntu-22.</description>
+    </item>
+    
+    <item>
+      <title>git命令</title>
+      <link>https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Thu, 07 Jul 2022 17:38:13 +0000</pubDate>
+      
+      <guid>https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/</guid>
+      <description>资料：
 https://gitee.com/progit/
 https://git-scm.com/book/zh/v2/起步-关于版本控制
 🕸️ 来源于阮一峰的网络日志
@@ -28,4 +52,8 @@ Git远程操作详解
 安装完成后 需要最后一步设置
 # --global参数 这台机器上的所有仓库都会使用这个配置 git config --global user.name &amp;#34;you name&amp;#34; git config --global user.email &amp;#34;email@exemple.com&amp;#34; 工作区：git init的文件夹就是一个工作区 版本库：工作区里面一个隐藏目录 .git (里面有暂存区和master分支)
 git add把文件添加进去，实际上是把文件修改添加到暂存区里面，git commit提交更改，实际上是把暂存区的所有内容提交到当前分支上。
-git init # 把当前目录编程git管理的仓库 git add &amp;lt;file&amp;gt; # 把当前文件添加到仓库 可以同时添加多个文件 git commit -m &amp;#34;message&amp;#34; # 把文件提交到仓库, -m 后边的是本次提交说明 git status # 查看当前工作区的转态，是否有文件修改 git diff # 查看修改内容 git log # 显示从最近到最远的提交日志， git reflog # 查看历史命令，以确定回到那个版本 git log --pretty=oneline # 只显示commit_id (版本号) git reset --hard commit_id # HEAD指向的版本是当前版本，可以根据commid 回退 git diff HEAD -- &amp;lt;file&amp;gt; # 查看工作区与版本库里面最新版本的区别 git checkout - - file 把file中在工作区的修改全部撤销</description></item></channel></rss>
+git init # 把当前目录编程git管理的仓库 git add &amp;lt;file&amp;gt; # 把当前文件添加到仓库 可以同时添加多个文件 git commit -m &amp;#34;message&amp;#34; # 把文件提交到仓库, -m 后边的是本次提交说明 git status # 查看当前工作区的转态，是否有文件修改 git diff # 查看修改内容 git log # 显示从最近到最远的提交日志， git reflog # 查看历史命令，以确定回到那个版本 git log --pretty=oneline # 只显示commit_id (版本号) git reset --hard commit_id # HEAD指向的版本是当前版本，可以根据commid 回退 git diff HEAD -- &amp;lt;file&amp;gt; # 查看工作区与版本库里面最新版本的区别 git checkout - - file 把file中在工作区的修改全部撤销</description>
+    </item>
+    
+  </channel>
+</rss>
