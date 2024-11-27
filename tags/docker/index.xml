@@ -13,6 +13,7 @@
       <pubDate>Sun, 17 Jul 2022 19:20:42 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2022-07-17-docker%E5%9F%BA%E7%A1%80/</guid>
+      
       <description>Docker基础 容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。
 Docker命令行参考
 镜像（image） Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。
@@ -35,6 +36,7 @@ docker container list
 docker container ls -all
 启动终止的容器
 docker container start &amp;lt;container id&amp;gt;</description>
+      
     </item>
     
     <item>
@@ -43,6 +45,7 @@ docker container start &amp;lt;container id&amp;gt;</description>
       <pubDate>Fri, 09 Apr 2021 17:25:09 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2021-04-09-docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      
       <description>容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。
 Docker命令行参考
 镜像（image） Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。
@@ -66,6 +69,7 @@ docker container list
 docker container ls -all
 启动终止的容器
 docker container start &amp;lt;container id&amp;gt;</description>
+      
     </item>
     
     <item>
@@ -74,6 +78,7 @@ docker container start &amp;lt;container id&amp;gt;</description>
       <pubDate>Thu, 08 Apr 2021 18:20:24 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2021-04-08-linux-%E5%AE%89%E8%A3%85docker/</guid>
+      
       <description>Linux 安装docker docker: 属于 Linux 容器的一种封装，提供简单易用的容器使用接口 👉 官方文档
 docker-compose: 一个集群管理方式，可以利用名为docker-compose.yml的yaml文件来定义需要启动的容器
 Kubernetes（K8S）: 非常强大的容器编排工具，可以管理大型集群、微服务、分布式应用等等
@@ -88,6 +93,7 @@ sudo docker run hello-world
 配置开机自启动 （禁止启动则使用disable关键字替换enable执行命令）
 sudo systemctl enable docker.service sudo systemctl enable containerd.service 安装docker-compose linux下参考官方文档 也可以使用pip进行安装 pip install docker-compose 卸载docker 卸载Docker Engine，CLI和Containerd软件包
 sudo yum remove docker-ce docker-ce-cli [containerd.</description>
+      
     </item>
     
   </channel>

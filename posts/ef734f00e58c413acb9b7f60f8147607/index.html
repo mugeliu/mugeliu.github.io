@@ -20,15 +20,8 @@
 
 
 
-  <meta itemprop="image" content="https://blog.mfcp.fun/" />
-  <meta property="og:image" content="https://blog.mfcp.fun/" />
-  <meta name="twitter:image" content="https://blog.mfcp.fun/" />
-  <meta name="twitter:image:src" content="https://blog.mfcp.fun/" />
 
 
-
-
-    
     
     
     
@@ -36,7 +29,13 @@
     <meta property="og:type" content="article" />
     <meta property="og:article:published_time" content=2023-08-26T01:18:03&#43;0800 />
     <meta property="article:published_time" content=2023-08-26T01:18:03&#43;0800 />
+    <meta property="og:url" content="https://blog.mfcp.fun/posts/ef734f00e58c413acb9b7f60f8147607/" />
 
+    
+    <meta property="og:article:author" content="mmm6" />
+    <meta property="article:author" content="mmm6" />
+    <meta name="author" content="mmm6" />
+    
     
 
     
@@ -70,9 +69,66 @@
 <meta name="generator" content="Hugo 0.112.4">
 
     
+    <meta property="og:title" content="搭建git服务器并配置blog自动部署" />
+<meta property="og:description" content="最方便的还是查看git的官方文档 中关于服务器上git配置的相关章节，比较详细
+👉 服务器上的-Git-配置服务器
+记录下我搭建过程中的思路以及一些需要注意的点
+搭建思路 在本地搭建了hugo配合typora写文章
+图片部分使用腾讯云的oss存储实现图床功能 ，（做了防盗链话费不了多钱）
+文章写好后推送到github的私有库中，配合action功能自动部署推送到公开库中展示
+📑 Github Page 原先计划
+在腾讯云搭建git服务，写好文章同时推送到腾讯云 在服务器中安装hugo，使用git中的钩子功能提交文章后在git服务器编译到指定的目录中
+这次重新搭建折腾了好久都卡在vps拉取的环节上了，所以放弃
+使用action的burnett01/rsync-deployments实现对编译好文件的上传
+搭建nginx，配置域名实现公网访问
+server { listen 80; server_name blog.mfcp.fun; location / { alias /var/www/blog_site/; } } 问题记录 创建完git用户后设置git-shell,用户就不能登录shell了，正常推送是没有问题的
+根据git文档中搭建好git服务后，根据文档中的说明，更改了git用户的默认shell，只能通过git协议推送代码，不能登录shell，但是我们要新建仓库必须要在shell中操作。
+两种解决办法 👇
+第一是通过高权限账户使用**chsh**命令临时更改git用户的默认shell，创建完在改回去
+# 查看系统shell cat /etc/shells # 第二种 chsh -s /bin/sh git #更改git用户的shell 第二种是通过高权限账户创建好文件，然后更改把文件夹的用户和用户组更改为git用户。
+创建的目录和文件要注意权限问题，所属权限不是git用户的话后期推送会失败
+git的钩子功能post-receive需要可执行权限才能成功执行
+由于github page跟腾讯云的baseurl不一致，同一个config文件不能使用,创建单独的配置文件编译
+同步到腾讯云ubuntu上需要创建ssh密钥文件，把公钥写入到authorized_keys中，把私钥文件写入到github项目的Security中通过虚拟变量形式来访问
+👇以下是成功的action文件shili
+# .github/workflows/gh-pages.yml name: GitHub Pages on: push: branches: - master jobs: build-deploy: runs-on: ubuntu-22." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.mfcp.fun/posts/ef734f00e58c413acb9b7f60f8147607/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-08-26T01:18:03+08:00" />
+<meta property="article:modified_time" content="2023-08-26T01:18:03+08:00" />
+
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="搭建git服务器并配置blog自动部署"/>
+<meta name="twitter:description" content="最方便的还是查看git的官方文档 中关于服务器上git配置的相关章节，比较详细
+👉 服务器上的-Git-配置服务器
+记录下我搭建过程中的思路以及一些需要注意的点
+搭建思路 在本地搭建了hugo配合typora写文章
+图片部分使用腾讯云的oss存储实现图床功能 ，（做了防盗链话费不了多钱）
+文章写好后推送到github的私有库中，配合action功能自动部署推送到公开库中展示
+📑 Github Page 原先计划
+在腾讯云搭建git服务，写好文章同时推送到腾讯云 在服务器中安装hugo，使用git中的钩子功能提交文章后在git服务器编译到指定的目录中
+这次重新搭建折腾了好久都卡在vps拉取的环节上了，所以放弃
+使用action的burnett01/rsync-deployments实现对编译好文件的上传
+搭建nginx，配置域名实现公网访问
+server { listen 80; server_name blog.mfcp.fun; location / { alias /var/www/blog_site/; } } 问题记录 创建完git用户后设置git-shell,用户就不能登录shell了，正常推送是没有问题的
+根据git文档中搭建好git服务后，根据文档中的说明，更改了git用户的默认shell，只能通过git协议推送代码，不能登录shell，但是我们要新建仓库必须要在shell中操作。
+两种解决办法 👇
+第一是通过高权限账户使用**chsh**命令临时更改git用户的默认shell，创建完在改回去
+# 查看系统shell cat /etc/shells # 第二种 chsh -s /bin/sh git #更改git用户的shell 第二种是通过高权限账户创建好文件，然后更改把文件夹的用户和用户组更改为git用户。
+创建的目录和文件要注意权限问题，所属权限不是git用户的话后期推送会失败
+git的钩子功能post-receive需要可执行权限才能成功执行
+由于github page跟腾讯云的baseurl不一致，同一个config文件不能使用,创建单独的配置文件编译
+同步到腾讯云ubuntu上需要创建ssh密钥文件，把公钥写入到authorized_keys中，把私钥文件写入到github项目的Security中通过虚拟变量形式来访问
+👇以下是成功的action文件shili
+# .github/workflows/gh-pages.yml name: GitHub Pages on: push: branches: - master jobs: build-deploy: runs-on: ubuntu-22."/>
+
+
+    
 
     <link rel="canonical" href="https://blog.mfcp.fun/posts/ef734f00e58c413acb9b7f60f8147607/">
-    <link href="/style.min.840eada6dfddec7b8ccfcf867f039bf80b1f16a265ec6e01dc553a3dddc9d509.css" rel="stylesheet">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
     <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
 
     
@@ -94,10 +150,15 @@
     
     <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
 
-    </head>
+    
+    <meta name="google-adsense-account" content="ca-pub-5713292976881584">
+
+    
+    
+</head>
 <body data-theme = "auto" class="notransition">
 
-<script src="/js/theme.js"></script>
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
 
 <div class="navbar" role="navigation">
     <nav class="menu" aria-label="Main Navigation">
@@ -145,6 +206,8 @@ stroke-linejoin="round" class="feather feather-home">
                 <li class="menu-separator">
                     <span>|</span>
                 </li>
+                
+                
             </ul>
             <a id="mode" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
@@ -163,14 +226,17 @@ stroke-linejoin="round" class="feather feather-home">
                 <h1 class="header-title">搭建git服务器并配置blog自动部署</h1>
                 
                 
+                
                 <div class="post-meta">
                     <time datetime="2023-08-26T01:18:03&#43;08:00" itemprop="datePublished"> 26 Aug 2023 </time>
                 </div>
                 
             </header>
-            <details class="toc">
-                <summary><b>Table of Contents</b></summary>
-                <nav id="TableOfContents">
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b>Table of Contents</b></summary>
+        <nav id="TableOfContents">
   <ul>
     <li>
       <ul>
@@ -184,7 +250,8 @@ stroke-linejoin="round" class="feather feather-home">
     </li>
   </ul>
 </nav>
-            </details><div class="page-content">
+    </details>
+            <div class="page-content">
                 <p><img src="https://images.unsplash.com/photo-1632425422799-286dc4325dbb" alt="unsplash"></p>
 <blockquote>
 <p>最方便的还是查看git的<a href="https://git-scm.com/book/zh/v2">官方文档</a> 中关于服务器上git配置的相关章节，比较详细</p>
@@ -386,9 +453,7 @@ stroke-linejoin="round" class="feather feather-home">
 </div>
     <small class="footer_copyright">
         © 2024 mmm6.
-        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noreferrer noopener">Hugo blog awesome</a>
-        theme on
-        <a href="https://gohugo.io" target="_blank" rel="noreferrer noopener">Hugo</a>.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
     </small>
 </footer><a href="#" title="Go to top" id="totop">
     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
@@ -416,7 +481,7 @@ stroke-linejoin="round" class="feather feather-home">
 
 
     
-    <script async src="https://blog.mfcp.fun/js/main.js" ></script>
+    <script src="https://blog.mfcp.fun/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
 
     
 

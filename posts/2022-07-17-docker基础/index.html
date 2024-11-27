@@ -20,15 +20,8 @@
 
 
 
-  <meta itemprop="image" content="https://blog.mfcp.fun/" />
-  <meta property="og:image" content="https://blog.mfcp.fun/" />
-  <meta name="twitter:image" content="https://blog.mfcp.fun/" />
-  <meta name="twitter:image:src" content="https://blog.mfcp.fun/" />
 
 
-
-
-    
     
     
     
@@ -36,7 +29,13 @@
     <meta property="og:type" content="article" />
     <meta property="og:article:published_time" content=2022-07-17T19:20:42Z />
     <meta property="article:published_time" content=2022-07-17T19:20:42Z />
+    <meta property="og:url" content="https://blog.mfcp.fun/posts/2022-07-17-docker%E5%9F%BA%E7%A1%80/" />
 
+    
+    <meta property="og:article:author" content="mmm6" />
+    <meta property="article:author" content="mmm6" />
+    <meta name="author" content="mmm6" />
+    
     
 
     
@@ -70,9 +69,66 @@
 <meta name="generator" content="Hugo 0.112.4">
 
     
+    <meta property="og:title" content="docker基础知识" />
+<meta property="og:description" content="Docker基础 容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。
+Docker命令行参考
+镜像（image） Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。
+拉取仓库代码到本地
+docker image pull library/hello-world
+docker官方提供的默认在library中，可以省略library
+docker image pull hello-world
+查看所有镜像文件
+docker image list
+⚠️ docker run& docker container run 区别：前者是1.13之前使用的命令，后者是1.13后新增加的，作用效果一样。[参考说明](https://www.docker.com/blog/whats-new-in-docker-1-13/) 从image文件中生成一个正在运行的容器实例
+docker container run xxxx
+手动终止运行的容器
+docker container kill xxxx
+以交互模式运行容器 (后边可以跟需要打开的shell)
+docker container run -it xxxx (bin/bash)
+容器 更多命令参考 👉🏻 (官方文档)
+列出本机正在运行的容器
+docker container list
+列出本机所有容器，包括终止运行的容器
+docker container ls -all
+启动终止的容器
+docker container start &lt;container id&gt;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.mfcp.fun/posts/2022-07-17-docker%E5%9F%BA%E7%A1%80/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-17T19:20:42+00:00" />
+<meta property="article:modified_time" content="2022-07-17T19:20:42+00:00" />
+
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="docker基础知识"/>
+<meta name="twitter:description" content="Docker基础 容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。
+Docker命令行参考
+镜像（image） Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。
+拉取仓库代码到本地
+docker image pull library/hello-world
+docker官方提供的默认在library中，可以省略library
+docker image pull hello-world
+查看所有镜像文件
+docker image list
+⚠️ docker run& docker container run 区别：前者是1.13之前使用的命令，后者是1.13后新增加的，作用效果一样。[参考说明](https://www.docker.com/blog/whats-new-in-docker-1-13/) 从image文件中生成一个正在运行的容器实例
+docker container run xxxx
+手动终止运行的容器
+docker container kill xxxx
+以交互模式运行容器 (后边可以跟需要打开的shell)
+docker container run -it xxxx (bin/bash)
+容器 更多命令参考 👉🏻 (官方文档)
+列出本机正在运行的容器
+docker container list
+列出本机所有容器，包括终止运行的容器
+docker container ls -all
+启动终止的容器
+docker container start &lt;container id&gt;"/>
+
+
+    
 
     <link rel="canonical" href="https://blog.mfcp.fun/posts/2022-07-17-docker%E5%9F%BA%E7%A1%80/">
-    <link href="/style.min.840eada6dfddec7b8ccfcf867f039bf80b1f16a265ec6e01dc553a3dddc9d509.css" rel="stylesheet">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
     <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
 
     
@@ -94,10 +150,15 @@
     
     <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
 
-    </head>
+    
+    <meta name="google-adsense-account" content="ca-pub-5713292976881584">
+
+    
+    
+</head>
 <body data-theme = "auto" class="notransition">
 
-<script src="/js/theme.js"></script>
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
 
 <div class="navbar" role="navigation">
     <nav class="menu" aria-label="Main Navigation">
@@ -145,6 +206,8 @@ stroke-linejoin="round" class="feather feather-home">
                 <li class="menu-separator">
                     <span>|</span>
                 </li>
+                
+                
             </ul>
             <a id="mode" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
@@ -163,14 +226,17 @@ stroke-linejoin="round" class="feather feather-home">
                 <h1 class="header-title">docker基础知识</h1>
                 
                 
+                
                 <div class="post-meta">
                     <time datetime="2022-07-17T19:20:42&#43;00:00" itemprop="datePublished"> 17 Jul 2022 </time>
                 </div>
                 
             </header>
-            <details class="toc">
-                <summary><b>Table of Contents</b></summary>
-                <nav id="TableOfContents">
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b>Table of Contents</b></summary>
+        <nav id="TableOfContents">
   <ul>
     <li>
       <ul>
@@ -180,7 +246,8 @@ stroke-linejoin="round" class="feather feather-home">
     </li>
   </ul>
 </nav>
-            </details><div class="page-content">
+    </details>
+            <div class="page-content">
                 <h1 id="docker基础">Docker基础</h1>
 <blockquote>
 <p>容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。</p>
@@ -303,9 +370,7 @@ stroke-linejoin="round" class="feather feather-home">
 </div>
     <small class="footer_copyright">
         © 2024 mmm6.
-        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noreferrer noopener">Hugo blog awesome</a>
-        theme on
-        <a href="https://gohugo.io" target="_blank" rel="noreferrer noopener">Hugo</a>.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
     </small>
 </footer><a href="#" title="Go to top" id="totop">
     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
@@ -333,7 +398,7 @@ stroke-linejoin="round" class="feather feather-home">
 
 
     
-    <script async src="https://blog.mfcp.fun/js/main.js" ></script>
+    <script src="https://blog.mfcp.fun/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
 
     
 

@@ -20,15 +20,8 @@
 
 
 
-  <meta itemprop="image" content="https://blog.mfcp.fun/" />
-  <meta property="og:image" content="https://blog.mfcp.fun/" />
-  <meta name="twitter:image" content="https://blog.mfcp.fun/" />
-  <meta name="twitter:image:src" content="https://blog.mfcp.fun/" />
 
 
-
-
-    
     
     
     
@@ -36,7 +29,13 @@
     <meta property="og:type" content="article" />
     <meta property="og:article:published_time" content=2022-01-04T11:05:58Z />
     <meta property="article:published_time" content=2022-01-04T11:05:58Z />
+    <meta property="og:url" content="https://blog.mfcp.fun/posts/2022-01-04-linux%E5%9F%BA%E6%9C%AC%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/" />
 
+    
+    <meta property="og:article:author" content="mmm6" />
+    <meta property="article:author" content="mmm6" />
+    <meta name="author" content="mmm6" />
+    
     
 
     
@@ -70,9 +69,58 @@
 <meta name="generator" content="Hugo 0.112.4">
 
     
+    <meta property="og:title" content="Linux基本安全设置" />
+<meta property="og:description" content="ℹ️ 来源：Sol Love
+以下命令用于ubuntu主机，其他linux命令可能不相同
+更改root密码 passwd
+将root密码更改为长而且复杂的密码，不需要记住他，只需要存在在安全的地方。只有无法通过ssh登录或丢失sodu密码时才需要此密码
+安装Fail2ban apt-get install fail2ban
+创建新用户
+useradd deploy mkdir /home/deploy mkdir /home/deploy/.ssh chmod 700 /home/deploy/.ssh 使用公钥认证 vim /home/deploy/.ssh/authorized_keys
+添加本地机器的公钥id_rsa.pub的内容到此文件中
+chmod 400 /home/deploy/.ssh/authorized_keys
+chown deploy:deploy /home/deploy -R
+测试新用户启动 为新用户设置密码 (设置复杂密码，是需要sudo的权限的密码)
+passwd deploy
+设置sudo权限 （visudo的文件是/etc/sudoers，但是不要直接修改此文件，修改请使用visudo命令）
+visudo root ALL=(ALL) ALL deploy ALL=(ALL) ALL 锁定SSH 配置ssh以防止密码和root登录并将ssh锁定到特定IP
+vim /etc/ssh/sshd_config
+PermitRootLogin no PasswordAuthentication no AllowUsers deploy@(your-ip) deploy@(another-ip-if-any) 重新启动ssh
+service ssh restart
+设置防火墙 ufw allow from {your-ip} to any port 22 ufw allow 80 ufw allow 443 ufw enable 启动安全更新 apt-get install unattended-upgrades vim /etc/apt/apt." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.mfcp.fun/posts/2022-01-04-linux%E5%9F%BA%E6%9C%AC%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-01-04T11:05:58+00:00" />
+<meta property="article:modified_time" content="2022-01-04T11:05:58+00:00" />
+
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Linux基本安全设置"/>
+<meta name="twitter:description" content="ℹ️ 来源：Sol Love
+以下命令用于ubuntu主机，其他linux命令可能不相同
+更改root密码 passwd
+将root密码更改为长而且复杂的密码，不需要记住他，只需要存在在安全的地方。只有无法通过ssh登录或丢失sodu密码时才需要此密码
+安装Fail2ban apt-get install fail2ban
+创建新用户
+useradd deploy mkdir /home/deploy mkdir /home/deploy/.ssh chmod 700 /home/deploy/.ssh 使用公钥认证 vim /home/deploy/.ssh/authorized_keys
+添加本地机器的公钥id_rsa.pub的内容到此文件中
+chmod 400 /home/deploy/.ssh/authorized_keys
+chown deploy:deploy /home/deploy -R
+测试新用户启动 为新用户设置密码 (设置复杂密码，是需要sudo的权限的密码)
+passwd deploy
+设置sudo权限 （visudo的文件是/etc/sudoers，但是不要直接修改此文件，修改请使用visudo命令）
+visudo root ALL=(ALL) ALL deploy ALL=(ALL) ALL 锁定SSH 配置ssh以防止密码和root登录并将ssh锁定到特定IP
+vim /etc/ssh/sshd_config
+PermitRootLogin no PasswordAuthentication no AllowUsers deploy@(your-ip) deploy@(another-ip-if-any) 重新启动ssh
+service ssh restart
+设置防火墙 ufw allow from {your-ip} to any port 22 ufw allow 80 ufw allow 443 ufw enable 启动安全更新 apt-get install unattended-upgrades vim /etc/apt/apt."/>
+
+
+    
 
     <link rel="canonical" href="https://blog.mfcp.fun/posts/2022-01-04-linux%E5%9F%BA%E6%9C%AC%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/">
-    <link href="/style.min.840eada6dfddec7b8ccfcf867f039bf80b1f16a265ec6e01dc553a3dddc9d509.css" rel="stylesheet">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
     <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
 
     
@@ -94,10 +142,15 @@
     
     <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
 
-    </head>
+    
+    <meta name="google-adsense-account" content="ca-pub-5713292976881584">
+
+    
+    
+</head>
 <body data-theme = "auto" class="notransition">
 
-<script src="/js/theme.js"></script>
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
 
 <div class="navbar" role="navigation">
     <nav class="menu" aria-label="Main Navigation">
@@ -145,6 +198,8 @@ stroke-linejoin="round" class="feather feather-home">
                 <li class="menu-separator">
                     <span>|</span>
                 </li>
+                
+                
             </ul>
             <a id="mode" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
@@ -163,14 +218,17 @@ stroke-linejoin="round" class="feather feather-home">
                 <h1 class="header-title">Linux基本安全设置</h1>
                 
                 
+                
                 <div class="post-meta">
                     <time datetime="2022-01-04T11:05:58&#43;00:00" itemprop="datePublished"> 4 Jan 2022 </time>
                 </div>
                 
             </header>
-            <details class="toc">
-                <summary><b>Table of Contents</b></summary>
-                <nav id="TableOfContents">
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b>Table of Contents</b></summary>
+        <nav id="TableOfContents">
   <ul>
     <li>
       <ul>
@@ -186,7 +244,8 @@ stroke-linejoin="round" class="feather feather-home">
     </li>
   </ul>
 </nav>
-            </details><div class="page-content">
+    </details>
+            <div class="page-content">
                 <p>ℹ️ 来源：<a href="https://sollove.com/2013/03/03/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers/">Sol Love</a></p>
 <p><em><code>以下命令用于ubuntu主机，其他linux命令可能不相同</code></em></p>
 <h3 id="更改root密码">更改root密码</h3>
@@ -284,9 +343,7 @@ stroke-linejoin="round" class="feather feather-home">
 </div>
     <small class="footer_copyright">
         © 2024 mmm6.
-        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noreferrer noopener">Hugo blog awesome</a>
-        theme on
-        <a href="https://gohugo.io" target="_blank" rel="noreferrer noopener">Hugo</a>.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
     </small>
 </footer><a href="#" title="Go to top" id="totop">
     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
@@ -314,7 +371,7 @@ stroke-linejoin="round" class="feather feather-home">
 
 
     
-    <script async src="https://blog.mfcp.fun/js/main.js" ></script>
+    <script src="https://blog.mfcp.fun/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
 
     
 

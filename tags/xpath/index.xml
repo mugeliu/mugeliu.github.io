@@ -13,6 +13,7 @@
       <pubDate>Wed, 19 May 2021 17:46:01 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2021-05-19-xpath-%E8%BD%B4-%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
+      
       <description>参考：
 https://www.cnblogs.com/zhaozhan/archive/2009/09/10/1564330.html
 http://www.zvon.org/xxl/XPathTutorial/General_chi/examples.html
@@ -22,6 +23,7 @@ Xpath轴 child 选取当前节点的所有子元素 parent 选取当前节点�
 谓语 last() 选取最后一个元素 /bookstore/book[last()] position()&amp;lt;3 选取最前面的两个属于 bookstore 元素的子元素的 book 元素 /bookstore/book[position()&amp;lt;3] price&amp;gt;35.00 选取 bookstore 元素的所有 book 元素，且其中的 price 元素的值须大于 35.00。 /bookstore/book[price&amp;gt;35.00] 运算符 https://www.w3school.com.cn/xpath/xpath_operators.asp
 XPath、XQuery 以及 XSLT 函数 https://www.w3school.com.cn/xpath/xpath_functions.asp
 normalize-space 删除指定字符串的开头和结尾的空白，并把内部的所有空白序列替换为一个，然后返回结果。如果没有 string 参数，则处理当前节点。 一些示例 # 根据text获取指定的节点，对不需要的节点进行排除。xpath(&amp;#39;//span[@class=&amp;#34;title-name&amp;#34;][contains(text(),&amp;#34;出品&amp;#34;) and not (contains(text(),&amp;#34;联合出品&amp;#34;))]/ancestor::dl/dd//div[@class=&amp;#34;p-item&amp;#34;][position()&amp;lt;4]//p/text()&amp;#39;)# 合并两个节点的值 （115.</description>
+      
     </item>
     
   </channel>

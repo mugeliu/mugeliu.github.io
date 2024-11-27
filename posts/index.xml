@@ -6,13 +6,33 @@
     <description>Recent content in 文章集合 on Awesome Hugo blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 13 Oct 2023 23:38:29 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 28 May 2024 11:19:21 +0800</lastBuildDate><atom:link href="https://blog.mfcp.fun/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>React系列一 | 搭建React项目</title>
+      <link>https://blog.mfcp.fun/posts/d2c46da82d353f146adf38580302cce3/</link>
+      <pubDate>Tue, 28 May 2024 11:19:21 +0800</pubDate>
+      
+      <guid>https://blog.mfcp.fun/posts/d2c46da82d353f146adf38580302cce3/</guid>
+      
+      <description>创建项目 npx create-react-app my-app 创建完成后会有完整的工程目录
+git 仓库等各种都已经创建好。默认的是 React 的介绍页面。可以在这个基础上进行修改。
+项目结构 index.js 为入口文件，创建了一个根节点 root, 并对根节点进行渲染 app.js 为具体应用的文件。 public 中的 index.html 为 html 模板。 reportWebVitals.js 为项目的监控文件。 使用 vite 重新搭建项目 起因是因为在后续的运行过程中发现报错 DeprecationWarning: &#39;onAfterSetupMiddleware&#39; option is deprecated
+参考了 github 上的issue、issue 后放弃使用 create-react-app
+GitHub 项目地址和文档： GitHub &amp;amp; 文档
+搭建命令 npm create vite@latest xxxx 接下来会让你选择要使用的框架和语言，包含了 vue、react 等。
+使用 TailwindCss 装饰 对于没有前端基础的学习 css 头大，遂决定用 tailwindcss 来处理页面，最基本的应该没问题
+文档地址: Tailwindcss 组件库
+安装 TailwindCss npm install -D tailwindcss postcss autoprefixer npx tailwindcss init -p 以上命令会在当前目录初始化 tailwindcss，创建tailwind.</description>
+      
+    </item>
+    
     <item>
       <title>Stable Diffusion系列一 | 安装webui</title>
       <link>https://blog.mfcp.fun/posts/b86adb06a9246b489312401c23b0b1a5/</link>
       <pubDate>Fri, 13 Oct 2023 23:38:29 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/b86adb06a9246b489312401c23b0b1a5/</guid>
+      
       <description>最近想深入学习一下Stable Diffusion，买了腾讯云服务器，在windows上和linux上都自己搭建了一遍，记录下搭建遇到的各种坑，如果不熟悉Linux，使用一键安装包即可，自己在Linux部署的话尽量使用境外服务器，有些模型会遇到不可说的问题下载不下来
 👇一些用到的地址
 Stable Diffusion Stable Diffusion webui civitai huggingface 我购买的是腾讯云的GN7服务器使用生成图片确实要比较快，每张图片几十秒就能生成好
@@ -40,6 +60,7 @@ sd默认使用的模型为v1-5-pruned-emaonly.safetensors,下载失败的话需�
 我在nginx配置了密码校验，所以没有在sdweiui中开启。
 以下配置内容参考网上大佬的文章
 server { listen 80; listen [::]:80; server_name xxx.xxx.com; return 301 https://$server_name$request_uri; } server { listen 443 ssl; listen [::]:443 ssl; server_name xxx.xxx.com; ssl_certificate /etc/nginx/cert/xxx.</description>
+      
     </item>
     
     <item>
@@ -48,6 +69,7 @@ server { listen 80; listen [::]:80; server_name xxx.xxx.com; return 301 https://
       <pubDate>Fri, 13 Oct 2023 22:46:37 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/d02aa061f94ef96b5fc191b736a21b97/</guid>
+      
       <description> 由于最近想学习一下 Stable Diffusion ,刚开始使用的是windows安装的，远程访问并不是很方便，再加上linux使用习惯了以后，还是更希望在Linux上操作。
 在搭建了Stable Diffusion过程中需要使用指定的python版本，不想升级系统自带的python版本，以避免后期出现奇怪的问题，所以使用anaconda来管理不同的python版本。
 安装 👉 Anaconda官方
@@ -59,6 +81,7 @@ apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxc
 运行完成后输入 conda info 出现安装信息，则安装成功
 可以根据自己的情况来配置shell默认进入的虚拟环境，具体的安装教程可以参考Anaconda的官方教程，里面的说明很详细。
 常用命令 #创建虚拟环境 conda create -n your_env_name python=X.X（3.6、3.7等） #激活虚拟环境 source activate your_env_name(虚拟环境名称) #退出虚拟环境 source deactivate your_env_name(虚拟环境名称) #删除虚拟环境 conda remove -n your_env_name(虚拟环境名称) --all #查看安装了哪些包 conda list #安装包 conda install package_name(包名) conda install scrapy==1.3 # 安装指定版本的包 conda install -n 环境名 包名 # 在conda指定的某个环境中安装包 #查看当前存在哪些虚拟环境 conda env list #或 conda info -e #或 conda info --envs #检查更新当前conda conda update conda #更新anaconda conda update anaconda #更新所有库 conda update --all #更新python conda update python </description>
+      
     </item>
     
     <item>
@@ -67,6 +90,7 @@ apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxc
       <pubDate>Sun, 10 Sep 2023 22:30:38 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/e85b6dfba09c43d9e017e43052e8e72b/</guid>
+      
       <description>之前一直在自己电脑上，手机上下载软件来实现出国服务，有些像ios系统软件还需要外区账号操作起来比较麻烦，想着搞一个软路由来实现出国服务
 斐讯N1时代 在B站上看了许多测评软件，看到斐讯N1性价比高，而且还能玩一下docker，遂148块大洋购买了N1，比当时80快钱的时候已经高太多了，斐讯虽然倒下了，留下的一些遗产确实真的不多，便宜又好使用，再写文章的同时又39块大洋购买了体脂秤S1和99大洋买了音响R1.
 体脂秤使用派健康可以正常使用，音响刷入新系统，也能使用，音质也比100大洋的要好点。
@@ -86,6 +110,7 @@ N1安装Armbian和基于Docker的OpenWRT N1盒子刷Armbian系统 斐讯N1挂载
 armbian-install -&amp;gt; 101 -&amp;gt; 1 -&amp;gt; poweroff
 创建/etc/apt/keyrings文件夹，然后信任Docker的GPG公钥
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg 其他没什么大问题，每个人遇到的情况都不太相同，有问题多google，总能找到一些解决办法。</description>
+      
     </item>
     
     <item>
@@ -94,6 +119,7 @@ curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o 
       <pubDate>Sat, 26 Aug 2023 01:18:03 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/ef734f00e58c413acb9b7f60f8147607/</guid>
+      
       <description>最方便的还是查看git的官方文档 中关于服务器上git配置的相关章节，比较详细
 👉 服务器上的-Git-配置服务器
 记录下我搭建过程中的思路以及一些需要注意的点
@@ -116,6 +142,7 @@ git的钩子功能post-receive需要可执行权限才能成功执行
 同步到腾讯云ubuntu上需要创建ssh密钥文件，把公钥写入到authorized_keys中，把私钥文件写入到github项目的Security中通过虚拟变量形式来访问
 👇以下是成功的action文件shili
 # .github/workflows/gh-pages.yml name: GitHub Pages on: push: branches: - master jobs: build-deploy: runs-on: ubuntu-22.</description>
+      
     </item>
     
     <item>
@@ -124,6 +151,7 @@ git的钩子功能post-receive需要可执行权限才能成功执行
       <pubDate>Wed, 23 Aug 2023 00:53:59 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/ad5bcc507ff11a28bcbc66c6a3300f5e/</guid>
+      
       <description>三年前在阿里云买了自己的第一台服务器，后续到期后在腾讯云买了第二台服务器，这台服务器陪伴了三年，从刚接触程序，第一次面对一个黑框框的界面到现在对程序不恐惧不陌生，时间过得真快啊
 因为换了工作，不在从事技术相关的国内工作，这台服务器也基本闲置了一年，只有上面搭建的博客在运行，最近想起来这台服务器马上就快要到期了，想着能不能搭建个stable-diffusion 来玩一下，网上看了很多教程，都是在windows上搭建的，就直接重装成了win服务器，后来发现不行
 想着centos停止支持，ubuntu使用的也比较多，又从最原先的centos换成了ubuntu。记录下从新配置的整个过程
@@ -140,6 +168,7 @@ sudo systemctl status nginx 安装启动成功后就是绿色的running，失败
 使用公网ip访问访问http页面，出现以下页面说明安装成功
 配置文件位置 主要的配置目录在 /etc/nginx 主要的配置文件 /etc/nginx/nginx.conf 站点的配置文件 /etc/nginx/sites-available/ 方便查看文件夹命名为自己 域名.conf 日志文件在 /var/log/nginx 一些注意的问题 如果不能访问，查看服务器的安全组是否放开，服务器的防火墙是否打开
 sudo ufw status # 查看防火墙是否开启 sudo ufw enable|disable #开启或者关闭防火墙 默认关闭 sudo ufw allow &amp;#34;nginx full&amp;#34; #放开nginx 80/443 首次配置需要注意，如果打开了服务器的防火墙，添加nginx后要放开22端口，之前操作已经禁止了密码登录，22端口关闭后就不能登录服务器，陷入死循环</description>
+      
     </item>
     
     <item>
@@ -148,6 +177,7 @@ sudo ufw status # 查看防火墙是否开启 sudo ufw enable|disable #开启或
       <pubDate>Sun, 20 Aug 2023 00:30:33 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/da417dd65a33f8a3951f8dac1c31556c/</guid>
+      
       <description>本文也是为了记录顺利搭建了cos图床，并开启的新的博客之路的过程 顺便体验一下typora来写文章，上传图片的丝滑操作 不出意外的话本文图片都是直接搭配picgo上传到cos存储中的 使用github搭建图床 github的图床最大的问题是国内访问受限
 刚开始使用github的资源搭建了图床，使使用 jsdelivr 做了cdn的加速
 虽然小博客没有多少访问需求，但是github的访问时断时续，没有特殊的手段访问的话好多图都是裂了的，
@@ -159,6 +189,7 @@ sudo ufw status # 查看防火墙是否开启 sudo ufw enable|disable #开启或
 直接在浏览器中访问的话由于没有Referer来源，所以也是403不能预览的，好处就是防止别人盗刷流量造成不必要的扣费，不过在浏览器中可以使用一些chrome插件来设置规则添加访问时的请求头，我是用的是 gooreplacer
 搭建步骤 在腾讯云中开启cos存储并创建存储桶 在安全设置中创建api密钥 本地下载好 picgo 并做好相关的密钥填写 在腾讯云中开启cdn，并设置好自定义域名（前提是你有个域名并且做好了相关的备案） 搭建完成后配合typora就可以有一个愉快的写作体验了
 详细的搭建步骤网上一搜一大堆，而且还很详细，这里就不献丑了，这篇文章也是为了验证cos图床是否能访问成功而写</description>
+      
     </item>
     
     <item>
@@ -167,6 +198,7 @@ sudo ufw status # 查看防火墙是否开启 sudo ufw enable|disable #开启或
       <pubDate>Fri, 04 Aug 2023 00:04:45 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/d41d8cd98f00b204e9800998ecf8427e/</guid>
+      
       <description>为什么要自己搭建1 刚开始接触编程的时候，看着大佬们都有个自己的博客，就按照教程自己琢磨搭建，正好也学习了编程的相关知识，后来越来越讨厌平台的各种审核删帖，虽然也并不会发什么不该发的东西，但是命门捏在别人手中的感受总是不好的
 就一直想着有个自己可以随心所欲写东西的地方，所以搭建了这个博客
 hexo搭建 刚开始是使用hexo搭建的，第一呢是因为hexo比较早，用的人也比较多，当时网上找的教程也比较多，能比较方便快捷的搭建起来，出了问题晚上也可以找到一堆教程。
@@ -175,6 +207,7 @@ hugo 刚开始使用了cango主题，刚开始看着各方面还都挺好，后�
 找到了目前这个主题hugo-blog-awesome比较符合我的要求，唯一的缺点是没有搜索功能，后期考虑给它加上搜索
 这是目前第一篇文章，后期可能把之前的文章同步过来，现在的状况就是比较散乱，有放在notion中的，有在之前腾讯云服务器的。
 The above quote is excerpted from Rob Pike&amp;rsquo;s talk during Gopherfest, November 18, 2015.&amp;#160;&amp;#x21a9;&amp;#xfe0e;</description>
+      
     </item>
     
     <item>
@@ -183,12 +216,14 @@ The above quote is excerpted from Rob Pike&amp;rsquo;s talk during Gopherfest, N
       <pubDate>Tue, 18 Oct 2022 17:33:38 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/b0fa82c0302ee74da7ec8ea1658d9218/</guid>
+      
       <description>Github Pages 记录使用github的actions自动化部署博客出现的一些问题
 两个库，一个私有库存储博客源文件，另一个公开库xxxx.github.io
 在setting &amp;gt; Developer settings &amp;gt; Personal access tokens申请一个token,放开repo所有权限和workflow
 在私有库中setting &amp;gt; Secrets &amp;gt; Actions 添加令牌,设置名称 HUGO_CL_TOKEN，值为上一步的token
 在repo中新建.github\workflows\xxx(自行设置).yml文件 (参考文章)
 name: HU CI # 名字自取 on: push: branches: [ master ] # 这里的意思是当 main分支发生push的时候，运行下面的jobs jobs: deploy: # 任务名自取 runs-on: ubuntu-latest	# 在什么环境运行任务 steps: - name: Checkout uses: actions/checkout@v3	# 引用actions/checkout这个action，与所在的github仓库同名 with: submodules: &amp;#39;recursive&amp;#39; # Fetch Hugo themes (true OR recursive) 获取submodule主题 fetch-depth: 0 # Fetch all history for .GitInfo and .</description>
+      
     </item>
     
     <item>
@@ -197,6 +232,7 @@ name: HU CI # 名字自取 on: push: branches: [ master ] # 这里的意思是�
       <pubDate>Fri, 14 Oct 2022 23:43:37 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/62bfad7a36da70d16da2cbd16e4e29a0/</guid>
+      
       <description>目录相关 系统目录结构
 /bin 这个目录存放着最经常使用的命令
 /boot 这里存放的是启动Linux时使用的一些核心文件,包括一些链接文件以及镜像文件
@@ -227,6 +263,7 @@ name: HU CI # 名字自取 on: push: branches: [ master ] # 这里的意思是�
 /etc 系统配置文件,更改可能导致系统无法启动。
 /bin /sbin /usr/bin /usr/sbin 这是系统预设的执行文件的放置目录。
 /bin /usr/bin是给系统用户使用的指令 /sbin /sur/sbin 是给root用户使用的指令 /var 这是一个重要的目录，系统上跑了很多程序，每个程序运行的日志都保存在这个目录( /var/log )下面。</description>
+      
     </item>
     
     <item>
@@ -235,6 +272,7 @@ name: HU CI # 名字自取 on: push: branches: [ master ] # 这里的意思是�
       <pubDate>Sun, 17 Jul 2022 19:20:42 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2022-07-17-docker%E5%9F%BA%E7%A1%80/</guid>
+      
       <description>Docker基础 容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。
 Docker命令行参考
 镜像（image） Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。
@@ -257,6 +295,7 @@ docker container list
 docker container ls -all
 启动终止的容器
 docker container start &amp;lt;container id&amp;gt;</description>
+      
     </item>
     
     <item>
@@ -265,6 +304,7 @@ docker container start &amp;lt;container id&amp;gt;</description>
       <pubDate>Thu, 07 Jul 2022 17:38:13 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/</guid>
+      
       <description>资料：
 https://gitee.com/progit/
 https://git-scm.com/book/zh/v2/起步-关于版本控制
@@ -275,6 +315,7 @@ Git远程操作详解
 # --global参数 这台机器上的所有仓库都会使用这个配置 git config --global user.name &amp;#34;you name&amp;#34; git config --global user.email &amp;#34;email@exemple.com&amp;#34; 工作区：git init的文件夹就是一个工作区 版本库：工作区里面一个隐藏目录 .git (里面有暂存区和master分支)
 git add把文件添加进去，实际上是把文件修改添加到暂存区里面，git commit提交更改，实际上是把暂存区的所有内容提交到当前分支上。
 git init # 把当前目录编程git管理的仓库 git add &amp;lt;file&amp;gt; # 把当前文件添加到仓库 可以同时添加多个文件 git commit -m &amp;#34;message&amp;#34; # 把文件提交到仓库, -m 后边的是本次提交说明 git status # 查看当前工作区的转态，是否有文件修改 git diff # 查看修改内容 git log # 显示从最近到最远的提交日志， git reflog # 查看历史命令，以确定回到那个版本 git log --pretty=oneline # 只显示commit_id (版本号) git reset --hard commit_id # HEAD指向的版本是当前版本，可以根据commid 回退 git diff HEAD -- &amp;lt;file&amp;gt; # 查看工作区与版本库里面最新版本的区别 git checkout - - file 把file中在工作区的修改全部撤销</description>
+      
     </item>
     
     <item>
@@ -283,6 +324,7 @@ git init # 把当前目录编程git管理的仓库 git add &amp;lt;file&amp;gt; 
       <pubDate>Thu, 21 Apr 2022 17:33:49 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2022-04-21-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/</guid>
+      
       <description>深浅拷贝的问题记录 🖇️ 在抓取排行榜数据时，发现抓取的排行榜数据总是最后的一条。但是排行榜的数据量是没有问题的。在仔细检查逻辑后发现并没有什么问题。最后搜索排查是深浅拷贝的问题，遂记录一下。原代码 👇
 def parse_more_rank(self, response): items = response.meta.get(&amp;#34;items&amp;#34;) url_list = response.xpath(&amp;#39;//a[@class=&amp;#34;figure_pic&amp;#34;]/@href&amp;#39;).getall() ranking_list = response.xpath(&amp;#39;//a[@class=&amp;#34;figure_pic&amp;#34;]/span/text()&amp;#39;).getall() title_list = response.xpath(&amp;#39;//a[@class=&amp;#34;figure_pic&amp;#34;]/following-sibling::strong/a/text()&amp;#39;).getall() cover_id_list = [u.split(&amp;#39;cover/&amp;#39;)[1].split(&amp;#34;.&amp;#34;)[0] for u in url_list] for url,ranking,title,cover_id in zip(url_list,ranking_list,title_list,cover_id_list): items[&amp;#34;ranking&amp;#34;] = ranking items[&amp;#34;title&amp;#34;] = title items[&amp;#34;cover_id&amp;#34;] = cover_id yield scrapy.Request(url, callback=self.parse_detail, meta={&amp;#34;items&amp;#34;: items}, dont_filter=True) 程序运行到for循环都是没有问题的。到一个解析回调self.parse_detail的时候就出现了问题。存储的所有数据都是最后一条。（因为不同的排行榜中有相同的作品，所以没有过滤重复请求。）
 最后排查是传递meta传递items的时候的问题，没有使用深拷贝，导致最后解析回调的时候都是同一个对象。
@@ -294,6 +336,7 @@ yield scrapy.Request(url, callback=self.parse_detail, meta=copy.deepcopy({&amp;#
 深拷贝(deepcopy)： copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。
 2022-08-02更新 在scrapy文档中看到了关于item拷贝的API
 yield scrapy.</description>
+      
     </item>
     
     <item>
@@ -302,6 +345,7 @@ yield scrapy.</description>
       <pubDate>Mon, 14 Mar 2022 19:42:01 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2022-03-14-google%E6%90%9C%E7%B4%A2%E5%B0%8F%E6%8A%80%E5%B7%A7/</guid>
+      
       <description>🕷️ 突然翻到了google的搜索及技巧的文章。遂整理记录逻辑运算符 “” 返回的结果中必须包含引号中的关键词或短语 OR (|) 连接搜索关键词，或的关系，必须大写 AND (+) 一般是空格 () 对条件分组进行搜索 排斥某些关键词的结果。可以和site:连用 通配符，用来匹配任何单词或短语 ~ 搜索除了跟关键词外还要搜索跟~后边关键词相关的词汇 .. 两个数之间 $250..$1000 搜索高级操作符 intitle allintitle
 allintitle 只返回包含标题中每个单词的结果。 intitle: 只查找命令后面的单词
 查询结果类似，如果关键词中有连接符，优先使用allintitle
@@ -325,6 +369,7 @@ link seo-hacker.com -site:seo-hacker.com
 allinanchor inanchor
 搜索结果展示锚点文本中出现相关关键词的网页
 allinanchor:best bed mattress philippines</description>
+      
     </item>
     
     <item>
@@ -333,6 +378,7 @@ allinanchor:best bed mattress philippines</description>
       <pubDate>Thu, 17 Feb 2022 15:14:29 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2022-02-17-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      
       <description>📖学习参考:给新手的正则表达式教程 regexper 正则表达式学习 菜鸟教程 正则表达式理解 正则表达式的核心是定义搜索模式的字符序 正则表达式适用于字符，而不是单词，如果我们使用正则表达式搜索模式cat, 我们不是在寻找单词cat,而是在寻找c后跟着a后跟着t 一些正则表达式 AppData[\s=]+(.*?);\s+var
 示例: &amp;lt;script&amp;gt;var AppData = {&amp;hellip;..}; var
 (https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?
@@ -345,6 +391,7 @@ readNumUnit[&amp;quot;:]+([万\+]{0,2})[&amp;quot;,:\{\w]+val[&amp;quot;:]+([\d\
 示例：readNumUnit&amp;quot;:&amp;ldquo;万&amp;rdquo;,&amp;ldquo;totalReadNum&amp;rdquo;:{&amp;ldquo;val&amp;rdquo;:&amp;ldquo;3.2&amp;rdquo;,&amp;ldquo;unit&amp;rdquo;:&amp;ldquo;万&amp;rdquo;}}
 gender[&amp;quot;:]+(?=男|女)[&amp;quot;,\w:]+\&amp;quot;([\d\.]+)\&amp;quot;\}
 示例： [{&amp;ldquo;gender&amp;rdquo;:&amp;ldquo;男&amp;rdquo;,&amp;ldquo;percent&amp;rdquo;:&amp;ldquo;46.62&amp;rdquo;},{&amp;ldquo;gender&amp;rdquo;:&amp;ldquo;女&amp;rdquo;,&amp;ldquo;percent&amp;rdquo;:&amp;ldquo;53.38&amp;rdquo;}]}</description>
+      
     </item>
     
     <item>
@@ -353,6 +400,7 @@ gender[&amp;quot;:]+(?=男|女)[&amp;quot;,\w:]+\&amp;quot;([\d\.]+)\&amp;quot;\
       <pubDate>Tue, 04 Jan 2022 11:05:58 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2022-01-04-linux%E5%9F%BA%E6%9C%AC%E5%AE%89%E5%85%A8%E8%AE%BE%E7%BD%AE/</guid>
+      
       <description>ℹ️ 来源：Sol Love
 以下命令用于ubuntu主机，其他linux命令可能不相同
 更改root密码 passwd
@@ -371,6 +419,7 @@ vim /etc/ssh/sshd_config
 PermitRootLogin no PasswordAuthentication no AllowUsers deploy@(your-ip) deploy@(another-ip-if-any) 重新启动ssh
 service ssh restart
 设置防火墙 ufw allow from {your-ip} to any port 22 ufw allow 80 ufw allow 443 ufw enable 启动安全更新 apt-get install unattended-upgrades vim /etc/apt/apt.</description>
+      
     </item>
     
     <item>
@@ -379,6 +428,7 @@ service ssh restart
       <pubDate>Mon, 23 Aug 2021 17:21:06 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2021-08-23-%E6%90%AD%E5%BB%BAaria2%E4%B8%8B%E8%BD%BD/</guid>
+      
       <description>github地址： https://github.com/aria2/aria2
 Windows 下载
 在解压目录后创建启动文件
@@ -394,6 +444,7 @@ arir
 如果打开网址后出现 错误: Aria2 RPC 服务器错误 大概率是因为rpc设置的是https或者wss, 更改成http即可正常显示下载请求
 yaaw (无搭建测试)
 webui-aria2 （无搭建测试）</description>
+      
     </item>
     
     <item>
@@ -402,6 +453,7 @@ webui-aria2 （无搭建测试）</description>
       <pubDate>Wed, 19 May 2021 17:46:01 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2021-05-19-xpath-%E8%BD%B4-%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
+      
       <description>参考：
 https://www.cnblogs.com/zhaozhan/archive/2009/09/10/1564330.html
 http://www.zvon.org/xxl/XPathTutorial/General_chi/examples.html
@@ -411,6 +463,7 @@ Xpath轴 child 选取当前节点的所有子元素 parent 选取当前节点�
 谓语 last() 选取最后一个元素 /bookstore/book[last()] position()&amp;lt;3 选取最前面的两个属于 bookstore 元素的子元素的 book 元素 /bookstore/book[position()&amp;lt;3] price&amp;gt;35.00 选取 bookstore 元素的所有 book 元素，且其中的 price 元素的值须大于 35.00。 /bookstore/book[price&amp;gt;35.00] 运算符 https://www.w3school.com.cn/xpath/xpath_operators.asp
 XPath、XQuery 以及 XSLT 函数 https://www.w3school.com.cn/xpath/xpath_functions.asp
 normalize-space 删除指定字符串的开头和结尾的空白，并把内部的所有空白序列替换为一个，然后返回结果。如果没有 string 参数，则处理当前节点。 一些示例 # 根据text获取指定的节点，对不需要的节点进行排除。xpath(&amp;#39;//span[@class=&amp;#34;title-name&amp;#34;][contains(text(),&amp;#34;出品&amp;#34;) and not (contains(text(),&amp;#34;联合出品&amp;#34;))]/ancestor::dl/dd//div[@class=&amp;#34;p-item&amp;#34;][position()&amp;lt;4]//p/text()&amp;#39;)# 合并两个节点的值 （115.</description>
+      
     </item>
     
     <item>
@@ -419,6 +472,7 @@ normalize-space 删除指定字符串的开头和结尾的空白，并把内部�
       <pubDate>Mon, 19 Apr 2021 10:43:33 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2021-04-19-%E5%AE%89%E5%8D%93%E9%AB%98%E7%89%88%E6%9C%AC%E6%8A%93%E5%8C%85%E8%A7%A3%E5%86%B3/</guid>
+      
       <description>迁移charles到系统证书 安卓4.4之前手机信任用户证书，配置好代理在浏览器访问 chls.pro/ssl 安装charle证书即可。
 最好使用第三方手机浏览器进行下载。有部分浏览器下载的.pem的不能安装，换个浏览器下载就行。正确的是.crt格式
 安卓4.4之后手机不在信任用户证书
@@ -430,6 +484,7 @@ normalize-space 删除指定字符串的开头和结尾的空白，并把内部�
 adb 命令进入到用户证书路径下,查看证书所属权限和所属组，不对则需要修改成root用户。
 adb shellcd /data/misc/user/0/cacerts-addedchmod 644 &amp;lt;xxxx&amp;gt;.0chown root &amp;lt;xxxx&amp;gt;.0chgrp root &amp;lt;xxxx&amp;gt;.0 然后要调整安卓system分区权限，不然移动证书到根证书会报错 只有可读权限#
 # 查看system 权限mount | grep /system # 查看system 路径cat /proc/mounts# 一般为 /dev/xxxx/xxxx /system# ro表示只读，rw表示读写mount -o rw,remount /dev/xxxx/xxxx /system system目录权限调整后，误删文件系统会崩溃。 最好改回去&amp;hellip;</description>
+      
     </item>
     
     <item>
@@ -438,6 +493,7 @@ adb shellcd /data/misc/user/0/cacerts-addedchmod 644 &amp;lt;xxxx&amp;gt;.0ch
       <pubDate>Fri, 09 Apr 2021 17:25:09 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2021-04-09-docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      
       <description>容器（Container）是通过镜像（image）创建的。容器是在原先的image之上新加了一层，这一层是可读可写的，镜像只是可读的。 在面向对象的编程语言中，有类跟对象的概念。类是抽象的，对象是类的具体实现。Image跟Container可以类比面向对象中的类跟对象，Image就相当于抽象的类，Container就相当于具体实例化的对象。 Image跟Container的职责区别：Image负责APP的存储和分发，Container负责运行APP。
 Docker命令行参考
 镜像（image） Docker 把应用程序及其依赖，打包在 image 文件里面，通过这个文件生成 Docker 容器。image 文件可以看作是容器的模板。
@@ -461,6 +517,7 @@ docker container list
 docker container ls -all
 启动终止的容器
 docker container start &amp;lt;container id&amp;gt;</description>
+      
     </item>
     
     <item>
@@ -469,6 +526,7 @@ docker container start &amp;lt;container id&amp;gt;</description>
       <pubDate>Thu, 08 Apr 2021 18:20:24 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2021-04-08-linux-%E5%AE%89%E8%A3%85docker/</guid>
+      
       <description>Linux 安装docker docker: 属于 Linux 容器的一种封装，提供简单易用的容器使用接口 👉 官方文档
 docker-compose: 一个集群管理方式，可以利用名为docker-compose.yml的yaml文件来定义需要启动的容器
 Kubernetes（K8S）: 非常强大的容器编排工具，可以管理大型集群、微服务、分布式应用等等
@@ -483,6 +541,7 @@ sudo docker run hello-world
 配置开机自启动 （禁止启动则使用disable关键字替换enable执行命令）
 sudo systemctl enable docker.service sudo systemctl enable containerd.service 安装docker-compose linux下参考官方文档 也可以使用pip进行安装 pip install docker-compose 卸载docker 卸载Docker Engine，CLI和Containerd软件包
 sudo yum remove docker-ce docker-ce-cli [containerd.</description>
+      
     </item>
     
     <item>
@@ -491,6 +550,7 @@ sudo yum remove docker-ce docker-ce-cli [containerd.</description>
       <pubDate>Fri, 02 Apr 2021 11:13:36 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2021-04-02-%E4%BD%BF%E7%94%A8hexo%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81blog/</guid>
+      
       <description>安装hexo 安装node环境
 npm install hexo
 安装git
@@ -512,6 +572,7 @@ git (主要用于拉取和同步代码)
 PUBLIC_WWW 这个目录为hexo生成的静态文件目录
 配置nginx 安装参考：👇
 sudo yum install nginx</description>
+      
     </item>
     
   </channel>

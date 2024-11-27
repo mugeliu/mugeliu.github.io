@@ -20,15 +20,8 @@
 
 
 
-  <meta itemprop="image" content="https://blog.mfcp.fun/" />
-  <meta property="og:image" content="https://blog.mfcp.fun/" />
-  <meta name="twitter:image" content="https://blog.mfcp.fun/" />
-  <meta name="twitter:image:src" content="https://blog.mfcp.fun/" />
 
 
-
-
-    
     
     
     
@@ -36,7 +29,13 @@
     <meta property="og:type" content="article" />
     <meta property="og:article:published_time" content=2022-07-07T17:38:13Z />
     <meta property="article:published_time" content=2022-07-07T17:38:13Z />
+    <meta property="og:url" content="https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/" />
 
+    
+    <meta property="og:article:author" content="mmm6" />
+    <meta property="article:author" content="mmm6" />
+    <meta name="author" content="mmm6" />
+    
     
 
     
@@ -70,9 +69,42 @@
 <meta name="generator" content="Hugo 0.112.4">
 
     
+    <meta property="og:title" content="git命令" />
+<meta property="og:description" content="资料：
+https://gitee.com/progit/
+https://git-scm.com/book/zh/v2/起步-关于版本控制
+🕸️ 来源于阮一峰的网络日志
+Git远程操作详解
+常用 Git 命令清单
+安装完成后 需要最后一步设置
+# --global参数 这台机器上的所有仓库都会使用这个配置 git config --global user.name &#34;you name&#34; git config --global user.email &#34;email@exemple.com&#34; 工作区：git init的文件夹就是一个工作区 版本库：工作区里面一个隐藏目录 .git (里面有暂存区和master分支)
+git add把文件添加进去，实际上是把文件修改添加到暂存区里面，git commit提交更改，实际上是把暂存区的所有内容提交到当前分支上。
+git init # 把当前目录编程git管理的仓库 git add &lt;file&gt; # 把当前文件添加到仓库 可以同时添加多个文件 git commit -m &#34;message&#34; # 把文件提交到仓库, -m 后边的是本次提交说明 git status # 查看当前工作区的转态，是否有文件修改 git diff # 查看修改内容 git log # 显示从最近到最远的提交日志， git reflog # 查看历史命令，以确定回到那个版本 git log --pretty=oneline # 只显示commit_id (版本号) git reset --hard commit_id # HEAD指向的版本是当前版本，可以根据commid 回退 git diff HEAD -- &lt;file&gt; # 查看工作区与版本库里面最新版本的区别 git checkout - - file 把file中在工作区的修改全部撤销" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-07T17:38:13+00:00" />
+<meta property="article:modified_time" content="2022-07-07T17:38:13+00:00" />
+
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="git命令"/>
+<meta name="twitter:description" content="资料：
+https://gitee.com/progit/
+https://git-scm.com/book/zh/v2/起步-关于版本控制
+🕸️ 来源于阮一峰的网络日志
+Git远程操作详解
+常用 Git 命令清单
+安装完成后 需要最后一步设置
+# --global参数 这台机器上的所有仓库都会使用这个配置 git config --global user.name &#34;you name&#34; git config --global user.email &#34;email@exemple.com&#34; 工作区：git init的文件夹就是一个工作区 版本库：工作区里面一个隐藏目录 .git (里面有暂存区和master分支)
+git add把文件添加进去，实际上是把文件修改添加到暂存区里面，git commit提交更改，实际上是把暂存区的所有内容提交到当前分支上。
+git init # 把当前目录编程git管理的仓库 git add &lt;file&gt; # 把当前文件添加到仓库 可以同时添加多个文件 git commit -m &#34;message&#34; # 把文件提交到仓库, -m 后边的是本次提交说明 git status # 查看当前工作区的转态，是否有文件修改 git diff # 查看修改内容 git log # 显示从最近到最远的提交日志， git reflog # 查看历史命令，以确定回到那个版本 git log --pretty=oneline # 只显示commit_id (版本号) git reset --hard commit_id # HEAD指向的版本是当前版本，可以根据commid 回退 git diff HEAD -- &lt;file&gt; # 查看工作区与版本库里面最新版本的区别 git checkout - - file 把file中在工作区的修改全部撤销"/>
+
+
+    
 
     <link rel="canonical" href="https://blog.mfcp.fun/posts/2022-07-07-git%E5%91%BD%E4%BB%A4/">
-    <link href="/style.min.840eada6dfddec7b8ccfcf867f039bf80b1f16a265ec6e01dc553a3dddc9d509.css" rel="stylesheet">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
     <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
 
     
@@ -94,10 +126,15 @@
     
     <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
 
-    </head>
+    
+    <meta name="google-adsense-account" content="ca-pub-5713292976881584">
+
+    
+    
+</head>
 <body data-theme = "auto" class="notransition">
 
-<script src="/js/theme.js"></script>
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
 
 <div class="navbar" role="navigation">
     <nav class="menu" aria-label="Main Navigation">
@@ -145,6 +182,8 @@ stroke-linejoin="round" class="feather feather-home">
                 <li class="menu-separator">
                     <span>|</span>
                 </li>
+                
+                
             </ul>
             <a id="mode" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
@@ -163,14 +202,17 @@ stroke-linejoin="round" class="feather feather-home">
                 <h1 class="header-title">git命令</h1>
                 
                 
+                
                 <div class="post-meta">
                     <time datetime="2022-07-07T17:38:13&#43;00:00" itemprop="datePublished"> 7 Jul 2022 </time>
                 </div>
                 
             </header>
-            <details class="toc">
-                <summary><b>Table of Contents</b></summary>
-                <nav id="TableOfContents">
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b>Table of Contents</b></summary>
+        <nav id="TableOfContents">
   <ul>
     <li><a href="#远程仓库的创建">远程仓库的创建</a>
       <ul>
@@ -186,7 +228,8 @@ stroke-linejoin="round" class="feather feather-home">
     </li>
   </ul>
 </nav>
-            </details><div class="page-content">
+    </details>
+            <div class="page-content">
                 <ul>
 <li>
 <p>资料：</p>
@@ -382,9 +425,7 @@ stroke-linejoin="round" class="feather feather-home">
 </div>
     <small class="footer_copyright">
         © 2024 mmm6.
-        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noreferrer noopener">Hugo blog awesome</a>
-        theme on
-        <a href="https://gohugo.io" target="_blank" rel="noreferrer noopener">Hugo</a>.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
     </small>
 </footer><a href="#" title="Go to top" id="totop">
     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
@@ -412,7 +453,7 @@ stroke-linejoin="round" class="feather feather-home">
 
 
     
-    <script async src="https://blog.mfcp.fun/js/main.js" ></script>
+    <script src="https://blog.mfcp.fun/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
 
     
 

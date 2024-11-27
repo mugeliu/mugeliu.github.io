@@ -20,15 +20,8 @@
 
 
 
-  <meta itemprop="image" content="https://blog.mfcp.fun/" />
-  <meta property="og:image" content="https://blog.mfcp.fun/" />
-  <meta name="twitter:image" content="https://blog.mfcp.fun/" />
-  <meta name="twitter:image:src" content="https://blog.mfcp.fun/" />
 
 
-
-
-    
     
     
     
@@ -36,7 +29,13 @@
     <meta property="og:type" content="article" />
     <meta property="og:article:published_time" content=2022-04-21T17:33:49Z />
     <meta property="article:published_time" content=2022-04-21T17:33:49Z />
+    <meta property="og:url" content="https://blog.mfcp.fun/posts/2022-04-21-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/" />
 
+    
+    <meta property="og:article:author" content="mmm6" />
+    <meta property="article:author" content="mmm6" />
+    <meta name="author" content="mmm6" />
+    
     
 
     
@@ -70,9 +69,44 @@
 <meta name="generator" content="Hugo 0.112.4">
 
     
+    <meta property="og:title" content="深拷贝与浅拷贝问题的记录" />
+<meta property="og:description" content="深浅拷贝的问题记录 🖇️ 在抓取排行榜数据时，发现抓取的排行榜数据总是最后的一条。但是排行榜的数据量是没有问题的。在仔细检查逻辑后发现并没有什么问题。最后搜索排查是深浅拷贝的问题，遂记录一下。原代码 👇
+def parse_more_rank(self, response): items = response.meta.get(&#34;items&#34;) url_list = response.xpath(&#39;//a[@class=&#34;figure_pic&#34;]/@href&#39;).getall() ranking_list = response.xpath(&#39;//a[@class=&#34;figure_pic&#34;]/span/text()&#39;).getall() title_list = response.xpath(&#39;//a[@class=&#34;figure_pic&#34;]/following-sibling::strong/a/text()&#39;).getall() cover_id_list = [u.split(&#39;cover/&#39;)[1].split(&#34;.&#34;)[0] for u in url_list] for url,ranking,title,cover_id in zip(url_list,ranking_list,title_list,cover_id_list): items[&#34;ranking&#34;] = ranking items[&#34;title&#34;] = title items[&#34;cover_id&#34;] = cover_id yield scrapy.Request(url, callback=self.parse_detail, meta={&#34;items&#34;: items}, dont_filter=True) 程序运行到for循环都是没有问题的。到一个解析回调self.parse_detail的时候就出现了问题。存储的所有数据都是最后一条。（因为不同的排行榜中有相同的作品，所以没有过滤重复请求。）
+最后排查是传递meta传递items的时候的问题，没有使用深拷贝，导致最后解析回调的时候都是同一个对象。
+更改后
+yield scrapy.Request(url, callback=self.parse_detail, meta=copy.deepcopy({&#34;items&#34;: items}), dont_filter=True) python赋值、深、浅拷贝 参考：
+菜鸟教程
+直接赋值： 其实就是对象的引用（别名）。
+浅拷贝(copy)： 拷贝父对象，不会拷贝对象的内部的子对象。
+深拷贝(deepcopy)： copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。
+2022-08-02更新 在scrapy文档中看到了关于item拷贝的API
+yield scrapy." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://blog.mfcp.fun/posts/2022-04-21-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-04-21T17:33:49+00:00" />
+<meta property="article:modified_time" content="2022-04-21T17:33:49+00:00" />
+
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="深拷贝与浅拷贝问题的记录"/>
+<meta name="twitter:description" content="深浅拷贝的问题记录 🖇️ 在抓取排行榜数据时，发现抓取的排行榜数据总是最后的一条。但是排行榜的数据量是没有问题的。在仔细检查逻辑后发现并没有什么问题。最后搜索排查是深浅拷贝的问题，遂记录一下。原代码 👇
+def parse_more_rank(self, response): items = response.meta.get(&#34;items&#34;) url_list = response.xpath(&#39;//a[@class=&#34;figure_pic&#34;]/@href&#39;).getall() ranking_list = response.xpath(&#39;//a[@class=&#34;figure_pic&#34;]/span/text()&#39;).getall() title_list = response.xpath(&#39;//a[@class=&#34;figure_pic&#34;]/following-sibling::strong/a/text()&#39;).getall() cover_id_list = [u.split(&#39;cover/&#39;)[1].split(&#34;.&#34;)[0] for u in url_list] for url,ranking,title,cover_id in zip(url_list,ranking_list,title_list,cover_id_list): items[&#34;ranking&#34;] = ranking items[&#34;title&#34;] = title items[&#34;cover_id&#34;] = cover_id yield scrapy.Request(url, callback=self.parse_detail, meta={&#34;items&#34;: items}, dont_filter=True) 程序运行到for循环都是没有问题的。到一个解析回调self.parse_detail的时候就出现了问题。存储的所有数据都是最后一条。（因为不同的排行榜中有相同的作品，所以没有过滤重复请求。）
+最后排查是传递meta传递items的时候的问题，没有使用深拷贝，导致最后解析回调的时候都是同一个对象。
+更改后
+yield scrapy.Request(url, callback=self.parse_detail, meta=copy.deepcopy({&#34;items&#34;: items}), dont_filter=True) python赋值、深、浅拷贝 参考：
+菜鸟教程
+直接赋值： 其实就是对象的引用（别名）。
+浅拷贝(copy)： 拷贝父对象，不会拷贝对象的内部的子对象。
+深拷贝(deepcopy)： copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。
+2022-08-02更新 在scrapy文档中看到了关于item拷贝的API
+yield scrapy."/>
+
+
+    
 
     <link rel="canonical" href="https://blog.mfcp.fun/posts/2022-04-21-%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D%E9%97%AE%E9%A2%98%E7%9A%84%E8%AE%B0%E5%BD%95/">
-    <link href="/style.min.840eada6dfddec7b8ccfcf867f039bf80b1f16a265ec6e01dc553a3dddc9d509.css" rel="stylesheet">
+    <link href="/style.min.2d921c18cf1ec555ffc03d59a8adc211c402c68c930c27d6a0c306ab175a8d09.css" rel="stylesheet">
     <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
 
     
@@ -94,10 +128,15 @@
     
     <link rel="icon" type="image/svg+xml" href="/icons/favicon.svg">
 
-    </head>
+    
+    <meta name="google-adsense-account" content="ca-pub-5713292976881584">
+
+    
+    
+</head>
 <body data-theme = "auto" class="notransition">
 
-<script src="/js/theme.js"></script>
+<script src="/js/theme.min.8961c317c5b88b953fe27525839672c9343f1058ab044696ca225656c8ba2ab0.js" integrity="sha256-iWHDF8W4i5U/4nUlg5ZyyTQ/EFirBEaWyiJWVsi6KrA="></script>
 
 <div class="navbar" role="navigation">
     <nav class="menu" aria-label="Main Navigation">
@@ -145,6 +184,8 @@ stroke-linejoin="round" class="feather feather-home">
                 <li class="menu-separator">
                     <span>|</span>
                 </li>
+                
+                
             </ul>
             <a id="mode" href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" class="mode-sunny" width="21" height="21" viewBox="0 0 14 14" stroke-width="1">
@@ -163,14 +204,17 @@ stroke-linejoin="round" class="feather feather-home">
                 <h1 class="header-title">深拷贝与浅拷贝问题的记录</h1>
                 
                 
+                
                 <div class="post-meta">
                     <time datetime="2022-04-21T17:33:49&#43;00:00" itemprop="datePublished"> 21 Apr 2022 </time>
                 </div>
                 
             </header>
-            <details class="toc">
-                <summary><b>Table of Contents</b></summary>
-                <nav id="TableOfContents">
+            
+    
+    <details class="toc" ZgotmplZ>
+        <summary><b>Table of Contents</b></summary>
+        <nav id="TableOfContents">
   <ul>
     <li>
       <ul>
@@ -183,7 +227,8 @@ stroke-linejoin="round" class="feather feather-home">
     </li>
   </ul>
 </nav>
-            </details><div class="page-content">
+    </details>
+            <div class="page-content">
                 <h1 id="深浅拷贝的问题记录">深浅拷贝的问题记录</h1>
 <aside>
 🖇️ 在抓取排行榜数据时，发现抓取的排行榜数据总是最后的一条。但是排行榜的数据量是没有问题的。在仔细检查逻辑后发现并没有什么问题。最后搜索排查是深浅拷贝的问题，遂记录一下。
@@ -267,9 +312,7 @@ stroke-linejoin="round" class="feather feather-home">
 </div>
     <small class="footer_copyright">
         © 2024 mmm6.
-        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noreferrer noopener">Hugo blog awesome</a>
-        theme on
-        <a href="https://gohugo.io" target="_blank" rel="noreferrer noopener">Hugo</a>.
+        Powered by <a href="https://github.com/hugo-sid/hugo-blog-awesome" target="_blank" rel="noopener">Hugo blog awesome</a>.
     </small>
 </footer><a href="#" title="Go to top" id="totop">
     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="currentColor" stroke="currentColor" viewBox="0 96 960 960">
@@ -297,7 +340,7 @@ stroke-linejoin="round" class="feather feather-home">
 
 
     
-    <script async src="https://blog.mfcp.fun/js/main.js" ></script>
+    <script src="https://blog.mfcp.fun/js/main.min.35f435a5d8eac613c52daa28d8af544a4512337d3e95236e4a4978417b8dcb2f.js" integrity="sha256-NfQ1pdjqxhPFLaoo2K9USkUSM30&#43;lSNuSkl4QXuNyy8="></script>
 
     
 

@@ -13,6 +13,7 @@
       <pubDate>Sun, 10 Sep 2023 22:30:38 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/e85b6dfba09c43d9e017e43052e8e72b/</guid>
+      
       <description>之前一直在自己电脑上，手机上下载软件来实现出国服务，有些像ios系统软件还需要外区账号操作起来比较麻烦，想着搞一个软路由来实现出国服务
 斐讯N1时代 在B站上看了许多测评软件，看到斐讯N1性价比高，而且还能玩一下docker，遂148块大洋购买了N1，比当时80快钱的时候已经高太多了，斐讯虽然倒下了，留下的一些遗产确实真的不多，便宜又好使用，再写文章的同时又39块大洋购买了体脂秤S1和99大洋买了音响R1.
 体脂秤使用派健康可以正常使用，音响刷入新系统，也能使用，音质也比100大洋的要好点。
@@ -32,6 +33,7 @@ N1安装Armbian和基于Docker的OpenWRT N1盒子刷Armbian系统 斐讯N1挂载
 armbian-install -&amp;gt; 101 -&amp;gt; 1 -&amp;gt; poweroff
 创建/etc/apt/keyrings文件夹，然后信任Docker的GPG公钥
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg 其他没什么大问题，每个人遇到的情况都不太相同，有问题多google，总能找到一些解决办法。</description>
+      
     </item>
     
   </channel>

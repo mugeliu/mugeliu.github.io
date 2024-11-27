@@ -13,6 +13,7 @@
       <pubDate>Sat, 26 Aug 2023 01:18:03 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/ef734f00e58c413acb9b7f60f8147607/</guid>
+      
       <description>最方便的还是查看git的官方文档 中关于服务器上git配置的相关章节，比较详细
 👉 服务器上的-Git-配置服务器
 记录下我搭建过程中的思路以及一些需要注意的点
@@ -35,6 +36,7 @@ git的钩子功能post-receive需要可执行权限才能成功执行
 同步到腾讯云ubuntu上需要创建ssh密钥文件，把公钥写入到authorized_keys中，把私钥文件写入到github项目的Security中通过虚拟变量形式来访问
 👇以下是成功的action文件shili
 # .github/workflows/gh-pages.yml name: GitHub Pages on: push: branches: - master jobs: build-deploy: runs-on: ubuntu-22.</description>
+      
     </item>
     
     <item>
@@ -43,6 +45,7 @@ git的钩子功能post-receive需要可执行权限才能成功执行
       <pubDate>Sun, 20 Aug 2023 00:30:33 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/da417dd65a33f8a3951f8dac1c31556c/</guid>
+      
       <description>本文也是为了记录顺利搭建了cos图床，并开启的新的博客之路的过程 顺便体验一下typora来写文章，上传图片的丝滑操作 不出意外的话本文图片都是直接搭配picgo上传到cos存储中的 使用github搭建图床 github的图床最大的问题是国内访问受限
 刚开始使用github的资源搭建了图床，使使用 jsdelivr 做了cdn的加速
 虽然小博客没有多少访问需求，但是github的访问时断时续，没有特殊的手段访问的话好多图都是裂了的，
@@ -54,6 +57,7 @@ git的钩子功能post-receive需要可执行权限才能成功执行
 直接在浏览器中访问的话由于没有Referer来源，所以也是403不能预览的，好处就是防止别人盗刷流量造成不必要的扣费，不过在浏览器中可以使用一些chrome插件来设置规则添加访问时的请求头，我是用的是 gooreplacer
 搭建步骤 在腾讯云中开启cos存储并创建存储桶 在安全设置中创建api密钥 本地下载好 picgo 并做好相关的密钥填写 在腾讯云中开启cdn，并设置好自定义域名（前提是你有个域名并且做好了相关的备案） 搭建完成后配合typora就可以有一个愉快的写作体验了
 详细的搭建步骤网上一搜一大堆，而且还很详细，这里就不献丑了，这篇文章也是为了验证cos图床是否能访问成功而写</description>
+      
     </item>
     
     <item>
@@ -62,6 +66,7 @@ git的钩子功能post-receive需要可执行权限才能成功执行
       <pubDate>Fri, 04 Aug 2023 00:04:45 +0800</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/d41d8cd98f00b204e9800998ecf8427e/</guid>
+      
       <description>为什么要自己搭建1 刚开始接触编程的时候，看着大佬们都有个自己的博客，就按照教程自己琢磨搭建，正好也学习了编程的相关知识，后来越来越讨厌平台的各种审核删帖，虽然也并不会发什么不该发的东西，但是命门捏在别人手中的感受总是不好的
 就一直想着有个自己可以随心所欲写东西的地方，所以搭建了这个博客
 hexo搭建 刚开始是使用hexo搭建的，第一呢是因为hexo比较早，用的人也比较多，当时网上找的教程也比较多，能比较方便快捷的搭建起来，出了问题晚上也可以找到一堆教程。
@@ -70,6 +75,7 @@ hugo 刚开始使用了cango主题，刚开始看着各方面还都挺好，后�
 找到了目前这个主题hugo-blog-awesome比较符合我的要求，唯一的缺点是没有搜索功能，后期考虑给它加上搜索
 这是目前第一篇文章，后期可能把之前的文章同步过来，现在的状况就是比较散乱，有放在notion中的，有在之前腾讯云服务器的。
 The above quote is excerpted from Rob Pike&amp;rsquo;s talk during Gopherfest, November 18, 2015.&amp;#160;&amp;#x21a9;&amp;#xfe0e;</description>
+      
     </item>
     
     <item>
@@ -78,6 +84,7 @@ The above quote is excerpted from Rob Pike&amp;rsquo;s talk during Gopherfest, N
       <pubDate>Fri, 02 Apr 2021 11:13:36 +0000</pubDate>
       
       <guid>https://blog.mfcp.fun/posts/2021-04-02-%E4%BD%BF%E7%94%A8hexo%E9%83%A8%E7%BD%B2%E9%9D%99%E6%80%81blog/</guid>
+      
       <description>安装hexo 安装node环境
 npm install hexo
 安装git
@@ -99,6 +106,7 @@ git (主要用于拉取和同步代码)
 PUBLIC_WWW 这个目录为hexo生成的静态文件目录
 配置nginx 安装参考：👇
 sudo yum install nginx</description>
+      
     </item>
     
   </channel>
